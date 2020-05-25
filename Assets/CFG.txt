@@ -1,0 +1,19 @@
+S -> RuleBasic | RuleComplexA | RuleComplexB
+RuleBasic -> SubjectObject Verb SubjectObject | SubjectObject Verb StrictObject | StrictSubject Verb SubjectObject | StrictSubject Verb StrictObject
+RuleComplexA -> RuleBasic LogicalOp SubjectObject | RuleBasic LogicalOp StrictObject
+RuleComplexB -> SubjectObject LogicalOp RuleBasic | StrictSubject LogicalOp RuleBasic
+SubjectObject -> "Player" | "Apple" | "Guard" | "Firefly"
+StrictSubject -> "Jump" | "Time"
+StrictObject -> "High" | "Red" | "Fast" | "Slow" | "Heavy" | "Light"
+Verb -> "Is" | "Has"
+LogicalOp -> "And"
+
+
+RuleBasic = X
+RuleComplexA = Y
+RuleComplexB = Z
+Verb = V
+SubjectObject = I
+StrictObject = J
+StrictSubject = K
+LogicalOp = L
