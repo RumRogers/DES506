@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Floor
   - Tile
+  - Movable
   layers:
   - Default
   - TransparentFX
