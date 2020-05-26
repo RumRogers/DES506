@@ -20,17 +20,17 @@ namespace Player
     {
         PlayerEntityProperties m_entityProperties;
 
-        public void Can(ref string ruleObject)
+        public void Can(string ruleObject)
         {
             Debug.LogError("IMPLEMENT PLAYER CAN (Josh hasn't impmented this yet)");
         }
 
-        public void Has(ref string ruleObject)
+        public void Has(string ruleObject)
         {
             Debug.LogError("IMPLEMENT PLAYER HAS (Josh hasn't impmented this yet)");
         }
 
-        public void Is(ref string ruleObject)
+        public void Is(string ruleObject)
         {
             Debug.LogError("IMPLEMENT PLAYER IS (Josh hasn't impmented this yet)");
         }
