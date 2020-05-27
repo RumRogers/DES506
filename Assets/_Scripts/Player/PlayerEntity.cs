@@ -5,15 +5,16 @@ using UnityEngine;
 
 namespace Player
 {
+    [System.Flags]
     public enum PlayerEntityProperties
     {
-        MOVEABLE    = 1 << 1,
-        PLAYABLE    = 2 << 1,
-        DYING       = 3 << 1,
-        CAN_JUMP    = 4 << 1,
-        JUMP_NORMAL = 5 << 1,
-        JUMP_HIGH   = 6 << 1,
-        CAN_DROWN   = 7 << 1
+        MOVEABLE    = 1 << 0,
+        PLAYABLE    = 1 << 1,
+        DYING       = 1 << 2,
+        CAN_JUMP    = 1 << 3,
+        JUMP_NORMAL = 1 << 4,
+        JUMP_HIGH   = 1 << 5,
+        CAN_DROWN   = 1 << 6
     }
 
     public class PlayerEntity : GameCore.Rules.IMutableEntity
@@ -48,7 +49,10 @@ namespace Player
         /// <param name="property"></param>
         public void AddEntityProperty(PlayerEntityProperties property)
         {
-            m_entityProperties |= property;
+            if (!HasProperty(property))
+            {
+                m_entityProperties |= property;
+            }
         }
 
         /// <summary>
@@ -57,7 +61,10 @@ namespace Player
         /// <param name="property"></param>
         public void RemoveEntityProperty(PlayerEntityProperties property)
         {
-            m_entityProperties &= ~property;
+            if (HasProperty(property))
+            {
+                m_entityProperties &= ~property;
+            }
         }
 
         /// <summary>
@@ -67,13 +74,16 @@ namespace Player
         /// <param name="toAdd"></param>
         public void ReplaceEntityProperty(PlayerEntityProperties toRemove, PlayerEntityProperties toAdd)
         {
-            m_entityProperties &= ~toRemove;
-            m_entityProperties |= toAdd;
+            if (!HasProperty(toAdd) && HasProperty(toRemove))
+            {
+                m_entityProperties &= ~toRemove;
+                m_entityProperties |= toAdd;
+            }
         }
 
         public bool HasProperty(PlayerEntityProperties property)
         {
-            return (m_entityProperties & property) == property;
+            return m_entityProperties.HasFlag(property);
         }
     }
 }

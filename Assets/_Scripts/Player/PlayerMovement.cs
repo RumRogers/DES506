@@ -28,7 +28,6 @@ namespace Player
         [SerializeField] float m_groundOverlapPadding = 0.1f;   //How far the player can sink before overlap recovery takes place
         [Header("Properties (Debug)")]
         [SerializeField] bool m_drawDebugRays = false;
-
         //player stats (not editor accessible)
         Vector3 m_playerStartPosition;
         Vector3 m_velocity = Vector3.zero;
