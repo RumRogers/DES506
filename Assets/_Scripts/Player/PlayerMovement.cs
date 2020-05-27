@@ -4,9 +4,10 @@ using UnityEngine;
 
 namespace Player
 {
+    [RequireComponent(typeof(PlayerEntity))]
     public class PlayerMovement : GameCore.System.Automaton
     {
-        PlayerEntity m_playerEntity = new PlayerEntity();   //Stores reference to a player entity
+        PlayerEntity m_playerEntity;
 
         //Player stats (editor variables)
         [Header("Pushing")]
@@ -28,7 +29,6 @@ namespace Player
         [SerializeField] float m_groundOverlapPadding = 0.1f;   //How far the player can sink before overlap recovery takes place
         [Header("Properties (Debug)")]
         [SerializeField] bool m_drawDebugRays = false;
-
         //player stats (not editor accessible)
         Vector3 m_playerStartPosition;
         Vector3 m_velocity = Vector3.zero;
@@ -68,11 +68,11 @@ namespace Player
         public AnimationCurve PushMovementCurve { get => m_pushMovementCurve; }
         #endregion
 
-        // Start is called before the first frame update
-        void Start()
+        private void Awake()
         {
             SetState(new Default_PlayerState(this));
             m_playerCollider = GetComponent<Collider>();
+            m_playerEntity = transform.GetComponent<PlayerEntity>();
 
             //setting properties
             m_playerEntity.AddEntityProperty(PlayerEntityProperties.CAN_JUMP);
@@ -80,6 +80,12 @@ namespace Player
 
             //Setting start position for death
             m_playerStartPosition = transform.position;
+        }
+
+        // Start is called before the first frame update
+        void Start()
+        {
+
         }
 
         // Override of automaton update function for extended functionality
@@ -90,10 +96,7 @@ namespace Player
                 SetState(new Death_PlayerState(this));
             }
 
-            if(m_state != null)
-            {
-                m_state.Manage();
-            }
+            base.Update();
 
             // do stuff we want to do in all states here (e.g. collsion / adding velocity / death states)
             if (IsColliding())

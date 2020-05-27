@@ -21,7 +21,7 @@ namespace Player
             //Jumping / falling state transitions
             if (m_playerMovement.IsGrounded())
             {
-                if (Input.GetButtonDown("Jump"))
+                if (Input.GetButtonDown("Jump") && m_playerMovement.PlayerEntity.HasProperty(PlayerEntityProperties.CAN_JUMP))
                 {
                     m_owner.SetState(new Jumping_PlayerState(m_owner));
                     return;

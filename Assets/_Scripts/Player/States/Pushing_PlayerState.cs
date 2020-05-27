@@ -67,6 +67,9 @@ namespace Player
                 m_moving = false;
 
                 m_playerMovement.OnBoxFinishedMoving();
+
+                m_playerMovement.Velocity = Vector3.zero;
+
                 yield break;
             }
         }
