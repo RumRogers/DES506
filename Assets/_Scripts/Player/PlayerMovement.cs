@@ -96,10 +96,7 @@ namespace Player
                 SetState(new Death_PlayerState(this));
             }
 
-            if(m_state != null)
-            {
-                m_state.Manage();
-            }
+            base.Update();
 
             // do stuff we want to do in all states here (e.g. collsion / adding velocity / death states)
             if (IsColliding())
