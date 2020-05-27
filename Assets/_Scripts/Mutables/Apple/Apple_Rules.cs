@@ -5,7 +5,7 @@ using GameCore.Rules;
 
 namespace GameMutables
 {
-    public class Apple_Rules : MonoBehaviour, IMutableEntity
+    public class Apple_Rules : MutableEntity
     {
         Renderer m_renderer;
         [SerializeField]
@@ -24,7 +24,7 @@ namespace GameMutables
             m_renderer = GetComponent<Renderer>();
         }
 
-        void IMutableEntity.Is(string lexeme)
+        public override void Is(string lexeme)
         {           
             Debug.Log("Apple is " + lexeme); 
             switch(lexeme)
@@ -48,9 +48,7 @@ namespace GameMutables
                     Debug.Log("This rule makes no sense, dude!");
                     return;
             }
-        }
-        void IMutableEntity.Can(string lexeme) { Debug.Log("Apple can " + lexeme); }
-        void IMutableEntity.Has(string lexeme) { Debug.Log("Apple has " + lexeme); }
+        }        
 
         private IEnumerator ChangeSize(Vector3 targetScale)
         {

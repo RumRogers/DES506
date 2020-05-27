@@ -42,7 +42,7 @@ namespace GameCore.Rules
 
         public readonly List<RuleChunk> m_ruleChunks;        
         private RuleDelegate m_ptrToMutables;
-
+        IMutableEntity mutableEntity;
         private List<RuleChunk> FilterValidChunks()
         {
             // Don't even bother to filter the rule when we don't have at least 3 chunks (needed for the basic rule)
@@ -145,11 +145,11 @@ namespace GameCore.Rules
             // WARNING: highly inefficient!!! Just used for testing, will avoid this in the final version.
             string tag = GrammarLexemes.GetTagFromLexeme(ruleSubject.m_lexeme);
             GameObject[] gameObjects = GameObject.FindGameObjectsWithTag(tag);
-            List<IMutableEntity> mutableEntities = new List<IMutableEntity>();
+            var mutableEntities = new List<MutableEntity>();
 
-            foreach(var gameObj in gameObjects)
+            foreach (var gameObj in gameObjects)
             {
-                IMutableEntity mutableEntity = gameObj.GetComponent<IMutableEntity>();
+                var mutableEntity = gameObj.GetComponent<MutableEntity>();
                 if(mutableEntity != null)
                 {
                     switch(ruleVerb.m_lexeme.ToLower())
