@@ -12,6 +12,7 @@ public class FireFlyAwakeState : State
     private bool m_inMotion = false;
     private const float m_maxSize = 0.1f;
     private const float m_growthSpeed = 2;
+    private float m_randSpeed = Random.Range(1, 3);
 
     public FireFlyAwakeState(Automaton owner, GameObject fireFlyObj) : base(owner)
     {
@@ -32,9 +33,9 @@ public class FireFlyAwakeState : State
     {
         Vector3 m_updatedPos = m_fireFlyObject.transform.position;
 
-            m_updatedPos.x += (Mathf.Sin(s_timer * 2) / 40);
-            m_updatedPos.y += (Mathf.Sin(s_timer * 4) / 80);
-            m_updatedPos.z += (Mathf.Cos(s_timer) / 80);
+            m_updatedPos.x += (Mathf.Sin(s_timer * m_randSpeed) / 40);
+            m_updatedPos.y += (Mathf.Sin(s_timer * m_randSpeed) / 80);
+            m_updatedPos.z += (Mathf.Cos(s_timer * m_randSpeed) / 80);
 
         m_fireFlyObject.transform.position = m_updatedPos;
     }

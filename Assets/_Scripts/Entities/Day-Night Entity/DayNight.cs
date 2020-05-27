@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DayNight : Automaton
+public class DayNight : Automaton //Needs to be updatedto use mutable class 
 {
     //Public Variables
     [Tooltip("This determines the speed of transition, with the larger the number, the faster it goes (Between 0 and 1)")]
@@ -19,7 +19,7 @@ public class DayNight : Automaton
         SetState(new DayState(this, m_light));
     }
 
-    override protected void Update()
+    override protected void Update() //Needs to be updated to use rules
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -37,9 +37,6 @@ public class DayNight : Automaton
             }
         }
 
-        if (m_state != null)
-        {
-            m_state.Manage();
-        }
+        base.Update();
     }
 }

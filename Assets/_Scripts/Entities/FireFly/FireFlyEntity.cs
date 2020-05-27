@@ -30,6 +30,12 @@ public class FireFlyEntity : Automaton
             }
         }
 
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            this.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+           // SetState(new ColorState(this, this.gameObject.GetComponent<Renderer>(), Color.green));
+        }
+
         if (m_state != null)
             m_state.Manage();
     }
