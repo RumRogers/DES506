@@ -42,7 +42,7 @@ namespace GameCore.Rules
 
         public readonly List<RuleChunk> m_ruleChunks;        
         private RuleDelegate m_ptrToMutables;
-        IMutableEntity mutableEntity;
+
         private List<RuleChunk> FilterValidChunks()
         {
             // Don't even bother to filter the rule when we don't have at least 3 chunks (needed for the basic rule)

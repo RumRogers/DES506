@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameCore.System;
 
 namespace GameCore.Rules
 {
@@ -8,7 +9,7 @@ namespace GameCore.Rules
     public delegate void RuleDelegate(string lexeme);
 
     // Each game entity that can be affected by run-time rules will have to inherit from this abstract class
-    public abstract class MutableEntity : MonoBehaviour
+    public abstract class MutableEntity : Automaton
     {
         public virtual void Is(string lexeme) { Debug.Log($"MutableEntity: called Is({lexeme})"); }
         public virtual void Can(string lexeme) { Debug.Log($"MutableEntity: called Can({lexeme})"); }
