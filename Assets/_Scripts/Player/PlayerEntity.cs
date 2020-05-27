@@ -16,21 +16,21 @@ namespace Player
         CAN_DROWN   = 7 << 1
     }
 
-    public class PlayerEntity : GameCore.Rules.IMutableEntity
+    public class PlayerEntity : GameCore.Rules.MutableEntity
     {
         PlayerEntityProperties m_entityProperties;
 
-        public void Can(string ruleObject)
+        public override void Can(string ruleObject)
         {
             Debug.LogError("IMPLEMENT PLAYER CAN (Josh hasn't impmented this yet)");
         }
 
-        public void Has(string ruleObject)
+        public override void Has(string ruleObject)
         {
             Debug.LogError("IMPLEMENT PLAYER HAS (Josh hasn't impmented this yet)");
         }
 
-        public void Is(string ruleObject)
+        public override void Is(string ruleObject)
         {
             Debug.LogError("IMPLEMENT PLAYER IS (Josh hasn't impmented this yet)");
         }
