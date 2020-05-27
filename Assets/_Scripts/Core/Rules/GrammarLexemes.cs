@@ -26,21 +26,21 @@ namespace GameCore.Rules
                 {
                     "JUMP", "DARK", "RED", "GREEN", "FAST", "SLOW"
                 }
-            },
-            {
+            }//,
+            /*{
                 RuleChunk.ChunkType.LOGICAL_OP, new List<string>()
                 {
                     "AND"
                 }
-            }
+            }*/
         };
 
-        public static bool IsValidLexeme(RuleChunk.ChunkType type, ref string lexeme)
+        public static bool IsValidLexeme(RuleChunk.ChunkType type, string lexeme)
         {
             return s_mapOfValidLexemes[type].Contains(lexeme);
         }
 
-        public static string GetTagFromLexeme(ref string lexeme)
+        public static string GetTagFromLexeme(string lexeme)
         {
             if(lexeme.Length == 0)
             {

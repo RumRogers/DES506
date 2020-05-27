@@ -7,6 +7,7 @@ TagManager:
   - Floor
   - Tile
   - Movable
+  - Apple
   layers:
   - Default
   - TransparentFX

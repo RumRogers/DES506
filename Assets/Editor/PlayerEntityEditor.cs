@@ -25,9 +25,8 @@ public class PlayerEntityEditor : EditorWindow
 
     private void OnGUI()
     {
-        if (Selection.activeTransform != null && Selection.activeTransform.TryGetComponent<Player.PlayerMovement>(out m_playerMovement))
+        if (Selection.activeTransform != null && Selection.activeTransform.TryGetComponent<Player.PlayerEntity>(out m_playerEntity))
         {
-            m_playerEntity = m_playerMovement.PlayerEntity;
 
             EditorGUILayout.LabelField("Status");
 

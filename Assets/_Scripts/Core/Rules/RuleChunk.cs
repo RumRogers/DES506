@@ -9,7 +9,7 @@ namespace GameCore.Rules
     {
         public enum ChunkType
         {
-            SUBJECT, VERB, OBJECT, LOGICAL_OP
+            SUBJECT, VERB, OBJECT//, LOGICAL_OP
         }
 
         public RuleChunk(ChunkType type, string lexeme)

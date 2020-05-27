@@ -4,9 +4,10 @@ using UnityEngine;
 
 namespace Player
 {
+    [RequireComponent(typeof(PlayerEntity))]
     public class PlayerMovement : GameCore.System.Automaton
     {
-        PlayerEntity m_playerEntity = new PlayerEntity();   //Stores reference to a player entity
+        PlayerEntity m_playerEntity;
 
         //Player stats (editor variables)
         [Header("Pushing")]
@@ -67,11 +68,11 @@ namespace Player
         public AnimationCurve PushMovementCurve { get => m_pushMovementCurve; }
         #endregion
 
-        // Start is called before the first frame update
-        void Start()
+        private void Awake()
         {
             SetState(new Default_PlayerState(this));
             m_playerCollider = GetComponent<Collider>();
+            m_playerEntity = transform.GetComponent<PlayerEntity>();
 
             //setting properties
             m_playerEntity.AddEntityProperty(PlayerEntityProperties.CAN_JUMP);
@@ -79,6 +80,12 @@ namespace Player
 
             //Setting start position for death
             m_playerStartPosition = transform.position;
+        }
+
+        // Start is called before the first frame update
+        void Start()
+        {
+
         }
 
         // Override of automaton update function for extended functionality
