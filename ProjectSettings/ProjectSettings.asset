@@ -653,10 +653,10 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 6
-  cloudProjectId: 35a4e68c-78a2-4ca7-95a2-f73bbcefc72b
+  cloudProjectId: 
   framebufferDepthMemorylessMode: 0
-  projectName: DES506_Personal
-  organizationId: bourban
+  projectName: 
+  organizationId: 
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
