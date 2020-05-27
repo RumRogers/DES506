@@ -88,6 +88,7 @@ namespace GameCore.Tiles
         protected void OnTriggerEnter(Collider other)
         {
             m_currentGameObject = other.gameObject;
+            Debug.Log($"Object {other.name} with tag {other.tag} just entered {this}.");
             ApplyEffect();
         }
 
@@ -98,6 +99,7 @@ namespace GameCore.Tiles
             if (other.gameObject == m_currentGameObject)
             {
                 m_currentGameObject = null;
+                Debug.Log($"Object {other.name} with tag {other.tag} just left {this}.");
             }
         }
 
@@ -105,6 +107,7 @@ namespace GameCore.Tiles
         {
             Debug.DrawLine(transform.position, transform.position + transform.up, c);
         }
+
         private void OnDrawGizmosSelected()
         {
             if (m_neighborTiles == null)
@@ -123,6 +126,16 @@ namespace GameCore.Tiles
                 }
                 ++idx;
             }            
+        }
+
+        private void OnDrawGizmos()
+        {
+            ForceAlignment();
+        }
+
+        public override string ToString()
+        {
+            return $"Tile ({transform.position.x},{transform.position.z}) of type {m_type})";
         }
     }
 }

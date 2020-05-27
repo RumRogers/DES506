@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace UI.Text
+namespace GameUI.Text
 {
     public static class StringHelpers
     {
