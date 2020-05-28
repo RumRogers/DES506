@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace GameUI.Text
+namespace GameUI.Dialogue
 {
     public class ScrollingTextExample : MonoBehaviour
     {
@@ -16,26 +16,14 @@ namespace GameUI.Text
         float m_deltaTime;
 
         [SerializeField]
-        UnityEngine.UI.Text text; 
+        Text text; 
 
         private void Start()
         {
             m_partialText = "";
             text.text = m_partialText;
-        }
 
-        private void Update()
-        {
-            m_deltaTime += Time.deltaTime;
-
-            if (m_deltaTime > m_textUpdateTime)
-            {
-                StringHelpers.AddNextChar(ref m_partialText, m_fullText);
-
-                text.text = m_partialText;
-                m_deltaTime = 0;
-            }
-
+            StartCoroutine(StringHelpers.FillDialogueBox(text, m_fullText, m_textUpdateTime));
         }
     }
 }

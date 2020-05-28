@@ -136,6 +136,30 @@ namespace GameCore.Rules
             return i == m_ruleChunks.Count;
         }*/
 
+
+        public static bool IsValidRule(params RuleChunk[] ruleChunks)
+        {
+            // We have a much simpler approach now, so it is enough to only check rules of length 3...
+            if(ruleChunks.Length == s_basicRule.Count)
+            {
+                // Let's check if the order of the rule boxes describes a valid rule...
+                for (int i = 0; i < ruleChunks.Length; ++i)
+                {
+                    // If any mismatch occurs, rule is not valid.
+                    if(ruleChunks[i].m_chunkType != s_basicRule[i])
+                    {
+                        return false;
+                    }
+                }
+
+                // We made it till this point, the rule is valid.
+                return true;
+            }
+
+            // Rule is not of length 3, thus invalid.
+            return false;
+        }
+
         private void Apply(List<RuleChunk> filteredRuleChunks)
         {
             var ruleSubject = filteredRuleChunks[0];

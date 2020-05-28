@@ -13,9 +13,11 @@ namespace GameCore.Rules
         private RuleChunk.ChunkType m_chunkType;
         [SerializeField]
         private string m_chunkLexeme;
+        private RuleChunk m_ruleChunk;
 
         public RuleChunk.ChunkType p_ChunkType { get => m_chunkType; }
         public string p_ChunkLexeme { get => m_chunkLexeme; }
+        public RuleChunk p_RuleChunk { get => new RuleChunk(m_chunkType, m_chunkLexeme); }
 
 #if SHOW_TEXT
         private TextMesh m_textMesh;
@@ -28,14 +30,13 @@ namespace GameCore.Rules
             var textMeshInstance = Instantiate(textMeshPrefab, transform);
 
             m_textMesh = textMeshInstance.GetComponent<TextMesh>();
-            m_textMesh.text = m_chunkLexeme;
 #endif
         }
 
         // Update is called once per frame
         void Update()
         {
-
+            m_textMesh.text = m_chunkLexeme;
         }
     }
 }

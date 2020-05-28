@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameCore.Rules;
 
 namespace GameCore.Tiles
 {
@@ -27,7 +28,8 @@ namespace GameCore.Tiles
         // The GameObject that is currently contained within this tile
         protected GameObject m_currentGameObject;
         protected Dictionary<CardinalPoint, AbstractTile> m_neighborTiles;
-
+        public GameObject p_ContainedGameObject { get => m_currentGameObject; }
+       
         private void Start()
         {
             InitTile();
@@ -72,6 +74,11 @@ namespace GameCore.Tiles
             m_neighborTiles[where] = neighbor;              
         }
 
+        public AbstractTile GetNeighborAtCardinalPoint(CardinalPoint where)
+        {
+            return m_neighborTiles[where];
+        }
+
         /// <summary>
         /// Each concrete type will have to set its own type by implementing this.
         /// It is useless for the logic but will help visually during level creation
@@ -88,8 +95,16 @@ namespace GameCore.Tiles
         protected void OnTriggerEnter(Collider other)
         {
             m_currentGameObject = other.gameObject;
-            Debug.Log($"Object {other.name} with tag {other.tag} just entered {this}.");
-            ApplyEffect();
+
+            if (other.CompareTag("Movable"))
+            {
+                ManageRuleChange();
+            }
+            //Debug.Log($"Object {other.name} with tag {other.tag} just entered {this}.");
+            else
+            {
+                ApplyEffect();
+            }
         }
 
         protected void OnTriggerExit(Collider other)
@@ -99,9 +114,106 @@ namespace GameCore.Tiles
             if (other.gameObject == m_currentGameObject)
             {
                 m_currentGameObject = null;
-                Debug.Log($"Object {other.name} with tag {other.tag} just left {this}.");
+                //Debug.Log($"Object {other.name} with tag {other.tag} just left {this}.");
             }
         }
+
+        private AbstractTile GetFurthestTileContainingRuleBoxAt(CardinalPoint direction)
+        {              
+            AbstractTile ptr = this;
+
+            // Proceed examining tiles in the specified direction until encountering either an empty tile
+            // or a tile containing something that is not a RuleBox.
+            do
+            {
+                ptr = ptr.m_neighborTiles[direction];
+            }
+            while (ptr.m_currentGameObject != null && ptr.m_currentGameObject.CompareTag("Movable"));
+
+            return ptr;
+        }
+
+        private void ManageRuleChange()
+        {
+            RuleBox ruleSubject = null, ruleVerb = null, ruleObject = null;
+            
+            var thisRuleBox = m_currentGameObject.GetComponent<RuleBox>();
+
+            switch(thisRuleBox.p_ChunkType)
+            {
+                case RuleChunk.ChunkType.SUBJECT:
+                    {
+                        AbstractTile eastTile = GetNeighborAtCardinalPoint(CardinalPoint.EAST);
+                        // Keep checking only if the eastern tile exists, and contains a rule box...
+                        if(eastTile != null && eastTile.ContainsRuleBox())
+                        {                       
+                            AbstractTile eastEastTile = eastTile.GetNeighborAtCardinalPoint(CardinalPoint.EAST);
+                            // Same for the tile that is two tiles away to the east from this one
+                            if (eastEastTile != null && eastEastTile.ContainsRuleBox())
+                            {
+                                ruleSubject = thisRuleBox;
+                                ruleVerb = eastTile.p_ContainedGameObject.GetComponent<RuleBox>();
+                                ruleObject = eastEastTile.p_ContainedGameObject.GetComponent<RuleBox>();
+                            }
+                        }
+                    }
+                    break;
+                case RuleChunk.ChunkType.VERB:
+                    {
+                        AbstractTile westTile = GetNeighborAtCardinalPoint(CardinalPoint.WEST);
+                        AbstractTile eastTile = GetNeighborAtCardinalPoint(CardinalPoint.EAST);
+
+                        if(westTile != null && eastTile != null && westTile.ContainsRuleBox() && eastTile.ContainsRuleBox())
+                        {
+                            ruleSubject = westTile.p_ContainedGameObject.GetComponent<RuleBox>();
+                            ruleVerb = thisRuleBox;                           
+                            ruleObject = eastTile.p_ContainedGameObject.GetComponent<RuleBox>();
+                        }
+                    }
+                    break;
+                case RuleChunk.ChunkType.OBJECT:
+                    {
+                        AbstractTile westTile = GetNeighborAtCardinalPoint(CardinalPoint.WEST);
+
+                        if (westTile != null && westTile.ContainsRuleBox())
+                        {
+                            AbstractTile westWestTile = westTile.GetNeighborAtCardinalPoint(CardinalPoint.WEST);                            
+                            if (westWestTile != null && westWestTile.ContainsRuleBox())
+                            {
+                                ruleSubject = westWestTile.p_ContainedGameObject.GetComponent<RuleBox>();
+                                ruleVerb = westTile.p_ContainedGameObject.GetComponent<RuleBox>();
+                                ruleObject = thisRuleBox;
+                            }
+                        }
+                    }
+                    break;
+                default:
+                    throw new UnityException($"Invalid type of rule box: {thisRuleBox}");
+            }
+            
+            if(ruleSubject != null && ruleVerb != null && ruleObject != null)
+            {
+                if (Rule.IsValidRule(ruleSubject.p_RuleChunk, ruleVerb.p_RuleChunk, ruleObject.p_RuleChunk))
+                {
+                    Rule rule = new Rule(ruleSubject.p_RuleChunk, ruleVerb.p_RuleChunk, ruleObject.p_RuleChunk);
+                }
+                else
+                {
+                    Debug.Log("Rule was not valid...");
+                }
+            }
+        }
+
+        public bool ContainsRuleBox()
+        {
+            return m_currentGameObject != null && m_currentGameObject.CompareTag("Movable");
+        }
+        public override string ToString()
+        {
+            return $"Tile ({transform.position.x},{transform.position.z}) of type {m_type})";
+        }
+
+        #region EDITOR_DEBUGGING
 
         public void DebugDrawNormal(Color c)
         {
@@ -133,9 +245,8 @@ namespace GameCore.Tiles
             ForceAlignment();
         }
 
-        public override string ToString()
-        {
-            return $"Tile ({transform.position.x},{transform.position.z}) of type {m_type})";
-        }
+        #endregion
+
+        
     }
 }

@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 194173235167853296}
   - component: {fileID: 194173235167853263}
   - component: {fileID: 194173235167853299}
+  - component: {fileID: 590413033}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: RuleBox
   m_TagString: Movable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -109,3 +110,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!114 &590413033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 194173235167853262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24dfaf267b80da84d8f8dc2897eb63db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_chunkType: 0
+  m_chunkLexeme: Lexeme

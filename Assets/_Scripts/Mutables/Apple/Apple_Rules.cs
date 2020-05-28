@@ -26,7 +26,7 @@ namespace GameMutables
 
         public override void Is(string lexeme)
         {           
-            Debug.Log("Apple is " + lexeme); 
+            Debug.Log($"{tag} is " + lexeme); 
             switch(lexeme)
             {
                 case "gone":
