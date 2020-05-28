@@ -6,7 +6,7 @@ namespace Player
 {
     public class Pushing_PlayerState : GameCore.System.State
     {
-        PlayerMovement m_playerMovement;
+        PlayerEntity m_playerEntity;
 
         bool m_moving = false;
 
@@ -14,8 +14,8 @@ namespace Player
 
         public Pushing_PlayerState(GameCore.System.Automaton owner) : base(owner)
         {
-            m_playerMovement = (PlayerMovement)owner;
-            m_playerMovement.Velocity = Vector3.zero;
+            m_playerEntity = (PlayerEntity)owner;
+            m_playerEntity.Velocity = Vector3.zero;
         }
 
         public override void Manage()
@@ -37,38 +37,38 @@ namespace Player
                 m_moving = true;
                 Vector3 forwardMovement = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z) * Input.GetAxisRaw("Vertical"); // removing the y component from the camera's forward vector
                 Vector3 rightMovement = Camera.main.transform.right * Input.GetAxisRaw("Horizontal");
-                m_playerMovement.Direction = (forwardMovement + rightMovement).normalized;
+                m_playerEntity.Direction = (forwardMovement + rightMovement).normalized;
 
-                Vector3 finalPosition = m_playerMovement.transform.position + (m_playerMovement.Direction * GRID_SIZE);
-                Vector3 currentPosition = m_playerMovement.transform.position;
-                Vector3 movableOffset = m_playerMovement.ClosestInteractable.position - m_playerMovement.transform.position;   
+                Vector3 finalPosition = m_playerEntity.transform.position + (m_playerEntity.Direction * GRID_SIZE);
+                Vector3 currentPosition = m_playerEntity.transform.position;
+                Vector3 movableOffset = m_playerEntity.ClosestInteractable.position - m_playerEntity.transform.position;   
 
                 float time = 0;
-                float timeToLerp = GRID_SIZE / m_playerMovement.PushSpeed;
+                float timeToLerp = GRID_SIZE / m_playerEntity.PushSpeed;
                 while (true)
                 {
                     time += Time.deltaTime;
                     float perComp = time / timeToLerp;
-                    float curvedPerComp = m_playerMovement.PushMovementCurve.Evaluate(perComp);
+                    float curvedPerComp = m_playerEntity.PushMovementCurve.Evaluate(perComp);
 
                     if (perComp > 1)
                     {
                         break;
                     }
-                    if (m_playerMovement.ClosestInteractable != null)
-                        m_playerMovement.ClosestInteractable.position = Vector3.Lerp(currentPosition + movableOffset, finalPosition + movableOffset, curvedPerComp);
+                    if (m_playerEntity.ClosestInteractable != null)
+                        m_playerEntity.ClosestInteractable.position = Vector3.Lerp(currentPosition + movableOffset, finalPosition + movableOffset, curvedPerComp);
 
-                    m_playerMovement.transform.position = Vector3.Lerp(currentPosition, finalPosition, curvedPerComp);
+                    m_playerEntity.transform.position = Vector3.Lerp(currentPosition, finalPosition, curvedPerComp);
                     yield return null;
                 }
                 //Hard setting end point incase something messes up and pushable ends up in slightly the wrong place
-                m_playerMovement.transform.position = finalPosition;
-                m_playerMovement.ClosestInteractable.position = finalPosition + movableOffset;
+                m_playerEntity.transform.position = finalPosition;
+                m_playerEntity.ClosestInteractable.position = finalPosition + movableOffset;
                 m_moving = false;
 
-                m_playerMovement.OnBoxFinishedMoving();
+                m_playerEntity.OnBoxFinishedMoving();
 
-                m_playerMovement.Velocity = Vector3.zero;
+                m_playerEntity.Velocity = Vector3.zero;
 
                 yield break;
             }
