@@ -6,6 +6,10 @@ namespace GameCore.Rules
 {
     public sealed class Rule
     {
+        public enum ApplicationMode
+        {
+            APPLY, UNDO
+        }
         private static List<RuleChunk.ChunkType> s_basicRule = new List<RuleChunk.ChunkType>(3)
         {
             RuleChunk.ChunkType.SUBJECT,
@@ -37,7 +41,6 @@ namespace GameCore.Rules
         public Rule(params RuleChunk[] ruleChunks)
         {
             m_ruleChunks = new List<RuleChunk>(ruleChunks);
-            Apply(FilterValidChunks());
         }
 
         public readonly List<RuleChunk> m_ruleChunks;        
@@ -160,37 +163,62 @@ namespace GameCore.Rules
             return false;
         }
 
-        private void Apply(List<RuleChunk> filteredRuleChunks)
+        public void Apply(ApplicationMode mode = ApplicationMode.APPLY)
         {
-            var ruleSubject = filteredRuleChunks[0];
-            var ruleVerb = filteredRuleChunks[1];
-            var ruleObject = filteredRuleChunks[2];
+            if(!IsValidRule(m_ruleChunks[0], m_ruleChunks[1], m_ruleChunks[2]))
+            {
+                return;
+            }
+
+            var ruleSubject = m_ruleChunks[0];
+            var ruleVerb = m_ruleChunks[1];
+            var ruleObject = m_ruleChunks[2];
 
             // WARNING: highly inefficient!!! Just used for testing, will avoid this in the final version.
             string tag = GrammarLexemes.GetTagFromLexeme(ruleSubject.m_lexeme);
             GameObject[] gameObjects = GameObject.FindGameObjectsWithTag(tag);
-            var mutableEntities = new List<MutableEntity>();
 
             foreach (var gameObj in gameObjects)
             {
-                var mutableEntity = gameObj.GetComponent<MutableEntity>();
-                if(mutableEntity != null)
+                var mutableEntities = gameObj.GetComponents<MutableEntity>();
+                foreach(var mutableEntity in mutableEntities)
                 {
-                    switch(ruleVerb.m_lexeme.ToLower())
+                    if(mode == ApplicationMode.APPLY)
                     {
-                        case "is":
-                            m_ptrToMutables += mutableEntity.Is;
-                            break;
-                        case "has":
-                            m_ptrToMutables += mutableEntity.Has;
-                            break;
-                        case "can":
-                            m_ptrToMutables += mutableEntity.Can;
-                            break;
-                        default:
-                            break;
+                        switch (ruleVerb.m_lexeme.ToLower())
+                        {
+                            case "is":
+                                m_ptrToMutables += mutableEntity.Is;
+                                break;
+                            case "has":
+                                m_ptrToMutables += mutableEntity.Has;
+                                break;
+                            case "can":
+                                m_ptrToMutables += mutableEntity.Can;
+                                break;
+                            default:
+                                break;
+                        }
                     }
-                }
+                    else
+                    {
+                        switch (ruleVerb.m_lexeme.ToLower())
+                        {
+                            case "is":
+                                m_ptrToMutables += mutableEntity.UndoIs;
+                                break;
+                            case "has":
+                                m_ptrToMutables += mutableEntity.UndoHas;
+                                break;
+                            case "can":
+                                m_ptrToMutables += mutableEntity.UndoCan;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    
+                }                
             }
 
             m_ptrToMutables(ruleObject.m_lexeme);

@@ -25,7 +25,18 @@ public class DebugTestRule : MonoBehaviour
             Rule r = new Rule(new RuleChunk(RuleChunk.ChunkType.SUBJECT, m_ruleSlots[0]),
                 new RuleChunk(RuleChunk.ChunkType.VERB, m_ruleSlots[1]),
                 new RuleChunk(RuleChunk.ChunkType.OBJECT, m_ruleSlots[2]));
+            r.Apply();
             
+        }
+
+        pos.y += m_btnSize.y + m_verticalSpacing;
+
+        if (GUI.Button(new Rect(pos.x, pos.y, m_btnSize.x, m_btnSize.y), "Undo Rule"))
+        {
+            Rule r = new Rule(new RuleChunk(RuleChunk.ChunkType.SUBJECT, m_ruleSlots[0]),
+                new RuleChunk(RuleChunk.ChunkType.VERB, m_ruleSlots[1]),
+                new RuleChunk(RuleChunk.ChunkType.OBJECT, m_ruleSlots[2]));
+            r.Apply(Rule.ApplicationMode.UNDO);
         }
     }
 }
