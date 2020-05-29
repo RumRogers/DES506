@@ -130,6 +130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 231225065}
   - component: {fileID: 231225061}
+  - component: {fileID: 231225067}
   - component: {fileID: 231225064}
   - component: {fileID: 231225063}
   - component: {fileID: 231225062}
@@ -181,6 +182,8 @@ MonoBehaviour:
   m_maxSpeed: 2
   m_walkingAcceleration: 15
   m_walkingDeceleration: 15
+  m_iceAcceleration: 1
+  m_iceDeceleration: 1
   m_aerialAccelleration: 5
   m_gravity: 9.81
   m_jumpVelocity: 4.5
@@ -194,6 +197,7 @@ MonoBehaviour:
   m_numVerticalRays: 3
   m_rayLength: 0.5
   m_skinWidth: 0.1
+  m_playerEntityProperties: 2
 --- !u!136 &231225062
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -262,7 +266,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 231225060}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.45, z: -0.13}
+  m_LocalPosition: {x: 0, y: 1.45, z: -1.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -281,6 +285,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.98, y: 1.38, z: 1.75}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &231225067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231225060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47de62c4b9adcc94e84146d5c1743d51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_idleAnim: {fileID: 0}
+  m_runnningAnim: {fileID: 0}
+  m_jumpingAnim: {fileID: 0}
+  m_fallingAnim: {fileID: 0}
+  m_pushingAnim: {fileID: 0}
 --- !u!1 &298048981
 GameObject:
   m_ObjectHideFlags: 0

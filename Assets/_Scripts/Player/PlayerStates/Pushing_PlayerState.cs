@@ -16,6 +16,8 @@ namespace Player
         {
             m_playerEntity = (PlayerEntity)owner;
             m_playerEntity.Velocity = Vector3.zero;
+
+            m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.PUSHING);
         }
 
         public override void Manage()

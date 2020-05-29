@@ -13,6 +13,8 @@ namespace Player
             m_playerEntity = (PlayerEntity)owner;
             Debug.Log("In DeathState!");
             m_playerEntity.transform.position = m_playerEntity.PlayerStartPosition;
+
+            m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.DYING);
         }
 
         public override void Manage()

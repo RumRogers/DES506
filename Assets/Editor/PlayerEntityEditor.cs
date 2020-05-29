@@ -55,6 +55,7 @@ public class PlayerEntityEditor : EditorWindow
                 }
             }
 
+            xPos = 5;
             yPos += m_buttonHeight + 8;
 
             GUI.color = Color.white;
