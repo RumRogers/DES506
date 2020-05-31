@@ -25,11 +25,21 @@ namespace GameCore.Tiles
         // Only needed for coherency in the editor, so it's visually obvious what type the tile is
         protected TileType m_type;
         private BoxCollider m_triggerBoxCollider;
+        [SerializeField]
         // The GameObject that is currently contained within this tile
         protected GameObject m_currentGameObject;
         protected Dictionary<CardinalPoint, AbstractTile> m_neighborTiles;
         public GameObject p_ContainedGameObject { get => m_currentGameObject; }
-       
+        //////////////////////////////////////////////////////////////////////////
+        [SerializeField]
+        private AbstractTile m_neighborN;
+        [SerializeField]
+        private AbstractTile m_neighborS;
+        [SerializeField]
+        private AbstractTile m_neighborW;
+        [SerializeField]
+        private AbstractTile m_neighborE;
+
         private void Start()
         {
             InitTile();
@@ -71,7 +81,23 @@ namespace GameCore.Tiles
 
         public void AddNeighbor(AbstractTile neighbor, CardinalPoint where)
         {
-            m_neighborTiles[where] = neighbor;              
+            m_neighborTiles[where] = neighbor;     
+            /////////////
+            switch(where)
+            {
+                case CardinalPoint.NORTH:
+                    m_neighborN = neighbor;
+                    break;
+                case CardinalPoint.SOUTH:
+                    m_neighborS = neighbor;
+                    break;
+                case CardinalPoint.WEST:
+                    m_neighborW = neighbor;
+                    break;
+                case CardinalPoint.EAST:
+                    m_neighborE = neighbor;
+                    break;
+            }
         }
 
         public AbstractTile GetNeighborAtCardinalPoint(CardinalPoint where)
@@ -94,6 +120,11 @@ namespace GameCore.Tiles
 
         protected void OnTriggerEnter(Collider other)
         {
+            // Do not update the current object if the player enters the tile but the tile contains something else already
+            if(m_currentGameObject != null && other.CompareTag("Player"))
+            {
+                return;
+            }
             m_currentGameObject = other.gameObject;
 
             if (other.CompareTag("Movable"))

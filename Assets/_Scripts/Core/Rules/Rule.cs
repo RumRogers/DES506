@@ -221,8 +221,10 @@ namespace GameCore.Rules
                 }                
             }
 
-            m_ptrToMutables(ruleObject.m_lexeme);
-            
+            if(m_ptrToMutables != null)
+            {
+                m_ptrToMutables(ruleObject.m_lexeme);
+            }
         }
     }
 }

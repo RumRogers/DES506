@@ -10,9 +10,9 @@ namespace GameMutables
     {
         Vector3 m_scaleNormal;
         [SerializeField]
-        Vector3 m_scaleBig = new Vector3(2f, 2f, 2f);
+        float m_scaleBigMultiplier = 2f;
         [SerializeField]
-        Vector3 m_scaleSmall = new Vector3(.5f, .5f, .5f);
+        float m_scaleSmallMultiplier = .5f;
         [SerializeField]
         float m_changeSizeSpeed = 1f;
 
@@ -28,10 +28,10 @@ namespace GameMutables
             switch(lexeme)
             {
                 case "big": 
-                    StartCoroutine(ChangeSize(m_scaleBig));
+                    StartCoroutine(ChangeSize(m_scaleNormal * m_scaleBigMultiplier));
                     break;
                 case "small":
-                    StartCoroutine(ChangeSize(m_scaleSmall));
+                    StartCoroutine(ChangeSize(m_scaleNormal * m_scaleSmallMultiplier));
                     break;
                 default:
                     break;

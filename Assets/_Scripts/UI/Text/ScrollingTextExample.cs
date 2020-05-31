@@ -9,6 +9,12 @@ namespace GameUI.Dialogue
     {
         [SerializeField]
         string m_fullText = "Hello there, this sentence needs to be longer!";
+
+        int stage = 0;
+
+        string[] playerStrings;
+        string[] NPCStrings;
+
         string m_partialText;
 
         [SerializeField]

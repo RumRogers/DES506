@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GameCore.Tiles
 {
-    public class DeletThis : MonoBehaviour
+    public class CreateLevelMap : MonoBehaviour
     {
         // Start is called before the first frame update
         void Start()
@@ -14,7 +14,7 @@ namespace GameCore.Tiles
 
         private IEnumerator CreateMap()
         {
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(.5f);
             TileMapper.SetAllNeighbors();
         }
     }

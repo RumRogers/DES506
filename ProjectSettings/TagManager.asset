@@ -9,6 +9,7 @@ TagManager:
   - Movable
   - Apple
   - Tree
+  - Gate
   layers:
   - Default
   - TransparentFX
