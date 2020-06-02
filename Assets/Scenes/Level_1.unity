@@ -516,6 +516,7 @@ GameObject:
   - component: {fileID: 24508190}
   - component: {fileID: 24508189}
   - component: {fileID: 24508192}
+  - component: {fileID: 24508193}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -605,6 +606,18 @@ MonoBehaviour:
   m_comebackSpeed: 0
   m_smoothMovement: 1
   m_lerpSpeed: 1
+--- !u!114 &24508193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 24508188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0199b436f619d6146bbc948b6250748d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &31638638
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8129,7 +8142,7 @@ GameObject:
   - component: {fileID: 482560492}
   m_Layer: 0
   m_Name: Gate
-  m_TagString: Gate
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8183,6 +8196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bf6a63a9ddf18a4db29e31b6142c115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_reactsToSubject: Gate
   m_openTriggerName: Open
   m_closeTriggerName: Close
   m_lights:
@@ -11379,6 +11393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01d15bf284ad57a4cadb87e654c84338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_reactsToSubject: 
   m_pushMovementCurve:
     serializedVersion: 2
     m_Curve:

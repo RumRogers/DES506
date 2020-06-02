@@ -7,10 +7,7 @@ TagManager:
   - Floor
   - Tile
   - Movable
-  - Apple
-  - Tree
-  - Gate
-  - Rock
+  - Mutable
   layers:
   - Default
   - TransparentFX

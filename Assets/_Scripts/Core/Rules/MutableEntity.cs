@@ -11,6 +11,19 @@ namespace GameCore.Rules
     // Each game entity that can be affected by run-time rules will have to inherit from this abstract class
     public abstract class MutableEntity : Automaton
     {
+        public const string s_MutableTag = "Mutable";
+
+        [SerializeField]
+        private string m_reactsToSubject = null;
+        public string p_ReactsToSubject { get => m_reactsToSubject; }
+
+        // Programmers, beware! If you decide to override this, you either call base.Awake() OR set the tag manually from the editor!
+        // If you don't, the "Mutable" tag won't be automatically applied to the mutable game object. You've been warned! :)
+        protected virtual void Awake()
+        {
+            gameObject.tag = s_MutableTag;
+        }
+
         public virtual void Is(string lexeme) { Debug.Log($"{this}: called Is({lexeme})"); }
         public virtual void Can(string lexeme) { Debug.Log($"{this}: called Can({lexeme})"); }
         public virtual void Has(string lexeme) { Debug.Log($"{this}: called Has({lexeme})"); }

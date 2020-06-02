@@ -7,7 +7,6 @@ namespace GameMutables
 {
     public class Level2_Tree : MutableEntity
     {
-        [SerializeField]
         Animator m_animator;
 
         const string BIG = "big";

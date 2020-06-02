@@ -18,7 +18,7 @@ namespace GameMutables
 
         // Start is called before the first frame update
         void Start()
-        {
+        {            
             m_scaleNormal = transform.localScale;
         }
 

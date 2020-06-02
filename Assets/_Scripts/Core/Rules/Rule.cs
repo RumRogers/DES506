@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameCore.System;
 
 namespace GameCore.Rules
 {
@@ -174,16 +175,13 @@ namespace GameCore.Rules
             var ruleVerb = m_ruleChunks[1];
             var ruleObject = m_ruleChunks[2];
 
-            // WARNING: highly inefficient!!! Just used for testing, will avoid this in the final version.
-            string tag = GrammarLexemes.GetTagFromLexeme(ruleSubject.m_lexeme);
-            GameObject[] gameObjects = GameObject.FindGameObjectsWithTag(tag);
+            var mutableEntities = LevelManager.GetMutablesFromSubject(ruleSubject.m_lexeme);
 
-            foreach (var gameObj in gameObjects)
+            if(mutableEntities != null)
             {
-                var mutableEntities = gameObj.GetComponents<MutableEntity>();
-                foreach(var mutableEntity in mutableEntities)
+                foreach (var mutableEntity in mutableEntities)
                 {
-                    if(mode == ApplicationMode.APPLY)
+                    if (mode == ApplicationMode.APPLY)
                     {
                         switch (ruleVerb.m_lexeme.ToLower())
                         {
@@ -217,9 +215,9 @@ namespace GameCore.Rules
                                 break;
                         }
                     }
-                    
-                }                
-            }
+
+                }
+            }           
 
             if(m_ptrToMutables != null)
             {
