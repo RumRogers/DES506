@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Class which handles navigating the menu, 
@@ -49,4 +50,19 @@ public class MenuButtonScript : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        //Just in case the others are left enabled in the editor, hard set only the splash screen active on start
+        DisplayMenu(0);
+    }
+
+    public void CloseGame()
+    {
+        Application.Quit();
+    }
+
+    public void LoadScene(string scene)
+    {
+        SceneManager.LoadScene(scene);
+    }
 }

@@ -37,8 +37,6 @@ namespace GameMutables
                 case "open":
                     StartCoroutine(OpenGate());
                     break;
-                case "lit":
-                    break;
                 default:
                     break;
 
@@ -83,4 +81,3 @@ namespace GameMutables
         }
     }
 }
-

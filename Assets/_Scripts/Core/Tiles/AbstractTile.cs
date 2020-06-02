@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿//#define DEBUG_TILE_NEIGHBORS
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using GameCore.Rules;
@@ -30,7 +32,8 @@ namespace GameCore.Tiles
         protected GameObject m_currentGameObject;
         protected Dictionary<CardinalPoint, AbstractTile> m_neighborTiles;
         public GameObject p_ContainedGameObject { get => m_currentGameObject; }
-        //////////////////////////////////////////////////////////////////////////
+
+#if DEBUG_TILE_NEIGHBORS
         [SerializeField]
         private AbstractTile m_neighborN;
         [SerializeField]
@@ -39,6 +42,7 @@ namespace GameCore.Tiles
         private AbstractTile m_neighborW;
         [SerializeField]
         private AbstractTile m_neighborE;
+#endif
 
         private void Start()
         {
@@ -81,9 +85,9 @@ namespace GameCore.Tiles
 
         public void AddNeighbor(AbstractTile neighbor, CardinalPoint where)
         {
-            m_neighborTiles[where] = neighbor;     
-            /////////////
-            switch(where)
+            m_neighborTiles[where] = neighbor;
+#if DEBUG_TILE_NEIGHBORS           
+            switch (where)
             {
                 case CardinalPoint.NORTH:
                     m_neighborN = neighbor;
@@ -98,6 +102,7 @@ namespace GameCore.Tiles
                     m_neighborE = neighbor;
                     break;
             }
+#endif
         }
 
         public AbstractTile GetNeighborAtCardinalPoint(CardinalPoint where)
