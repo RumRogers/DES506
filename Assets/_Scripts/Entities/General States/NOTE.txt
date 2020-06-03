@@ -1,0 +1,1 @@
+I figure it would be good to have a collection of shareable states, things that are applicable to more than one entity
