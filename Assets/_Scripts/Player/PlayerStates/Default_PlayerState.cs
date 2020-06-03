@@ -18,12 +18,11 @@ namespace Player
 
         public override void Manage()
         {
-
             //Jumping / falling state transitions
             if (m_playerEntity.IsGrounded())
             {
                 //need to check if it's playable here before jump as we still want it to enter the falling state if it's not grounded, regardless of it's properties
-                if (Input.GetButtonDown("Jump") && m_playerEntity.HasProperty(PlayerEntityProperties.CAN_JUMP)&& m_playerEntity.HasProperty(PlayerEntityProperties.PLAYABLE))
+                if (Input.GetButtonDown("Jump") && m_playerEntity.HasProperty(PlayerEntityProperties.CAN_JUMP) && m_playerEntity.HasProperty(PlayerEntityProperties.PLAYABLE))
                 {
                     m_owner.SetState(new Jumping_PlayerState(m_owner));
                     return;
@@ -58,8 +57,8 @@ namespace Player
                 }
 
                 //Directional input
-                Vector3 forwardMovement = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z) * Input.GetAxisRaw("Vertical"); // removing the y component from the camera's forward vector
-                Vector3 rightMovement = Camera.main.transform.right * Input.GetAxisRaw("Horizontal");
+                Vector3 forwardMovement = Vector3.forward * Input.GetAxis("Vertical"); // removing the y component from the camera's forward vector
+                Vector3 rightMovement = Vector3.right * Input.GetAxis("Horizontal");
                 m_playerEntity.Direction = (forwardMovement + rightMovement).normalized;
 
                 //Slope detection 
@@ -75,15 +74,18 @@ namespace Player
                 }
 
                 //Overlap recovery (ground)
-                if (m_playerEntity.GroundHitInfo.distance < (m_playerEntity.PlayerCollider.bounds.extents.y) - m_playerEntity.GroundOverlapPadding)
+                if (Vector3.Distance(m_playerEntity.transform.position, m_playerEntity.GroundHitInfo.point) < m_playerEntity.PlayerCollider.bounds.extents.y)
                 {
-                    float lerpedY = Mathf.Lerp(m_playerEntity.transform.position.y, m_playerEntity.transform.position.y + 1, Time.deltaTime);
+                    float targetY = m_playerEntity.GroundHitInfo.point.y + (m_playerEntity.PlayerCollider.bounds.extents.y);
+                    float lerpedY = Mathf.Lerp(m_playerEntity.transform.position.y, targetY, Time.deltaTime);
                     m_playerEntity.transform.position = new Vector3(m_playerEntity.transform.position.x, lerpedY, m_playerEntity.transform.position.z);
                 }
 
                 //If there is input, add velocity in that direction, but clamp the movement speed, Y velocity should always equal zero in this state, so no need to preserve down / up velocity
                 if (m_playerEntity.Direction != Vector3.zero)
                 {
+                    //rotate the player to face the direction they are traveling in
+                    m_playerEntity.transform.rotation = Quaternion.LookRotation(m_playerEntity.Direction);
                     if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING))
                     {
                         m_velocity += (m_playerEntity.Direction * m_playerEntity.IceAcceleration) * Time.deltaTime;
@@ -96,11 +98,11 @@ namespace Player
 
                     m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.RUNNING);
                 }
-                else if (Mathf.Abs(m_velocity.x) > 0.3f || Mathf.Abs(m_velocity.z) > 0.3f)
+                else if (Mathf.Abs(m_velocity.x) > 0.1f || Mathf.Abs(m_velocity.z) > 0.1f)
                 {
                     if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING))
                     {
-                        m_velocity += (m_playerEntity.Direction * m_playerEntity.IceDeceleration) * Time.deltaTime;
+                        m_velocity += (((m_velocity.normalized) * -1) * m_playerEntity.IceDeceleration) * Time.deltaTime;
                     }
                     else
                     {

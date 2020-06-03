@@ -27,6 +27,7 @@ namespace Player
             {
                 m_playerEntity.Velocity = new Vector3(m_playerEntity.Velocity.x, 0, m_playerEntity.Velocity.z);
                 m_owner.SetState(new Default_PlayerState(m_owner));
+                return;
             }
 
             //Directional input, slower in mid air

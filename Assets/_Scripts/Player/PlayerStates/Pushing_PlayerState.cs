@@ -18,6 +18,14 @@ namespace Player
             m_playerEntity.Velocity = Vector3.zero;
 
             m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.PUSHING);
+
+            //Rotate player to the object they are pushing
+            Quaternion newRotation = Quaternion.LookRotation(m_playerEntity.ClosestInteractable.position - m_playerEntity.transform.position);
+            //Might be inefficient but eular angles makes this equasion much easier
+            Vector3 eularRoation = newRotation.eulerAngles;
+            eularRoation.y = Mathf.RoundToInt(eularRoation.y / 90) * 90;
+            Debug.Log(eularRoation);
+            m_playerEntity.transform.eulerAngles = eularRoation;
         }
 
         public override void Manage()
@@ -37,9 +45,20 @@ namespace Player
             if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
             {
                 m_moving = true;
-                Vector3 forwardMovement = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z) * Input.GetAxisRaw("Vertical"); // removing the y component from the camera's forward vector
-                Vector3 rightMovement = Camera.main.transform.right * Input.GetAxisRaw("Horizontal");
-                m_playerEntity.Direction = (forwardMovement + rightMovement).normalized;
+
+                Vector3 forwardMovement = new Vector3(m_playerEntity.transform.forward.x, 0, m_playerEntity.transform.forward.z) * Input.GetAxisRaw("Vertical"); // removing the y component from the camera's forward vector
+                Vector3 rightMovement = new Vector3(m_playerEntity.transform.right.x, 0, m_playerEntity.transform.right.z) * Input.GetAxisRaw("Horizontal");
+
+                //locking it from moving on diagonals
+                if (forwardMovement.magnitude > rightMovement.magnitude)
+                {
+                    m_playerEntity.Direction = forwardMovement.normalized;
+                }
+                else
+                {
+                    m_playerEntity.Direction = rightMovement.normalized;
+                }
+
 
                 Vector3 finalPosition = m_playerEntity.transform.position + (m_playerEntity.Direction * GRID_SIZE);
                 Vector3 currentPosition = m_playerEntity.transform.position;

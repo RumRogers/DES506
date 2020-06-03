@@ -28,6 +28,8 @@ namespace Player
 
         public override void Manage()
         {
+
+
             //subtracting gravity from upwards velocity until forces equalise
             m_playerEntity.Velocity += (Vector3.down * m_playerEntity.Gravity) * Time.deltaTime;
 
@@ -47,6 +49,7 @@ namespace Player
             if (m_playerEntity.Velocity.y < 0)
             {
                 m_owner.SetState(new Falling_PlayerState(m_owner));
+                return;
             }
         }
     }

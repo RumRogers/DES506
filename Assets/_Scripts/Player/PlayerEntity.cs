@@ -18,6 +18,7 @@ namespace Player
         SLIDING         = 1 << 7
     }
 
+    [RequireComponent(typeof(PlayerAnimator))]
     public class PlayerEntity : GameCore.Rules.MutableEntity
     {
         //Player stats (editor variables)
@@ -38,14 +39,10 @@ namespace Player
         [SerializeField] float m_highJumpVelocity = 9.5f;
         [Header("Collision")]
         [SerializeField] float m_maxClimbableIncline = 45.0f;
-        [SerializeField] float m_groundPadding = 0.1f;  //How far from the floor the ray should start
-        [SerializeField] float m_collisionRayLengthMultiplyer = 0.7f;   //Determines what percentage of the player's bounds to use as ray length
-        [SerializeField] float m_groundOverlap = 0.1f;   //How far the player can sink before overlap recovery takes place
-        [Header("'Complex' Collision")]
-        [SerializeField] bool m_useComplexCollisions = true;
+        [SerializeField] float m_heightPadding = 0.1f;  //How far from the floor the ray should start
+        [SerializeField] float m_groundOverlapPadding = 0.1f;   //How far the player can sink before overlap recovery takes place
         [SerializeField] int m_numHorizontalRays = 3;
         [SerializeField] int m_numVerticalRays = 3;
-        [SerializeField] float m_rayLength = 0.1f;
         [SerializeField] float m_skinWidth = 0.2f; // the distance from the outside of the object the rays start
 
         //player stats (not editor accessible)
@@ -84,7 +81,7 @@ namespace Player
         public float JumpVelocity { get => m_jumpVelocity; }
         public float HighJumpVelocity { get => m_highJumpVelocity; }
         public float MaxClimableAngle { get => m_maxClimbableIncline; }
-        public float GroundOverlapPadding { get => m_groundOverlap; }
+        public float GroundOverlapPadding { get => m_groundOverlapPadding; }
         public Collider PlayerCollider { get => m_playerCollider; }
         public RaycastHit GroundHitInfo { get => m_groundedHitInfo; }
         public Vector3 PlayerStartPosition { get => m_playerStartPosition; }
@@ -102,8 +99,8 @@ namespace Player
             m_Animator = GetComponent<PlayerAnimator>();
 
             //setting properties
-            AddEntityProperty(PlayerEntityProperties.CAN_JUMP);
-            AddEntityProperty(PlayerEntityProperties.JUMP_NORMAL);
+            //AddEntityProperty(PlayerEntityProperties.CAN_JUMP);
+            //AddEntityProperty(PlayerEntityProperties.JUMP_NORMAL);
 
             //Setting start position for death
             m_playerStartPosition = transform.position;
@@ -130,19 +127,8 @@ namespace Player
 
         public bool IsColliding()
         {
-            if (!m_useComplexCollisions)
-            {
-                //Debug.DrawLine(transform.position, transform.position + (new Vector3(m_velocity.x, 0.0f, m_velocity.z).normalized * m_playerCollider.bounds.extents.x * m_collisionRayLengthMultiplyer)); //Uncomment for debug rays
-                if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y - (m_playerCollider.bounds.extents.y - m_groundPadding), transform.position.z),
-                new Vector3(m_velocity.x, 0.0f, m_velocity.z).normalized, out m_collisionHitInfo, m_playerCollider.bounds.extents.x * m_collisionRayLengthMultiplyer))
-                {
-                    return m_collisionHitInfo.collider.isTrigger ? false : true;    //if collider is a trigger, ignore it and return false
-                }
-                return false;
-            }
-
             Vector3 rayStart = transform.position;
-            Vector3 rayDirection = new Vector3(m_velocity.x, 0, m_velocity.z).normalized;
+            Vector3 rayDirection = m_velocity.normalized; //new Vector3(m_velocity.x, 0, m_velocity.z).normalized;
             Vector3 horizontalRaySpacing = Vector3.Cross(rayDirection, transform.up);    // get perpendicular vector to our direction for spacing
             Vector3 verticalRaySpacing = new Vector3(0, m_playerCollider.bounds.extents.y / m_numVerticalRays, 0);
 
@@ -156,7 +142,7 @@ namespace Player
                 //rayStart = transform.position + ((m_playerCollider.bounds.extents.z /2) * rayDirection);  //enable if you want rays to start at the outer edge of the player
                 horizontalRaySpacing *= (m_playerCollider.bounds.extents.x * 2);
             }
-            if (m_velocity.x != 0 && m_velocity.z != 0)
+            else if (m_velocity.x != 0 && m_velocity.z != 0)
             {
                 horizontalRaySpacing /= horizontalRaySpacing.magnitude;
             }
@@ -164,40 +150,75 @@ namespace Player
             horizontalRaySpacing -= horizontalRaySpacing * m_skinWidth; //adding a variable width from the outer edge of the collider (should help with the player "sticking" to things
 
             rayStart -= (verticalRaySpacing * (m_numHorizontalRays/ 2)) + ((horizontalRaySpacing) * (m_numVerticalRays / 2)); //ray start is currently at center of the object and needs to be offset
-            rayStart.y += m_groundPadding;  //Rasing off the ground by padding value
-
+            rayStart.y += m_heightPadding;  //Rasing off the ground by padding value
 
             for (int x = 0; x < m_numHorizontalRays; ++x)
             {
                 for (int y = 0; y < m_numVerticalRays; ++y)
                 {
 
-                    //Debug.DrawLine(rayStart, (rayStart + (rayDirection * m_rayLength)));  //Uncomment for debug rays
+                    Debug.DrawLine(rayStart, (rayStart + (rayDirection * m_playerCollider.bounds.extents.z)));  //Uncomment for debug rays
 
-                    if (Physics.Raycast(rayStart, rayDirection, out m_collisionHitInfo, m_rayLength))
+                    if (Physics.Raycast(rayStart, rayDirection, out m_collisionHitInfo, m_playerCollider.bounds.extents.z))
                     {
-                        if(!m_collisionHitInfo.collider.isTrigger)
-                        {
-                            return true;
-                        }
+                        return true;
                     }
                     rayStart += verticalRaySpacing;
                 }
                 rayStart += horizontalRaySpacing;
-                rayStart.y = (transform.position.y - verticalRaySpacing.y) + m_groundPadding;
+                rayStart.y = (transform.position.y - verticalRaySpacing.y) + m_heightPadding;
             }
 
-            return false;
+            return false; 
         }
 
         //Public because it will only be called in certain states
         public bool IsGrounded()
         {
-            if (Physics.Raycast(transform.position, Vector3.down, out m_groundedHitInfo, m_playerCollider.bounds.extents.y))
+            bool collided = false;
+            Vector3 rayStart = transform.position;
+            Vector3 xRaySpacing = transform.right * (m_playerCollider.bounds.extents.x / 3);
+            Vector3 zRaySpacing = transform.forward * (m_playerCollider.bounds.extents.z / 3);
+            Debug.DrawRay(rayStart, -transform.up, Color.red);
+           // Debug.DrawRay(rayStart, transform.right, Color.red);
+            //Debug.DrawRay(rayStart, transform.forward, Color.red);
+            rayStart.y = transform.position.y;
+            RaycastHit collisionInfo;
+
+            Debug.DrawRay(rayStart, zRaySpacing, Color.red);
+            Debug.DrawRay(rayStart, xRaySpacing, Color.blue);
+
+
+            rayStart -= (xRaySpacing * (3 / 2)) + (zRaySpacing * (3 / 2));
+
+            for (int x = 0; x < 3; ++x)
             {
-                return m_groundedHitInfo.collider.isTrigger ? false : true; //if stood on trigger, ignore it and return false
+                for (int z = 0; z < 3; ++z)
+                {
+                    Debug.DrawLine(rayStart, rayStart + (-transform.up * m_playerCollider.bounds.extents.y));
+                    if (Physics.Raycast(rayStart, -transform.up, out collisionInfo, m_playerCollider.bounds.extents.y + m_groundOverlapPadding))
+                    {
+                        //if it's the first ray, set it to the first result regardless, as we cannot compare null variables
+                        if (x == 0 && z == 0)
+                        {
+                            m_groundedHitInfo = collisionInfo;
+                        }
+                        //for slope detection we want the shortest ray to be the hit info 
+                        else if (collisionInfo.distance < m_groundedHitInfo.distance)
+                        {
+                            m_groundedHitInfo = collisionInfo;
+                        }
+                        collided = true;
+                    }
+                    rayStart += zRaySpacing;
+                }
+                rayStart += xRaySpacing;
+                rayStart -= zRaySpacing * (3);
             }
-            return false;
+
+
+            return collided;
+
         }
 
         public void OnBoxFinishedMoving()
