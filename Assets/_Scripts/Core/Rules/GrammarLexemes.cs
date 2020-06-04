@@ -7,37 +7,47 @@ namespace GameCore.Rules
 {
     public static class GrammarLexemes
     {
-        public enum Subject
+        public static Dictionary<RuleChunk.ChunkType, List<string>> s_mapOfValidLexemes = new Dictionary<RuleChunk.ChunkType, List<string>>(3)
         {
-            PLAYER, WEATHER, APPLE, TIME, SKY
-        }
-
-        public enum Verb
-        {
-            IS, CAN, HAS
-        }
-
-        public enum Object
-        {
-            JUMP, DARK, RED, FAST, SLOW
-        }
-
-        public enum LogicalOperator
-        {
-            AND
-        }
-
-        public static string GetTagFromLexeme(Subject lexeme)
-        {
-            switch(lexeme)
+            { 
+                RuleChunk.ChunkType.SUBJECT, new List<string>()
+                {
+                    "PLAYER", "APPLE", "SKY", "TIME", "WEATHER"
+                }
+            },
             {
-                case Subject.PLAYER: return "Player";
-                case Subject.APPLE: return "Apple";
-                case Subject.SKY: return "Sky";
-                case Subject.TIME: return "Player";
-                case Subject.WEATHER: return "Player";
-                default: return null;
+                RuleChunk.ChunkType.VERB, new List<string>()
+                {
+                    "IS", "CAN", "HAS"
+                }
+            },
+            {
+                RuleChunk.ChunkType.OBJECT, new List<string>()
+                {
+                    "JUMP", "DARK", "RED", "GREEN", "FAST", "SLOW"
+                }
+            }//,
+            /*{
+                RuleChunk.ChunkType.LOGICAL_OP, new List<string>()
+                {
+                    "AND"
+                }
+            }*/
+        };
+
+        public static bool IsValidLexeme(RuleChunk.ChunkType type, string lexeme)
+        {
+            return s_mapOfValidLexemes[type].Contains(lexeme);
+        }
+
+        public static string GetTagFromLexeme(string lexeme)
+        {
+            if(lexeme.Length == 0)
+            {
+                return null;
             }
+
+            return char.ToUpper(lexeme[0]) + lexeme.Substring(1).ToLower();
         }
     }
 }
