@@ -8,6 +8,9 @@ TagManager:
   - Tile
   - Movable
   - Apple
+  - Sky
+  - Firefly
+  - Door
   layers:
   - Default
   - TransparentFX
