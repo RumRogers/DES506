@@ -3,36 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScrollingTextExample : MonoBehaviour
+namespace GameUI.Dialogue
 {
-    [SerializeField]
-    string m_fullText = "Hello there, this sentence needs to be longer!";
-    string m_partialText;
-
-    [SerializeField]
-    float m_textUpdateTime = 0.25f;
-    float m_deltaTime;
-
-    [SerializeField]
-    Text text;
-
-    private void Start()
+    public class ScrollingTextExample : MonoBehaviour
     {
-        m_partialText = "";
-        text.text = m_partialText;
-    }
+        [SerializeField]
+        string m_fullText = "Hello there, this sentence needs to be longer!";
 
-    private void Update()
-    {
-        m_deltaTime += Time.deltaTime;
+        int stage = 0;
 
-        if (m_deltaTime > m_textUpdateTime)
+        string[] playerStrings;
+        string[] NPCStrings;
+
+        string m_partialText;
+
+        [SerializeField]
+        float m_textUpdateTime = 0.25f;
+        float m_deltaTime;
+
+        [SerializeField]
+        Text text; 
+
+        private void Start()
         {
-            UI.Text.StringHelpers.AddNextChar(ref m_partialText, m_fullText);
-
+            m_partialText = "";
             text.text = m_partialText;
-            m_deltaTime = 0;
-        }
 
+            StartCoroutine(StringHelpers.FillDialogueBox(text, m_fullText, m_textUpdateTime));
+        }
     }
 }

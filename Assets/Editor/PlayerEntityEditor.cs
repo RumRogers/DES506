@@ -13,10 +13,9 @@ public class PlayerEntityEditor : EditorWindow
     const int STATUS_PER_ROW = 2;
     const int BUTTONS_PER_ROW = 2;
 
-    Player.PlayerMovement m_playerMovement;
     Player.PlayerEntity m_playerEntity;
 
-    [MenuItem("Josh's Shitty Debug/Player Entity Debug")]
+    [MenuItem("Debug tools for musky fools/Player Entity Debug")]
     static void Init()
     {
         GetWindow<PlayerEntityEditor>("Player Entity Debug");
@@ -56,6 +55,7 @@ public class PlayerEntityEditor : EditorWindow
                 }
             }
 
+            xPos = 5;
             yPos += m_buttonHeight + 8;
 
             GUI.color = Color.white;

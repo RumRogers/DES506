@@ -1,11 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameCore.System;
 
 namespace GameCore.Rules
 {
     public sealed class Rule
     {
+        public enum ApplicationMode
+        {
+            APPLY, UNDO
+        }
         private static List<RuleChunk.ChunkType> s_basicRule = new List<RuleChunk.ChunkType>(3)
         {
             RuleChunk.ChunkType.SUBJECT,
@@ -37,7 +42,6 @@ namespace GameCore.Rules
         public Rule(params RuleChunk[] ruleChunks)
         {
             m_ruleChunks = new List<RuleChunk>(ruleChunks);
-            Apply(FilterValidChunks());
         }
 
         public readonly List<RuleChunk> m_ruleChunks;        
@@ -136,41 +140,89 @@ namespace GameCore.Rules
             return i == m_ruleChunks.Count;
         }*/
 
-        private void Apply(List<RuleChunk> filteredRuleChunks)
+
+        public static bool IsValidRule(params RuleChunk[] ruleChunks)
         {
-            var ruleSubject = filteredRuleChunks[0];
-            var ruleVerb = filteredRuleChunks[1];
-            var ruleObject = filteredRuleChunks[2];
-
-            // WARNING: highly inefficient!!! Just used for testing, will avoid this in the final version.
-            string tag = GrammarLexemes.GetTagFromLexeme(ruleSubject.m_lexeme);
-            GameObject[] gameObjects = GameObject.FindGameObjectsWithTag(tag);
-            var mutableEntities = new List<MutableEntity>();
-
-            foreach (var gameObj in gameObjects)
+            // We have a much simpler approach now, so it is enough to only check rules of length 3...
+            if(ruleChunks.Length == s_basicRule.Count)
             {
-                var mutableEntity = gameObj.GetComponent<MutableEntity>();
-                if(mutableEntity != null)
+                // Let's check if the order of the rule boxes describes a valid rule...
+                for (int i = 0; i < ruleChunks.Length; ++i)
                 {
-                    switch(ruleVerb.m_lexeme.ToLower())
+                    // If any mismatch occurs, rule is not valid.
+                    if(ruleChunks[i].m_chunkType != s_basicRule[i])
                     {
-                        case "is":
-                            m_ptrToMutables += mutableEntity.Is;
-                            break;
-                        case "has":
-                            m_ptrToMutables += mutableEntity.Has;
-                            break;
-                        case "can":
-                            m_ptrToMutables += mutableEntity.Can;
-                            break;
-                        default:
-                            break;
+                        return false;
                     }
                 }
+
+                // We made it till this point, the rule is valid.
+                return true;
             }
 
-            m_ptrToMutables(ruleObject.m_lexeme);
-            
+            // Rule is not of length 3, thus invalid.
+            return false;
+        }
+
+        public void Apply(ApplicationMode mode = ApplicationMode.APPLY)
+        {
+            if(!IsValidRule(m_ruleChunks[0], m_ruleChunks[1], m_ruleChunks[2]))
+            {
+                return;
+            }
+
+            var ruleSubject = m_ruleChunks[0];
+            var ruleVerb = m_ruleChunks[1];
+            var ruleObject = m_ruleChunks[2];
+
+            var mutableEntities = LevelManager.GetMutablesFromSubject(ruleSubject.m_lexeme);
+
+            if(mutableEntities != null)
+            {
+                foreach (var mutableEntity in mutableEntities)
+                {
+                    if (mode == ApplicationMode.APPLY)
+                    {
+                        switch (ruleVerb.m_lexeme.ToLower())
+                        {
+                            case "is":
+                                m_ptrToMutables += mutableEntity.Is;
+                                break;
+                            case "has":
+                                m_ptrToMutables += mutableEntity.Has;
+                                break;
+                            case "can":
+                                m_ptrToMutables += mutableEntity.Can;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        switch (ruleVerb.m_lexeme.ToLower())
+                        {
+                            case "is":
+                                m_ptrToMutables += mutableEntity.UndoIs;
+                                break;
+                            case "has":
+                                m_ptrToMutables += mutableEntity.UndoHas;
+                                break;
+                            case "can":
+                                m_ptrToMutables += mutableEntity.UndoCan;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+
+                }
+            }           
+
+            if(m_ptrToMutables != null)
+            {
+                m_ptrToMutables(ruleObject.m_lexeme);
+            }
         }
     }
 }
