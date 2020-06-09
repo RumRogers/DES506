@@ -11446,13 +11446,10 @@ MonoBehaviour:
   m_jumpVelocity: 4.5
   m_highJumpVelocity: 9.5
   m_maxClimbableIncline: 45
-  m_groundPadding: 0.03
-  m_collisionRayLengthMultiplyer: 0.54
-  m_groundOverlap: 0.1
-  m_useComplexCollisions: 1
+  m_heightPadding: 0.1
+  m_groundOverlapPadding: 0.1
   m_numHorizontalRays: 3
   m_numVerticalRays: 3
-  m_rayLength: 0.5
   m_skinWidth: 0.1
   m_playerEntityProperties: 2
 --- !u!4 &698550519
@@ -15409,7 +15406,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_reactsToSubject: tree
-  m_animator: {fileID: 0}
 --- !u!1001 &990119107
 PrefabInstance:
   m_ObjectHideFlags: 0
