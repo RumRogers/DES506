@@ -6,62 +6,103 @@ using GameCore.Spells;
 
 public class DebugTestSpell : MonoBehaviour
 {
-    public static Enchantable s_enchantbaleMouseOver = null;
+    static GameObject s_enchantbaleGameObjMouseOver = null;
+    static List<Enchantable> s_enchantables = new List<Enchantable>();
     Vector2 m_topLeft = new Vector2(10, 10);
     Vector2 m_btnSize = new Vector2(100, 20);
     float m_verticalSpacing = 5f;
 
     private void OnGUI()
     {
+        if (s_enchantbaleGameObjMouseOver == null)
+        {
+            return;
+        }
+
+        bool clicked = false;
         Vector2 pos = m_topLeft;
 
-            if(s_enchantbaleMouseOver != null && s_enchantbaleMouseOver.IsCastable(SpellType.TRANSFORM_SIZE))
+        if (s_enchantables[0].IsCastable(SpellType.TRANSFORM_SIZE_BIG))
+        {
+            if (s_enchantables[0].GetMagicState(SpellType.TRANSFORM_SIZE_BIG) != SpellState.SPELLED)
             {
-                if(s_enchantbaleMouseOver.GetMagicState(SpellType.TRANSFORM_SIZE) != SpellState.SPELLED)
+                if (GUI.Button(new Rect(pos.x, pos.y, m_btnSize.x, m_btnSize.y), "Make Big"))
                 {
-                    if (GUI.Button(new Rect(pos.x, pos.y, m_btnSize.x, m_btnSize.y), "Make Big"))
+                    clicked = true;
+                    foreach (var enchantable in s_enchantables)
                     {
-                        s_enchantbaleMouseOver.CastSpell(new Spell(SpellType.TRANSFORM_SIZE));
-                        s_enchantbaleMouseOver = null;
-                    }
-                }
-                else
-                {
-                    if (GUI.Button(new Rect(pos.x, pos.y, m_btnSize.x, m_btnSize.y), "Make Small"))
-                    {
-                        s_enchantbaleMouseOver.CastSpell(new Spell(SpellType.TRANSFORM_SIZE));
-                        s_enchantbaleMouseOver = null;
+                        enchantable.CastSpell(new Spell(SpellType.TRANSFORM_SIZE_BIG));
                     }
                 }
 
                 pos.y += m_btnSize.y + m_verticalSpacing;
             }
-            if (s_enchantbaleMouseOver != null && s_enchantbaleMouseOver.IsCastable(SpellType.TRANSFORM_TEMPERATURE))
+            if (s_enchantables[0].GetMagicState(SpellType.TRANSFORM_SIZE_SMALL) != SpellState.COUNTERSPELLED)
             {
-                if (s_enchantbaleMouseOver.GetMagicState(SpellType.TRANSFORM_TEMPERATURE) != SpellState.SPELLED)
+                if (GUI.Button(new Rect(pos.x, pos.y, m_btnSize.x, m_btnSize.y), "Make Small"))
                 {
-                    if (GUI.Button(new Rect(pos.x, pos.y, m_btnSize.x, m_btnSize.y), "Make Hot"))
+                    clicked = true;
+                    foreach (var enchantable in s_enchantables)
                     {
-                        s_enchantbaleMouseOver.CastSpell(new Spell(SpellType.TRANSFORM_TEMPERATURE));
-                        s_enchantbaleMouseOver = null;
-                    }
-                }
-                else
-                {
-                    if (GUI.Button(new Rect(pos.x, pos.y, m_btnSize.x, m_btnSize.y), "Make Cold"))
-                    {
-                        s_enchantbaleMouseOver.CastSpell(new Spell(SpellType.TRANSFORM_TEMPERATURE));
-                        s_enchantbaleMouseOver = null;
+                        enchantable.CastSpell(new Spell(SpellType.TRANSFORM_SIZE_SMALL));
                     }
                 }
 
                 pos.y += m_btnSize.y + m_verticalSpacing;
             }
-
-            if (s_enchantbaleMouseOver != null && GUI.Button(new Rect(pos.x, pos.y, m_btnSize.x, m_btnSize.y), "Reset Spells"))
+            if (s_enchantables[0].GetMagicState(SpellType.TRANSFORM_TEMPERATURE_HOT) != SpellState.SPELLED)
             {
-                s_enchantbaleMouseOver.CastSpell(new Spell(SpellType.TRANSFORM_RESET));
-                s_enchantbaleMouseOver = null;
+                if (GUI.Button(new Rect(pos.x, pos.y, m_btnSize.x, m_btnSize.y), "Make Hot"))
+                {
+                    clicked = true;
+                    foreach (var enchantable in s_enchantables)
+                    {
+                        enchantable.CastSpell(new Spell(SpellType.TRANSFORM_TEMPERATURE_HOT));
+                    }
+                }
+
+                pos.y += m_btnSize.y + m_verticalSpacing;
             }
+            if (s_enchantables[0].GetMagicState(SpellType.TRANSFORM_TEMPERATURE_COLD) != SpellState.COUNTERSPELLED)
+            {
+                if (GUI.Button(new Rect(pos.x, pos.y, m_btnSize.x, m_btnSize.y), "Make Cold"))
+                {
+                    clicked = true;
+                    foreach (var enchantable in s_enchantables)
+                    {
+                        enchantable.CastSpell(new Spell(SpellType.TRANSFORM_TEMPERATURE_COLD));
+                    }
+                }
+
+                pos.y += m_btnSize.y + m_verticalSpacing;
+            }
+            if (GUI.Button(new Rect(pos.x, pos.y, m_btnSize.x, m_btnSize.y), "Reset"))
+            {
+                clicked = true;
+                foreach (var enchantable in s_enchantables)
+                {
+                    enchantable.CastSpell(new Spell(SpellType.TRANSFORM_RESET));
+                }
+            }
+        }
+
+        if(clicked)
+        {
+            SetHighlighted(null);
+        }
+    }
+
+    public static void SetHighlighted(GameObject gameObject)
+    {
+        if(gameObject != s_enchantbaleGameObjMouseOver)
+        {
+            s_enchantbaleGameObjMouseOver = gameObject;
+            s_enchantables.Clear();
+        }
+    }
+
+    public static void RegisterEnchantable(Enchantable enchantableComponent)
+    {
+        s_enchantables.Add(enchantableComponent);
     }
 }

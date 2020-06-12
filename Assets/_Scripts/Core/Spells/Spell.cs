@@ -7,8 +7,10 @@ namespace GameCore.Spells
 {
     public enum SpellType
     {
-        TRANSFORM_SIZE,
-        TRANSFORM_TEMPERATURE,
+        TRANSFORM_SIZE_BIG,
+        TRANSFORM_SIZE_SMALL,
+        TRANSFORM_TEMPERATURE_HOT,
+        TRANSFORM_TEMPERATURE_COLD,
         TRANSFORM_RESET
     }
 

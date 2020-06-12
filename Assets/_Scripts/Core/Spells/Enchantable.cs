@@ -6,48 +6,36 @@ using GameCore.System;
 
 namespace GameCore.Spells
 {
+    [RequireComponent(typeof(MagicProfile))]
     public abstract class Enchantable : Automaton
     {
         delegate void SpellDelegate(Spell spell);
-
-        [Serializable]
-        protected struct CastableSpells
-        {
-            public bool sizeSpell;
-            public bool temperatureSpell;
-        }
-
-        [Serializable]
-        protected struct MagicState
-        {
-            public SpellState size;
-            public SpellState temperature;
-        }
-
         public const string s_EnchantableTag = "Enchantable";
-        [SerializeField]
-        protected CastableSpells m_castableSpells;
-        [SerializeField]
-        protected MagicState m_magicState;
         private SpellDelegate m_spellDelegate;
+        [SerializeField]
+        private MagicProfile m_magicProfile;
 
-        // Programmers, beware! If you decide to override this, you either call base.Awake() OR set the tag manually from the editor!
-        // If you don't, the "Enchantable" tag won't be automatically applied to the enchantable game object. You've been warned! :)
-        protected virtual void Awake()
+
+        // NOT overridable. DO NOT redeclare this method in child classes. Use Start() or something else. Thank you.
+        protected void Awake()
         {
             gameObject.tag = s_EnchantableTag;
+            m_magicProfile = GetComponent<MagicProfile>();
         }
 
         public void CastSpell(Spell spell)
         {
+
             switch (spell.m_type)
             {
-                case SpellType.TRANSFORM_SIZE:
-                    m_spellDelegate = SpellSize;
-                    break;
-                case SpellType.TRANSFORM_TEMPERATURE:
+                case SpellType.TRANSFORM_SIZE_BIG:
+                case SpellType.TRANSFORM_SIZE_SMALL:
+                    m_spellDelegate = SpellSize;                    
+                    break;                
+                case SpellType.TRANSFORM_TEMPERATURE_HOT:
+                case SpellType.TRANSFORM_TEMPERATURE_COLD:
                     m_spellDelegate = SpellTemperature;
-                    break;
+                    break;                    
                 case SpellType.TRANSFORM_RESET:
                     m_spellDelegate = SpellReset;
                     m_spellDelegate += ResetMagicState;
@@ -62,29 +50,33 @@ namespace GameCore.Spells
 
         void SpellSize(Spell spell)
         {
-            if (m_magicState.size != SpellState.SPELLED)
+            var magicState = m_magicProfile.GetMagicFingerprint().magicState;
+            
+            if (spell.m_type == SpellType.TRANSFORM_SIZE_BIG && magicState.size != SpellState.SPELLED)
             {
                 SpellSizeBig(spell);
-                m_magicState.size = SpellState.SPELLED;
+                m_magicProfile.SetSizeMagicState(SpellState.SPELLED);
             }
-            else
+            else if(spell.m_type == SpellType.TRANSFORM_SIZE_SMALL && magicState.size != SpellState.COUNTERSPELLED)
             {
                 SpellSizeSmall(spell);
-                m_magicState.size = SpellState.COUNTERSPELLED;
+                m_magicProfile.SetSizeMagicState(SpellState.COUNTERSPELLED);
             }
         }
 
         void SpellTemperature(Spell spell)
         {
-            if (m_magicState.temperature != SpellState.SPELLED)
+            var magicState = m_magicProfile.GetMagicFingerprint().magicState;
+
+            if (spell.m_type == SpellType.TRANSFORM_TEMPERATURE_HOT && magicState.temperature != SpellState.SPELLED)
             {
                 SpellTemperatureHot(spell);
-                m_magicState.temperature = SpellState.SPELLED;
+                m_magicProfile.SetTemperatureMagicState(SpellState.SPELLED);                
             }
-            else
+            else if (spell.m_type == SpellType.TRANSFORM_TEMPERATURE_COLD && magicState.temperature != SpellState.COUNTERSPELLED)
             {
                 SpellTemperatureCold(spell);
-                m_magicState.temperature = SpellState.COUNTERSPELLED;
+                m_magicProfile.SetTemperatureMagicState(SpellState.COUNTERSPELLED);
             }
         }
         protected virtual void SpellSizeBig(Spell spell) { }
@@ -100,12 +92,16 @@ namespace GameCore.Spells
 
         public bool IsCastable(SpellType spellType)
         {
+            var castableSpells = m_magicProfile.GetMagicFingerprint().castableSpells;
+
             switch(spellType)
             {
-                case SpellType.TRANSFORM_SIZE:
-                    return m_castableSpells.sizeSpell;
-                case SpellType.TRANSFORM_TEMPERATURE:
-                    return m_castableSpells.temperatureSpell;
+                case SpellType.TRANSFORM_SIZE_BIG:
+                case SpellType.TRANSFORM_SIZE_SMALL:
+                    return castableSpells.sizeSpell;
+                case SpellType.TRANSFORM_TEMPERATURE_HOT:
+                case SpellType.TRANSFORM_TEMPERATURE_COLD:
+                    return castableSpells.temperatureSpell;
                 default: 
                     return false;
             }
@@ -113,12 +109,16 @@ namespace GameCore.Spells
 
         public SpellState GetMagicState(SpellType spellType) 
         {
-            switch(spellType)
+            var magicState = m_magicProfile.GetMagicFingerprint().magicState;
+
+            switch (spellType)
             {
-                case SpellType.TRANSFORM_SIZE:
-                    return m_magicState.size;
-                case SpellType.TRANSFORM_TEMPERATURE:
-                    return m_magicState.temperature;
+                case SpellType.TRANSFORM_SIZE_BIG:
+                case SpellType.TRANSFORM_SIZE_SMALL:
+                    return magicState.size;
+                case SpellType.TRANSFORM_TEMPERATURE_HOT:
+                case SpellType.TRANSFORM_TEMPERATURE_COLD:
+                    return magicState.temperature;
                 default:
                     throw new UnityException("GetMagicState: invalid spell type!");
             }
@@ -126,14 +126,15 @@ namespace GameCore.Spells
 
         private void ResetMagicState(Spell spell)
         {
-            m_magicState.size = m_magicState.temperature = SpellState.NORMAL;
+            m_magicProfile.ResetMagicState();
         }
 
         /////// Remove this once Josh's controller is complete and can interact with Enchantable instances //////
         private void OnMouseDown()
         {
             print(this);
-            DebugTestSpell.s_enchantbaleMouseOver = this;
+            DebugTestSpell.SetHighlighted(gameObject);
+            DebugTestSpell.RegisterEnchantable(this);
         }
     }
 }
