@@ -19,6 +19,7 @@ namespace Player
     }
 
     [RequireComponent(typeof(PlayerAnimator))]
+    [RequireComponent(typeof(Projectile.ProjectileHandler))]
     public class PlayerEntity : GameCore.Rules.MutableEntity
     {
         //Player stats (editor variables)
@@ -52,6 +53,9 @@ namespace Player
         Vector3 m_direction;
         Collider m_playerCollider;
         GameCore.System.State m_previousGroundState;
+
+        //aim state / projectiles
+        Projectile.ProjectileHandler m_projectileHandler;
 
         //Collision variables
         RaycastHit m_groundedHitInfo;
@@ -89,6 +93,7 @@ namespace Player
         public RaycastHit GroundHitInfo { get => m_groundedHitInfo; }
         public Vector3 PlayerStartPosition { get => m_playerStartPosition; }
         public PlayerAnimator Animator { get => m_Animator; }
+        public Projectile.ProjectileHandler Projectile { get => m_projectileHandler; }
         //Get and Settable
         public GameCore.System.State PreviousGroundState { get => m_previousGroundState; set => m_previousGroundState = value; }
         public Transform ClosestInteractable { get => m_closestInteractable; set => m_closestInteractable = value; }
@@ -99,12 +104,12 @@ namespace Player
         private void Awake()
         {
             SetState(new Default_PlayerState(this));
-            m_playerCollider = GetComponent<Collider>();
-            m_Animator = GetComponent<PlayerAnimator>();
-
-            //setting properties
-            //AddEntityProperty(PlayerEntityProperties.CAN_JUMP);
-            //AddEntityProperty(PlayerEntityProperties.JUMP_NORMAL);
+            if (!TryGetComponent<Collider>(out m_playerCollider))
+            {
+                Debug.LogError("No collider attached to the player!");
+            }
+            m_Animator = GetComponent<PlayerAnimator>(); //requried component, should be safe
+            m_projectileHandler = GetComponent<Projectile.ProjectileHandler>(); //requried component, should be safe
 
             //Setting start position for death
             m_playerStartPosition = transform.position;

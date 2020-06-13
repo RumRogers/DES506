@@ -45,23 +45,8 @@ namespace Player
             if (m_playerEntity.HasProperty(PlayerEntityProperties.PLAYABLE))
             {
                 //Pushing state transition, gets closest interactable and switches state if there are interactables in range 
-                if (Input.GetButtonDown("Interact"))
+                if (Input.GetButtonDown("Aim") || Input.GetAxisRaw("Aim") == 1)
                 {
-                    if (m_playerEntity.InteractablesInRange.Count > 0)
-                    {
-                        float closestDistance = (m_playerEntity.InteractablesInRange[0].position - m_playerEntity.transform.position).magnitude;
-                        m_playerEntity.ClosestInteractable = m_playerEntity.InteractablesInRange[0];
-                        foreach (Transform t in m_playerEntity.InteractablesInRange)
-                        {
-                            float distance = (t.position - m_playerEntity.transform.position).magnitude;
-                            if (distance < closestDistance)
-                            {
-                                m_playerEntity.ClosestInteractable = t;
-                                closestDistance = distance;
-                            }
-                        }
-                        //m_owner.SetState(new Pushing_PlayerState(m_owner));
-                    }
                         m_owner.SetState(new Aiming_PlayerState(m_owner)); 
                         return;
                 }

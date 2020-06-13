@@ -11,6 +11,8 @@ namespace Player
         GameCore.Camera.PlayerMoveCamera m_camera;
         Vector3 m_velocity;
 
+        bool m_canFire = true;
+
         public Aiming_PlayerState(GameCore.System.Automaton owner) : base(owner)
         {
             m_playerEntity = (PlayerEntity)owner;
@@ -27,13 +29,25 @@ namespace Player
         public override void Manage()
         {
 
-            //if button "aim" up get out of this state, using the Interact button for now
-            if (Input.GetButtonDown("Interact"))
+            //if button "aim" up get out of this state, axis is for joystick shoulder buttons
+            if (!Input.GetButton("Aim") && Input.GetAxisRaw("Aim") == 0)
             {
                 { 
                     m_owner.SetState(new Default_PlayerState(m_owner));
                     return;
                 }
+            }
+
+            if ((Input.GetButtonDown("Fire") || Input.GetAxisRaw("Fire") != 0) && m_canFire)
+            {
+                //casting spell logic to be triggered from within here
+                m_playerEntity.Projectile.FireProjectile(Camera.main.transform.forward, m_playerEntity.transform.position + (m_playerEntity.transform.forward * 1.75f));
+                m_canFire = false;
+            }
+
+            if (!Input.GetButton("Fire") && Input.GetAxisRaw("Fire") == 0)
+            {
+                m_canFire = true;
             }
 
             if (m_playerEntity.IsGrounded())
