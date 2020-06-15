@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using GameCore.System;
 
 namespace GameCore.Camera
 {
-    public class ThirdPerson_CameraState : GameCore.System.State
+    public class ThirdPerson_CameraState : State
     {
         PlayerMoveCamera m_playerMoveCamera;
         UnityEngine.Camera m_camera;
@@ -19,7 +19,7 @@ namespace GameCore.Camera
         float m_aimFOV = 45;
         float m_startFOV;
 
-        public ThirdPerson_CameraState(GameCore.System.Automaton owner) : base (owner)
+        public ThirdPerson_CameraState(Automaton owner) : base (owner)
         {
             m_playerMoveCamera = (PlayerMoveCamera)owner;
 

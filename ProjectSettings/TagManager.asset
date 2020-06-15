@@ -6,9 +6,9 @@ TagManager:
   tags:
   - Floor
   - Tile
-  - Movable
   - Mutable
   - Enchantable
+  - NPC
   layers:
   - Default
   - TransparentFX

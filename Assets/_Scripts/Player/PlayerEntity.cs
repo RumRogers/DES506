@@ -30,6 +30,10 @@ namespace Player
         [SerializeField] float m_maxSpeed = 2.0f;
         [SerializeField] float m_walkingAcceleration = 15.0f;
         [SerializeField] float m_walkingDeceleration = 15.0f;
+        [Header("Aiming")]
+        [SerializeField] float m_aimingMaxSpeed = 2.0f;
+        [SerializeField] float m_aimingAcceleration = 15.0f;
+        [SerializeField] float m_aimingDeceleration = 15.0f;
         [Header("Modified Movment")]
         [SerializeField] float m_iceAcceleration = 1f;
         [SerializeField] float m_iceDeceleration = 1f;
@@ -71,6 +75,9 @@ namespace Player
         //Player anim
         PlayerAnimator m_Animator;
 
+        //Dialogue
+        List<Transform> m_speakersInRange = new List<Transform>();
+
         #region PUBLIC ACCESSORS
         //player stats, Mutable
         public Vector3 Velocity { get => m_velocity; set => m_velocity = value; }
@@ -79,6 +86,9 @@ namespace Player
         public float MaxSpeed { get => m_maxSpeed; }
         public float WalkingAcceleration { get => m_walkingAcceleration; }
         public float WalkingDeceleration { get => m_walkingDeceleration; }
+        public float AimingMaxSpeed { get => m_aimingMaxSpeed; }
+        public float AimingAcceleration { get => m_aimingAcceleration; }
+        public float AimingDeceleration { get => m_aimingDeceleration; }
         public float IceAcceleration { get => m_iceAcceleration; }
         public float IceDeceleration { get => m_iceDeceleration; }
         public float IceMaxSpeed { get => m_maxIceSpeed; }
@@ -97,7 +107,8 @@ namespace Player
         //Get and Settable
         public GameCore.System.State PreviousGroundState { get => m_previousGroundState; set => m_previousGroundState = value; }
         public Transform ClosestInteractable { get => m_closestInteractable; set => m_closestInteractable = value; }
-        public List<Transform> InteractablesInRange { get => m_interactablesInRange; set => m_interactablesInRange = value; }
+        public List<Transform> InteractablesInRange { get => m_interactablesInRange; set => m_interactablesInRange = value; }   //to be removed, but unsure if we'll have other interactibles so may as well leave it
+        public List<Transform> SpeakersInRange { get => m_speakersInRange; set => m_speakersInRange = value; }
         public AnimationCurve PushMovementCurve { get => m_pushMovementCurve; }
         #endregion
 
@@ -122,6 +133,12 @@ namespace Player
             if (HasProperty(PlayerEntityProperties.DYING))
             {
                 SetState(new Death_PlayerState(this));
+            }
+
+            //Dialogue trigger
+            if (Input.GetButtonDown("Interact") && m_speakersInRange.Count > 0 && m_state.GetType() != typeof(Dialogue_PlayerState))
+            {
+                SetState(new Dialogue_PlayerState(this));
             }
 
             base.Update();
@@ -314,25 +331,21 @@ namespace Player
         #region UNITY COLLISIONS
         public void OnTriggerEnter(Collider other)
         {
-            if (other.tag == "Movable")
+            if (other.tag == "NPC")
             {
-                m_interactablesInRange.Add(other.transform);
+                m_speakersInRange.Add(other.transform);
             }
         }
 
         public void OnTriggerExit(Collider other)
         {
-            if (other.tag == "Movable")
+            if (other.tag == "NPC")
             {
-                foreach (Transform t in m_interactablesInRange)
+                foreach (Transform t in m_speakersInRange)
                 {
                     if (t.GetInstanceID() == other.transform.GetInstanceID())
                     {
-                        if (t == m_closestInteractable && m_state.GetType() == typeof(Pushing_PlayerState))
-                        {
-                            SetState(new Default_PlayerState(this));
-                        }
-                        m_interactablesInRange.Remove(t);
+                        m_speakersInRange.Remove(t);
                         return;
                     }
                 }

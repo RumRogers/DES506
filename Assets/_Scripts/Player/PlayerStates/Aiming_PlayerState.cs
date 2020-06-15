@@ -29,7 +29,7 @@ namespace Player
         public override void Manage()
         {
 
-            //if button "aim" up get out of this state, axis is for joystick shoulder buttons
+            //if button "aim" up get out of this state, axis is for joystick trigger buttons
             if (!Input.GetButton("Aim") && Input.GetAxisRaw("Aim") == 0)
             {
                 { 
@@ -41,7 +41,7 @@ namespace Player
             if ((Input.GetButtonDown("Fire") || Input.GetAxisRaw("Fire") != 0) && m_canFire)
             {
                 //casting spell logic to be triggered from within here
-                m_playerEntity.Projectile.FireProjectile(Camera.main.transform.forward, m_playerEntity.transform.position + (m_playerEntity.transform.forward * 1.75f));
+                m_playerEntity.Projectile.FireProjectile(Camera.main.transform.forward, m_playerEntity.transform.position + (m_playerEntity.transform.forward * 2f));
                 m_canFire = false;
             }
 
@@ -122,8 +122,8 @@ namespace Player
                     }
                     else
                     {
-                        m_velocity += (m_playerEntity.Direction * m_playerEntity.WalkingAcceleration) * Time.deltaTime;
-                        m_velocity = Vector3.ClampMagnitude(m_velocity, m_playerEntity.MaxSpeed);
+                        m_velocity += (m_playerEntity.Direction * m_playerEntity.AimingAcceleration) * Time.deltaTime;
+                        m_velocity = Vector3.ClampMagnitude(m_velocity, m_playerEntity.AimingMaxSpeed);
                     }
                     m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.RUNNING);
                 }
@@ -135,7 +135,7 @@ namespace Player
                     }
                     else
                     {
-                        m_velocity += (((m_velocity.normalized) * -1) * m_playerEntity.WalkingDeceleration) * Time.deltaTime;
+                        m_velocity += (((m_velocity.normalized) * -1) * m_playerEntity.AimingDeceleration) * Time.deltaTime;
                     }
                 }
                 else

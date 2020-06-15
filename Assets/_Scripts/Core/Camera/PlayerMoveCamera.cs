@@ -15,11 +15,15 @@ namespace GameCore.Camera
         [SerializeField]
         float m_defaultDistance = 5;
         [SerializeField]
-        float m_defaultStartingAngle = 33; 
+        float m_defaultStartingAngle = 33;
         [SerializeField]
         float m_defaultMaxAngle = 45; //max pitch
         [SerializeField]
         float m_aimingMaxAngle = 90;  //max pitch
+        [SerializeField]
+        float m_dialogueDistance = 1;
+        [SerializeField]
+        float m_dialogueAngle = 33;
         [SerializeField]
         Vector2 m_aimingOffset = new Vector2(1,1);
         [SerializeField]
@@ -50,6 +54,8 @@ namespace GameCore.Camera
         public float p_AimingMaxAngle { get => m_aimingMaxAngle; }
         public float p_AimingMovementSpeed { get => m_aimingMovementSpeed; }
         public float p_AimingLerpSpeed { get => m_aimingLerpSpeed; }
+        public float p_DialogueDistance { get => m_dialogueDistance; }
+        public float p_DialogueAngle { get => m_dialogueAngle; }
         public Transform p_CameraTarget { get => m_cameraTarget; }
         public Quaternion p_DefaultRotation { get => m_defaultRotation; }
         public Vector3 p_CameraOffset { get => m_cameraOffset; }
@@ -59,6 +65,8 @@ namespace GameCore.Camera
 
         private void Start()
         {
+            Cursor.lockState = CursorLockMode.Locked;
+
             m_defaultRotation = transform.rotation;
             m_cameraOffset = transform.position - m_cameraTarget.position;
             SetState(new Default_CameraState(this));
