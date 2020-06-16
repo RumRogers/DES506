@@ -107,6 +107,10 @@ namespace GameCore.Spells
             }
         }
 
+        public MagicProfile.CastableSpells GetCastableSpells()
+        {
+            return m_magicProfile.GetMagicFingerprint().castableSpells;
+        }
         public SpellState GetMagicState(SpellType spellType) 
         {
             var magicState = m_magicProfile.GetMagicFingerprint().magicState;
