@@ -5,23 +5,45 @@ using UnityEngine;
 
 public class FireFlyAwakeState : State
 {
+    //Reminents of a colision avoidance check 
     private const float m_distanceCheck = 100.0f;
-    private GameObject m_fireFlyObject;
-    static private float s_timer;
-    private float m_size;
-    private bool m_inMotion = false;
-    private const float m_maxSize = 0.1f;
-    private const float m_growthSpeed = 2;
-    private float m_randSpeed = Random.Range(1, 3);
 
+    //Defaults with override constructors for changes
+    private float m_maxSize = 0.1f;
+    private float m_growthSpeed = 2;
+
+    //The rest of the class memeber variables
+    private GameObject m_fireFlyObject;
+    static private float s_timer; //Static to ensure it starts where it left off
+    private float m_size = 0.0f;
+    private bool m_inMotion = false;
+    private float m_randSpeed = Random.Range(0.6f, 4.0f);
+
+    //Constructors
+    #region
     public FireFlyAwakeState(Automaton owner, GameObject fireFlyObj) : base(owner)
     {
         m_fireFlyObject = fireFlyObj;
+       
+        //The asleep version can sometimes cast a very faint shadow, so for now, this is the solution
         m_fireFlyObject.GetComponent<Renderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
 
         if (!m_fireFlyObject)
             Debug.Log("<color=red> Error: </color>Missing gameobject in FireFlyAwakeState");
     }
+
+    public FireFlyAwakeState(Automaton owner, GameObject fireFlyObj, float speed) : base(owner)
+    {
+        m_fireFlyObject = fireFlyObj;
+
+        m_randSpeed = speed;
+
+        m_fireFlyObject.GetComponent<Renderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
+
+        if (!m_fireFlyObject)
+            Debug.Log("<color=red> Error: </color>Missing gameobject in FireFlyAwakeState");
+    }
+    #endregion 
 
     public override void Manage()
     {
@@ -29,6 +51,7 @@ public class FireFlyAwakeState : State
         AnimateBehaviour();
         Grow();
     }
+
     private void AnimateBehaviour() //Temp behaviour
     {
         Vector3 m_updatedPos = m_fireFlyObject.transform.position;
@@ -49,7 +72,7 @@ public class FireFlyAwakeState : State
         }
     }
 
-    //Currently not needed
+    //Currently not needed, and will likely eventually be removed
     void CollisionChecker()
     {
 

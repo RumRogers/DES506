@@ -8,12 +8,11 @@ public class FireFlySleepState : State
     private GameObject m_fireFlyObject;
     private const float m_shrinkSpeed = 2;
     private float m_size = 0.1f;
-    private Renderer m_fireFlyRenderer;
 
     public FireFlySleepState(Automaton owner, GameObject fireFlyObj) : base(owner)
     {
         m_fireFlyObject = fireFlyObj;
-        m_fireFlyObject.GetComponent<Renderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+        m_fireFlyObject.GetComponent<Renderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off; //Needs to be changed to avoid this call each time the rule changes
 
         if (!m_fireFlyObject)
             Debug.Log("<color=red> Error: </color>Missing gameobject in FireFlySleepState");

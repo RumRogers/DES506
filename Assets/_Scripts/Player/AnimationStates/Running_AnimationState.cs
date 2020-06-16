@@ -14,7 +14,7 @@ namespace Player
             //m_playerAnimator.Running.wrapMode = WrapMode.Loop;
             m_playerAnimator.StopAllCoroutines();
             m_playerAnimator.StartCoroutine(Transition());
-            Debug.Log("Running");
+            //Debug.Log("Running");
         }
         //You might be thinking "why use a switch statement here? surely it's better and more efficent to just change the state from within the player entity class!" 
         //while this might be true, this allows us to control which states can be transitioned into others.

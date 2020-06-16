@@ -8,6 +8,12 @@ TagManager:
   - Tile
   - Movable
   - Mutable
+  - Enchantable
+  - Tree
+  - PauseMenu
+  - UI_SpellWheel_Arrow
+  - UI_SpellSlot_Empty
+  - UI_SpellSlot_Full
   layers:
   - Default
   - TransparentFX
