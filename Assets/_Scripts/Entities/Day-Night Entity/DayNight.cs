@@ -1,42 +1,45 @@
-﻿using GameCore.System;
+﻿using GameCore.Rules;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DayNight : Automaton //Needs to be updatedto use mutable class 
+public class DayNight : MutableEntity 
 {
-    //Public Variables
     [Tooltip("This determines the speed of transition, with the larger the number, the faster it goes (Between 0 and 1)")]
     public float m_transitionSpeed = 0.01f;
     
-    //Private and Protected
     private Light m_light;
-    private bool m_isDay = true;
 
     void Start()
     {
+        //Currently uses get component call, but if prefered can be changed
         m_light = GetComponent<Light>();
-        SetState(new DayState(this, m_light));
+
+        if (!m_light)
+            Debug.Log("<color=red> Error: </color>Missing light component for Day/Night entity");
+
+        //Sets default state, subject to preference of designers
+        SetState(new DayState(this, m_light, m_transitionSpeed)); 
     }
 
-    override protected void Update() //Needs to be updated to use rules
+    public override void Is(string lexeme)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        switch (lexeme) //Contains my solution for caps, happy to change to wider solution
         {
-            m_isDay = !m_isDay;
+            case "day":
+            case "Day":
+                SetState(new DayState(this, m_light, m_transitionSpeed));
+                break;
 
-            switch (m_isDay)
-            {
-                case true:
-                    SetState(new DayState(this, m_light));
-                    break;
+            case "night":
+            case "Night":
+                SetState(new NightState(this, m_light, m_transitionSpeed));
+                break;
 
-                case false:
-                    SetState(new NightState(this, m_light));
-                    break;
-            }
+            default:
+                Debug.Log("<color=yellow> INVALID RULE: </color>The submitted rule is incorrect (found in Day/Night)");
+                break;
         }
-
-        base.Update();
+       // base.Is(lexeme);
     }
 }

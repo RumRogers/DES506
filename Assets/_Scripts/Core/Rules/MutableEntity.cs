@@ -34,5 +34,10 @@ namespace GameCore.Rules
         {
             return $"MutableEntity for GameObject named \"{gameObject.name}\" and tagged \"{gameObject.tag}\"";
         }
+
+        private void OnMouseOver()
+        {
+            Debug.Log(this);
+        }
     }
 }

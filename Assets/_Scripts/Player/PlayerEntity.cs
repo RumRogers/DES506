@@ -19,6 +19,7 @@ namespace Player
     }
 
     [RequireComponent(typeof(PlayerAnimator))]
+    [RequireComponent(typeof(Projectile.ProjectileHandler))]
     public class PlayerEntity : GameCore.Rules.MutableEntity
     {
         //Player stats (editor variables)
@@ -32,6 +33,7 @@ namespace Player
         [Header("Modified Movment")]
         [SerializeField] float m_iceAcceleration = 1f;
         [SerializeField] float m_iceDeceleration = 1f;
+        [SerializeField] float m_maxIceSpeed = 2.0f;
         [Header("Air Movement")]
         [SerializeField] float m_aerialAccelleration = 5.0f;
         [SerializeField] float m_gravity = 9.81f;
@@ -50,6 +52,10 @@ namespace Player
         Vector3 m_velocity = Vector3.zero;
         Vector3 m_direction;
         Collider m_playerCollider;
+        GameCore.System.State m_previousGroundState;
+
+        //aim state / projectiles
+        Projectile.ProjectileHandler m_projectileHandler;
 
         //Collision variables
         RaycastHit m_groundedHitInfo;
@@ -75,6 +81,7 @@ namespace Player
         public float WalkingDeceleration { get => m_walkingDeceleration; }
         public float IceAcceleration { get => m_iceAcceleration; }
         public float IceDeceleration { get => m_iceDeceleration; }
+        public float IceMaxSpeed { get => m_maxIceSpeed; }
         public float AerialAccelleration { get => m_aerialAccelleration; }
         public float PushSpeed { get => m_pushingSpeed; }
         public float Gravity { get => m_gravity; }
@@ -86,7 +93,9 @@ namespace Player
         public RaycastHit GroundHitInfo { get => m_groundedHitInfo; }
         public Vector3 PlayerStartPosition { get => m_playerStartPosition; }
         public PlayerAnimator Animator { get => m_Animator; }
-        //Pushing Getters
+        public Projectile.ProjectileHandler Projectile { get => m_projectileHandler; }
+        //Get and Settable
+        public GameCore.System.State PreviousGroundState { get => m_previousGroundState; set => m_previousGroundState = value; }
         public Transform ClosestInteractable { get => m_closestInteractable; set => m_closestInteractable = value; }
         public List<Transform> InteractablesInRange { get => m_interactablesInRange; set => m_interactablesInRange = value; }
         public AnimationCurve PushMovementCurve { get => m_pushMovementCurve; }
@@ -95,12 +104,12 @@ namespace Player
         private void Awake()
         {
             SetState(new Default_PlayerState(this));
-            m_playerCollider = GetComponent<Collider>();
-            m_Animator = GetComponent<PlayerAnimator>();
-
-            //setting properties
-            //AddEntityProperty(PlayerEntityProperties.CAN_JUMP);
-            //AddEntityProperty(PlayerEntityProperties.JUMP_NORMAL);
+            if (!TryGetComponent<Collider>(out m_playerCollider))
+            {
+                Debug.LogError("No collider attached to the player!");
+            }
+            m_Animator = GetComponent<PlayerAnimator>(); //requried component, should be safe
+            m_projectileHandler = GetComponent<Projectile.ProjectileHandler>(); //requried component, should be safe
 
             //Setting start position for death
             m_playerStartPosition = transform.position;
@@ -121,7 +130,6 @@ namespace Player
             {
                 m_velocity = new Vector3(0.0f, m_velocity.y, 0.0f);
             }
-
             transform.position += m_velocity * Time.deltaTime;
         }
 
@@ -179,15 +187,9 @@ namespace Player
             Vector3 rayStart = transform.position;
             Vector3 xRaySpacing = transform.right * (m_playerCollider.bounds.extents.x / 3);
             Vector3 zRaySpacing = transform.forward * (m_playerCollider.bounds.extents.z / 3);
-            Debug.DrawRay(rayStart, -transform.up, Color.red);
-           // Debug.DrawRay(rayStart, transform.right, Color.red);
-            //Debug.DrawRay(rayStart, transform.forward, Color.red);
+
             rayStart.y = transform.position.y;
             RaycastHit collisionInfo;
-
-            Debug.DrawRay(rayStart, zRaySpacing, Color.red);
-            Debug.DrawRay(rayStart, xRaySpacing, Color.blue);
-
 
             rayStart -= (xRaySpacing * (3 / 2)) + (zRaySpacing * (3 / 2));
 
@@ -195,7 +197,7 @@ namespace Player
             {
                 for (int z = 0; z < 3; ++z)
                 {
-                    Debug.DrawLine(rayStart, rayStart + (-transform.up * m_playerCollider.bounds.extents.y));
+                    //Debug.DrawLine(rayStart, rayStart + (-transform.up * m_playerCollider.bounds.extents.y));
                     if (Physics.Raycast(rayStart, -transform.up, out collisionInfo, m_playerCollider.bounds.extents.y + m_groundOverlapPadding))
                     {
                         //if it's the first ray, set it to the first result regardless, as we cannot compare null variables
@@ -215,7 +217,6 @@ namespace Player
                 rayStart += xRaySpacing;
                 rayStart -= zRaySpacing * (3);
             }
-
 
             return collided;
 
