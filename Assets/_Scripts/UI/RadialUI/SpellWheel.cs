@@ -9,19 +9,20 @@ using UnityEngine.UI;
 
 namespace GameUI
 {
+    [Serializable]
+    struct SpellSlotData
+    {
+        public SpellType spellId;
+        public string spellName;
+        public Sprite spellSprite;
+    }
+
     public class SpellWheel : Automaton
     {
-        static List<SpellType> s_spellsOrder = new List<SpellType>()
-        {
-            SpellType.TRANSFORM_SIZE_BIG,
-            SpellType.TRANSFORM_SIZE_SMALL,
-            SpellType.TRANSFORM_TEMPERATURE_HOT,
-            SpellType.TRANSFORM_TEMPERATURE_COLD
-        };
         static Dictionary<Transform, Enchantable> s_gameTransformToEnchantable = new Dictionary<Transform, Enchantable>();
         private static Enchantable s_targetEnchantable = null;
         const string ARROW_PANEL_TAG = "UI_SpellWheel_Arrow";
-        const string SPELL_SLOT_EMPTY_TAG = "UI_SpellSlot_Empty";
+
         const string SPELL_SLOT_FULL_TAG = "UI_SpellSlot_Full";
 
         RectTransform m_rectTransform;
@@ -50,7 +51,9 @@ namespace GameUI
         [SerializeField]
         int m_targetSlotIdx = -1;
         List<int> m_availableSlotIndices = new List<int>();
-
+        [SerializeField]
+        List<SpellSlotData> m_spellsOrder = new List<SpellSlotData>();
+        
         // Start is called before the first frame update
         void Start()
         {
@@ -101,9 +104,12 @@ namespace GameUI
                 spellSlot.transform.localPosition = emptySpellSlot.transform.localPosition;
                 m_spellSlots.Add(spellSlot.transform);
                 spellSlot.SetActive(false);
+                spellSlot.transform.GetChild(0).gameObject.name += "_" + i;
 
                 currAngle -= angleStep;
             }
+
+            InitSpellSlots();
         }
 
         public void SetVisible(bool visible, bool showSpells = false)
@@ -129,7 +135,7 @@ namespace GameUI
 
         public void AimAtFirstAvailableSlot()
         {
-            m_targetSlotIdx = m_availableSlotIndices[0];
+            m_targetSlotIdx = 0;
             AimAtSlot(m_availableSlotIndices[m_targetSlotIdx]);
         }
 
@@ -140,17 +146,34 @@ namespace GameUI
         }
 
         public void AimAtPrevSlot()
-        {
-            m_targetSlotIdx = (m_targetSlotIdx - 1) % m_availableSlotIndices.Count;
+        {            
+            if(--m_targetSlotIdx < 0)
+            {
+                m_targetSlotIdx = m_availableSlotIndices.Count - 1;
+            }
             AimAtSlot(m_availableSlotIndices[m_targetSlotIdx]);
         }
 
         private void AimAtSlot(int slotNumber)
         {
-            //slotNumber = slotNumber % m_spellsAmount;
             float angleStep = GetAngleStep();
             float thetaDeg = (slotNumber * angleStep - m_firstSlotRotation) * Mathf.Rad2Deg;            
             m_arrowPanel.transform.rotation = Quaternion.Euler(0f, 0f, -90f - thetaDeg);
+            
+            for (int i = 0; i < m_spellSlots.Count; i++)
+            {
+
+                if (i == slotNumber)
+                {
+                    m_spellSlots[i].GetChild(0).gameObject.SetActive(true);
+                    m_spellSlots[i].GetChild(1).GetChild(1).gameObject.SetActive(true);
+                }
+                else
+                {
+                    m_spellSlots[i].GetChild(0).gameObject.SetActive(false);
+                    m_spellSlots[i].GetChild(1).GetChild(1).gameObject.SetActive(false);
+                }
+            }      
         }
 
         private float GetAngleStep()
@@ -186,11 +209,11 @@ namespace GameUI
             MagicProfile.MagicState magicState = s_targetEnchantable.GetFullMagicState();
             MagicProfile.CastableSpells castableSpells = s_targetEnchantable.GetCastableSpells();
 
-            for(int i = 0; i < s_spellsOrder.Count; ++i)
+            for(int i = 0; i < m_spellsOrder.Count; ++i)
             {
                 m_spellSlots[i].gameObject.SetActive(false);
 
-                switch (s_spellsOrder[i])
+                switch (m_spellsOrder[i].spellId)
                 {
                     case SpellType.TRANSFORM_SIZE_BIG:
                         if(castableSpells.sizeSpell && magicState.size != SpellState.SPELLED)
@@ -224,7 +247,19 @@ namespace GameUI
             }
         }
 
-        
+        private void InitSpellSlots()
+        {
+            for(int i = 0; i < m_spellsOrder.Count; ++i)
+            {
+                Image spellIcon = m_spellSlots[i].GetChild(1).GetChild(0).GetComponent<Image>();
+                Text spellName = m_spellSlots[i].GetChild(1).GetChild(1).GetComponent<Text>();
+
+                spellIcon.sprite = m_spellsOrder[i].spellSprite;
+                spellName.text = m_spellsOrder[i].spellName;
+            }
+        }
+
+        //private void InitSpellSlot()
     }
 }
 

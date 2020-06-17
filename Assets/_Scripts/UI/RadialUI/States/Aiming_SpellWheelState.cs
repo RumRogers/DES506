@@ -20,7 +20,9 @@ namespace GameUI
         {
             if(!Input.GetMouseButton(1))
             {
+                SpellWheel.SetTargetEnchantable(null);
                 m_spellWheel.SetState(new Idle_SpellWheelState(m_spellWheel));
+                return;
             }
 
             if (HasTargetEnchantedChanged())
@@ -32,17 +34,13 @@ namespace GameUI
             {
                 if (Input.mouseScrollDelta.y > 0f)
                 {
-                    m_spellWheel.AimAtNextSlot();
+                    m_spellWheel.AimAtPrevSlot();
                 }
                 else if(Input.mouseScrollDelta.y < 0f)
                 {
-                    m_spellWheel.AimAtPrevSlot();
+                    m_spellWheel.AimAtNextSlot();
                 }
             }
-            /*else if(Input.mouseScrollDelta.y != 0f)
-            {
-                m_spellWheel.AimAtSlot(m_spellWheel.p_TargetSlot - (int)Input.mouseScrollDelta.y);
-            }*/
         }
 
         private bool HasTargetEnchantedChanged()
