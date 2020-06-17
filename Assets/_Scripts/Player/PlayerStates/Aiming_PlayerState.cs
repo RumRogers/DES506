@@ -11,7 +11,10 @@ namespace Player
         GameCore.Camera.PlayerMoveCamera m_camera;
         Vector3 m_velocity;
 
-        bool m_canFire = true;
+        RaycastHit m_rayHitInfo;
+        Transform m_aimedAt = null;
+        Renderer m_aimedAtRenderer = null;
+        Material m_highlightedOldMaterial = null;
 
         public Aiming_PlayerState(GameCore.System.Automaton owner) : base(owner)
         {
@@ -24,6 +27,9 @@ namespace Player
             m_camera.SetState(new GameCore.Camera.ThirdPerson_CameraState(m_camera));
             //Storing a reference to this state object to transition back to after a fall
             m_playerEntity.PreviousGroundState = this;
+
+            //temp
+            m_playerEntity.m_reticle.gameObject.SetActive(true);
         }
 
         public override void Manage()
@@ -32,22 +38,58 @@ namespace Player
             //if button "aim" up get out of this state, axis is for joystick trigger buttons
             if (!Input.GetButton("Aim") && Input.GetAxisRaw("Aim") == 0)
             {
-                { 
-                    m_owner.SetState(new Default_PlayerState(m_owner));
-                    return;
+                if (m_aimedAtRenderer != null)
+                {
+                    m_aimedAtRenderer.material = m_highlightedOldMaterial;
+                }
+
+                m_owner.SetState(new Default_PlayerState(m_owner));
+
+                m_playerEntity.m_reticle.gameObject.SetActive(false);                //TEMP REMOVE LATER
+                return;
+            }
+
+            //Casting ray forward from the camera to check if there is an enchantable object where the player is aiming
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out m_rayHitInfo, 100))
+            {
+                if (m_rayHitInfo.transform.tag == "Enchantable")
+                {
+                    if (m_aimedAt == null || m_aimedAt != m_rayHitInfo.transform)
+                    {
+                        m_aimedAt = m_rayHitInfo.transform;
+                        if (!m_aimedAt.TryGetComponent<Renderer>(out m_aimedAtRenderer))
+                        {
+                            Debug.LogError($"Object {m_rayHitInfo.transform.name} doesn't have a renderer component!");
+                            return;
+                        }
+                        m_highlightedOldMaterial = m_aimedAtRenderer.material;
+                        m_aimedAtRenderer.material = m_playerEntity.HighlightMaterial;
+                    }
+                }
+                else if (m_aimedAt)
+                {
+                    m_aimedAtRenderer.material = m_highlightedOldMaterial;
+                    m_highlightedOldMaterial = null;
+                    m_aimedAtRenderer = null;
+                    m_aimedAt = null;
                 }
             }
 
-            if ((Input.GetButtonDown("Fire") || Input.GetAxisRaw("Fire") != 0) && m_canFire)
+
+            if ((Input.GetButtonDown("Fire") || Input.GetAxisRaw("Fire") != 0))
             {
                 //casting spell logic to be triggered from within here
-                m_playerEntity.Projectile.FireProjectile(Camera.main.transform.forward, m_playerEntity.transform.position + (m_playerEntity.transform.forward * 2f));
-                m_canFire = false;
-            }
+                Vector3 direction = Vector3.zero;
 
-            if (!Input.GetButton("Fire") && Input.GetAxisRaw("Fire") == 0)
-            {
-                m_canFire = true;
+                if (m_rayHitInfo.point != Vector3.zero)
+                {
+                    direction = m_rayHitInfo.point - m_playerEntity.transform.position;
+                }
+                else
+                {
+                    direction = (Camera.main.transform.position + (Camera.main.transform.forward * 100)) - m_playerEntity.transform.position;
+                }
+                m_playerEntity.Projectile.FireProjectile(direction , m_playerEntity.transform.position + (m_playerEntity.transform.forward * 2f));
             }
 
             if (m_playerEntity.IsGrounded())

@@ -34,6 +34,7 @@ namespace Player
         [SerializeField] float m_aimingMaxSpeed = 2.0f;
         [SerializeField] float m_aimingAcceleration = 15.0f;
         [SerializeField] float m_aimingDeceleration = 15.0f;
+        [SerializeField] Material m_highlightMaterial;
         [Header("Modified Movment")]
         [SerializeField] float m_iceAcceleration = 1f;
         [SerializeField] float m_iceDeceleration = 1f;
@@ -43,6 +44,7 @@ namespace Player
         [SerializeField] float m_gravity = 9.81f;
         [SerializeField] float m_jumpVelocity = 4.5f;
         [SerializeField] float m_highJumpVelocity = 9.5f;
+        [SerializeField] float m_jumpHeldMultiplier = 1.5f;   //the amount of velocity added per second to the y axis if jump is held down, added over time, not set like jump vel
         [Header("Collision")]
         [SerializeField] float m_maxClimbableIncline = 45.0f;
         [SerializeField] float m_heightPadding = 0.1f;  //How far from the floor the ray should start
@@ -50,6 +52,11 @@ namespace Player
         [SerializeField] int m_numHorizontalRays = 3;
         [SerializeField] int m_numVerticalRays = 3;
         [SerializeField] float m_skinWidth = 0.2f; // the distance from the outside of the object the rays start
+        [Header("Properties")]
+        [SerializeField] PlayerEntityProperties m_playerEntityProperties;
+
+        [Header("TEMP")]
+        public Transform m_reticle;
 
         //player stats (not editor accessible)
         Vector3 m_playerStartPosition;
@@ -69,8 +76,7 @@ namespace Player
         List<Transform> m_interactablesInRange = new List<Transform>();
         Transform m_closestInteractable = null;
 
-        //Player Entity
-        [SerializeField]PlayerEntityProperties m_playerEntityProperties;
+        
 
         //Player anim
         PlayerAnimator m_Animator;
@@ -89,10 +95,12 @@ namespace Player
         public float AimingMaxSpeed { get => m_aimingMaxSpeed; }
         public float AimingAcceleration { get => m_aimingAcceleration; }
         public float AimingDeceleration { get => m_aimingDeceleration; }
+        public Material HighlightMaterial { get => m_highlightMaterial; }
         public float IceAcceleration { get => m_iceAcceleration; }
         public float IceDeceleration { get => m_iceDeceleration; }
         public float IceMaxSpeed { get => m_maxIceSpeed; }
         public float AerialAccelleration { get => m_aerialAccelleration; }
+        public float JumpHeldMutliplier { get => m_jumpHeldMultiplier; }
         public float PushSpeed { get => m_pushingSpeed; }
         public float Gravity { get => m_gravity; }
         public float JumpVelocity { get => m_jumpVelocity; }

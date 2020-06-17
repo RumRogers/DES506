@@ -78,8 +78,15 @@ namespace GameCore.Camera
                 //Code for if design wants to be able to rotate the camera
                 else
                 {
-                    //m_rotation.x =  Mathf.Clamp(m_rotation.x - (Input.GetAxis("Camera Y") * m_playerMoveCamera.p_MovementSpeed), m_playerMoveCamera.p_DefaultStartingAngle - m_playerMoveCamera.p_DefaultMaxAngle, m_playerMoveCamera.p_DefaultStartingAngle + m_playerMoveCamera.p_DefaultMaxAngle);
-                    m_rotation.x = m_playerMoveCamera.p_DefaultStartingAngle;
+                    //Togglable for debug / testing purposes, may be changed to make this behaviour hard set
+                    if (m_playerMoveCamera.m_DefaultCanRotateVertically)
+                    {
+                        m_rotation.x = Mathf.Clamp(m_rotation.x - (Input.GetAxis("Camera Y") * m_playerMoveCamera.p_MovementSpeed), m_playerMoveCamera.p_DefaultStartingAngle - m_playerMoveCamera.p_DefaultMaxAngle, m_playerMoveCamera.p_DefaultStartingAngle + m_playerMoveCamera.p_DefaultMaxAngle);
+                    }
+                    else
+                    {
+                        m_rotation.x = m_playerMoveCamera.p_DefaultStartingAngle;
+                    }
                     m_rotation.y += Input.GetAxis("Camera X") * m_playerMoveCamera.p_MovementSpeed;
 
                     m_playerMoveCamera.transform.eulerAngles = m_rotation;

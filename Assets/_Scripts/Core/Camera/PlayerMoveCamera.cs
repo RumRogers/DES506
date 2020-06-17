@@ -41,8 +41,9 @@ namespace GameCore.Camera
         float m_aimingLerpSpeed = 0.3f;
 
         //temp (I think)
-        [SerializeField]
-        bool m_fixedDefaultCamera;
+        [Header("TEMP")]
+        [SerializeField] bool m_fixedDefaultCamera;
+        [SerializeField] public bool m_DefaultCanRotateVertically;
 
         public float p_MovementSpeed { get => m_movementSpeed; }
         public float p_ComebackSpeed { get => m_comebackSpeed; }
