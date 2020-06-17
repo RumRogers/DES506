@@ -3,6 +3,7 @@ using GameCore.System;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,15 @@ namespace GameUI
 {
     public class SpellWheel : Automaton
     {
+        static List<SpellType> s_spellsOrder = new List<SpellType>()
+        {
+            SpellType.TRANSFORM_SIZE_BIG,
+            SpellType.TRANSFORM_SIZE_SMALL,
+            SpellType.TRANSFORM_TEMPERATURE_HOT,
+            SpellType.TRANSFORM_TEMPERATURE_COLD
+        };
+        static Dictionary<Transform, Enchantable> s_gameTransformToEnchantable = new Dictionary<Transform, Enchantable>();
+        private static Enchantable s_targetEnchantable = null;
         const string ARROW_PANEL_TAG = "UI_SpellWheel_Arrow";
         const string SPELL_SLOT_EMPTY_TAG = "UI_SpellSlot_Empty";
         const string SPELL_SLOT_FULL_TAG = "UI_SpellSlot_Full";
@@ -30,6 +40,7 @@ namespace GameUI
         [SerializeField]
         List<Transform> m_emptySlots = new List<Transform>();
         List<Transform> m_spellSlots = new List<Transform>();
+        Dictionary<Transform, Transform> m_spellActiveObj = new Dictionary<Transform, Transform>();
         [SerializeField]
         Enchantable m_targetEnchantable = null;
         [SerializeField]
@@ -37,6 +48,7 @@ namespace GameUI
         float m_originalBGAlpha;
         Transform m_arrowPanel;
         int m_targetSlot = 0;
+        List<int> m_availableSlotIndices = new List<int>();
         public int p_TargetSlot { get => m_targetSlot; }
 
         // Start is called before the first frame update
@@ -49,11 +61,17 @@ namespace GameUI
             m_circleRadius = (m_bgImage.rectTransform.rect.width - m_circleThickness / 2f) / 2f;
             m_arrowPanel = GameObject.FindGameObjectWithTag(ARROW_PANEL_TAG).transform;
             m_firstSlotRotation = 2f * GetAngleStep();
+            InitMap();
             InitCircle();
 
             SetState(new Idle_SpellWheelState(this));
         }
 
+        protected override void Update()
+        {
+            base.Update();
+            m_targetEnchantable = s_targetEnchantable;
+        }
         void InitCircle()
         {
             foreach (var emptySlot in m_emptySlots)
@@ -88,7 +106,7 @@ namespace GameUI
             }
         }
 
-        public void SetVisible(bool visible)
+        public void SetVisible(bool visible, bool showSpells = false)
         {
             Color c = m_bgImage.color;
             c.a = visible ? m_originalBGAlpha : 0f;
@@ -100,10 +118,32 @@ namespace GameUI
                 {
                     t.gameObject.SetActive(visible);
                 }
+                else
+                {
+                    t.gameObject.SetActive(false);
+                }
             }
+
+            m_arrowPanel.gameObject.SetActive(showSpells);
         }
 
-        public void AimAtSlot(int slotNumber)
+        public void AimAtFirstAvailableSlot()
+        {
+            m_targetSlot = m_availableSlotIndices[0];
+            AimAtSlot(m_targetSlot);
+        }
+
+        public void AimAtNextSlot()
+        {
+
+        }
+
+        public void AimAtPrevSlot()
+        {
+
+        }
+
+        private void AimAtSlot(int slotNumber)
         {
             slotNumber = slotNumber % m_spellsAmount;
             float angleStep = GetAngleStep();
@@ -116,13 +156,74 @@ namespace GameUI
         {
             return (2 * Mathf.PI) / m_spellsAmount;
         }
-        private void OnGUI()
+
+        private void InitMap()
         {
-            if(GUI.Button(new Rect(10, 10, 150, 50), "Init SpellWheel"))
+            const string ENCHANTABLE_TAG = "Enchantable";
+
+            var enchantables = GameObject.FindGameObjectsWithTag(ENCHANTABLE_TAG);
+
+            foreach(var enchantableObj in enchantables)
             {
-                InitCircle();
+                s_gameTransformToEnchantable[enchantableObj.transform] = enchantableObj.GetComponent<Enchantable>();
             }
         }
+
+        public static Enchantable GetTargetEnchantable()
+        {
+            return s_targetEnchantable;
+        }
+        public static void SetTargetEnchantable(Transform enchantableTransform)
+        {
+            s_targetEnchantable = enchantableTransform != null ? s_gameTransformToEnchantable[enchantableTransform] : null;
+        }
+
+        public void PopulateSpellSlots()
+        {
+            m_availableSlotIndices.Clear();
+
+            MagicProfile.MagicState magicState = s_targetEnchantable.GetFullMagicState();
+            MagicProfile.CastableSpells castableSpells = s_targetEnchantable.GetCastableSpells();
+
+            for(int i = 0; i < s_spellsOrder.Count; ++i)
+            {
+                m_spellSlots[i].gameObject.SetActive(false);
+
+                switch (s_spellsOrder[i])
+                {
+                    case SpellType.TRANSFORM_SIZE_BIG:
+                        if(castableSpells.sizeSpell && magicState.size != SpellState.SPELLED)
+                        {
+                            m_spellSlots[i].gameObject.SetActive(true);
+                            m_availableSlotIndices.Add(i);
+                        }
+                        break;
+                    case SpellType.TRANSFORM_SIZE_SMALL:
+                        if (castableSpells.sizeSpell && magicState.size != SpellState.COUNTERSPELLED)
+                        {
+                            m_spellSlots[i].gameObject.SetActive(true);
+                            m_availableSlotIndices.Add(i);
+                        }
+                        break;
+                    case SpellType.TRANSFORM_TEMPERATURE_HOT:
+                        if (castableSpells.temperatureSpell && magicState.temperature != SpellState.SPELLED)
+                        {
+                            m_spellSlots[i].gameObject.SetActive(true);
+                            m_availableSlotIndices.Add(i);
+                        }
+                        break;
+                    case SpellType.TRANSFORM_TEMPERATURE_COLD:
+                        if (castableSpells.temperatureSpell && magicState.temperature != SpellState.COUNTERSPELLED)
+                        {
+                            m_spellSlots[i].gameObject.SetActive(true);
+                            m_availableSlotIndices.Add(i);
+                        }
+                        break;
+                }
+            }
+        }
+
+        
     }
 }
 

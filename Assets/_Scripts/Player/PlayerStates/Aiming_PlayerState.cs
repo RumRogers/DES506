@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using GameUI;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -57,6 +58,7 @@ namespace Player
                     if (m_aimedAt == null || m_aimedAt != m_rayHitInfo.transform)
                     {
                         m_aimedAt = m_rayHitInfo.transform;
+                        SpellWheel.SetTargetEnchantable(m_rayHitInfo.transform);
                         if (!m_aimedAt.TryGetComponent<Renderer>(out m_aimedAtRenderer))
                         {
                             Debug.LogError($"Object {m_rayHitInfo.transform.name} doesn't have a renderer component!");
@@ -72,6 +74,7 @@ namespace Player
                     m_highlightedOldMaterial = null;
                     m_aimedAtRenderer = null;
                     m_aimedAt = null;
+                    SpellWheel.SetTargetEnchantable(null);
                 }
             }
 
