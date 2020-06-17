@@ -1007,14 +1007,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_cameraTarget: {fileID: 231225065}
-  m_aimingDistance: 1.95
+  m_aimingDistance: 3
   m_defaultDistance: 6
   m_defaultStartingAngle: 41.13
-  m_defaultMaxAngle: 57.3
+  m_defaultMaxAngle: 30
   m_aimingMaxAngle: 90
   m_dialogueDistance: 2
   m_dialogueAngle: 45
-  m_aimingOffset: {x: 1, y: 1}
+  m_aimingOffset: {x: 0.2, y: 1}
   m_movementSpeed: 1
   m_aimingMovementSpeed: 2.17
   m_comebackSpeed: 1
@@ -1022,7 +1022,7 @@ MonoBehaviour:
   m_lerpSpeed: 1
   m_aimingLerpSpeed: 0.3
   m_fixedDefaultCamera: 0
-  m_DefaultCanRotateVertically: 0
+  m_DefaultCanRotateVertically: 1
 --- !u!114 &774538334
 MonoBehaviour:
   m_ObjectHideFlags: 0
