@@ -20,7 +20,6 @@ namespace GameUI
             {                
                 m_spellWheel.SetState(new Aiming_SpellWheelState(m_spellWheel));
                 m_spellWheel.SetVisible(true);
-                m_spellWheel.AimAtFirstAvailableSlot();
             }
         }
     }

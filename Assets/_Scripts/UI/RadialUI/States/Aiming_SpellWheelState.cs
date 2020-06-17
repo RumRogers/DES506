@@ -30,9 +30,13 @@ namespace GameUI
             
             if(m_lastTargetEnchantable != null)
             {
-                if (Input.mouseScrollDelta.y != 0f)
+                if (Input.mouseScrollDelta.y > 0f)
                 {
-                    //m_spellWheel.AimAtSlot(m_spellWheel.p_TargetSlot - (int)Mathf.Sign(Input.mouseScrollDelta.y));
+                    m_spellWheel.AimAtNextSlot();
+                }
+                else if(Input.mouseScrollDelta.y < 0f)
+                {
+                    m_spellWheel.AimAtPrevSlot();
                 }
             }
             /*else if(Input.mouseScrollDelta.y != 0f)
