@@ -14,6 +14,12 @@ namespace Projectile
         int m_projectileIndex = 0;
         bool m_canFire = true;
         List<Projectile> m_projectiles = new List<Projectile>();
+
+        //Public Vars
+        public float TimeBetweenShots { get => m_timeBetweenShots; }
+        public float Range { get => m_range; }
+        public float Speed { get => m_speed; }
+
         // Start is called before the first frame update
         void Start()
         {

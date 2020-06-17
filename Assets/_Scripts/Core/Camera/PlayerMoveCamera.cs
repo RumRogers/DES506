@@ -72,6 +72,28 @@ namespace GameCore.Camera
             m_cameraOffset = transform.position - m_cameraTarget.position;
             SetState(new Default_CameraState(this));
         }
+
+        protected override void Update()
+        {
+            base.Update();
+            CheckCollision();
+        }
+
+        //Casts ray from target to camera and checks if it hits, if so moves camera to hit position
+        private void CheckCollision()
+        {
+            Vector3 targetToCamera = transform.position - m_cameraTarget.position;
+            float distance = targetToCamera.magnitude;
+            Vector3 direction = targetToCamera.normalized;
+            RaycastHit hit;
+
+            LayerMask layer = LayerMask.GetMask("IgnoreCamera");
+
+            if (Physics.Raycast(m_cameraTarget.position, direction, out hit, distance, ~layer)) //flipped the bit operator here to hit everything but that layer
+            {
+                transform.position = hit.point;
+            }
+        }
     }
 }
 

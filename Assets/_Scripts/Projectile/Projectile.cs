@@ -40,6 +40,10 @@ namespace Projectile
         //if colliding, deactivate    
         private void OnTriggerEnter(Collider other)
         {
+            if (other.isTrigger)
+            {
+                return;
+            }
             m_time = 0;
             gameObject.SetActive(false);
         }

@@ -51,7 +51,7 @@ namespace Player
             }
 
             //Casting ray forward from the camera to check if there is an enchantable object where the player is aiming
-            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out m_rayHitInfo, 100))
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out m_rayHitInfo, m_playerEntity.Projectile.Range))
             {
                 if (m_rayHitInfo.transform.tag == "Enchantable")
                 {
@@ -90,9 +90,9 @@ namespace Player
                 }
                 else
                 {
-                    direction = (Camera.main.transform.position + (Camera.main.transform.forward * 100)) - m_playerEntity.transform.position;
+                    direction = (Camera.main.transform.position + (Camera.main.transform.forward * m_playerEntity.Projectile.Range)) - m_playerEntity.transform.position;
                 }
-                m_playerEntity.Projectile.FireProjectile(direction , m_playerEntity.transform.position + (m_playerEntity.transform.forward * 2f));
+                m_playerEntity.Projectile.FireProjectile(direction.normalized, m_playerEntity.transform.position + (m_playerEntity.transform.forward * 2f));
             }
 
             if (m_playerEntity.IsGrounded())
