@@ -2,15 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameStateController : GameCore.System.Automaton
+namespace GameCore.GameState
 {
-    void Awake()
-    {
-        SetState(new Playing_State(this));
-    }
 
-    override protected void Update()
+    public class GameStateController : GameCore.System.Automaton
     {
-        m_state.Manage();
+        GameObject m_pauseMenu;
+
+        void Awake()
+        {
+            m_pauseMenu = GameObject.FindGameObjectWithTag("PauseMenu");
+
+            SetState(new Playing_State(this));
+        }
+
+        override protected void Update()
+        {
+            m_state.Manage();
+        }
     }
 }

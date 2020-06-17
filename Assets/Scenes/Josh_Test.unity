@@ -515,6 +515,8 @@ GameObject:
   - component: {fileID: 413661094}
   - component: {fileID: 413661093}
   - component: {fileID: 413661092}
+  - component: {fileID: 413661098}
+  - component: {fileID: 413661097}
   m_Layer: 0
   m_Name: Other Cube
   m_TagString: Enchantable
@@ -611,6 +613,40 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &413661097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413661091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60aa5f6859aed7546b07e2ee11de5785, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_magicProfile: {fileID: 0}
+  m_scaleBigMultiplier: 2
+  m_scaleSmallMultiplier: 0.5
+  m_changeSizeSpeed: 1
+--- !u!114 &413661098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413661091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f927b4b2fa810bf4593a730b471e4a98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_castableSpells:
+    sizeSpell: 1
+    temperatureSpell: 0
+  m_magicState:
+    size: 0
+    temperature: 0
 --- !u!4 &496939127 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1424418927591661895, guid: 8ece4949563f9f54685d142252628d0b,

@@ -47,9 +47,9 @@ namespace GameUI
         Vector2 m_circleCenter;
         float m_originalBGAlpha;
         Transform m_arrowPanel;
-        int m_targetSlot = 0;
+        [SerializeField]
+        int m_targetSlotIdx = -1;
         List<int> m_availableSlotIndices = new List<int>();
-        public int p_TargetSlot { get => m_targetSlot; }
 
         // Start is called before the first frame update
         void Start()
@@ -129,26 +129,27 @@ namespace GameUI
 
         public void AimAtFirstAvailableSlot()
         {
-            m_targetSlot = m_availableSlotIndices[0];
-            AimAtSlot(m_targetSlot);
+            m_targetSlotIdx = m_availableSlotIndices[0];
+            AimAtSlot(m_availableSlotIndices[m_targetSlotIdx]);
         }
 
         public void AimAtNextSlot()
         {
-
+            m_targetSlotIdx = (m_targetSlotIdx + 1) % m_availableSlotIndices.Count;
+            AimAtSlot(m_availableSlotIndices[m_targetSlotIdx]);
         }
 
         public void AimAtPrevSlot()
         {
-
+            m_targetSlotIdx = (m_targetSlotIdx - 1) % m_availableSlotIndices.Count;
+            AimAtSlot(m_availableSlotIndices[m_targetSlotIdx]);
         }
 
         private void AimAtSlot(int slotNumber)
         {
-            slotNumber = slotNumber % m_spellsAmount;
+            //slotNumber = slotNumber % m_spellsAmount;
             float angleStep = GetAngleStep();
-            float thetaDeg = (slotNumber * angleStep - m_firstSlotRotation) * Mathf.Rad2Deg;
-            m_targetSlot = slotNumber;
+            float thetaDeg = (slotNumber * angleStep - m_firstSlotRotation) * Mathf.Rad2Deg;            
             m_arrowPanel.transform.rotation = Quaternion.Euler(0f, 0f, -90f - thetaDeg);
         }
 
