@@ -96,7 +96,7 @@ MonoBehaviour:
     type: 3}
   m_prefabSpellSlot: {fileID: 2669610419498652926, guid: 672bf0a50194f11408dffc45820fac70,
     type: 3}
-  m_spellsAmount: 8
+  m_spellsAmount: 10
   m_emptySlots: []
   m_targetEnchantable: {fileID: 0}
   m_circleCenter: {x: 0, y: 0}
@@ -112,6 +112,24 @@ MonoBehaviour:
     spellName: Inferno
     spellSprite: {fileID: 21300000, guid: 86c1217eaf1207b429dbe67939215529, type: 3}
   - spellId: 3
+    spellName: Dead Cold
+    spellSprite: {fileID: 21300000, guid: 865169dbc6e40d544874b568794d3764, type: 3}
+  - spellId: 4
+    spellName: Dead Cold
+    spellSprite: {fileID: 21300000, guid: 865169dbc6e40d544874b568794d3764, type: 3}
+  - spellId: 4
+    spellName: Dead Cold
+    spellSprite: {fileID: 21300000, guid: 865169dbc6e40d544874b568794d3764, type: 3}
+  - spellId: 4
+    spellName: Dead Cold
+    spellSprite: {fileID: 21300000, guid: 865169dbc6e40d544874b568794d3764, type: 3}
+  - spellId: 4
+    spellName: Dead Cold
+    spellSprite: {fileID: 21300000, guid: 865169dbc6e40d544874b568794d3764, type: 3}
+  - spellId: 4
+    spellName: Dead Cold
+    spellSprite: {fileID: 21300000, guid: 865169dbc6e40d544874b568794d3764, type: 3}
+  - spellId: 4
     spellName: Dead Cold
     spellSprite: {fileID: 21300000, guid: 865169dbc6e40d544874b568794d3764, type: 3}
 --- !u!1 &7337699529066155563

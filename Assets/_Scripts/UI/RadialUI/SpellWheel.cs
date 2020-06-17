@@ -41,7 +41,8 @@ namespace GameUI
         [SerializeField]
         List<Transform> m_emptySlots = new List<Transform>();
         List<Transform> m_spellSlots = new List<Transform>();
-        Dictionary<Transform, Transform> m_spellActiveObj = new Dictionary<Transform, Transform>();
+        Dictionary<Transform, SpellType> m_spellSlotToSpellType = new Dictionary<Transform, SpellType>();
+        //Dictionary<Transform, Transform> m_spellActiveObj = new Dictionary<Transform, Transform>();
         [SerializeField]
         Enchantable m_targetEnchantable = null;
         [SerializeField]
@@ -106,6 +107,7 @@ namespace GameUI
                 spellSlot.SetActive(false);
                 spellSlot.transform.GetChild(0).gameObject.name += "_" + i;
 
+                m_spellSlotToSpellType[spellSlot.transform] = m_spellsOrder[i].spellId;
                 currAngle -= angleStep;
             }
 
@@ -205,9 +207,10 @@ namespace GameUI
         public void PopulateSpellSlots()
         {
             m_availableSlotIndices.Clear();
-
+            m_spellSlotToSpellType.Clear();
             MagicProfile.MagicState magicState = s_targetEnchantable.GetFullMagicState();
             MagicProfile.CastableSpells castableSpells = s_targetEnchantable.GetCastableSpells();
+
 
             for(int i = 0; i < m_spellsOrder.Count; ++i)
             {
@@ -220,6 +223,7 @@ namespace GameUI
                         {
                             m_spellSlots[i].gameObject.SetActive(true);
                             m_availableSlotIndices.Add(i);
+                            m_spellSlotToSpellType[m_spellSlots[i]] = SpellType.TRANSFORM_SIZE_BIG;
                         }
                         break;
                     case SpellType.TRANSFORM_SIZE_SMALL:
@@ -227,6 +231,7 @@ namespace GameUI
                         {
                             m_spellSlots[i].gameObject.SetActive(true);
                             m_availableSlotIndices.Add(i);
+                            m_spellSlotToSpellType[m_spellSlots[i]] = SpellType.TRANSFORM_SIZE_SMALL;
                         }
                         break;
                     case SpellType.TRANSFORM_TEMPERATURE_HOT:
@@ -234,6 +239,7 @@ namespace GameUI
                         {
                             m_spellSlots[i].gameObject.SetActive(true);
                             m_availableSlotIndices.Add(i);
+                            m_spellSlotToSpellType[m_spellSlots[i]] = SpellType.TRANSFORM_TEMPERATURE_HOT;
                         }
                         break;
                     case SpellType.TRANSFORM_TEMPERATURE_COLD:
@@ -241,6 +247,7 @@ namespace GameUI
                         {
                             m_spellSlots[i].gameObject.SetActive(true);
                             m_availableSlotIndices.Add(i);
+                            m_spellSlotToSpellType[m_spellSlots[i]] = SpellType.TRANSFORM_TEMPERATURE_COLD;
                         }
                         break;
                 }
@@ -259,7 +266,10 @@ namespace GameUI
             }
         }
 
-        //private void InitSpellSlot()
+        public void CastSelectedSpell()
+        {
+            s_targetEnchantable.CastSpell(new Spell(m_spellSlotToSpellType[m_spellSlots[m_availableSlotIndices[m_targetSlotIdx]]]));            
+        }
     }
 }
 
