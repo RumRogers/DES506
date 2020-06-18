@@ -50,6 +50,7 @@ namespace Player
                 return;
             }
 
+            Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * m_playerEntity.Projectile.Range);
             //Casting ray forward from the camera to check if there is an enchantable object where the player is aiming
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out m_rayHitInfo, m_playerEntity.Projectile.Range))
             {
@@ -68,6 +69,7 @@ namespace Player
                         m_aimedAtRenderer.material = m_playerEntity.HighlightMaterial;
                     }
                 }
+                //if the hit object is not enchantable and there is a currently selected enchantable, set to null
                 else if (m_aimedAt)
                 {
                     m_aimedAtRenderer.material = m_highlightedOldMaterial;
@@ -76,6 +78,16 @@ namespace Player
                     m_aimedAt = null;
                     SpellWheel.SetTargetEnchantable(null);
                 }
+            }
+            //not sure about this condition as it is similar to the one above...
+            //if it doesn't hit and there is an aimed at transform, set to null also
+            else if (m_aimedAt)
+            {
+                m_aimedAtRenderer.material = m_highlightedOldMaterial;
+                m_highlightedOldMaterial = null;
+                m_aimedAtRenderer = null;
+                m_aimedAt = null;
+                SpellWheel.SetTargetEnchantable(null);
             }
 
 
