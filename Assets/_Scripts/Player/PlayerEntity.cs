@@ -34,7 +34,7 @@ namespace Player
         [SerializeField] float m_aimingMaxSpeed = 2.0f;
         [SerializeField] float m_aimingAcceleration = 15.0f;
         [SerializeField] float m_aimingDeceleration = 15.0f;
-        [SerializeField] Material m_highlightMaterial;
+        [SerializeField] Shader m_highlightShader;
         [Header("Modified Movment")]
         [SerializeField] float m_iceAcceleration = 1f;
         [SerializeField] float m_iceDeceleration = 1f;
@@ -95,7 +95,7 @@ namespace Player
         public float AimingMaxSpeed { get => m_aimingMaxSpeed; }
         public float AimingAcceleration { get => m_aimingAcceleration; }
         public float AimingDeceleration { get => m_aimingDeceleration; }
-        public Material HighlightMaterial { get => m_highlightMaterial; }
+        public Shader HighlightShader { get => m_highlightShader; }
         public float IceAcceleration { get => m_iceAcceleration; }
         public float IceDeceleration { get => m_iceDeceleration; }
         public float IceMaxSpeed { get => m_maxIceSpeed; }

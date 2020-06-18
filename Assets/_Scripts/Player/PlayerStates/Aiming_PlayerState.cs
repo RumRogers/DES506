@@ -15,7 +15,7 @@ namespace Player
         RaycastHit m_rayHitInfo;
         Transform m_aimedAt = null;
         Renderer m_aimedAtRenderer = null;
-        Material m_highlightedOldMaterial = null;
+        Shader m_highlightedOldShader = null;
 
         public Aiming_PlayerState(GameCore.System.Automaton owner) : base(owner)
         {
@@ -41,7 +41,7 @@ namespace Player
             {
                 if (m_aimedAtRenderer != null)
                 {
-                    m_aimedAtRenderer.material = m_highlightedOldMaterial;
+                    m_aimedAtRenderer.material.shader = m_highlightedOldShader;
                 }
 
                 m_owner.SetState(new Default_PlayerState(m_owner));
@@ -52,7 +52,7 @@ namespace Player
 
             Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * m_playerEntity.Projectile.Range);
             //Casting ray forward from the camera to check if there is an enchantable object where the player is aiming
-            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out m_rayHitInfo, m_playerEntity.Projectile.Range))
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out m_rayHitInfo, m_playerEntity.Projectile.Range + (m_camera.transform.position - m_playerEntity.transform.position).magnitude))
             {
                 if (m_rayHitInfo.transform.tag == "Enchantable")
                 {
@@ -65,15 +65,15 @@ namespace Player
                             Debug.LogError($"Object {m_rayHitInfo.transform.name} doesn't have a renderer component!");
                             return;
                         }
-                        m_highlightedOldMaterial = m_aimedAtRenderer.material;
-                        m_aimedAtRenderer.material = m_playerEntity.HighlightMaterial;
+                        m_highlightedOldShader = m_aimedAtRenderer.material.shader;
+                        m_aimedAtRenderer.material.shader = m_playerEntity.HighlightShader;
                     }
                 }
                 //if the hit object is not enchantable and there is a currently selected enchantable, set to null
                 else if (m_aimedAt)
                 {
-                    m_aimedAtRenderer.material = m_highlightedOldMaterial;
-                    m_highlightedOldMaterial = null;
+                    m_aimedAtRenderer.material.shader = m_highlightedOldShader;
+                    m_highlightedOldShader = null;
                     m_aimedAtRenderer = null;
                     m_aimedAt = null;
                     SpellWheel.SetTargetEnchantable(null);
@@ -83,8 +83,8 @@ namespace Player
             //if it doesn't hit and there is an aimed at transform, set to null also
             else if (m_aimedAt)
             {
-                m_aimedAtRenderer.material = m_highlightedOldMaterial;
-                m_highlightedOldMaterial = null;
+                m_aimedAtRenderer.material.shader = m_highlightedOldShader;
+                m_highlightedOldShader = null;
                 m_aimedAtRenderer = null;
                 m_aimedAt = null;
                 SpellWheel.SetTargetEnchantable(null);
