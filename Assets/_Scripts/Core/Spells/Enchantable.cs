@@ -111,6 +111,12 @@ namespace GameCore.Spells
         {
             return m_magicProfile.GetMagicFingerprint().castableSpells;
         }
+
+        public MagicProfile.MagicState GetFullMagicState()
+        {
+            return m_magicProfile.GetMagicFingerprint().magicState;
+        }
+
         public SpellState GetMagicState(SpellType spellType) 
         {
             var magicState = m_magicProfile.GetMagicFingerprint().magicState;
