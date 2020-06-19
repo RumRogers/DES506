@@ -68,9 +68,11 @@ namespace GameCore.Camera
         IEnumerator Transition()
         {
             float time = 0;
+            float distance = (m_playerMoveCamera.transform.position - m_playerMoveCamera.p_CameraTarget.transform.position).magnitude;
             while (true)
             {
                 m_offset = (m_playerMoveCamera.transform.right * m_playerMoveCamera.p_AimingOffset.x) + (m_playerMoveCamera.transform.up * m_playerMoveCamera.p_AimingOffset.y);    //updating offset as the player may be moving
+                m_startingPos = m_playerMoveCamera.transform.position;
                 m_endingPos = m_playerMoveCamera.p_CameraTarget.position - ((m_playerMoveCamera.transform.forward * m_playerMoveCamera.p_AimingDistance) - m_offset);
                 m_playerMoveCamera.transform.position = Vector3.Lerp(m_startingPos, m_endingPos, time);
 

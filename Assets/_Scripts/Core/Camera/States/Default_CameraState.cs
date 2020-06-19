@@ -115,6 +115,7 @@ namespace GameCore.Camera
             while (true)
             {
                 m_offset = (m_playerMoveCamera.transform.up) * 1.5f;
+                m_transitionStart = m_playerMoveCamera.transform.position;
                 m_transitionEnd = m_playerMoveCamera.p_CameraTarget.position - ((m_playerMoveCamera.transform.forward * m_playerMoveCamera.p_DefaultDistance) - m_offset);
                 m_playerMoveCamera.transform.position = Vector3.Lerp(m_transitionStart, m_transitionEnd, time);
                 m_playerMoveCamera.transform.rotation = Quaternion.Lerp(m_playerMoveCamera.transform.rotation, Quaternion.Euler(m_rotation), time);
