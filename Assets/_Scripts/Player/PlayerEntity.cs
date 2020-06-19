@@ -30,6 +30,11 @@ namespace Player
         [SerializeField] float m_maxSpeed = 2.0f;
         [SerializeField] float m_walkingAcceleration = 15.0f;
         [SerializeField] float m_walkingDeceleration = 15.0f;
+        [Header("Aiming")]
+        [SerializeField] float m_aimingMaxSpeed = 2.0f;
+        [SerializeField] float m_aimingAcceleration = 15.0f;
+        [SerializeField] float m_aimingDeceleration = 15.0f;
+        [SerializeField] Shader m_highlightShader;
         [Header("Modified Movment")]
         [SerializeField] float m_iceAcceleration = 1f;
         [SerializeField] float m_iceDeceleration = 1f;
@@ -39,6 +44,7 @@ namespace Player
         [SerializeField] float m_gravity = 9.81f;
         [SerializeField] float m_jumpVelocity = 4.5f;
         [SerializeField] float m_highJumpVelocity = 9.5f;
+        [SerializeField] float m_jumpHeldMultiplier = 1.5f;   //the amount of velocity added per second to the y axis if jump is held down, added over time, not set like jump vel
         [Header("Collision")]
         [SerializeField] float m_maxClimbableIncline = 45.0f;
         [SerializeField] float m_heightPadding = 0.1f;  //How far from the floor the ray should start
@@ -46,6 +52,11 @@ namespace Player
         [SerializeField] int m_numHorizontalRays = 3;
         [SerializeField] int m_numVerticalRays = 3;
         [SerializeField] float m_skinWidth = 0.2f; // the distance from the outside of the object the rays start
+        [Header("Properties")]
+        [SerializeField] PlayerEntityProperties m_playerEntityProperties;
+
+        [Header("TEMP")]
+        public Transform m_reticle;
 
         //player stats (not editor accessible)
         Vector3 m_playerStartPosition;
@@ -65,11 +76,13 @@ namespace Player
         List<Transform> m_interactablesInRange = new List<Transform>();
         Transform m_closestInteractable = null;
 
-        //Player Entity
-        [SerializeField]PlayerEntityProperties m_playerEntityProperties;
+        
 
         //Player anim
         PlayerAnimator m_Animator;
+
+        //Dialogue
+        List<Transform> m_speakersInRange = new List<Transform>();
 
         #region PUBLIC ACCESSORS
         //player stats, Mutable
@@ -79,10 +92,15 @@ namespace Player
         public float MaxSpeed { get => m_maxSpeed; }
         public float WalkingAcceleration { get => m_walkingAcceleration; }
         public float WalkingDeceleration { get => m_walkingDeceleration; }
+        public float AimingMaxSpeed { get => m_aimingMaxSpeed; }
+        public float AimingAcceleration { get => m_aimingAcceleration; }
+        public float AimingDeceleration { get => m_aimingDeceleration; }
+        public Shader HighlightShader { get => m_highlightShader; }
         public float IceAcceleration { get => m_iceAcceleration; }
         public float IceDeceleration { get => m_iceDeceleration; }
         public float IceMaxSpeed { get => m_maxIceSpeed; }
         public float AerialAccelleration { get => m_aerialAccelleration; }
+        public float JumpHeldMutliplier { get => m_jumpHeldMultiplier; }
         public float PushSpeed { get => m_pushingSpeed; }
         public float Gravity { get => m_gravity; }
         public float JumpVelocity { get => m_jumpVelocity; }
@@ -97,7 +115,8 @@ namespace Player
         //Get and Settable
         public GameCore.System.State PreviousGroundState { get => m_previousGroundState; set => m_previousGroundState = value; }
         public Transform ClosestInteractable { get => m_closestInteractable; set => m_closestInteractable = value; }
-        public List<Transform> InteractablesInRange { get => m_interactablesInRange; set => m_interactablesInRange = value; }
+        public List<Transform> InteractablesInRange { get => m_interactablesInRange; set => m_interactablesInRange = value; }   //to be removed, but unsure if we'll have other interactibles so may as well leave it
+        public List<Transform> SpeakersInRange { get => m_speakersInRange; set => m_speakersInRange = value; }
         public AnimationCurve PushMovementCurve { get => m_pushMovementCurve; }
         #endregion
 
@@ -122,6 +141,12 @@ namespace Player
             if (HasProperty(PlayerEntityProperties.DYING))
             {
                 SetState(new Death_PlayerState(this));
+            }
+
+            //Dialogue trigger
+            if (Input.GetButtonDown("Interact") && m_speakersInRange.Count > 0 && m_state.GetType() != typeof(Dialogue_PlayerState))
+            {
+                SetState(new Dialogue_PlayerState(this));
             }
 
             base.Update();
@@ -314,25 +339,21 @@ namespace Player
         #region UNITY COLLISIONS
         public void OnTriggerEnter(Collider other)
         {
-            if (other.tag == "Movable")
+            if (other.tag == "NPC")
             {
-                m_interactablesInRange.Add(other.transform);
+                m_speakersInRange.Add(other.transform);
             }
         }
 
         public void OnTriggerExit(Collider other)
         {
-            if (other.tag == "Movable")
+            if (other.tag == "NPC")
             {
-                foreach (Transform t in m_interactablesInRange)
+                foreach (Transform t in m_speakersInRange)
                 {
                     if (t.GetInstanceID() == other.transform.GetInstanceID())
                     {
-                        if (t == m_closestInteractable && m_state.GetType() == typeof(Pushing_PlayerState))
-                        {
-                            SetState(new Default_PlayerState(this));
-                        }
-                        m_interactablesInRange.Remove(t);
+                        m_speakersInRange.Remove(t);
                         return;
                     }
                 }
