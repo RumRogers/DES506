@@ -14,8 +14,6 @@ namespace GameEnchantables
         float m_scaleSmallMultiplier = .5f;
         [SerializeField]
         float m_changeSizeSpeed = 1f;
-        //[SerializeField]
-        //bool m_
 
         // Start is called before the first frame update
         void Start()
