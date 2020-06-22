@@ -711,6 +711,8 @@ MonoBehaviour:
   m_defaultStartingAngle: 33
   m_defaultMaxAngle: 45
   m_aimingMaxAngle: 90
+  m_dialogueDistance: 1
+  m_dialogueAngle: 33
   m_aimingOffset: {x: 1, y: 1}
   m_movementSpeed: 0
   m_aimingMovementSpeed: 0
@@ -719,6 +721,7 @@ MonoBehaviour:
   m_lerpSpeed: 1
   m_aimingLerpSpeed: 0.3
   m_fixedDefaultCamera: 0
+  m_DefaultCanRotateVertically: 0
 --- !u!1 &26793032
 GameObject:
   m_ObjectHideFlags: 0
@@ -6102,6 +6105,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 295411977}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &295756088 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8364697276190939614, guid: 19b4b3f449e78d34e9a7399029da3229,
+    type: 3}
+  m_PrefabInstance: {fileID: 52882924149939499}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &297544825
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11448,6 +11457,10 @@ MonoBehaviour:
   m_maxSpeed: 2
   m_walkingAcceleration: 15
   m_walkingDeceleration: 15
+  m_aimingMaxSpeed: 2
+  m_aimingAcceleration: 15
+  m_aimingDeceleration: 15
+  m_highlightMaterial: {fileID: 0}
   m_iceAcceleration: 1
   m_iceDeceleration: 1
   m_maxIceSpeed: 2
@@ -11455,6 +11468,7 @@ MonoBehaviour:
   m_gravity: 9.81
   m_jumpVelocity: 4.5
   m_highJumpVelocity: 9.5
+  m_jumpHeldMultiplier: 1.5
   m_maxClimbableIncline: 45
   m_heightPadding: 0.1
   m_groundOverlapPadding: 0.1
@@ -11462,6 +11476,7 @@ MonoBehaviour:
   m_numVerticalRays: 3
   m_skinWidth: 0.1
   m_playerEntityProperties: 2
+  m_reticle: {fileID: 0}
 --- !u!4 &698550519
 Transform:
   m_ObjectHideFlags: 0
@@ -18947,6 +18962,50 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1185370138}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1187518213
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1187518215}
+  - component: {fileID: 1187518214}
+  m_Layer: 0
+  m_Name: GameState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1187518214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1187518213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c3427da003170841ae3fb2d33a1bd76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_pauseMenu: {fileID: 295756088}
+--- !u!4 &1187518215
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1187518213}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 440.971, y: 282.05487, z: -112.49646}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1188304455
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32890,6 +32949,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PauseMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 52882924269579520, guid: 19b4b3f449e78d34e9a7399029da3229,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 52882924269579524, guid: 19b4b3f449e78d34e9a7399029da3229,
         type: 3}

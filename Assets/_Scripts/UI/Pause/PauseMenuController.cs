@@ -2,28 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+#region tips
+[System.Serializable]
+public class Tip
+{
+    public string text;
+}
+
+[System.Serializable]
+public class Tips
+{
+    public Tip[] tips;
+}
+#endregion
+
 public class PauseMenuController : MonoBehaviour
 {
-    bool m_isPlaying = true;
-
+    [SerializeField]
     GameObject[] m_menus;
+
+    Tips tipObj;
+
+    [SerializeField]
+    TextAsset tipsJSON;
+
     //Index:
     //0 -- Main Pause Menu
 
-    public void TempTogglePause()
+    private void Start()
     {
-        m_isPlaying = !m_isPlaying;
-
-        Time.timeScale = m_isPlaying ? 0 : 1;
+        tipObj = JsonUtility.FromJson<Tips>(tipsJSON.text);
     }
 
-    private void Awake()
-    {
-        HideAllMenus();
-        m_isPlaying = true;
-    }
-
-#region Sub-Menu Handling
+    #region Sub-Menu Handling
 
     public void DisplayMenu(int index)
     {
@@ -46,4 +57,6 @@ public class PauseMenuController : MonoBehaviour
     }
 
 #endregion
+
 }
+
