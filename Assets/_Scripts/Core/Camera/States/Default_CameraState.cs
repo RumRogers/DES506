@@ -15,8 +15,11 @@ namespace GameCore.Camera
         Vector3 m_rotation;
         Vector3 m_offset;
 
-        Vector3 m_transitionStart;
-        Vector3 m_transitionEnd;
+        //Transition vars
+        Vector3 m_startingPos;
+        Vector3 m_endingPos;
+        Quaternion m_startRotation;
+        float m_startDistance;
         bool m_transitioned = false;
 
         float m_defaultFOV = 50;
@@ -28,12 +31,11 @@ namespace GameCore.Camera
 
             if(!m_playerMoveCamera.p_FixedDefaultCamera)
             {
-                m_transitionStart = m_playerMoveCamera.transform.position;
                 m_rotation = m_playerMoveCamera.transform.eulerAngles;
                 m_rotation.x = m_playerMoveCamera.p_DefaultStartingAngle;
 
-                m_offset = (m_playerMoveCamera.transform.up) * 1.5f;
-                m_transitionEnd = m_playerMoveCamera.p_CameraTarget.position - ((m_playerMoveCamera.transform.forward * m_playerMoveCamera.p_DefaultDistance) - m_offset);
+                m_startDistance = (m_playerMoveCamera.p_CameraTarget.position - m_playerMoveCamera.transform.position).magnitude;
+                m_startRotation = m_playerMoveCamera.transform.rotation;
 
                 if (!m_playerMoveCamera.TryGetComponent<UnityEngine.Camera>(out m_camera))
                 {
@@ -98,13 +100,8 @@ namespace GameCore.Camera
                 if (m_transitioned)
                 {
                     targetPosition = m_playerMoveCamera.p_CameraTarget.position - ((m_playerMoveCamera.transform.forward * m_playerMoveCamera.p_DefaultDistance) - m_offset);
+                    m_playerMoveCamera.transform.position = targetPosition;
                 }
-                else
-                {
-                    targetPosition = m_playerMoveCamera.p_CameraTarget.position - ((m_playerMoveCamera.transform.forward * (m_playerMoveCamera.transform.position - m_playerMoveCamera.p_CameraTarget.position).magnitude) - m_offset);
-                }
-
-                m_playerMoveCamera.transform.position = targetPosition;
             }
         }
 
@@ -115,14 +112,16 @@ namespace GameCore.Camera
             while (true)
             {
                 m_offset = (m_playerMoveCamera.transform.up) * 1.5f;
-                m_transitionStart = m_playerMoveCamera.transform.position;
-                m_transitionEnd = m_playerMoveCamera.p_CameraTarget.position - ((m_playerMoveCamera.transform.forward * m_playerMoveCamera.p_DefaultDistance) - m_offset);
-                m_playerMoveCamera.transform.position = Vector3.Lerp(m_transitionStart, m_transitionEnd, time);
-                m_playerMoveCamera.transform.rotation = Quaternion.Lerp(m_playerMoveCamera.transform.rotation, Quaternion.Euler(m_rotation), time);
+                //actually dependent on the state we just came from... might need to keep track of last state
+                m_startingPos = m_playerMoveCamera.p_CameraTarget.position - (m_playerMoveCamera.transform.forward * m_startDistance);
+                m_endingPos = m_playerMoveCamera.p_CameraTarget.position - ((m_playerMoveCamera.transform.forward * m_playerMoveCamera.p_DefaultDistance) - m_offset);
+                m_playerMoveCamera.transform.position = Vector3.Lerp(m_startingPos, m_endingPos, time);
+                m_playerMoveCamera.transform.rotation = Quaternion.Lerp(m_startRotation, Quaternion.Euler(m_rotation), time);
 
                 m_camera.fieldOfView = Mathf.Lerp(m_startFOV, m_defaultFOV, time);
 
                 time += Time.deltaTime * m_playerMoveCamera.p_ComebackSpeed;
+                time = m_playerMoveCamera.p_LerpCurve.Evaluate(time);
 
                 if (time > 1)
                 {

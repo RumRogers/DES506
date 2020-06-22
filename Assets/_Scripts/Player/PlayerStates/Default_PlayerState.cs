@@ -60,10 +60,10 @@ namespace Player
                 //Slope detection 
                 //if the slope is climable, modify the direction the player is traveling in 
                 float slopeAngle = Vector3.Angle(m_playerEntity.GroundHitInfo.normal, Vector3.up);
-                if (slopeAngle < m_playerEntity.MaxClimableAngle)
+                if (slopeAngle < m_playerEntity.MaxClimableAngle && slopeAngle > 0)
                 {
                     Vector3 slopeDirection = Vector3.zero;
-                    if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING) && slopeAngle > 1)
+                    if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING))
                     {                    
                         //get the players right based on direction of movement, then use it to calculate the new direction of travel
                         Vector3 playerRight = Vector3.Cross(m_playerEntity.transform.forward, -m_playerEntity.transform.up);

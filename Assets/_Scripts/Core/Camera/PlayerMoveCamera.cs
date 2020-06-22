@@ -30,6 +30,7 @@ namespace GameCore.Camera
         [SerializeField] float m_movementSpeed;
         [SerializeField] bool m_smoothMovement = false;
         [SerializeField] float m_lerpSpeed = 1f;
+        [SerializeField] AnimationCurve m_lerpCurve;
 
         //temp (I think)
         [Header("TEMP")]
@@ -59,6 +60,7 @@ namespace GameCore.Camera
         public Vector3 p_AimingOffset { get => m_aimingOffset; }
         public bool p_SmoothMovement { get => m_smoothMovement; }
         public bool p_FixedDefaultCamera { get => m_fixedDefaultCamera; }
+        public AnimationCurve p_LerpCurve { get => m_lerpCurve; }
 
         private void Start()
         {
