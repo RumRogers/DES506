@@ -13,8 +13,10 @@ namespace GameCore.Camera
         Vector3 m_offset;
 
         bool m_transitioned = false;
+        Quaternion m_startRotation;
         Vector3 m_startingPos;
         Vector3 m_endingPos;
+        float m_startDistance;
 
         float m_aimFOV = 45;
         float m_startFOV;
@@ -29,11 +31,10 @@ namespace GameCore.Camera
             }
             m_startFOV = m_camera.fieldOfView;
 
-            m_rotation = m_playerMoveCamera.transform.eulerAngles;
+            m_rotation = Quaternion.LookRotation(new Vector3(m_playerMoveCamera.transform.forward.x, 0, m_playerMoveCamera.transform.forward.z)).eulerAngles;
 
-            //Getting initial start and offset
-            m_startingPos = m_playerMoveCamera.transform.position;
-            m_offset = (m_playerMoveCamera.transform.right * m_playerMoveCamera.p_AimingOffset.x) + (m_playerMoveCamera.transform.up * m_playerMoveCamera.p_AimingOffset.y);
+            m_startRotation = m_playerMoveCamera.transform.rotation;
+            m_startDistance = (m_playerMoveCamera.p_CameraTarget.position - m_playerMoveCamera.transform.position).magnitude;
 
             //Camera transition between current position and expected distance without changing angle.
             m_playerMoveCamera.StopAllCoroutines();
@@ -46,23 +47,16 @@ namespace GameCore.Camera
             m_rotation.x = Mathf.Clamp(m_rotation.x - (Input.GetAxis("Camera Y") * m_playerMoveCamera.p_AimingMovementSpeed), m_playerMoveCamera.p_AimingMinAngle, m_playerMoveCamera.p_AimingMaxAngle);
             m_rotation.y += Input.GetAxis("Camera X") * m_playerMoveCamera.p_AimingMovementSpeed;
 
-            m_playerMoveCamera.transform.eulerAngles = m_rotation;
-
             m_offset = (m_playerMoveCamera.transform.right * m_playerMoveCamera.p_AimingOffset.x) + (m_playerMoveCamera.transform.up * m_playerMoveCamera.p_AimingOffset.y);
 
             Vector3 targetPosition;
 
             if (m_transitioned)
             {
-                //after transition move at a fixed distance for two reasons, 1. should be more reliable in cases where the transition lerp might not calculate final distance consistently 2. camera collision detection will move the camera
                 targetPosition = m_playerMoveCamera.p_CameraTarget.position - ((m_playerMoveCamera.transform.forward * m_playerMoveCamera.p_AimingDistance) - m_offset);
-            }
-            else
-            {
-                //if not transitioned, use the current distance rather than the aiming distance, allows the player to move camera while transitioning
-                targetPosition = m_playerMoveCamera.p_CameraTarget.position - ((m_playerMoveCamera.transform.forward * (m_playerMoveCamera.transform.position - m_playerMoveCamera.p_CameraTarget.position).magnitude) - m_offset);
-            }
-            m_playerMoveCamera.transform.position = targetPosition;
+                m_playerMoveCamera.transform.position = targetPosition;
+                m_playerMoveCamera.transform.eulerAngles = m_rotation;
+            }            
         }
 
         IEnumerator Transition()
@@ -72,13 +66,15 @@ namespace GameCore.Camera
             while (true)
             {
                 m_offset = (m_playerMoveCamera.transform.right * m_playerMoveCamera.p_AimingOffset.x) + (m_playerMoveCamera.transform.up * m_playerMoveCamera.p_AimingOffset.y);    //updating offset as the player may be moving
-                m_startingPos = m_playerMoveCamera.transform.position;
+                m_startingPos = m_playerMoveCamera.p_CameraTarget.position - (m_playerMoveCamera.transform.forward * m_startDistance);
                 m_endingPos = m_playerMoveCamera.p_CameraTarget.position - ((m_playerMoveCamera.transform.forward * m_playerMoveCamera.p_AimingDistance) - m_offset);
                 m_playerMoveCamera.transform.position = Vector3.Lerp(m_startingPos, m_endingPos, time);
+                m_playerMoveCamera.transform.rotation = Quaternion.Lerp(m_startRotation, Quaternion.Euler(m_rotation), time);
 
                 m_camera.fieldOfView = Mathf.Lerp(m_startFOV, m_aimFOV, time);
 
                 time += Time.deltaTime * m_playerMoveCamera.p_ComebackSpeed;
+                time = m_playerMoveCamera.p_LerpCurve.Evaluate(time);
 
                 if (time > 1)
                 {
