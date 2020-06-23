@@ -97,7 +97,7 @@ namespace Player
                 if (m_playerEntity.Direction != Vector3.zero)
                 {
                     //rotate the player to face the direction they are traveling in
-                    m_playerEntity.transform.rotation = Quaternion.LookRotation(m_playerEntity.Direction);
+                    m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Direction.x, 0, m_playerEntity.Direction.z));
                     if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING))
                     {
                         m_velocity += (m_playerEntity.Direction * m_playerEntity.IceAcceleration) * Time.deltaTime;

@@ -29,6 +29,7 @@ namespace Player
 
                 if (m_playerEntity.PreviousGroundState != null)
                 {
+                    m_playerEntity.Velocity = new Vector3(m_playerEntity.Velocity.x, 0, m_playerEntity.Velocity.z);
                     m_owner.SetState(m_playerEntity.PreviousGroundState);
                 }
                 else

@@ -242,9 +242,12 @@ namespace Player
                 rayStart += xRaySpacing;
                 rayStart -= zRaySpacing * (3);
             }
+            if (collided)
+            {
+                transform.position = new Vector3(transform.position.x, m_groundedHitInfo.point.y + m_playerCollider.bounds.extents.y, transform.position.z);
+            }
 
             return collided;
-
         }
 
         public void OnBoxFinishedMoving()
