@@ -564,7 +564,7 @@ MonoBehaviour:
   m_aimingMaxSpeed: 2
   m_aimingAcceleration: 15
   m_aimingDeceleration: 15
-  m_highlightMaterial: {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
+  m_highlightShader: {fileID: 0}
   m_iceAcceleration: 1
   m_iceDeceleration: 1
   m_maxIceSpeed: 2.95
@@ -1913,6 +1913,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 542665144}
+  - component: {fileID: 542665145}
   m_Layer: 0
   m_Name: TreeModel
   m_TagString: Untagged
@@ -1952,6 +1953,29 @@ Transform:
   m_Father: {fileID: 229411228}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &542665145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 542665143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: -1
+  OverrideMaxDistance: -1
 --- !u!1 &588840666
 GameObject:
   m_ObjectHideFlags: 0
@@ -2622,20 +2646,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_cameraTarget: {fileID: 231225065}
-  m_aimingDistance: 1.95
   m_defaultDistance: 6
   m_defaultStartingAngle: 41.13
+  m_defaultMinAngle: -45
   m_defaultMaxAngle: 57.3
+  m_aimingDistance: 1.95
+  m_aimingMinAngle: -90
   m_aimingMaxAngle: 90
+  m_aimingOffset: {x: 1, y: 1}
+  m_aimingMovementSpeed: 2.17
+  m_aimingLerpSpeed: 0.3
   m_dialogueDistance: 2
   m_dialogueAngle: 45
-  m_aimingOffset: {x: 1, y: 1}
-  m_movementSpeed: 1
-  m_aimingMovementSpeed: 2.17
   m_comebackSpeed: 1
+  m_movementSpeed: 1
   m_smoothMovement: 1
   m_lerpSpeed: 1
-  m_aimingLerpSpeed: 0.3
   m_fixedDefaultCamera: 0
   m_DefaultCanRotateVertically: 0
 --- !u!114 &774538334

@@ -1,5 +1,28 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8420965133920926834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SPELLS/Spell_Cast
+  m_EditorClassIdentifier: 
+  Path: event:/SPELLS/Spell_Cast
+  guid: a5207f7c1f2cc941966de4210b8f1078
+  Banks:
+  - {fileID: 178988661411114446}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
 --- !u!114 &-8415032040721163499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15,7 +38,7 @@ MonoBehaviour:
   Path: event:/AMBIANCE CRICKETS
   guid: 17d0f4459162954aa3ba1aa9dac5c3b5
   Banks:
-  - {fileID: -1163055164145004872}
+  - {fileID: 178988661411114446}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -41,6 +64,29 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &-5070997987969550899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Footsteps
+  m_EditorClassIdentifier: 
+  Path: event:/Footsteps
+  guid: 21e6af97db5d3b4d8560c9fc914d10ce
+  Banks:
+  - {fileID: 178988661411114446}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
 --- !u!114 &-4619083611211680480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,6 +105,70 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &-4290556911360160112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SPELLS/SpellFX_Enlarge
+  m_EditorClassIdentifier: 
+  Path: event:/SPELLS/SpellFX_Enlarge
+  guid: dfabedca0a8fce4198e4bc03bd696cd1
+  Banks:
+  - {fileID: 178988661411114446}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
+--- !u!114 &-2443177578697674723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637281651143207291
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-1956143331563030215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SPELLS/Spell_Fail
+  m_EditorClassIdentifier: 
+  Path: event:/SPELLS/Spell_Fail
+  guid: f4a26242f270164e8e72d2b5d47532b3
+  Banks:
+  - {fileID: 178988661411114446}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
 --- !u!114 &-1163055164145004872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,7 +186,7 @@ MonoBehaviour:
   lastModified: 637261813640289218
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &-576393237337478040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,17 +219,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 1549267405382922713}
-  - {fileID: -1163055164145004872}
+  - {fileID: 178988661411114446}
   EditorEvents:
   - {fileID: -8415032040721163499}
   - {fileID: 998972529664228970}
+  - {fileID: 3738940236566228132}
+  - {fileID: 6482363784228512078}
+  - {fileID: -5070997987969550899}
+  - {fileID: -8420965133920926834}
+  - {fileID: -4290556911360160112}
+  - {fileID: -1956143331563030215}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -1163055164145004872}
+  - {fileID: 178988661411114446}
   StringsBanks:
   - {fileID: 1549267405382922713}
-  stringsBankWriteTime: 637261813640298963
+  stringsBankWriteTime: 637285265093687534
   cacheVersion: 3
+--- !u!114 &178988661411114446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637285265093437705
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &378395351564052842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,7 +287,7 @@ MonoBehaviour:
   Path: event:/ROOSTER
   guid: ae8acd563c4ee543ba8ca60c21763703
   Banks:
-  - {fileID: -1163055164145004872}
+  - {fileID: 178988661411114446}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -175,12 +309,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637261813640298963
+  lastModified: 637285265093687534
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 804
+    Value: 1078
   Exists: 1
+--- !u!114 &3738940236566228132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SPELLS/SpellFX_Shrink
+  m_EditorClassIdentifier: 
+  Path: event:/SPELLS/SpellFX_Shrink
+  guid: 08aae8f24068e84fb4736fd272be4439
+  Banks:
+  - {fileID: 178988661411114446}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
 --- !u!114 &4063500106777592901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,3 +356,26 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &6482363784228512078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SPELLS/Spell_Aiming
+  m_EditorClassIdentifier: 
+  Path: event:/SPELLS/Spell_Aiming
+  guid: 0f525ae3b22a68479dc719dd78c33290
+  Banks:
+  - {fileID: 178988661411114446}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
