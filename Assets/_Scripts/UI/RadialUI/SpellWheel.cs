@@ -1,5 +1,8 @@
-﻿using GameCore.Spells;
+﻿//#define CHECK_FOR_UNLOCKED_SPELLS
+
+using GameCore.Spells;
 using GameCore.System;
+using GameCore.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -215,8 +218,15 @@ namespace GameUI
             for(int i = 0; i < m_spellsOrder.Count; ++i)
             {
                 m_spellSlots[i].gameObject.SetActive(false);
+                SpellType spellType = m_spellsOrder[i].spellId;
 
-                switch (m_spellsOrder[i].spellId)
+#if CHECK_FOR_UNLOCKED_SPELLS
+                if (!LevelManager.IsSpellUnlocked(spellType))
+                {
+                    continue;
+                }
+#endif
+                switch (spellType)
                 {
                     case SpellType.TRANSFORM_SIZE_BIG:
                         if(castableSpells.sizeSpell && magicState.size != SpellState.SPELLED)

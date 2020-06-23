@@ -2,13 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 using GameCore.Rules;
+using GameCore.Spells;
 
 namespace GameCore.System
 {
     public class LevelManager : MonoBehaviour
     {
-        public static Dictionary<string, List<MutableEntity>> s_mapSubjectToMutable = new Dictionary<string, List<MutableEntity>>();
+        static int s_playerSpells = 0;
+        public static int p_PlayerSpells { get => s_playerSpells; }
+        public static void UnlockSpell(SpellType spellType)
+        {            
+            Utils.Bits.SetBit(ref s_playerSpells, (int)spellType);
+        }
 
+        public static bool IsSpellUnlocked(SpellType spellType)
+        {
+            return Utils.Bits.GetBit(s_playerSpells, (int)spellType);
+        }
+
+        // All of this became obsolete when we changed core mechanic
+        /*
+        public static Dictionary<string, List<MutableEntity>> s_mapSubjectToMutable = new Dictionary<string, List<MutableEntity>>();
+        
         private void Start()
         {
             PrepareMutables();
@@ -58,7 +73,7 @@ namespace GameCore.System
             }
 
             return null;
-        }
+        }*/
     }
 }
 

@@ -15,6 +15,7 @@ TagManager:
   - UI_SpellSlot_Empty
   - UI_SpellSlot_Full
   - NPC
+  - Collectible
   layers:
   - Default
   - TransparentFX
