@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="Event" id="{caedabdf-8f0a-41ce-98e4-bc03bd696cd1}">
+		<property name="color">
+			<value>Blue Light 2</value>
+		</property>
 		<property name="name">
 			<value>SpellFX_Enlarge</value>
 		</property>

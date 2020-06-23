@@ -4,5 +4,8 @@
 		<property name="assetPath">
 			<value>Spells/</value>
 		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{9937f860-8fbb-46f5-bf06-8a9c030d1b0c}</destination>
+		</relationship>
 	</object>
 </objects>
