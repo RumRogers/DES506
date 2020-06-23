@@ -53,6 +53,13 @@ public class PauseMenuController : MonoBehaviour
         m_currTipNum = rnd.Next(m_tipsAmount);
         Debug.Log(m_currTipNum);
         SetTipText(m_currTipNum);
+
+        SetTipNumText(m_currTipNum);
+    }
+
+    public void SetTipNumText(int num)
+    {
+        m_tipNumText.text = "Tip " + (num + 1) + '/' + m_tipsAmount;
     }
 
     public void SetTipText(int index)
