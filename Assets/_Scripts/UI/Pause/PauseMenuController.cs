@@ -38,7 +38,7 @@ public class PauseMenuController : MonoBehaviour
     //0 -- Main Pause Menu
 
 
-    private void Awake() //On opening the menu, display a random tip
+    private void Awake() 
     {
         m_tipObj = JsonUtility.FromJson<Tips>(m_tipsJSON.text);
 
@@ -56,6 +56,32 @@ public class PauseMenuController : MonoBehaviour
 
         SetTipNumText(m_currTipNum);
     }
+
+    public void NextTipButtonPress(bool next) //Next as in; "next or previous"
+    {
+        if (next)
+        {
+            if (m_currTipNum < m_tipsAmount -1)
+            {
+                ++m_currTipNum;
+
+                SetTipText(m_currTipNum);
+                SetTipNumText(m_currTipNum);
+            }
+        }
+        else
+        {
+            if (m_currTipNum > 0)
+            {
+                --m_currTipNum;
+                SetTipText(m_currTipNum);
+                SetTipNumText(m_currTipNum);
+            }
+        }
+
+        
+    }
+
 
     public void SetTipNumText(int num)
     {
