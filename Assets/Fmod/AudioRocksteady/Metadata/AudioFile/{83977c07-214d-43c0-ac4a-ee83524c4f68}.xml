@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.01.00">
 	<object class="AudioFile" id="{83977c07-214d-43c0-ac4a-ee83524c4f68}">
 		<property name="assetPath">
-			<value>Spells/DES506_SFX_Spells_Shrink.wav</value>
+			<value>Spells/SpellEffects/DES506_SFX_Spells_Shrink.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>44.0999985</value>

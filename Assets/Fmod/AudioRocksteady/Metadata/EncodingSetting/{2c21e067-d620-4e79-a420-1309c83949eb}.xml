@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="EncodingSetting" id="{2c21e067-d620-4e79-a420-1309c83949eb}">
-		<property name="encodingFormat">
-			<value>3</value>
-		</property>
 		<property name="quality">
-			<value>37</value>
+			<value>100</value>
 		</property>
 		<relationship name="platform">
 			<destination>{e380c2dd-6481-4eca-933f-6b8529ccf139}</destination>

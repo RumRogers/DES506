@@ -8,7 +8,7 @@
 			<value>Spell_Cast</value>
 		</property>
 		<property name="outputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{1c5e7cff-690b-4682-a412-5d63e9eadba1}</destination>
@@ -93,7 +93,11 @@
 			<destination>{e8fd869b-af3b-44b6-b32e-c6e20b7646c6}</destination>
 		</relationship>
 	</object>
-	<object class="MultiSound" id="{4533250c-1f6f-4cb6-b86e-9798685b1bce}" />
+	<object class="MultiSound" id="{4533250c-1f6f-4cb6-b86e-9798685b1bce}">
+		<relationship name="sounds">
+			<destination>{3333e351-34a9-438e-b160-c72e162d298e}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusEffectChain" id="{85aca4e3-1f6e-480e-844b-b7eff3a718d0}">
 		<relationship name="effects">
 			<destination>{12eac168-93d3-448f-a2f0-6207bec8de22}</destination>
@@ -120,6 +124,11 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{e8bb7bf6-09a8-4ebb-bb81-73ab90a7f903}" />
+	<object class="SingleSound" id="{3333e351-34a9-438e-b160-c72e162d298e}">
+		<relationship name="audioFile">
+			<destination>{5650b71c-ee02-4bc8-85a5-3b501a022f29}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusFader" id="{12eac168-93d3-448f-a2f0-6207bec8de22}" />
 	<object class="MixerBusEffectChain" id="{5b1b3543-c73d-4105-b281-44d964bd59e6}">
 		<relationship name="effects">
