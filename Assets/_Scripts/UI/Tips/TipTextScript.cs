@@ -15,6 +15,22 @@ namespace GameUI
 
             m_controller.UpdateTipText();
         }
+
+
+        private void Update()
+        {
+            if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.A))
+            {
+                m_controller.NextTipButtonPress(false);
+            }
+
+            if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.D))
+            {
+                m_controller.NextTipButtonPress(true);
+            }
+
+        }
+
     }
 
 }

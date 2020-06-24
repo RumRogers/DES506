@@ -31,5 +31,16 @@ namespace GameCore.GameState
         {
             SetState(new Playing_State(this));
         }
+
+        public bool IsPaused()
+        {
+            if (m_state.ToString() == "GameCore.GameState.Paused_State") //oof must change soon
+            {
+                return true;
+            }
+
+            return false;
+        }
+
     }
 }
