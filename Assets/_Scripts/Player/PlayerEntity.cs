@@ -71,12 +71,14 @@ namespace Player
         //Collision variables
         RaycastHit m_groundedHitInfo;
         RaycastHit m_collisionHitInfo;
+        //transform the player is stood on
+        Transform m_ground;
+        Vector3 m_oldGroundPosition;
+        Vector3 m_newGroundPosition;
 
         //Interacting transforms 
         List<Transform> m_interactablesInRange = new List<Transform>();
         Transform m_closestInteractable = null;
-
-        
 
         //Player anim
         PlayerAnimator m_Animator;
@@ -206,6 +208,11 @@ namespace Player
         }
 
         //Public because it will only be called in certain states
+        /// <summary>
+        /// Casts rays out underneath the player collider and returns true if any hit, if they are hit and the player is close to the  ground or overlapping, they will be moved to the point hit + y extents.
+        /// also moves the player if the ground moves
+        /// </summary>
+        /// <returns>ground was hit</returns>
         public bool IsGrounded()
         {
             bool collided = false;
@@ -242,9 +249,29 @@ namespace Player
                 rayStart += xRaySpacing;
                 rayStart -= zRaySpacing * (3);
             }
+
+            //I realise this means this function does more than one thing, which surely is a cardinal sin, however I couldn't find a better place to execute this just yet
+            //Nor could I think of a better name for this function
             if (collided)
             {
+                //update the position to the point on the ground hit + half of the player's height
                 transform.position = new Vector3(transform.position.x, m_groundedHitInfo.point.y + m_playerCollider.bounds.extents.y, transform.position.z);
+
+                //if the ground has changed, change the ground and the old position
+                if(m_ground != m_groundedHitInfo.transform)
+                {
+                    m_ground = m_groundedHitInfo.transform;
+                    m_oldGroundPosition = m_ground.position;
+                }
+                
+                m_newGroundPosition = m_ground.transform.position;
+                
+                //if the ground has moved since the last frame, add that movement to the player
+                if (m_newGroundPosition != m_oldGroundPosition)
+                {
+                    transform.position += (m_newGroundPosition - m_oldGroundPosition);
+                    m_oldGroundPosition = m_newGroundPosition;
+                }
             }
 
             return collided;
