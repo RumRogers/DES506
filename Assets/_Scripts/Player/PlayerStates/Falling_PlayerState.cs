@@ -22,11 +22,20 @@ namespace Player
         {
             m_playerEntity.Velocity += (Vector3.down * m_playerEntity.Gravity) * Time.deltaTime;
 
-            //if grounded transition to default state
+            //if grounded transition to previous grounded state, or if there wasn't one, transition to the default state
             if (m_playerEntity.IsGrounded())
             {
                 m_playerEntity.Velocity = new Vector3(m_playerEntity.Velocity.x, 0, m_playerEntity.Velocity.z);
-                m_owner.SetState(new Default_PlayerState(m_owner));
+
+                if (m_playerEntity.PreviousGroundState != null)
+                {
+                    m_playerEntity.Velocity = new Vector3(m_playerEntity.Velocity.x, 0, m_playerEntity.Velocity.z);
+                    m_owner.SetState(m_playerEntity.PreviousGroundState);
+                }
+                else
+                {
+                    m_owner.SetState(new Default_PlayerState(m_owner));
+                }
                 return;
             }
 

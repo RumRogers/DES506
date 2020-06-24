@@ -175,6 +175,7 @@ namespace GameCore.Rules
             var ruleVerb = m_ruleChunks[1];
             var ruleObject = m_ruleChunks[2];
 
+            /*
             var mutableEntities = LevelManager.GetMutablesFromSubject(ruleSubject.m_lexeme);
 
             if(mutableEntities != null)
@@ -222,7 +223,7 @@ namespace GameCore.Rules
             if(m_ptrToMutables != null)
             {
                 m_ptrToMutables(ruleObject.m_lexeme);
-            }
+            }*/
         }
     }
 }

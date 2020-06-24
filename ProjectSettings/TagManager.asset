@@ -8,41 +8,47 @@ TagManager:
   - Tile
   - Movable
   - Mutable
-  - Sky
-  - Door
+  - Enchantable
+  - Tree
+  - PauseMenu
+  - UI_SpellWheel_Arrow
+  - UI_SpellSlot_Empty
+  - UI_SpellSlot_Full
+  - NPC
+  - Collectible
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  -
   - Water
   - UI
-  - 
-  - 
+  -
+  -
   - PostProcessing
-  - HighlightObject
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - IgnoreCamera
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
   m_SortingLayers:
   - name: Default
     uniqueID: 0

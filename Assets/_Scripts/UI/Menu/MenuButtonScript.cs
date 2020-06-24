@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 /// <summary>
@@ -16,6 +17,9 @@ public class MenuButtonScript : MonoBehaviour
 {
     [SerializeField]
     GameObject[] m_menus;
+
+    [SerializeField]
+    Text playButtonText; //Used to determine whether the play button should say "begin" or "continue"
 
    //Array index (set in editor):
    //   0 -- Splash Screen
@@ -54,6 +58,15 @@ public class MenuButtonScript : MonoBehaviour
     {
         //Just in case the others are left enabled in the editor, hard set only the splash screen active on start
         DisplayMenu(0);
+
+        if (PlayerPrefs.HasKey("LevelReached"))
+        {
+            playButtonText.text = "Continue"; //Probably don't hard code these
+        }
+        else
+        {
+            playButtonText.text = "Begin";
+        }
     }
 
     public void CloseGame()
