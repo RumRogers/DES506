@@ -12,9 +12,9 @@ public class ExtendedStudioEventEmitterEditor : FMODUnity.StudioEventEmitterEdit
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
-        var list = serializedObject.FindProperty("m_gameEvents");
-        EditorGUILayout.PropertyField(list, new GUIContent("Triggered by game events"), true);
+        //var list = serializedObject.FindProperty("m_gameEvents");
+        //EditorGUILayout.PropertyField(list, new GUIContent("Triggered by game events"), true);
         
-        serializedObject.ApplyModifiedProperties();
+        //serializedObject.ApplyModifiedProperties();
     }
 }

@@ -389,6 +389,7 @@ GameObject:
   - component: {fileID: 509135002}
   - component: {fileID: 509135001}
   - component: {fileID: 509135005}
+  - component: {fileID: 509135008}
   - component: {fileID: 509135007}
   - component: {fileID: 509135006}
   m_Layer: 0
@@ -496,13 +497,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 509135000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60aa5f6859aed7546b07e2ee11de5785, type: 3}
+  m_Script: {fileID: 11500000, guid: 4a4a153d9016fad409598d5c966557b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_magicProfile: {fileID: 0}
-  m_scaleBigMultiplier: 2
-  m_scaleSmallMultiplier: 0.5
-  m_changeSizeSpeed: 1
+  m_shrinkSpellSFX: {fileID: 3527441442036735292, guid: c858deb5d7b834f408148afcc1984218,
+    type: 3}
+  m_enlargeSpellSFX: {fileID: 823886751311533561, guid: 7172979037907ae45a5f0b743f4c35c2,
+    type: 3}
+  m_infernoSpellSFX: {fileID: 0}
+  m_coldSpellSFX: {fileID: 0}
 --- !u!114 &509135007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -521,6 +524,22 @@ MonoBehaviour:
   m_magicState:
     size: 0
     temperature: 0
+--- !u!114 &509135008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509135000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60aa5f6859aed7546b07e2ee11de5785, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_magicProfile: {fileID: 0}
+  m_scaleBigMultiplier: 2
+  m_scaleSmallMultiplier: 0.5
+  m_changeSizeSpeed: 1
 --- !u!4 &622124374 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1424418927591661895, guid: 8ece4949563f9f54685d142252628d0b,
