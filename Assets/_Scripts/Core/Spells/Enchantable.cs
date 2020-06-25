@@ -57,7 +57,7 @@ namespace GameCore.Spells
             
             if (spell.m_type == SpellType.TRANSFORM_SIZE_BIG && magicState.size != SpellState.SPELLED)
             {
-                if (m_fmodAdapter.p_EnlargeSpellSFX)
+                if (m_fmodAdapter != null && m_fmodAdapter.p_EnlargeSpellSFX)
                 {
                     Instantiate(m_fmodAdapter.p_EnlargeSpellSFX);
                 }
@@ -66,7 +66,7 @@ namespace GameCore.Spells
             }
             else if(spell.m_type == SpellType.TRANSFORM_SIZE_SMALL && magicState.size != SpellState.COUNTERSPELLED)
             {
-                if (m_fmodAdapter.p_ShrinkSpellSFX)
+                if (m_fmodAdapter != null && m_fmodAdapter.p_ShrinkSpellSFX)
                 {
                     Instantiate(m_fmodAdapter.p_ShrinkSpellSFX);
                 }
@@ -81,7 +81,7 @@ namespace GameCore.Spells
 
             if (spell.m_type == SpellType.TRANSFORM_TEMPERATURE_HOT && magicState.temperature != SpellState.SPELLED)
             {
-                if (m_fmodAdapter.p_InfernoSpellSFX)
+                if (m_fmodAdapter != null && m_fmodAdapter.p_InfernoSpellSFX)
                 {
                     Instantiate(m_fmodAdapter.p_InfernoSpellSFX);
                 }
@@ -90,7 +90,7 @@ namespace GameCore.Spells
             }
             else if (spell.m_type == SpellType.TRANSFORM_TEMPERATURE_COLD && magicState.temperature != SpellState.COUNTERSPELLED)
             {
-                if (m_fmodAdapter.p_ColdSpellSFX)
+                if (m_fmodAdapter != null && m_fmodAdapter.p_ColdSpellSFX)
                 {
                     Instantiate(m_fmodAdapter.p_ColdSpellSFX);
                 }
