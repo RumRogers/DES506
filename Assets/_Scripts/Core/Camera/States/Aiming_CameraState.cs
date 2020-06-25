@@ -5,7 +5,7 @@ using GameCore.System;
 
 namespace GameCore.Camera
 {
-    public class ThirdPerson_CameraState : State
+    public class Aiming_CameraState : State
     {
         PlayerMoveCamera m_playerMoveCamera;
         UnityEngine.Camera m_camera;
@@ -21,7 +21,7 @@ namespace GameCore.Camera
         float m_aimFOV = 45;
         float m_startFOV;
 
-        public ThirdPerson_CameraState(Automaton owner) : base (owner)
+        public Aiming_CameraState(Automaton owner) : base (owner)
         {
             m_playerMoveCamera = (PlayerMoveCamera)owner;
 
@@ -44,8 +44,18 @@ namespace GameCore.Camera
         //Gets mouse input and rotates around the player by making the camera face the player, the subtracting it's forward vector by the desired distance
         public override void Manage()
         {
-            m_rotation.x = Mathf.Clamp(m_rotation.x - (Input.GetAxis("Camera Y") * m_playerMoveCamera.p_AimingMovementSpeed), m_playerMoveCamera.p_AimingMinAngle, m_playerMoveCamera.p_AimingMaxAngle);
-            m_rotation.y += Input.GetAxis("Camera X") * m_playerMoveCamera.p_AimingMovementSpeed;
+            Vector2 input = new Vector2(Input.GetAxis("Camera Y"), Input.GetAxis("Camera X"));
+            //if what the camera is pointing at is of interest (enchantable)
+            if (m_playerMoveCamera.p_AimedAtTransform != null)
+            {
+                input /= 2; //half the input, potentially expose this to the editor
+                //rotation direction fro aim assist (not normalised yet)
+                Quaternion rotationDirection = Quaternion.LookRotation(m_playerMoveCamera.p_AimedAtTransform.position - m_playerMoveCamera.transform.position, Vector3.up);
+                m_rotation = Quaternion.RotateTowards(Quaternion.Euler(m_rotation), rotationDirection, Time.deltaTime * m_playerMoveCamera.p_AutoAimStrength).eulerAngles;
+                
+            }
+            m_rotation.x = Mathf.Clamp(m_rotation.x - (input.x * (m_playerMoveCamera.p_AimingMovementSpeed / 2)), m_playerMoveCamera.p_AimingMinAngle, m_playerMoveCamera.p_AimingMaxAngle);
+            m_rotation.y += input.y * (m_playerMoveCamera.p_AimingMovementSpeed / 2);
 
             m_offset = (m_playerMoveCamera.transform.right * m_playerMoveCamera.p_AimingOffset.x) + (m_playerMoveCamera.transform.up * m_playerMoveCamera.p_AimingOffset.y);
 
@@ -73,7 +83,7 @@ namespace GameCore.Camera
 
                 m_camera.fieldOfView = Mathf.Lerp(m_startFOV, m_aimFOV, time);
 
-                time += Time.deltaTime * m_playerMoveCamera.p_ComebackSpeed;
+                time += Time.deltaTime * m_playerMoveCamera.p_AimingLerpSpeed;
                 time = m_playerMoveCamera.p_LerpCurve.Evaluate(time);
 
                 if (time > 1)

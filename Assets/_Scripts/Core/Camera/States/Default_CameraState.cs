@@ -24,84 +24,51 @@ namespace GameCore.Camera
 
         float m_defaultFOV = 50;
         float m_startFOV;
-        
+
         public Default_CameraState(Automaton owner) : base(owner)
         {
             m_playerMoveCamera = (PlayerMoveCamera)owner;
 
-            if(!m_playerMoveCamera.p_FixedDefaultCamera)
+            m_rotation = m_playerMoveCamera.transform.eulerAngles;
+            m_rotation.x = m_playerMoveCamera.p_DefaultStartingAngle;
+
+            m_startDistance = (m_playerMoveCamera.p_CameraTarget.position - m_playerMoveCamera.transform.position).magnitude;
+            m_startRotation = m_playerMoveCamera.transform.rotation;
+
+            if (!m_playerMoveCamera.TryGetComponent<UnityEngine.Camera>(out m_camera))
             {
-                m_rotation = m_playerMoveCamera.transform.eulerAngles;
-                m_rotation.x = m_playerMoveCamera.p_DefaultStartingAngle;
-
-                m_startDistance = (m_playerMoveCamera.p_CameraTarget.position - m_playerMoveCamera.transform.position).magnitude;
-                m_startRotation = m_playerMoveCamera.transform.rotation;
-
-                if (!m_playerMoveCamera.TryGetComponent<UnityEngine.Camera>(out m_camera))
-                {
-                    Debug.LogError("Camera component not found! Camera movement script is not attached to a Camera!");
-                }
-                m_startFOV = m_camera.fieldOfView;
-
-                //start coroutine
-                m_playerMoveCamera.StopAllCoroutines();
-                m_playerMoveCamera.StartCoroutine(Transition());
+                Debug.LogError("Camera component not found! Camera movement script is not attached to a Camera!");
             }
-            else
-            {
-                m_transitioned = true;
-            }
+            m_startFOV = m_camera.fieldOfView;
+
+            //start coroutine
+            m_playerMoveCamera.StopAllCoroutines();
+            m_playerMoveCamera.StartCoroutine(Transition());
         }
 
         public override void Manage()
         {
-            //I never lose because I'm playing everyside B-)
-            //Code for if design prefered the fixed perspective
-            if (m_playerMoveCamera.p_FixedDefaultCamera)
+            //Togglable for debug / testing purposes, may be changed to make this behaviour hard set
+            if (m_playerMoveCamera.m_DefaultCanRotateVertically)
             {
-                if (Input.GetKeyDown(KeyCode.F12))
-                {
-                    m_owner.SetState(new Controlling_CameraState(m_owner));
-                    return;
-                }
-
-                if (m_playerMoveCamera.p_SmoothMovement)
-                {
-                    m_owner.transform.position = Vector3.Lerp(
-                        m_owner.transform.position,
-                        m_playerMoveCamera.p_CameraTarget.position + m_playerMoveCamera.p_CameraOffset,
-                        Time.deltaTime * m_playerMoveCamera.p_LerpSpeed);
-                }
-                else
-                {
-                    m_playerMoveCamera.transform.position = m_playerMoveCamera.p_CameraTarget.position + m_playerMoveCamera.p_CameraOffset;
-                }
+                m_rotation.x = Mathf.Clamp(m_rotation.x - (Input.GetAxis("Camera Y") * m_playerMoveCamera.p_DefaultMovementSpeed), m_playerMoveCamera.p_DefaultStartingAngle + m_playerMoveCamera.p_DefaultMinAngle, m_playerMoveCamera.p_DefaultStartingAngle + m_playerMoveCamera.p_DefaultMaxAngle);
             }
-            //Code for if design wants to be able to rotate the camera
             else
             {
-                //Togglable for debug / testing purposes, may be changed to make this behaviour hard set
-                if (m_playerMoveCamera.m_DefaultCanRotateVertically)
-                {
-                    m_rotation.x = Mathf.Clamp(m_rotation.x - (Input.GetAxis("Camera Y") * m_playerMoveCamera.p_MovementSpeed), m_playerMoveCamera.p_DefaultStartingAngle + m_playerMoveCamera.p_DefaultMinAngle, m_playerMoveCamera.p_DefaultStartingAngle + m_playerMoveCamera.p_DefaultMaxAngle);
-                }
-                else
-                {
-                    m_rotation.x = m_playerMoveCamera.p_DefaultStartingAngle;
-                }
-                m_rotation.y += Input.GetAxis("Camera X") * m_playerMoveCamera.p_MovementSpeed;
+                m_rotation.x = m_playerMoveCamera.p_DefaultStartingAngle;
+            }
+            m_rotation.y += Input.GetAxis("Camera X") * m_playerMoveCamera.p_DefaultMovementSpeed;
 
-                m_playerMoveCamera.transform.eulerAngles = m_rotation;
+            m_playerMoveCamera.transform.eulerAngles = m_rotation;
 
-                m_offset = (m_playerMoveCamera.transform.up) * 1.5f;
+            m_offset = (m_playerMoveCamera.transform.up) * 1.5f;
 
-                Vector3 targetPosition;
+            Vector3 targetPosition;
 
-                if (m_transitioned)
-                {
-                    targetPosition = m_playerMoveCamera.p_CameraTarget.position - ((m_playerMoveCamera.transform.forward * m_playerMoveCamera.p_DefaultDistance) - m_offset);
-                    m_playerMoveCamera.transform.position = targetPosition;
-                }
+            if (m_transitioned)
+            {
+                targetPosition = m_playerMoveCamera.p_CameraTarget.position - ((m_playerMoveCamera.transform.forward * m_playerMoveCamera.p_DefaultDistance) - m_offset);
+                m_playerMoveCamera.transform.position = targetPosition;
             }
         }
 
@@ -120,7 +87,7 @@ namespace GameCore.Camera
 
                 m_camera.fieldOfView = Mathf.Lerp(m_startFOV, m_defaultFOV, time);
 
-                time += Time.deltaTime * m_playerMoveCamera.p_ComebackSpeed;
+                time += Time.deltaTime * m_playerMoveCamera.p_DefaultLerpSpeed;
                 time = m_playerMoveCamera.p_LerpCurve.Evaluate(time);
 
                 if (time > 1)

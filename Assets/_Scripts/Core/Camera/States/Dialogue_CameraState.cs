@@ -54,7 +54,7 @@ namespace GameCore.Camera
                 m_playerMoveCamera.transform.position = Vector3.Lerp(m_startPosition, m_endPosition, time);
                 m_playerMoveCamera.transform.rotation = Quaternion.Lerp(m_startRotation, m_endRotation, time);
 
-                time += Time.deltaTime * m_playerMoveCamera.p_ComebackSpeed;
+                time += Time.deltaTime * m_playerMoveCamera.p_DefaultLerpSpeed;
                 time = m_playerMoveCamera.p_LerpCurve.Evaluate(time);   //applying motion curve to time
 
                 if (time > 1)

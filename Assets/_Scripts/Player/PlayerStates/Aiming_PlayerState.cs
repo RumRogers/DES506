@@ -25,7 +25,7 @@ namespace Player
             {
                 Debug.LogError("Cannot get PlayerMoveCamera Component on Main Camera!");
             }
-            m_camera.SetState(new GameCore.Camera.ThirdPerson_CameraState(m_camera));
+            m_camera.SetState(new GameCore.Camera.Aiming_CameraState(m_camera));
             //Storing a reference to this state object to transition back to after a fall
             m_playerEntity.PreviousGroundState = this;
 
@@ -50,7 +50,7 @@ namespace Player
                 return;
             }
 
-            Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * m_playerEntity.Projectile.Range);
+            //Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * m_playerEntity.Projectile.Range);
             //Casting ray forward from the camera to check if there is an enchantable object where the player is aiming
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out m_rayHitInfo, m_playerEntity.Projectile.Range + (m_camera.transform.position - m_playerEntity.transform.position).magnitude))
             {
@@ -90,6 +90,8 @@ namespace Player
                 SpellWheel.SetTargetEnchantable(null);
             }
 
+            //Setting the cameras aimed at transfrom for the aiming camera state. Not sure if we could move the functionality for the shader changing there? or if it makes sense to be here?
+            m_camera.p_AimedAtTransform = m_aimedAt;
 
             if ((Input.GetButtonDown("Fire") || Input.GetAxisRaw("Fire") != 0))
             {

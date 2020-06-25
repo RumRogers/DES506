@@ -102,6 +102,8 @@ MonoBehaviour:
   m_defaultStartingAngle: 41.13
   m_defaultMinAngle: -10
   m_defaultMaxAngle: 30
+  m_defaultMovementSpeed: 1
+  m_defaultLerpSpeed: 1
   m_aimingDistance: 2.47
   m_aimingMinAngle: -90
   m_aimingMaxAngle: 90
@@ -111,9 +113,6 @@ MonoBehaviour:
   m_dialogueDistance: 2
   m_dialogueAngle: 45
   m_comebackSpeed: 1
-  m_movementSpeed: 1
-  m_smoothMovement: 1
-  m_lerpSpeed: 1
   m_lerpCurve:
     serializedVersion: 2
     m_Curve:
@@ -147,7 +146,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_fixedDefaultCamera: 0
   m_DefaultCanRotateVertically: 1
 --- !u!114 &2166381962610705799
 MonoBehaviour:
