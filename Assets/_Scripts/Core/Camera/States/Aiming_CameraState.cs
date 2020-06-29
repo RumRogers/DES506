@@ -90,6 +90,8 @@ namespace GameCore.Camera
                 {
                     m_transitioned = true;
                     m_distance = m_playerMoveCamera.p_AimingDistance;
+                    m_rotation.x = m_endRotation.eulerAngles.x;
+                    m_camera.fieldOfView = m_aimFOV;
                     yield break;
                 }
 
