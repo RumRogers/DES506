@@ -1,0 +1,26 @@
+fileFormatVersion: 2
+guid: 307bfe4dd763de34f85fc707bfb9542d
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Neue Montreal
+  fontNames:
+  - Neue Montreal
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 561e8c13cb4fa034ab18dba8c31c8b9f, type: 3}
+  - {fileID: 12800000, guid: bfa96de55c4ca224fb0aeb2fb937eb3b, type: 3}
+  - {fileID: 12800000, guid: 5d99878ca6470244f8a39e5bb2ee9f19, type: 3}
+  - {fileID: 12800000, guid: 216d18dc428dce145aee0d30edb7d9d1, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
