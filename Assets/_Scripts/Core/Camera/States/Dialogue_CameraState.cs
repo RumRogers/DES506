@@ -57,7 +57,7 @@ namespace GameCore.Camera
                 time += Time.deltaTime * m_playerMoveCamera.p_DefaultLerpSpeed;
                 time = m_playerMoveCamera.p_LerpCurve.Evaluate(time);   //applying motion curve to time
 
-                if (time > 1)
+                if (time > 0.99f)
                 {
                     yield break;
                 }

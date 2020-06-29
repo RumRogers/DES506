@@ -9,17 +9,19 @@ namespace GameCore.Camera
     {
         PlayerMoveCamera m_playerMoveCamera;
         UnityEngine.Camera m_camera;
-        Vector3 m_rotation;
         Vector3 m_offset;
+        Vector3 m_rotation;
 
         bool m_transitioned = false;
+
         Quaternion m_startRotation;
-        Vector3 m_startingPos;
-        Vector3 m_endingPos;
-        float m_startDistance;
+        Quaternion m_endRotation;
 
         float m_aimFOV = 45;
         float m_startFOV;
+
+        float m_startDistance;
+        float m_distance;
 
         public Aiming_CameraState(Automaton owner) : base (owner)
         {
@@ -31,7 +33,7 @@ namespace GameCore.Camera
             }
             m_startFOV = m_camera.fieldOfView;
 
-            m_rotation = Quaternion.LookRotation(new Vector3(m_playerMoveCamera.transform.forward.x, 0, m_playerMoveCamera.transform.forward.z)).eulerAngles;
+            m_endRotation = Quaternion.LookRotation(new Vector3(m_playerMoveCamera.transform.forward.x, 0, m_playerMoveCamera.transform.forward.z));
 
             m_startRotation = m_playerMoveCamera.transform.rotation;
             m_startDistance = (m_playerMoveCamera.p_CameraTarget.position - m_playerMoveCamera.transform.position).magnitude;
@@ -52,21 +54,22 @@ namespace GameCore.Camera
                 //rotation direction fro aim assist (not normalised yet)
                 Quaternion rotationDirection = Quaternion.LookRotation(m_playerMoveCamera.p_AimedAtTransform.position - m_playerMoveCamera.transform.position, Vector3.up);
                 m_rotation = Quaternion.RotateTowards(Quaternion.Euler(m_rotation), rotationDirection, Time.deltaTime * m_playerMoveCamera.p_AutoAimStrength).eulerAngles;
-                
+
             }
-            m_rotation.x = Mathf.Clamp(m_rotation.x - (input.x * (m_playerMoveCamera.p_AimingMovementSpeed / 2)), m_playerMoveCamera.p_AimingMinAngle, m_playerMoveCamera.p_AimingMaxAngle);
-            m_rotation.y += input.y * (m_playerMoveCamera.p_AimingMovementSpeed / 2);
+            if (m_transitioned)
+            {
+                m_rotation.x = Mathf.Clamp(m_rotation.x - (input.x * (m_playerMoveCamera.p_AimingMovementSpeed * Time.deltaTime)), m_playerMoveCamera.p_AimingMinAngle, m_playerMoveCamera.p_AimingMaxAngle);
+            }
+            m_rotation.y += input.y * (m_playerMoveCamera.p_AimingMovementSpeed * Time.deltaTime);
+
+            m_playerMoveCamera.transform.eulerAngles = m_rotation;
 
             m_offset = (m_playerMoveCamera.transform.right * m_playerMoveCamera.p_AimingOffset.x) + (m_playerMoveCamera.transform.up * m_playerMoveCamera.p_AimingOffset.y);
 
-            Vector3 targetPosition;
+            Vector3 targetPosition = m_playerMoveCamera.p_CameraTarget.position - ((m_playerMoveCamera.transform.forward * m_distance) - m_offset);
 
-            if (m_transitioned)
-            {
-                targetPosition = m_playerMoveCamera.p_CameraTarget.position - ((m_playerMoveCamera.transform.forward * m_playerMoveCamera.p_AimingDistance) - m_offset);
-                m_playerMoveCamera.transform.position = targetPosition;
-                m_playerMoveCamera.transform.eulerAngles = m_rotation;
-            }            
+            m_playerMoveCamera.transform.position = targetPosition;
+
         }
 
         IEnumerator Transition()
@@ -75,20 +78,18 @@ namespace GameCore.Camera
             float distance = (m_playerMoveCamera.transform.position - m_playerMoveCamera.p_CameraTarget.transform.position).magnitude;
             while (true)
             {
-                m_offset = (m_playerMoveCamera.transform.right * m_playerMoveCamera.p_AimingOffset.x) + (m_playerMoveCamera.transform.up * m_playerMoveCamera.p_AimingOffset.y);    //updating offset as the player may be moving
-                m_startingPos = m_playerMoveCamera.p_CameraTarget.position - (m_playerMoveCamera.transform.forward * m_startDistance);
-                m_endingPos = m_playerMoveCamera.p_CameraTarget.position - ((m_playerMoveCamera.transform.forward * m_playerMoveCamera.p_AimingDistance) - m_offset);
-                m_playerMoveCamera.transform.position = Vector3.Lerp(m_startingPos, m_endingPos, time);
-                m_playerMoveCamera.transform.rotation = Quaternion.Lerp(m_startRotation, Quaternion.Euler(m_rotation), time);
+                m_distance = Mathf.Lerp(m_startDistance, m_playerMoveCamera.p_AimingDistance, time);
+                m_rotation.x = Quaternion.Lerp(m_startRotation, m_endRotation, time).eulerAngles.x;
 
                 m_camera.fieldOfView = Mathf.Lerp(m_startFOV, m_aimFOV, time);
 
                 time += Time.deltaTime * m_playerMoveCamera.p_AimingLerpSpeed;
                 time = m_playerMoveCamera.p_LerpCurve.Evaluate(time);
 
-                if (time > 1)
+                if (time > 0.99f)
                 {
                     m_transitioned = true;
+                    m_distance = m_playerMoveCamera.p_AimingDistance;
                     yield break;
                 }
 

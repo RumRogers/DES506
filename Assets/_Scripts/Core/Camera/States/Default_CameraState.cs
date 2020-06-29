@@ -16,11 +16,13 @@ namespace GameCore.Camera
         Vector3 m_offset;
 
         //Transition vars
-        Vector3 m_startingPos;
-        Vector3 m_endingPos;
-        Quaternion m_startRotation;
-        float m_startDistance;
         bool m_transitioned = false;
+
+        Quaternion m_startRotation;
+        Quaternion m_endRotation;
+
+        float m_startDistance;
+        float m_distance;
 
         float m_defaultFOV = 50;
         float m_startFOV;
@@ -29,11 +31,13 @@ namespace GameCore.Camera
         {
             m_playerMoveCamera = (PlayerMoveCamera)owner;
 
-            m_rotation = m_playerMoveCamera.transform.eulerAngles;
-            m_rotation.x = m_playerMoveCamera.p_DefaultStartingAngle;
-
             m_startDistance = (m_playerMoveCamera.p_CameraTarget.position - m_playerMoveCamera.transform.position).magnitude;
+
             m_startRotation = m_playerMoveCamera.transform.rotation;
+            m_endRotation = Quaternion.Euler(new Vector3(m_playerMoveCamera.p_DefaultStartingAngle, m_playerMoveCamera.transform.eulerAngles.y, m_playerMoveCamera.transform.eulerAngles.z));
+            m_rotation = m_startRotation.eulerAngles;
+
+            m_offset = (Vector3.up) * 1.5f;
 
             if (!m_playerMoveCamera.TryGetComponent<UnityEngine.Camera>(out m_camera))
             {
@@ -49,27 +53,20 @@ namespace GameCore.Camera
         public override void Manage()
         {
             //Togglable for debug / testing purposes, may be changed to make this behaviour hard set
-            if (m_playerMoveCamera.m_DefaultCanRotateVertically)
+            if (m_playerMoveCamera.m_DefaultCanRotateVertically && m_transitioned)
             {
-                m_rotation.x = Mathf.Clamp(m_rotation.x - (Input.GetAxis("Camera Y") * m_playerMoveCamera.p_DefaultMovementSpeed), m_playerMoveCamera.p_DefaultStartingAngle + m_playerMoveCamera.p_DefaultMinAngle, m_playerMoveCamera.p_DefaultStartingAngle + m_playerMoveCamera.p_DefaultMaxAngle);
+                m_rotation.x = Mathf.Clamp(m_rotation.x - (Input.GetAxis("Camera Y") * (m_playerMoveCamera.p_DefaultMovementSpeed * Time.deltaTime)), m_playerMoveCamera.p_DefaultStartingAngle + m_playerMoveCamera.p_DefaultMinAngle, m_playerMoveCamera.p_DefaultStartingAngle + m_playerMoveCamera.p_DefaultMaxAngle);
             }
             else
             {
                 m_rotation.x = m_playerMoveCamera.p_DefaultStartingAngle;
             }
-            m_rotation.y += Input.GetAxis("Camera X") * m_playerMoveCamera.p_DefaultMovementSpeed;
+            m_rotation.y += Input.GetAxis("Camera X") * (m_playerMoveCamera.p_DefaultMovementSpeed * Time.deltaTime);
 
             m_playerMoveCamera.transform.eulerAngles = m_rotation;
 
-            m_offset = (m_playerMoveCamera.transform.up) * 1.5f;
-
-            Vector3 targetPosition;
-
-            if (m_transitioned)
-            {
-                targetPosition = m_playerMoveCamera.p_CameraTarget.position - ((m_playerMoveCamera.transform.forward * m_playerMoveCamera.p_DefaultDistance) - m_offset);
-                m_playerMoveCamera.transform.position = targetPosition;
-            }
+            Vector3 targetPosition = m_playerMoveCamera.p_CameraTarget.position - ((m_playerMoveCamera.transform.forward * m_distance) - m_offset);
+            m_playerMoveCamera.transform.position = targetPosition;
         }
 
 
@@ -77,21 +74,18 @@ namespace GameCore.Camera
         {
             float time = 0;
             while (true)
-            {
-                m_offset = (m_playerMoveCamera.transform.up) * 1.5f;
-                //actually dependent on the state we just came from... might need to keep track of last state
-                m_startingPos = m_playerMoveCamera.p_CameraTarget.position - (m_playerMoveCamera.transform.forward * m_startDistance);
-                m_endingPos = m_playerMoveCamera.p_CameraTarget.position - ((m_playerMoveCamera.transform.forward * m_playerMoveCamera.p_DefaultDistance) - m_offset);
-                m_playerMoveCamera.transform.position = Vector3.Lerp(m_startingPos, m_endingPos, time);
-                m_playerMoveCamera.transform.rotation = Quaternion.Lerp(m_startRotation, Quaternion.Euler(m_rotation), time);
+            {                
+                m_distance = Mathf.Lerp(m_startDistance, m_playerMoveCamera.p_DefaultDistance, time);
+                m_rotation.x = Quaternion.Lerp(m_startRotation, m_endRotation, time).eulerAngles.x;
 
                 m_camera.fieldOfView = Mathf.Lerp(m_startFOV, m_defaultFOV, time);
 
                 time += Time.deltaTime * m_playerMoveCamera.p_DefaultLerpSpeed;
                 time = m_playerMoveCamera.p_LerpCurve.Evaluate(time);
 
-                if (time > 1)
+                if (time > 0.99f)
                 {
+                    m_distance = m_playerMoveCamera.p_DefaultDistance;
                     m_transitioned = true;
                     yield break;
                 }

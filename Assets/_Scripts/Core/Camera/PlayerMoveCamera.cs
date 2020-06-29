@@ -30,6 +30,8 @@ namespace GameCore.Camera
         [SerializeField] float m_dialogueAngle = 33;
         [Header("General")]
         [SerializeField] AnimationCurve m_lerpCurve;
+        [Header("Collision")]
+        [SerializeField] float m_minDistanceFromPlayer = 0.3f;
 
         //temp (I think)
         [Header("TEMP")]
@@ -76,7 +78,7 @@ namespace GameCore.Camera
         }
 
         //Casts ray from target to camera and checks if it hits, if so moves camera to hit position
-        private void CheckCollision()
+        public void CheckCollision()
         {
             Vector3 targetToCamera = transform.position - m_cameraTarget.position;
             float distance = targetToCamera.magnitude;
@@ -85,10 +87,22 @@ namespace GameCore.Camera
 
             LayerMask layer = LayerMask.GetMask("IgnoreCamera");
 
+            Debug.DrawRay(m_cameraTarget.position, direction * distance);
+
             if (Physics.Raycast(m_cameraTarget.position, direction, out hit, distance, ~layer)) //flipped the bit operator here to hit everything other than that layer
             {
                 //do not need to check if it is not a trigger as our project does not allow raycasts to hit triggers
-                transform.position = hit.point;
+                //Get distance
+                Vector3 targetToWall = hit.point - m_cameraTarget.position;
+                float distanceToWall = targetToWall.magnitude;
+                //normalise vector
+                targetToWall = targetToWall / distanceToWall;
+                //clamp distance between min and max camera distance values
+                distanceToWall = Mathf.Clamp(distanceToWall, m_minDistanceFromPlayer, m_defaultDistance);
+                //multiply normalised vector by distance
+                targetToWall *= distanceToWall;
+                //set transform to that point
+                transform.position = m_cameraTarget.position + targetToWall;
             }
         }
     }
