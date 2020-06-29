@@ -24,7 +24,6 @@ namespace GameCore.Camera
         float m_startDistance;
         float m_distance;
 
-        float m_defaultFOV = 50;
         float m_startFOV;
 
         public Default_CameraState(Automaton owner) : base(owner)
@@ -80,11 +79,12 @@ namespace GameCore.Camera
         {
             float time = 0;
             while (true)
-            {                
-                m_distance = Mathf.Lerp(m_startDistance, m_playerMoveCamera.p_DefaultDistance, time);
+            {
+                //since camera will move in Manage() all that is needed is to lerp the distance and rotation.x here, the rest takes care of itself 
+                m_distance = Mathf.Lerp(m_startDistance, m_playerMoveCamera.p_DefaultDistance, time);   
                 m_rotation.x = Quaternion.Lerp(m_startRotation, m_endRotation, time).eulerAngles.x;
 
-                m_camera.fieldOfView = Mathf.Lerp(m_startFOV, m_defaultFOV, time);
+                m_camera.fieldOfView = Mathf.Lerp(m_startFOV, m_playerMoveCamera.p_DefaultFOV, time);
 
                 time += Time.deltaTime * m_playerMoveCamera.p_DefaultLerpSpeed;
                 time = m_playerMoveCamera.p_LerpCurve.Evaluate(time);
@@ -93,7 +93,7 @@ namespace GameCore.Camera
                 {
                     m_distance = m_playerMoveCamera.p_DefaultDistance;
                     m_rotation.x = m_endRotation.eulerAngles.x;
-                    m_camera.fieldOfView = m_defaultFOV;
+                    m_camera.fieldOfView = m_playerMoveCamera.p_DefaultFOV;
                     m_transitioned = true;
                     yield break;
                 }

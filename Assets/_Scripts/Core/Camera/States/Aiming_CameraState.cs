@@ -17,7 +17,6 @@ namespace GameCore.Camera
         Quaternion m_startRotation;
         Quaternion m_endRotation;
 
-        float m_aimFOV = 45;
         float m_startFOV;
 
         float m_startDistance;
@@ -81,7 +80,7 @@ namespace GameCore.Camera
                 m_distance = Mathf.Lerp(m_startDistance, m_playerMoveCamera.p_AimingDistance, time);
                 m_rotation.x = Quaternion.Lerp(m_startRotation, m_endRotation, time).eulerAngles.x;
 
-                m_camera.fieldOfView = Mathf.Lerp(m_startFOV, m_aimFOV, time);
+                m_camera.fieldOfView = Mathf.Lerp(m_startFOV, m_playerMoveCamera.p_AimingFOV, time);
 
                 time += Time.deltaTime * m_playerMoveCamera.p_AimingLerpSpeed;
                 time = m_playerMoveCamera.p_LerpCurve.Evaluate(time);
@@ -91,7 +90,7 @@ namespace GameCore.Camera
                     m_transitioned = true;
                     m_distance = m_playerMoveCamera.p_AimingDistance;
                     m_rotation.x = m_endRotation.eulerAngles.x;
-                    m_camera.fieldOfView = m_aimFOV;
+                    m_camera.fieldOfView = m_playerMoveCamera.p_AimingFOV;
                     yield break;
                 }
 

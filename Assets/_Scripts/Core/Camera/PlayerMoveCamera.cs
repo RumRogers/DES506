@@ -15,16 +15,18 @@ namespace GameCore.Camera
         [SerializeField] float m_defaultStartingAngle = 33;
         [SerializeField] float m_defaultMinAngle = -45; //min pitch
         [SerializeField] float m_defaultMaxAngle = 45; //max pitch
-        [SerializeField] float m_defaultMovementSpeed;
+        [SerializeField] float m_defaultMovementSpeed = 10;
         [SerializeField] float m_defaultLerpSpeed = 1f;
+        [SerializeField] float m_defaultFOV = 45f;
         [Header("Aiming")]
         [SerializeField] float m_aimingDistance = 1;
-        [SerializeField] float m_aimingMinAngle = -90;  //max pitch
+        [SerializeField] float m_aimingMinAngle = -90;  //min pitch
         [SerializeField] float m_aimingMaxAngle = 90;  //max pitch
         [SerializeField] Vector2 m_aimingOffset = new Vector2(1, 1);
-        [SerializeField] float m_aimingMovementSpeed;
+        [SerializeField] float m_aimingMovementSpeed = 10;
         [SerializeField] float m_aimingLerpSpeed = 0.3f;
         [SerializeField] float m_autoAimStrength = 10f;
+        [SerializeField] float m_aimingFOV = 40f;
         [Header("Dialogue")]
         [SerializeField] float m_dialogueDistance = 1;
         [SerializeField] float m_dialogueAngle = 33;
@@ -47,12 +49,14 @@ namespace GameCore.Camera
         public float p_DefaultStartingAngle { get => m_defaultStartingAngle; }
         public float p_DefaultMinAngle { get => m_defaultMinAngle; }
         public float p_DefaultMaxAngle { get => m_defaultMaxAngle; }
+        public float p_DefaultFOV { get => m_defaultFOV; }
         public float p_AimingDistance { get => m_aimingDistance; }
         public float p_AimingMinAngle { get => m_aimingMinAngle; }
         public float p_AimingMaxAngle { get => m_aimingMaxAngle; }
         public float p_AimingMovementSpeed { get => m_aimingMovementSpeed; }
         public float p_AimingLerpSpeed { get => m_aimingLerpSpeed; }
         public float p_AutoAimStrength { get => m_autoAimStrength; }
+        public float p_AimingFOV { get => m_aimingFOV; }
         public float p_DialogueDistance { get => m_dialogueDistance; }
         public float p_DialogueAngle { get => m_dialogueAngle; }
         public Transform p_CameraTarget { get => m_cameraTarget; }
