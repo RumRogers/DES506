@@ -48,8 +48,7 @@ namespace Player
 
                 m_playerEntity.m_reticle.gameObject.SetActive(false);                //TEMP REMOVE LATER
                 return;
-            }
-
+            } 
             //Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * m_playerEntity.Projectile.Range);
             //Casting ray forward from the camera to check if there is an enchantable object where the player is aiming
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out m_rayHitInfo, m_playerEntity.Projectile.Range + (m_camera.transform.position - m_playerEntity.transform.position).magnitude))
