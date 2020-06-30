@@ -34,12 +34,7 @@ namespace GameCore.GameState
 
         public bool IsPaused()
         {
-            if (m_state.ToString() == "GameCore.GameState.Paused_State") //oof must change soon
-            {
-                return true;
-            }
-
-            return false;
+            return typeof(Paused_State).IsInstanceOfType(m_state);
         }
 
     }
