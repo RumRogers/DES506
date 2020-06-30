@@ -3,16 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using GameCore.Rules;
 using GameCore.Spells;
+using GameUI.SpellBook;
 
 namespace GameCore.System
 {
     public class LevelManager : MonoBehaviour
     {
+        static SpellBook s_spellBook = null;
         static int s_playerSpells = 0;
+        const string SPELLBOOK_TAG = "SpellBook";
         public static int p_PlayerSpells { get => s_playerSpells; }
         public static void UnlockSpell(SpellType spellType)
-        {            
+        {  
+            if(s_spellBook == null)
+            {
+                s_spellBook = GameObject.FindGameObjectWithTag(SPELLBOOK_TAG).GetComponent<SpellBook>();
+            }
             Utils.Bits.SetBit(ref s_playerSpells, (int)spellType);
+            s_spellBook.UnlockSpell(spellType);
         }
 
         public static bool IsSpellUnlocked(SpellType spellType)

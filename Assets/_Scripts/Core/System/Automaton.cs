@@ -19,6 +19,12 @@ namespace GameCore.System
             m_state = state;
         }
 
+        // This is useful to store a previous generic state and assign it back later (example CurrentState -> IdleState -> CurrentState)
+        public State GetState()
+        {
+            return m_state;
+        }
+
         // Overridable by specialised classes
         protected virtual void Update()
         {

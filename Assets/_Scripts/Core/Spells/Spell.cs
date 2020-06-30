@@ -9,9 +9,10 @@ namespace GameCore.Spells
     {
         TRANSFORM_SIZE_BIG,
         TRANSFORM_SIZE_SMALL,
-        TRANSFORM_TEMPERATURE_HOT,
         TRANSFORM_TEMPERATURE_COLD,
-        TRANSFORM_RESET
+        TRANSFORM_RESET,
+        NONE,
+        TRANSFORM_TEMPERATURE_HOT
     }
 
     public enum SpellState
