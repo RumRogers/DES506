@@ -45,6 +45,8 @@ namespace Player
                     break;
             }
 
+            m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.AIMING);
+
             m_itemEquipped = m_playerEntity.EquipedItem;
             //temp
             m_playerEntity.m_reticle.gameObject.SetActive(true);
@@ -133,6 +135,7 @@ namespace Player
             {
                 //TEMP (kinda): Currently only fires if the equipped item is the quill, in future it should fire regardless but shoot a different projectile based on the equiped item passed to the projectile handler when
                 //the equipped item is changed on the player 
+                m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.CASTING);
                 if (m_playerEntity.EquipedItem == PlayerEquipableItems.SPELL_QUILL)
                 {
                     Vector3 direction = Vector3.zero;
@@ -233,7 +236,6 @@ namespace Player
                         m_velocity += (m_playerEntity.Direction * m_playerEntity.AimingAcceleration) * Time.deltaTime;
                         m_velocity = Vector3.ClampMagnitude(m_velocity, m_playerEntity.AimingMaxSpeed);
                     }
-                    m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.RUNNING);
                 }
                 else if (Mathf.Abs(m_velocity.x) > 0.1f || Mathf.Abs(m_velocity.z) > 0.1f)
                 {
@@ -250,8 +252,6 @@ namespace Player
                 {
                     m_velocity.x = 0.0f;
                     m_velocity.z = 0.0f;
-
-                    m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.IDLE);
                 }
             }
 

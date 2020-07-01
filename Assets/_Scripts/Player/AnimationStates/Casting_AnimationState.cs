@@ -4,21 +4,19 @@ using UnityEngine;
 
 namespace Player
 {
-    public class Idle_AnimationState : GameCore.System.State
+    public class Casting_AnimationState : GameCore.System.State
     {
         PlayerAnimator m_playerAnimator;
 
-        public Idle_AnimationState(GameCore.System.Automaton owner) : base(owner)
+        public Casting_AnimationState(GameCore.System.Automaton owner) : base(owner)
         {
-            m_playerAnimator = (PlayerAnimator)m_owner;
-            m_playerAnimator.Animation.wrapMode = WrapMode.Loop;
+            m_playerAnimator = (PlayerAnimator)owner;
+
+            m_playerAnimator.Animation.wrapMode = WrapMode.Once;
             m_playerAnimator.StopAllCoroutines();
             m_playerAnimator.StartCoroutine(Transition());
-
-            //Debug.Log("Idle");
         }
-        //You might be thinking "why use a switch statement here? surely it's better and more efficent to just change the state from within the player entity class!" 
-        //while this might be true, this allows us to control which states can be transitioned into others.
+
         public override void Manage()
         {
             switch (m_playerAnimator.PlayerAnimProperties)
@@ -32,21 +30,35 @@ namespace Player
                 case PlayerAnimationProperties.FALLING:
                     m_owner.SetState(new Falling_AnimationState(m_owner));
                     break;
-                case PlayerAnimationProperties.PUSHING:
-                    m_owner.SetState(new Pushing_AnimationState(m_owner));
+                case PlayerAnimationProperties.IDLE:
+                    m_owner.SetState(new Idle_AnimationState(m_owner));
                     break;
                 case PlayerAnimationProperties.AIMING:
                     m_owner.SetState(new Aiming_AnimationState(m_owner));
-                    break;
-                default:
                     break;
             }
         }
 
         IEnumerator Transition()
         {
-            m_playerAnimator.Animation.Play("idle", PlayMode.StopAll);
+            m_playerAnimator.Animation.Play("casting", PlayMode.StopAll);
+            while (m_playerAnimator.Animation.isPlaying)
+            {
+                //do nothing
+                Debug.Log("Casting");
+                yield return null;
+            }
+            //if it is still casting after it has finished playing, then transition back to aiming as the state has not been changed
+            if (m_playerAnimator.PlayerAnimProperties == PlayerAnimationProperties.CASTING)
+            {
+                m_playerAnimator.SetProperty(PlayerAnimationProperties.AIMING);
+
+                Debug.Log("Casting finished returning to aim");
+            }
+            Debug.Log("Casting finished");
+
             yield break;
         }
     }
+
 }
