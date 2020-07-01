@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using GameCore.System;
+using GameAudio;
 
 namespace GameCore.Spells
 {
     [RequireComponent(typeof(MagicProfile))]
+    [RequireComponent(typeof(Enchantable_FMODAdapter))]
     public abstract class Enchantable : Automaton
     {
         delegate void SpellDelegate(Spell spell);
@@ -14,13 +16,14 @@ namespace GameCore.Spells
         private SpellDelegate m_spellDelegate;
         [SerializeField]
         private MagicProfile m_magicProfile;
-
+        private Enchantable_FMODAdapter m_fmodAdapter;
 
         // NOT overridable. DO NOT redeclare this method in child classes. Use Start() or something else. Thank you.
         protected void Awake()
         {
             gameObject.tag = s_EnchantableTag;
             m_magicProfile = GetComponent<MagicProfile>();
+            m_fmodAdapter = GetComponent<Enchantable_FMODAdapter>();
         }
 
         public void CastSpell(Spell spell)
@@ -54,11 +57,19 @@ namespace GameCore.Spells
             
             if (spell.m_type == SpellType.TRANSFORM_SIZE_BIG && magicState.size != SpellState.SPELLED)
             {
+                if (m_fmodAdapter != null && m_fmodAdapter.p_EnlargeSpellSFX)
+                {
+                    Instantiate(m_fmodAdapter.p_EnlargeSpellSFX);
+                }
                 SpellSizeBig(spell);
                 m_magicProfile.SetSizeMagicState(SpellState.SPELLED);
             }
             else if(spell.m_type == SpellType.TRANSFORM_SIZE_SMALL && magicState.size != SpellState.COUNTERSPELLED)
             {
+                if (m_fmodAdapter != null && m_fmodAdapter.p_ShrinkSpellSFX)
+                {
+                    Instantiate(m_fmodAdapter.p_ShrinkSpellSFX);
+                }
                 SpellSizeSmall(spell);
                 m_magicProfile.SetSizeMagicState(SpellState.COUNTERSPELLED);
             }
@@ -70,11 +81,19 @@ namespace GameCore.Spells
 
             if (spell.m_type == SpellType.TRANSFORM_TEMPERATURE_HOT && magicState.temperature != SpellState.SPELLED)
             {
+                if (m_fmodAdapter != null && m_fmodAdapter.p_InfernoSpellSFX)
+                {
+                    Instantiate(m_fmodAdapter.p_InfernoSpellSFX);
+                }
                 SpellTemperatureHot(spell);
                 m_magicProfile.SetTemperatureMagicState(SpellState.SPELLED);                
             }
             else if (spell.m_type == SpellType.TRANSFORM_TEMPERATURE_COLD && magicState.temperature != SpellState.COUNTERSPELLED)
             {
+                if (m_fmodAdapter != null && m_fmodAdapter.p_ColdSpellSFX)
+                {
+                    Instantiate(m_fmodAdapter.p_ColdSpellSFX);
+                }
                 SpellTemperatureCold(spell);
                 m_magicProfile.SetTemperatureMagicState(SpellState.COUNTERSPELLED);
             }
@@ -140,12 +159,12 @@ namespace GameCore.Spells
         }
 
         /////// Remove this once Josh's controller is complete and can interact with Enchantable instances //////
-        private void OnMouseDown()
+        /*private void OnMouseDown()
         {
             print(this);
             DebugTestSpell.SetHighlighted(gameObject);
             DebugTestSpell.RegisterEnchantable(this);
-        }
+        }*/
     }
 }
 

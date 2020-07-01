@@ -19,7 +19,7 @@ namespace GameCore.Camera
         {            
             if(Input.GetKeyDown(KeyCode.F12))
             {
-                m_owner.SetState(new Comeback_CameraState(m_owner));
+                m_owner.SetState(new Default_CameraState(m_owner));
                 return;
             }
             float h = Input.GetAxis("Horizontal");
@@ -27,7 +27,7 @@ namespace GameCore.Camera
 
             if(h != 0 || v != 0)
             {
-                m_playerMoveCamera.transform.position += new Vector3(h, 0, v) * m_playerMoveCamera.p_MovementSpeed * Time.deltaTime;
+                m_playerMoveCamera.transform.position += new Vector3(h, 0, v) * m_playerMoveCamera.p_DefaultMovementSpeed * Time.deltaTime;
             }
         }
     }

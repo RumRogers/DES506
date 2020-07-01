@@ -18,6 +18,13 @@ namespace Player
         SLIDING         = 1 << 7
     }
 
+    //probably don't need an enum for just two items, however it does make it more expandable in future
+    public enum PlayerEquipableItems
+    {
+        SPELL_QUILL,
+        ERASER
+    }
+
     [RequireComponent(typeof(PlayerAnimator))]
     [RequireComponent(typeof(Projectile.ProjectileHandler))]
     public class PlayerEntity : GameCore.Rules.MutableEntity
@@ -35,6 +42,7 @@ namespace Player
         [SerializeField] float m_aimingAcceleration = 15.0f;
         [SerializeField] float m_aimingDeceleration = 15.0f;
         [SerializeField] Shader m_highlightShader;
+        [SerializeField] GameUI.SpellWheel m_spellWheel;
         [Header("Modified Movment")]
         [SerializeField] float m_iceAcceleration = 1f;
         [SerializeField] float m_iceDeceleration = 1f;
@@ -64,6 +72,7 @@ namespace Player
         Vector3 m_direction;
         Collider m_playerCollider;
         GameCore.System.State m_previousGroundState;
+        PlayerEquipableItems m_equipedItem;
 
         //aim state / projectiles
         Projectile.ProjectileHandler m_projectileHandler;
@@ -81,7 +90,7 @@ namespace Player
         Transform m_closestInteractable = null;
 
         //Player anim
-        PlayerAnimator m_Animator;
+        PlayerAnimator m_animator;
 
         //Dialogue
         List<Transform> m_speakersInRange = new List<Transform>();
@@ -112,13 +121,15 @@ namespace Player
         public Collider PlayerCollider { get => m_playerCollider; }
         public RaycastHit GroundHitInfo { get => m_groundedHitInfo; }
         public Vector3 PlayerStartPosition { get => m_playerStartPosition; }
-        public PlayerAnimator Animator { get => m_Animator; }
+        public PlayerAnimator Animator { get => m_animator; }
         public Projectile.ProjectileHandler Projectile { get => m_projectileHandler; }
+        public GameUI.SpellWheel SpellWheel { get => m_spellWheel; }
         //Get and Settable
         public GameCore.System.State PreviousGroundState { get => m_previousGroundState; set => m_previousGroundState = value; }
         public Transform ClosestInteractable { get => m_closestInteractable; set => m_closestInteractable = value; }
         public List<Transform> InteractablesInRange { get => m_interactablesInRange; set => m_interactablesInRange = value; }   //to be removed, but unsure if we'll have other interactibles so may as well leave it
         public List<Transform> SpeakersInRange { get => m_speakersInRange; set => m_speakersInRange = value; }
+        public PlayerEquipableItems EquipedItem { get => m_equipedItem; set { m_equipedItem = value; m_projectileHandler.ChangeProjectileStatsBasedOnItem(value); } }   //changes projectile stats too
         public AnimationCurve PushMovementCurve { get => m_pushMovementCurve; }
         #endregion
 
@@ -129,8 +140,10 @@ namespace Player
             {
                 Debug.LogError("No collider attached to the player!");
             }
-            m_Animator = GetComponent<PlayerAnimator>(); //requried component, should be safe
+            m_animator = GetComponent<PlayerAnimator>(); //requried component, should be safe
             m_projectileHandler = GetComponent<Projectile.ProjectileHandler>(); //requried component, should be safe
+
+            EquipedItem = PlayerEquipableItems.ERASER;
 
             //Setting start position for death
             m_playerStartPosition = transform.position;
@@ -143,6 +156,19 @@ namespace Player
             if (HasProperty(PlayerEntityProperties.DYING))
             {
                 SetState(new Death_PlayerState(this));
+            }
+
+            //TEMP: F to switch equipped item type just for testing. Will be removed later 
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                if (m_equipedItem != PlayerEquipableItems.ERASER)
+                {
+                    EquipedItem = PlayerEquipableItems.ERASER;
+                }
+                else if (m_equipedItem != PlayerEquipableItems.SPELL_QUILL)
+                {
+                    EquipedItem = PlayerEquipableItems.SPELL_QUILL;
+                }
             }
 
             //Dialogue trigger

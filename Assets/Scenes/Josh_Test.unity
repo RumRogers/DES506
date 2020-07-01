@@ -2036,6 +2036,16 @@ PrefabInstance:
       propertyPath: m_comebackSpeed
       value: 0.08
       objectReference: {fileID: 0}
+    - target: {fileID: 2166381962610705796, guid: 43745d68f9b7f3644b86b4609c6d0dd0,
+        type: 3}
+      propertyPath: m_defaultMovementSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2166381962610705796, guid: 43745d68f9b7f3644b86b4609c6d0dd0,
+        type: 3}
+      propertyPath: m_aimingMovementSpeed
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43745d68f9b7f3644b86b4609c6d0dd0, type: 3}
 --- !u!1001 &4580232385682639026
@@ -2120,12 +2130,22 @@ PrefabInstance:
         type: 3}
       propertyPath: m_highlightShader
       value: 
-      objectReference: {fileID: -6465566751694194690, guid: a1023af0f2a53804094c8c1e3c8de2c6,
+      objectReference: {fileID: -6465566751694194690, guid: 8300b7834b75a4c4987005cc7d185065,
         type: 3}
     - target: {fileID: 4580232385870872158, guid: 3ead565c55b9919448a7c71d26aae209,
         type: 3}
       propertyPath: m_projectileContainer
       value: 
       objectReference: {fileID: 880781258}
+    - target: {fileID: 4580232385870872158, guid: 3ead565c55b9919448a7c71d26aae209,
+        type: 3}
+      propertyPath: m_meleeRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4580232385870872158, guid: 3ead565c55b9919448a7c71d26aae209,
+        type: 3}
+      propertyPath: m_spellRange
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ead565c55b9919448a7c71d26aae209, type: 3}

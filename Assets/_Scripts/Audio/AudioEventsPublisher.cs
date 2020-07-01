@@ -6,13 +6,15 @@ namespace GameAudio
 {
     // This is a quick implementation of the Observer Pattern, it doesn't provide an unsubscribe method for now
     // because it seems kinda pointless for audio events. Will add it if needed.
+
+    // We don't need this anymore as agreed with the Audio Team
     public class AudioEventsPublisher : MonoBehaviour
     {
         static Dictionary<string, List<ExtendedStudioEventEmitter>> m_mapEventsToFMODScripts = new Dictionary<string, List<ExtendedStudioEventEmitter>>();
 
         public static void Subscribe(ExtendedStudioEventEmitter subscriber)
         {
-            var eventIds = subscriber.p_GameEvents;
+            /*var eventIds = subscriber.p_GameEvents;
 
             foreach(var eventId in eventIds)
             {
@@ -25,7 +27,7 @@ namespace GameAudio
                 }
 
                 m_mapEventsToFMODScripts[eventId].Add(subscriber);
-            }
+            }*/
         }
 
         public static void RaiseGameEvent(string eventId)

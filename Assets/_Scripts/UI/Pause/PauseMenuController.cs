@@ -37,7 +37,6 @@ public class PauseMenuController : MonoBehaviour
     //Index:
     //0 -- Main Pause Menu
 
-
     private void Awake() 
     {
         m_tipObj = JsonUtility.FromJson<Tips>(m_tipsJSON.text);
@@ -79,9 +78,7 @@ public class PauseMenuController : MonoBehaviour
             }
         }
 
-        
     }
-
 
     public void SetTipNumText(int num)
     {
@@ -125,4 +122,3 @@ public class PauseMenuController : MonoBehaviour
 #endregion
 
 }
-

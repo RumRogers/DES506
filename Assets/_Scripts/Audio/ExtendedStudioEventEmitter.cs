@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using FMOD.Studio;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,13 +8,18 @@ namespace GameAudio
     [AddComponentMenu("FMOD Studio/Andrea's KICKASS Extended FMOD Studio Event Emitter!")]
     public class ExtendedStudioEventEmitter : FMODUnity.StudioEventEmitter
     {
-        [SerializeField]
-        List<string> m_gameEvents;
-        public List<string> p_GameEvents { get => m_gameEvents; }
-
-        private void Start()
+        private void Update()
         {
-            AudioEventsPublisher.Subscribe(this);
+            if (instance.isValid())
+            {
+                PLAYBACK_STATE state;
+                instance.getPlaybackState(out state);
+                Debug.Log($"FMOD: {state}");
+                if(state == PLAYBACK_STATE.STOPPED)
+                {
+                    Destroy(gameObject);
+                }
+            }
         }
     }
 }

@@ -625,9 +625,6 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
-  m_gameEvents:
-  - asd
-  - crap
 --- !u!1 &646371030
 GameObject:
   m_ObjectHideFlags: 0
@@ -679,6 +676,12 @@ MonoBehaviour:
   m_movementSpeed: 2
   m_smoothMovement: 0
   m_lerpSpeed: 1
+  m_lerpCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   m_fixedDefaultCamera: 0
   m_DefaultCanRotateVertically: 0
 --- !u!114 &646371032
@@ -888,8 +891,6 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
-  m_gameEvents:
-  - 
 --- !u!1001 &952491315
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1490,6 +1491,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1411066630 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3527441442036735292, guid: c858deb5d7b834f408148afcc1984218,
+    type: 3}
+  m_PrefabInstance: {fileID: 3527441441147721713}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1411066631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411066630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f3ec40fd173a0c41ae18541d363855b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/SPELLS/SpellFX_Shrink
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
 --- !u!1001 &1551234097
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1662,6 +1692,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enlarge_SFX
       objectReference: {fileID: 0}
+    - target: {fileID: 823886751311533561, guid: 7172979037907ae45a5f0b743f4c35c2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 823886751311533563, guid: 7172979037907ae45a5f0b743f4c35c2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1786,5 +1821,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3527441442036735295, guid: c858deb5d7b834f408148afcc1984218, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c858deb5d7b834f408148afcc1984218, type: 3}

@@ -31,5 +31,11 @@ namespace GameCore.GameState
         {
             SetState(new Playing_State(this));
         }
+
+        public bool IsPaused()
+        {
+            return typeof(Paused_State).IsInstanceOfType(m_state);
+        }
+
     }
 }

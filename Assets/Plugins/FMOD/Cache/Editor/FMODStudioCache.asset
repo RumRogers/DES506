@@ -11,11 +11,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SPELLS/SpellFX_Rain
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/SPELLS/SpellFX_Rain
   guid: 0d2dabacd67a2a43a4508aed01e413d6
   Banks:
-  - {fileID: 3612003195659793390}
+  - {fileID: -2488033456736598308}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -34,11 +34,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SPELLS/Spell_Cast
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/SPELLS/Spell_Cast
   guid: a5207f7c1f2cc941966de4210b8f1078
   Banks:
-  - {fileID: 3612003195659793390}
+  - {fileID: -2488033456736598308}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -57,11 +57,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/AMBIANCE CRICKETS
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/AMBIANCE CRICKETS
   guid: 17d0f4459162954aa3ba1aa9dac5c3b5
   Banks:
-  - {fileID: 3612003195659793390}
+  - {fileID: -2488033456736598308}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -80,9 +80,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
-  SubDir: 
+  SubDir:
   lastModified: 637260965320000000
   LoadResult: 0
   FileSizes: []
@@ -98,9 +98,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
-  SubDir: 
+  SubDir:
   lastModified: 637285291033143567
   LoadResult: 0
   FileSizes: []
@@ -116,11 +116,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/UI/Menu_Return
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/UI/Menu_Return
   guid: c8e16e8368f46f46865d40d27b5735a9
   Banks:
-  - {fileID: 3612003195659793390}
+  - {fileID: -2488033456736598308}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/Footsteps
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/Footsteps
   guid: 21e6af97db5d3b4d8560c9fc914d10ce
   Banks: []
@@ -161,11 +161,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/UI/MenuStartGame
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/UI/MenuStartGame
   guid: 2c362621c288e342b4a75cf3ce14eca6
   Banks:
-  - {fileID: 3612003195659793390}
+  - {fileID: -2488033456736598308}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -184,9 +184,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
-  SubDir: 
+  SubDir:
   lastModified: 637261813640289218
   LoadResult: 0
   FileSizes: []
@@ -202,11 +202,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SPELLS/SpellFX_Enlarge
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/SPELLS/SpellFX_Enlarge
   guid: dfabedca0a8fce4198e4bc03bd696cd1
   Banks:
-  - {fileID: 3612003195659793390}
+  - {fileID: -2488033456736598308}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -225,11 +225,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/PlayerMovement/Player_Land
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/PlayerMovement/Player_Land
   guid: b49aa6b85ed96b48986b659f5af88a80
   Banks:
-  - {fileID: 3612003195659793390}
+  - {fileID: -2488033456736598308}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -248,13 +248,31 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
-  SubDir: 
+  SubDir:
   lastModified: 637286039941605002
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &-2488033456736598308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier:
+  Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
+  SubDir:
+  lastModified: 637286143623647907
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-2443177578697674723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,9 +284,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
-  SubDir: 
+  SubDir:
   lastModified: 637281651143207291
   LoadResult: 0
   FileSizes: []
@@ -284,11 +302,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SPELLS/Spell_Fail
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/SPELLS/Spell_Fail
   guid: f4a26242f270164e8e72d2b5d47532b3
   Banks:
-  - {fileID: 3612003195659793390}
+  - {fileID: -2488033456736598308}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -307,11 +325,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/PlayerMovement/Player_Footsteps
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/PlayerMovement/Player_Footsteps
   guid: 21e6af97db5d3b4d8560c9fc914d10ce
   Banks:
-  - {fileID: 3612003195659793390}
+  - {fileID: -2488033456736598308}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -330,9 +348,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
-  SubDir: 
+  SubDir:
   lastModified: 637261813640289218
   LoadResult: 0
   FileSizes: []
@@ -348,11 +366,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/UI/RadialUI_Hover
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/UI/RadialUI_Hover
   guid: d7209b9f8dbe964788e1ca008bb346d6
   Banks:
-  - {fileID: 3612003195659793390}
+  - {fileID: -2488033456736598308}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -371,11 +389,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/PlayerMovement/Player_Jump
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/PlayerMovement/Player_Jump
   guid: 5fd5b8bffa74a242984ddf960902a17c
   Banks:
-  - {fileID: 3612003195659793390}
+  - {fileID: -2488033456736598308}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -394,9 +412,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
-  SubDir: 
+  SubDir:
   lastModified: 637260974560000000
   LoadResult: 0
   FileSizes: []
@@ -412,10 +430,10 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
   m_Name: FMODStudioCache
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   EditorBanks:
   - {fileID: 1549267405382922713}
-  - {fileID: 3612003195659793390}
+  - {fileID: -2488033456736598308}
   EditorEvents:
   - {fileID: -8415032040721163499}
   - {fileID: 998972529664228970}
@@ -439,10 +457,10 @@ MonoBehaviour:
   - {fileID: 1963411780168839912}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 3612003195659793390}
+  - {fileID: -2488033456736598308}
   StringsBanks:
   - {fileID: 1549267405382922713}
-  stringsBankWriteTime: 637286123335309481
+  stringsBankWriteTime: 637286143623677824
   cacheVersion: 3
 --- !u!114 &174932387286588109
 MonoBehaviour:
@@ -455,11 +473,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SPELLS/Spell_Acquire
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/SPELLS/Spell_Acquire
   guid: 80dbcc72a416f84fbd57afa54e95b01f
   Banks:
-  - {fileID: 3612003195659793390}
+  - {fileID: -2488033456736598308}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -478,9 +496,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
-  SubDir: 
+  SubDir:
   lastModified: 637285265093437705
   LoadResult: 0
   FileSizes: []
@@ -496,9 +514,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
-  SubDir: 
+  SubDir:
   lastModified: 637267803555566664
   LoadResult: 0
   FileSizes: []
@@ -514,11 +532,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/ROOSTER
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/ROOSTER
   guid: ae8acd563c4ee543ba8ca60c21763703
   Banks:
-  - {fileID: 3612003195659793390}
+  - {fileID: -2488033456736598308}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -537,10 +555,10 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.strings.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.strings.bank
-  SubDir: 
-  lastModified: 637286123335309481
+  SubDir:
+  lastModified: 637286143623677824
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -557,11 +575,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/UI/Button_Click
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/UI/Button_Click
   guid: f56ccd8dda1ebb47a8ffa221fb1d52f8
   Banks:
-  - {fileID: 3612003195659793390}
+  - {fileID: -2488033456736598308}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -580,11 +598,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SPELLS/SpellFX_Freeze
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/SPELLS/SpellFX_Freeze
   guid: fd83121caef014419c998c310c848490
   Banks:
-  - {fileID: 3612003195659793390}
+  - {fileID: -2488033456736598308}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -603,11 +621,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/UI/Button_Hover
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/UI/Button_Hover
   guid: 276858788d2cc04e98273b1bd3b615b2
   Banks:
-  - {fileID: 3612003195659793390}
+  - {fileID: -2488033456736598308}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -626,11 +644,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/UI/RadialUI_Click
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/UI/RadialUI_Click
   guid: 0cacc0f22d717e46a7ee0d0e15b18275
   Banks:
-  - {fileID: 3612003195659793390}
+  - {fileID: -2488033456736598308}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -649,11 +667,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/UI/RadialUI_Close
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/UI/RadialUI_Close
   guid: be9febdc108ad445a6a4c925733459eb
   Banks:
-  - {fileID: 3612003195659793390}
+  - {fileID: -2488033456736598308}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -672,9 +690,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
-  SubDir: 
+  SubDir:
   lastModified: 637286123335279863
   LoadResult: 0
   FileSizes: []
@@ -690,11 +708,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SPELLS/SpellFX_Shrink
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: event:/SPELLS/SpellFX_Shrink
   guid: 08aae8f24068e84fb4736fd272be4439
   Banks:
-  - {fileID: 3612003195659793390}
+  - {fileID: -2488033456736598308}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -713,9 +731,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
-  SubDir: 
+  SubDir:
   lastModified: 637260973280000000
   LoadResult: 0
   FileSizes: []
@@ -735,7 +753,7 @@ MonoBehaviour:
   Path: event:/SPELLS/Spell_Aiming
   guid: 0f525ae3b22a68479dc719dd78c33290
   Banks:
-  - {fileID: 3612003195659793390}
+  - {fileID: -2488033456736598308}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0

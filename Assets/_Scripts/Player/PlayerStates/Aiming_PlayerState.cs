@@ -17,6 +17,8 @@ namespace Player
         Renderer m_aimedAtRenderer = null;
         Shader m_highlightedOldShader = null;
 
+        PlayerEquipableItems m_itemEquipped;
+
         public Aiming_PlayerState(GameCore.System.Automaton owner) : base(owner)
         {
             m_playerEntity = (PlayerEntity)owner;
@@ -25,10 +27,25 @@ namespace Player
             {
                 Debug.LogError("Cannot get PlayerMoveCamera Component on Main Camera!");
             }
-            m_camera.SetState(new GameCore.Camera.ThirdPerson_CameraState(m_camera));
+            m_camera.SetState(new GameCore.Camera.Aiming_CameraState(m_camera));
             //Storing a reference to this state object to transition back to after a fall
             m_playerEntity.PreviousGroundState = this;
 
+            //SpellWheel state change, probably doesn't need to be a switch statement, but would make it easier in the future if we add more states / items
+            switch (m_playerEntity.EquipedItem)
+            {
+                case PlayerEquipableItems.SPELL_QUILL:
+                    m_playerEntity.SpellWheel.SetState(new GameUI.Aiming_SpellWheelState(m_playerEntity.SpellWheel));
+                    break;
+                case PlayerEquipableItems.ERASER:
+                    m_playerEntity.SpellWheel.SetState(new GameUI.Idle_SpellWheelState(m_playerEntity.SpellWheel));
+                    break;
+                default:
+                    m_playerEntity.SpellWheel.SetState(new GameUI.Idle_SpellWheelState(m_playerEntity.SpellWheel));
+                    break;
+            }
+
+            m_itemEquipped = m_playerEntity.EquipedItem;
             //temp
             m_playerEntity.m_reticle.gameObject.SetActive(true);
         }
@@ -45,12 +62,31 @@ namespace Player
                 }
 
                 m_owner.SetState(new Default_PlayerState(m_owner));
+                m_playerEntity.SpellWheel.SetState(new GameUI.Idle_SpellWheelState(m_playerEntity.SpellWheel));
 
                 m_playerEntity.m_reticle.gameObject.SetActive(false);                //TEMP REMOVE LATER
                 return;
+            } 
+
+            //if we change items in this state, we should activate / deactivate the radial UI (probably not worth keeping as I think we change items through
+            //kinda temporary code 
+            if (m_itemEquipped != m_playerEntity.EquipedItem)
+            {
+                m_itemEquipped = m_playerEntity.EquipedItem;
+                switch (m_itemEquipped)
+                {
+                    case PlayerEquipableItems.SPELL_QUILL:
+                        m_playerEntity.SpellWheel.SetState(new GameUI.Aiming_SpellWheelState(m_playerEntity.SpellWheel));
+                        break;
+                    case PlayerEquipableItems.ERASER:
+                        m_playerEntity.SpellWheel.SetState(new GameUI.Idle_SpellWheelState(m_playerEntity.SpellWheel));
+                        break;
+                    default:
+                        m_playerEntity.SpellWheel.SetState(new GameUI.Idle_SpellWheelState(m_playerEntity.SpellWheel));
+                        break;
+                }
             }
 
-            Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * m_playerEntity.Projectile.Range);
             //Casting ray forward from the camera to check if there is an enchantable object where the player is aiming
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out m_rayHitInfo, m_playerEntity.Projectile.Range + (m_camera.transform.position - m_playerEntity.transform.position).magnitude))
             {
@@ -90,21 +126,36 @@ namespace Player
                 SpellWheel.SetTargetEnchantable(null);
             }
 
+            //Setting the cameras aimed at transfrom for the aiming camera state. Not sure if we could move the functionality for the shader changing there? or if it makes sense to be here?
+            m_camera.p_AimedAtTransform = m_aimedAt;
 
             if ((Input.GetButtonDown("Fire") || Input.GetAxisRaw("Fire") != 0))
             {
-                //casting spell logic to be triggered from within here
-                Vector3 direction = Vector3.zero;
+                //TEMP (kinda): Currently only fires if the equipped item is the quill, in future it should fire regardless but shoot a different projectile based on the equiped item passed to the projectile handler when
+                //the equipped item is changed on the player 
+                if (m_playerEntity.EquipedItem == PlayerEquipableItems.SPELL_QUILL)
+                {
+                    Vector3 direction = Vector3.zero;
 
-                if (m_rayHitInfo.point != Vector3.zero)
-                {
-                    direction = m_rayHitInfo.point - m_playerEntity.transform.position;
+                    if (m_rayHitInfo.point != Vector3.zero)
+                    {
+                        direction = m_rayHitInfo.point - m_playerEntity.transform.position;
+                    }
+                    else
+                    {
+                        direction = (Camera.main.transform.position + (Camera.main.transform.forward * m_playerEntity.Projectile.Range)) - m_playerEntity.transform.position;
+                    }
+                    m_playerEntity.Projectile.FireProjectile(direction.normalized, m_playerEntity.transform.position + (m_playerEntity.transform.forward * 2f));
                 }
-                else
+                else if (m_aimedAt)
                 {
-                    direction = (Camera.main.transform.position + (Camera.main.transform.forward * m_playerEntity.Projectile.Range)) - m_playerEntity.transform.position;
+                    //make sure that there is an enchantable script attached before casting a new spell
+                    GameCore.Spells.Enchantable enchantable;
+                    if (m_aimedAt.TryGetComponent<GameCore.Spells.Enchantable>(out enchantable))
+                    {
+                        enchantable.CastSpell(new GameCore.Spells.Spell(GameCore.Spells.SpellType.TRANSFORM_RESET));
+                    }
                 }
-                m_playerEntity.Projectile.FireProjectile(direction.normalized, m_playerEntity.transform.position + (m_playerEntity.transform.forward * 2f));
             }
 
             if (m_playerEntity.IsGrounded())
