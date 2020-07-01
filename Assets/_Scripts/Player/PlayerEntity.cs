@@ -21,7 +21,7 @@ namespace Player
     //probably don't need an enum for just two items, however it does make it more expandable in future
     public enum PlayerEquipableItems
     {
-        SPELL_QUILL,
+        SPELL_QUILL = 0,
         ERASER
     }
 
