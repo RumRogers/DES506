@@ -11,13 +11,7 @@ namespace GameUI.SpellBook
     public class SpellBook : Automaton
     {
         [SerializeField]
-        Transform m_mainContainer;
-        [SerializeField]
-        Transform m_spellEnlarge;
-        [SerializeField]
-        Transform m_spellShrink;
-        [SerializeField]
-        Transform m_spellFreeze;
+        Transform m_mainContainer;       
 
         [SerializeField]
         List<Transform> m_lockedSpellSlots = new List<Transform>();
