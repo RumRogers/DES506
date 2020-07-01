@@ -17,6 +17,8 @@ namespace Projectile
         bool m_canFire = true;
         List<Projectile> m_projectiles = new List<Projectile>();
 
+        Player.PlayerEquipableItems m_projectileType;   //Will be usful later on when we need to change effects based on the item
+
         //Public Vars
         public float TimeBetweenShots { get => m_timeBetweenShots; }
         public float Range { get => m_range; }
@@ -42,6 +44,7 @@ namespace Projectile
         {
             if (m_canFire)
             {
+
                 //Currently still fires the particle system regardless of which item is equipped
                 m_projectiles[m_projectileIndex].Fire(direction, m_speed, m_range);
                 m_projectiles[m_projectileIndex].transform.position = startPosition;
@@ -58,9 +61,11 @@ namespace Projectile
             {
                 case Player.PlayerEquipableItems.ERASER:
                     m_range = m_meleeRange;
+                    m_projectileType = equipedItem;
                     break;
                 case Player.PlayerEquipableItems.SPELL_QUILL:
                     m_range = m_spellRange;
+                    m_projectileType = equipedItem;
                     break;
             }
         }

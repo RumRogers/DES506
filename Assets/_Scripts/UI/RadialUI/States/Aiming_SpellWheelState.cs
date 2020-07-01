@@ -14,16 +14,13 @@ namespace GameUI
         public Aiming_SpellWheelState(SpellWheel owner) : base(owner)
         {
             m_spellWheel = owner;
+
+            //transition from idle
+            m_spellWheel.SetVisible(true);
         }
 
         public override void Manage()
         {
-            if(!Input.GetMouseButton(1))
-            {
-                TransitionBack();
-                return;
-            }
-
             if (HasTargetEnchantedChanged())
             {
                 OnTargetEnchantedChanged();
@@ -43,18 +40,11 @@ namespace GameUI
                 if(Input.GetMouseButtonDown(0))
                 {
                     m_spellWheel.CastSelectedSpell();
-                    TransitionBack();
                     return;
-
                 }
             }
         }
 
-        private void TransitionBack()
-        {
-            SpellWheel.SetTargetEnchantable(null);
-            m_spellWheel.SetState(new Idle_SpellWheelState(m_spellWheel));
-        }
         private bool HasTargetEnchantedChanged()
         {
             return m_lastTargetEnchantable != SpellWheel.GetTargetEnchantable();

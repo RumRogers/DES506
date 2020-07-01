@@ -42,6 +42,7 @@ namespace Player
         [SerializeField] float m_aimingAcceleration = 15.0f;
         [SerializeField] float m_aimingDeceleration = 15.0f;
         [SerializeField] Shader m_highlightShader;
+        [SerializeField] GameUI.SpellWheel m_spellWheel;
         [Header("Modified Movment")]
         [SerializeField] float m_iceAcceleration = 1f;
         [SerializeField] float m_iceDeceleration = 1f;
@@ -122,6 +123,7 @@ namespace Player
         public Vector3 PlayerStartPosition { get => m_playerStartPosition; }
         public PlayerAnimator Animator { get => m_animator; }
         public Projectile.ProjectileHandler Projectile { get => m_projectileHandler; }
+        public GameUI.SpellWheel SpellWheel { get => m_spellWheel; }
         //Get and Settable
         public GameCore.System.State PreviousGroundState { get => m_previousGroundState; set => m_previousGroundState = value; }
         public Transform ClosestInteractable { get => m_closestInteractable; set => m_closestInteractable = value; }
@@ -141,7 +143,7 @@ namespace Player
             m_animator = GetComponent<PlayerAnimator>(); //requried component, should be safe
             m_projectileHandler = GetComponent<Projectile.ProjectileHandler>(); //requried component, should be safe
 
-            EquipedItem = PlayerEquipableItems.SPELL_QUILL;
+            EquipedItem = PlayerEquipableItems.ERASER;
 
             //Setting start position for death
             m_playerStartPosition = transform.position;
@@ -154,6 +156,19 @@ namespace Player
             if (HasProperty(PlayerEntityProperties.DYING))
             {
                 SetState(new Death_PlayerState(this));
+            }
+
+            //TEMP: F to switch equipped item type just for testing. Will be removed later 
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                if (m_equipedItem != PlayerEquipableItems.ERASER)
+                {
+                    EquipedItem = PlayerEquipableItems.ERASER;
+                }
+                else if (m_equipedItem != PlayerEquipableItems.SPELL_QUILL)
+                {
+                    EquipedItem = PlayerEquipableItems.SPELL_QUILL;
+                }
             }
 
             //Dialogue trigger
