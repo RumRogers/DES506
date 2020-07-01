@@ -8,20 +8,33 @@ public class NPCSimple : MonoBehaviour
     private GameObject m_player;
 
     [SerializeField]
-    private string m_dialog;
+    private string m_dialog; //To be added
 
     [SerializeField]
     private Camera m_playerCamera;
 
+    [SerializeField]
     private bool m_isPlayerTalking = false;
+
+    //Contained members
     private const float c_viewRadius = 5.0f;
-    private Vector3 c_offset = new Vector3(1, 1, 1);
-    private Vector3 playerToTarget;
-    private Vector3 test;
+    private Vector3 m_playerToTarget;
+    private Vector3 m_targetVec;
+    private Vector3 m_offset  = new Vector3( 1, 1, 0 );
+
+    //Defaults
+    private Vector3 m_defaultPos;
+    private Quaternion m_defaultRot;
+    private Vector3 m_defaultDirection;
+    private bool temp = true;
 
     void Start()
     {
-        test = transform.forward;
+        m_targetVec = transform.forward;
+
+        m_defaultDirection = transform.forward;
+        m_defaultPos = m_playerCamera.transform.position;
+        m_defaultRot = m_playerCamera.transform.rotation;
 
         if (!m_player || !m_playerCamera)
             Debug.LogError(name + " is missing a component");
@@ -32,22 +45,40 @@ public class NPCSimple : MonoBehaviour
         switch(m_isPlayerTalking)
         {
             case true:
+                
+                if(temp)
+                {
+                    Vector3 tempVec = m_player.transform.position + (m_player.transform.forward * -2) + m_offset;
+                    m_playerCamera.transform.position = m_player.transform.position + (m_player.transform.forward * -2) + m_offset;
+                }
+                
+                temp = false;
+
                 PlayerInteractionState();
                 break;
 
             case false:
+                if(!temp)
+                {
+                    m_playerCamera.transform.position = Vector3.Slerp(m_playerCamera.transform.position, m_defaultPos, 0.1f);// m_defaultPos;
+                    m_playerCamera.transform.rotation = Quaternion.Slerp(m_playerCamera.transform.rotation, m_defaultRot, 0.1f);
+                }
+
+                if (Vector3.Distance(m_playerCamera.transform.position, m_defaultPos) < 0.05f)
+                    temp = true;
+
                 DefaultState();
                 break;
         }
-
-        if (Input.GetKeyDown(KeyCode.P))
-            m_isPlayerTalking = true;
     }
 
     private void PlayerInteractionState()
     {
         //Camera changes position
-        m_playerCamera.transform.position = m_player.transform.localPosition + c_offset;
+        m_player.transform.LookAt(new Vector3(transform.position.x, m_player.transform.position.y, transform.position.z));
+        
+        
+        
         m_playerCamera.transform.LookAt(transform);
         //Letter box effect?
         //NPC's dialog 
@@ -55,29 +86,48 @@ public class NPCSimple : MonoBehaviour
 
     public void PlayerInteracts()
     {
-        m_isPlayerTalking = true;
+        m_isPlayerTalking = !m_isPlayerTalking;
     }
 
     private void DefaultState()
     {
-        playerToTarget = m_player.transform.position - this.transform.position;
-        playerToTarget.y = 0;
+        if(temp)
+        {
+            m_defaultPos = m_playerCamera.transform.position;
+            m_defaultRot = m_playerCamera.transform.rotation;
+        }
 
-        float angle = Vector3.Angle(transform.forward, playerToTarget);
+        m_playerToTarget = m_player.transform.position - transform.position;
+        m_playerToTarget.y = 0;
+
+        float angle = Vector3.Angle(transform.forward, m_playerToTarget); //Needed for the turning speed
 
         if (Vector3.Distance(m_player.transform.position, transform.position) <= c_viewRadius)
         {
-            test = Vector3.RotateTowards(test, playerToTarget, Time.deltaTime * (angle / 60), 0.0f);
-            transform.rotation = Quaternion.LookRotation(test);
+            m_targetVec = Vector3.RotateTowards(m_targetVec, m_playerToTarget, Time.deltaTime * (angle / 20), 0.0f);
+            transform.rotation = Quaternion.LookRotation(m_targetVec);
+        }
+        else
+        {
+            //Update turning speed to be inverse of angle, as it will be moving away, and as such start slow
+            m_targetVec = Vector3.RotateTowards(m_targetVec, m_defaultDirection, Time.deltaTime * (angle / 20), 0.0f);
+            transform.rotation = Quaternion.LookRotation(m_targetVec);
         }
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawRay(transform.position, playerToTarget * 10);
+        Gizmos.DrawRay(transform.position, m_playerToTarget * 10);
 
         Gizmos.color = Color.blue;
-        Gizmos.DrawRay(transform.position, test * 10);
+        Gizmos.DrawRay(transform.position, m_targetVec * 10);
     }
+
+    //private IEnumerable TranslateCameraToOrigin()
+    //{
+
+
+    //    yield return null;
+    //}
 }
