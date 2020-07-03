@@ -14,7 +14,6 @@ namespace GameCore.Spells
         delegate void SpellDelegate(Spell spell);
         public const string s_EnchantableTag = "Enchantable";
         private SpellDelegate m_spellDelegate;
-        [SerializeField]
         private MagicProfile m_magicProfile;
         private Enchantable_FMODAdapter m_fmodAdapter;
 
