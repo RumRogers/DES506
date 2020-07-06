@@ -26,6 +26,9 @@ namespace Player
                 case PlayerAnimationProperties.RUNNING:
                     m_owner.SetState(new Running_AnimationState(m_owner));
                     break;
+                case PlayerAnimationProperties.AIMING:
+                    m_owner.SetState(new Aiming_AnimationState(m_owner));
+                    break;
                 default:
                     m_owner.SetState(new Idle_AnimationState(m_owner));    //if no state, return to idle
                     break;

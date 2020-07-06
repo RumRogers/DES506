@@ -11,7 +11,7 @@ namespace Player
         public Running_AnimationState(GameCore.System.Automaton owner) : base(owner)
         {
             m_playerAnimator = (PlayerAnimator)m_owner;
-            //m_playerAnimator.Running.wrapMode = WrapMode.Loop;
+            m_playerAnimator.Animation.wrapMode = WrapMode.Loop;
             m_playerAnimator.StopAllCoroutines();
             m_playerAnimator.StartCoroutine(Transition());
             //Debug.Log("Running");
@@ -33,6 +33,9 @@ namespace Player
                     break;
                 case PlayerAnimationProperties.RUNNING: //if already running do nothing
                     break;
+                case PlayerAnimationProperties.AIMING:
+                    m_owner.SetState(new Aiming_AnimationState(m_owner));
+                    break;
                 default:
                     m_owner.SetState(new Idle_AnimationState(m_owner));    //if no state, return to idle
                     break;
@@ -41,7 +44,7 @@ namespace Player
 
         IEnumerator Transition()
         {
-            //m_playerAnimator.Running.Play();
+            m_playerAnimator.Animation.Play("running", PlayMode.StopAll);
             yield break;
         }
     }

@@ -14,6 +14,8 @@ namespace Player
         RUNNING,     
         JUMPING,
         FALLING,
+        AIMING,
+        CASTING,
         PUSHING,
         DYING
     }
@@ -24,18 +26,25 @@ namespace Player
 
         PlayerAnimationProperties m_playerAnimProperties;
 
-        [SerializeField] Animation m_idleAnim;
-        [SerializeField] Animation m_runnningAnim;
-        [SerializeField] Animation m_jumpingAnim;
-        [SerializeField] Animation m_fallingAnim;
-        [SerializeField] Animation m_pushingAnim;
+        [SerializeField] AnimationClip m_idleAnim;
+        [SerializeField] AnimationClip m_runnningAnim;
+        [SerializeField] AnimationClip m_jumpingAnim;
+        [SerializeField] AnimationClip m_fallingAnim;
+        [SerializeField] AnimationClip m_aimingAnim;
+        [SerializeField] AnimationClip m_castingAnim;        
+        [SerializeField] AnimationClip m_pushingAnim;
+        [SerializeField] Animation m_animation;
+        [SerializeField] float m_playbackSpeed;
 
         #region PUBLIC ACCESSORS
-        public Animation Idle { get => m_idleAnim; }
-        public Animation Running { get => m_runnningAnim; }
-        public Animation Jumping { get => m_jumpingAnim; }
-        public Animation Falling { get => m_fallingAnim; }
-        public Animation Pushing { get => m_pushingAnim; }
+        public AnimationClip Idle { get => m_idleAnim; }
+        public AnimationClip Running { get => m_runnningAnim; }
+        public AnimationClip Jumping { get => m_jumpingAnim; }
+        public AnimationClip Falling { get => m_fallingAnim; }
+        public AnimationClip Pushing { get => m_pushingAnim; }
+        public AnimationClip Aiming { get => m_aimingAnim; }
+        public AnimationClip Casting { get => m_castingAnim; }
+        public Animation Animation { get => m_animation; }
         public PlayerAnimationProperties PlayerAnimProperties { get => m_playerAnimProperties; }
         #endregion
 
@@ -43,6 +52,18 @@ namespace Player
         void Start()
         {
             SetProperty(PlayerAnimationProperties.IDLE);
+            m_animation.AddClip(m_idleAnim, "idle");
+            m_animation.AddClip(m_runnningAnim, "running");
+            //m_animation.AddClip(m_jumpingAnim, "jumping");
+            //m_animation.AddClip(m_fallingAnim, "falling");
+            m_animation.AddClip(m_aimingAnim, "aiming");
+            m_animation.AddClip(m_castingAnim, "casting");
+
+            foreach (AnimationState state in m_animation)
+            {
+                state.speed = m_playbackSpeed;
+            }
+
             SetState(new Idle_AnimationState(this));
         }
 

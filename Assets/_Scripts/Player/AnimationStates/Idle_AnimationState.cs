@@ -11,7 +11,7 @@ namespace Player
         public Idle_AnimationState(GameCore.System.Automaton owner) : base(owner)
         {
             m_playerAnimator = (PlayerAnimator)m_owner;
-            //m_playerAnimator.Idle.wrapMode = WrapMode.Loop;
+            m_playerAnimator.Animation.wrapMode = WrapMode.Loop;
             m_playerAnimator.StopAllCoroutines();
             m_playerAnimator.StartCoroutine(Transition());
 
@@ -35,6 +35,9 @@ namespace Player
                 case PlayerAnimationProperties.PUSHING:
                     m_owner.SetState(new Pushing_AnimationState(m_owner));
                     break;
+                case PlayerAnimationProperties.AIMING:
+                    m_owner.SetState(new Aiming_AnimationState(m_owner));
+                    break;
                 default:
                     break;
             }
@@ -42,7 +45,7 @@ namespace Player
 
         IEnumerator Transition()
         {
-            //m_playerAnimator.Idle.Play();
+            m_playerAnimator.Animation.Play("idle", PlayMode.StopAll);
             yield break;
         }
     }
