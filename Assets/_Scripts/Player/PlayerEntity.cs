@@ -140,13 +140,15 @@ namespace Player
         public AnimationCurve PushMovementCurve { get => m_pushMovementCurve; }
         #endregion
 
+        static string s_spellWheelTag = "UI_SpellWheel";
+
         private void Awake()
         {
             if (!TryGetComponent<Collider>(out m_playerCollider))
             {
                 Debug.LogError("No collider attached to the player!");
             }
-            m_spellWheel = GameObject.Find("SpellWheel").GetComponentInChildren<GameUI.SpellWheel>();
+            m_spellWheel = GameObject.FindGameObjectWithTag(s_spellWheelTag).GetComponentInChildren<GameUI.SpellWheel>();
             m_animator = GetComponent<PlayerAnimator>(); //requried component, should be safe
             m_projectileHandler = GetComponent<Projectile.ProjectileHandler>(); //requried component, should be safe
 

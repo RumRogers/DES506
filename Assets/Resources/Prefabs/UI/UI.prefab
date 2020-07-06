@@ -40,6 +40,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3360299220940538242}
     m_Modifications:
+    - target: {fileID: 7337699529212502528, guid: cc17569ab18d3be469385761207d456d,
+        type: 3}
+      propertyPath: m_Name
+      value: UI_SpellWheel
+      objectReference: {fileID: 0}
+    - target: {fileID: 7337699529212502528, guid: cc17569ab18d3be469385761207d456d,
+        type: 3}
+      propertyPath: m_TagString
+      value: UI_SpellWheel
+      objectReference: {fileID: 0}
     - target: {fileID: 7337699529212502540, guid: cc17569ab18d3be469385761207d456d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -144,36 +154,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7337699529212502540, guid: cc17569ab18d3be469385761207d456d,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7337699529212502540, guid: cc17569ab18d3be469385761207d456d,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7337699529212502540, guid: cc17569ab18d3be469385761207d456d,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7337699529212502528, guid: cc17569ab18d3be469385761207d456d,
-        type: 3}
-      propertyPath: m_Name
-      value: UI_SpellWheel
-      objectReference: {fileID: 0}
-    - target: {fileID: 7337699529212502528, guid: cc17569ab18d3be469385761207d456d,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7337699529212502541, guid: cc17569ab18d3be469385761207d456d,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc17569ab18d3be469385761207d456d, type: 3}
@@ -190,6 +170,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3360299220940538242}
     m_Modifications:
+    - target: {fileID: 7529084372063039730, guid: fddf4aa7766cbc74586ec9e684e34602,
+        type: 3}
+      propertyPath: m_Name
+      value: SpellBook
+      objectReference: {fileID: 0}
     - target: {fileID: 7529084372063039630, guid: fddf4aa7766cbc74586ec9e684e34602,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -294,11 +279,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7529084372063039730, guid: fddf4aa7766cbc74586ec9e684e34602,
-        type: 3}
-      propertyPath: m_Name
-      value: SpellBook
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fddf4aa7766cbc74586ec9e684e34602, type: 3}

@@ -17,6 +17,7 @@ TagManager:
   - NPC
   - Collectible
   - SpellBook
+  - UI_SpellWheel
   layers:
   - Default
   - TransparentFX
