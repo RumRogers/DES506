@@ -25,6 +25,12 @@ namespace Player
         ERASER
     }
 
+    public enum PlayerGroundStates
+    {
+        DEFAULT         = 0,
+        AIMING          = 1
+    }
+
     [RequireComponent(typeof(PlayerAnimator))]
     [RequireComponent(typeof(Projectile.ProjectileHandler))]
     public class PlayerEntity : GameCore.Rules.MutableEntity
@@ -70,7 +76,8 @@ namespace Player
         Vector3 m_velocity = Vector3.zero;
         Vector3 m_direction;
         Collider m_playerCollider;
-        GameCore.System.State m_previousGroundState;
+        //GameCore.System.State m_previousGroundState;
+        PlayerGroundStates m_previousGroundState;
         PlayerEquipableItems m_equipedItem;
         GameUI.SpellWheel m_spellWheel;
 
@@ -125,7 +132,7 @@ namespace Player
         public Projectile.ProjectileHandler Projectile { get => m_projectileHandler; }
         public GameUI.SpellWheel SpellWheel { get => m_spellWheel; }
         //Get and Settable
-        public GameCore.System.State PreviousGroundState { get => m_previousGroundState; set => m_previousGroundState = value; }
+        public PlayerGroundStates PreviousGroundState { get => m_previousGroundState; set => m_previousGroundState = value; }
         public Transform ClosestInteractable { get => m_closestInteractable; set => m_closestInteractable = value; }
         public List<Transform> InteractablesInRange { get => m_interactablesInRange; set => m_interactablesInRange = value; }   //to be removed, but unsure if we'll have other interactibles so may as well leave it
         public List<Transform> SpeakersInRange { get => m_speakersInRange; set => m_speakersInRange = value; }
@@ -135,7 +142,6 @@ namespace Player
 
         private void Awake()
         {
-            SetState(new Default_PlayerState(this));
             if (!TryGetComponent<Collider>(out m_playerCollider))
             {
                 Debug.LogError("No collider attached to the player!");
@@ -146,6 +152,7 @@ namespace Player
 
             EquipedItem = PlayerEquipableItems.ERASER;
 
+            SetState(new Default_PlayerState(this));
             //Setting start position for death
             m_playerStartPosition = transform.position;
         }
@@ -158,6 +165,8 @@ namespace Player
             {
                 SetState(new Death_PlayerState(this));
             }
+
+            Debug.Log( $"animator state: {m_animator.GetState().GetType()} player state {m_state.GetType()}" );
 
             //TEMP: F to switch equipped item type just for testing. Will be removed later 
             if (Input.GetKeyDown(KeyCode.F))

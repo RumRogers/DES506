@@ -27,14 +27,18 @@ namespace Player
             {
                 m_playerEntity.Velocity = new Vector3(m_playerEntity.Velocity.x, 0, m_playerEntity.Velocity.z);
 
-                if (m_playerEntity.PreviousGroundState != null)
+                m_playerEntity.Velocity = new Vector3(m_playerEntity.Velocity.x, 0, m_playerEntity.Velocity.z);
+                switch (m_playerEntity.PreviousGroundState)
                 {
-                    m_playerEntity.Velocity = new Vector3(m_playerEntity.Velocity.x, 0, m_playerEntity.Velocity.z);
-                    m_owner.SetState(m_playerEntity.PreviousGroundState);
-                }
-                else
-                {
-                    m_owner.SetState(new Default_PlayerState(m_owner));
+                    case PlayerGroundStates.AIMING:
+                        m_playerEntity.SetState(new Aiming_PlayerState(m_playerEntity));
+                        break;
+                    case PlayerGroundStates.DEFAULT:
+                        m_playerEntity.SetState(new Default_PlayerState(m_playerEntity));
+                        break;
+                    default:
+                        m_playerEntity.SetState(new Default_PlayerState(m_playerEntity));
+                        break;
                 }
                 return;
             }
@@ -48,6 +52,7 @@ namespace Player
             //if there is an input, move in that direction, but clamp the magnitude (speed) so they cannot exceed max speed while in the air
             if (m_playerEntity.Direction != Vector3.zero)
             {
+                m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Velocity.normalized.x, 0, m_playerEntity.Velocity.normalized.z));
                 m_velocity += (m_playerEntity.Direction * m_playerEntity.AerialAccelleration) * Time.deltaTime;
                 m_velocity = Vector3.ClampMagnitude(m_velocity, m_playerEntity.MaxSpeed);
             }

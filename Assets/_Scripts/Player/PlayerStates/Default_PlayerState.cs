@@ -22,8 +22,10 @@ namespace Player
                 Debug.LogError("Cannot get PlayerMoveCamera Component on Main Camera!");
             }
             m_camera.SetState(new GameCore.Camera.Default_CameraState(m_camera));
+
+            m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.IDLE);
             //Storing a reference to this state object to transition back to after a fall
-            m_playerEntity.PreviousGroundState = this;
+            m_playerEntity.PreviousGroundState = PlayerGroundStates.DEFAULT;
         }
 
         public override void Manage()
@@ -97,7 +99,7 @@ namespace Player
                 if (m_playerEntity.Direction != Vector3.zero)
                 {
                     //rotate the player to face the direction they are traveling in
-                    m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Direction.x, 0, m_playerEntity.Direction.z));
+                    m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Velocity.normalized.x, 0, m_playerEntity.Direction.z));
                     if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING))
                     {
                         m_velocity += (m_playerEntity.Direction * m_playerEntity.IceAcceleration) * Time.deltaTime;
@@ -120,13 +122,14 @@ namespace Player
                     {
                         m_velocity += (((m_velocity.normalized) * -1) * m_playerEntity.WalkingDeceleration) * Time.deltaTime;
                     }
+                    m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.IDLE);
+
                 }
                 else
                 {
                     m_velocity.x = 0.0f;
                     m_velocity.z = 0.0f;
 
-                    m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.IDLE);
                 }
             }
 
