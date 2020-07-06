@@ -354,7 +354,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60aa5f6859aed7546b07e2ee11de5785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_magicProfile: {fileID: 0}
   m_scaleBigMultiplier: 2
   m_scaleSmallMultiplier: 0.5
   m_changeSizeSpeed: 1
@@ -1042,11 +1041,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7337699529212502528, guid: cc17569ab18d3be469385761207d456d,
-        type: 3}
-      propertyPath: m_Name
-      value: SpellWheel
-      objectReference: {fileID: 0}
     - target: {fileID: 7337699529212502540, guid: cc17569ab18d3be469385761207d456d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1151,6 +1145,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7337699529212502528, guid: cc17569ab18d3be469385761207d456d,
+        type: 3}
+      propertyPath: m_Name
+      value: SpellWheel
       objectReference: {fileID: 0}
     - target: {fileID: 7337699528007067438, guid: cc17569ab18d3be469385761207d456d,
         type: 3}

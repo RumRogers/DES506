@@ -42,7 +42,6 @@ namespace Player
         [SerializeField] float m_aimingAcceleration = 15.0f;
         [SerializeField] float m_aimingDeceleration = 15.0f;
         [SerializeField] Shader m_highlightShader;
-        [SerializeField] GameUI.SpellWheel m_spellWheel;
         [Header("Modified Movment")]
         [SerializeField] float m_iceAcceleration = 1f;
         [SerializeField] float m_iceDeceleration = 1f;
@@ -73,6 +72,7 @@ namespace Player
         Collider m_playerCollider;
         GameCore.System.State m_previousGroundState;
         PlayerEquipableItems m_equipedItem;
+        GameUI.SpellWheel m_spellWheel;
 
         //aim state / projectiles
         Projectile.ProjectileHandler m_projectileHandler;
@@ -140,6 +140,7 @@ namespace Player
             {
                 Debug.LogError("No collider attached to the player!");
             }
+            m_spellWheel = GameObject.Find("SpellWheel").GetComponentInChildren<GameUI.SpellWheel>();
             m_animator = GetComponent<PlayerAnimator>(); //requried component, should be safe
             m_projectileHandler = GetComponent<Projectile.ProjectileHandler>(); //requried component, should be safe
 
