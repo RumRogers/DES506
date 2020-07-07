@@ -23,6 +23,8 @@ public class FallPlatform : Enchantable
     private Vector3 m_smallScale = new Vector3(0.2f, 0.2f, 0.2f);
     private Vector3 m_largeScale = new Vector3(2.0f, 2.0f, 2.0f);
 
+    private bool m_fallTriggerStart = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,9 +34,9 @@ public class FallPlatform : Enchantable
         m_timeTillFall = m_normalTimeTillFall;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && !m_fallTriggerStart)
             StartCoroutine(StartFall());
     }
 
@@ -54,13 +56,23 @@ public class FallPlatform : Enchantable
 
     IEnumerator StartFall()
     {
-        m_counter += Time.deltaTime;
+        m_fallTriggerStart = true;
+        m_counter = 0;
 
-        if (m_counter >= m_timeTillFall)
-            m_rigBod.isKinematic = false;
+        while(m_rigBod.isKinematic)
+        {
+            m_counter += Time.deltaTime;
 
-        else 
-            transform.position = m_position + (transform.right * (Mathf.Sin(m_counter * 30)) * 0.01f);
+            if (m_counter >= m_timeTillFall)
+            {
+                m_rigBod.isKinematic = false;
+            }
+
+            else
+                transform.position = m_position + (transform.right * (Mathf.Sin(m_counter * 30)) * 0.01f);
+
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
 
         yield return null;
     }

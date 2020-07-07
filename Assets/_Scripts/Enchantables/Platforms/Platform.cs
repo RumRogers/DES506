@@ -31,6 +31,7 @@ public class Platform : Enchantable
     {
         //Retain original position
         m_position = transform.position;
+        StartCoroutine(Translate());
     }
     
     #region Enumerators
@@ -81,12 +82,19 @@ public class Platform : Enchantable
     
     protected override void SpellTemperatureHot(Spell spell) 
     {
-        StartCoroutine(Translate());
+        if (!m_isMoving)
+        {
+            StartCoroutine(Translate());
+        }
     }
 
     protected override void SpellReset(Spell spell) 
     {
-        StartCoroutine(Translate());
+        if (!m_isMoving)
+        {
+            StartCoroutine(Translate());
+        }
+            
         StartCoroutine(ScaleObject(Vector3.one));
     }
 #endregion
