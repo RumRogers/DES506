@@ -28,7 +28,9 @@ namespace Player
 
         [SerializeField] AnimationClip m_idleAnim;
         [SerializeField] AnimationClip m_runnningAnim;
-        [SerializeField] AnimationClip m_jumpingAnim;
+        [SerializeField] AnimationClip m_jumpStart;
+        [SerializeField] AnimationClip m_jumpMid;
+        [SerializeField] AnimationClip m_jumpLand;
         [SerializeField] AnimationClip m_fallingAnim;
         [SerializeField] AnimationClip m_aimingAnim;
         [SerializeField] AnimationClip m_castingAnim;        
@@ -39,7 +41,9 @@ namespace Player
         #region PUBLIC ACCESSORS
         public AnimationClip Idle { get => m_idleAnim; }
         public AnimationClip Running { get => m_runnningAnim; }
-        public AnimationClip Jumping { get => m_jumpingAnim; }
+        public AnimationClip JumpingStart { get => m_jumpStart; }
+        public AnimationClip JumpingMid { get => m_jumpMid; }
+        public AnimationClip JumpingLand { get => m_jumpLand; }
         public AnimationClip Falling { get => m_fallingAnim; }
         public AnimationClip Pushing { get => m_pushingAnim; }
         public AnimationClip Aiming { get => m_aimingAnim; }
@@ -54,8 +58,10 @@ namespace Player
             SetProperty(PlayerAnimationProperties.IDLE);
             m_animation.AddClip(m_idleAnim, "idle");
             m_animation.AddClip(m_runnningAnim, "running");
-            //m_animation.AddClip(m_jumpingAnim, "jumping");
-            //m_animation.AddClip(m_fallingAnim, "falling");
+            m_animation.AddClip(m_jumpStart, "jumpStart");
+            m_animation.AddClip(m_jumpMid, "jumpMid");
+            m_animation.AddClip(m_jumpLand, "jumpLand");
+            m_animation.AddClip(m_fallingAnim, "falling");
             m_animation.AddClip(m_aimingAnim, "aiming");
             m_animation.AddClip(m_castingAnim, "casting");
 

@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace Player
 {
-    public class Jumping_AnimationState : GameCore.System.State
+    public class JumpEnd_AnimationState : GameCore.System.State
     {
         PlayerAnimator m_playerAnimator;
 
-        public Jumping_AnimationState(GameCore.System.Automaton owner) : base(owner)
+        public JumpEnd_AnimationState(GameCore.System.Automaton owner) : base(owner)
         {
             m_playerAnimator = (PlayerAnimator)owner;
 
@@ -22,27 +22,32 @@ namespace Player
         {
             switch (m_playerAnimator.PlayerAnimProperties)
             {
-                case PlayerAnimationProperties.RUNNING:
-                    m_owner.SetState(new Running_AnimationState(m_owner));
+                case PlayerAnimationProperties.JUMPING:
+                    m_playerAnimator.SetState(new Jumping_AnimationState(m_playerAnimator));
                     break;
                 case PlayerAnimationProperties.FALLING:
-                    m_owner.SetState(new JumpMid_AnimationState(m_owner));
-                    break;
-                default:
-                    m_owner.SetState(new Idle_AnimationState(m_owner));    //if no state, return to idle
+                    m_playerAnimator.SetState(new Falling_AnimationState(m_playerAnimator));
                     break;
             }
         }
 
         IEnumerator Transition()
         {
-            m_playerAnimator.Animation.Play("jumpStart", PlayMode.StopAll);
+            m_playerAnimator.Animation.Play("jumpLand", PlayMode.StopAll);
             while (m_playerAnimator.Animation.isPlaying)
             {
                 //do nothing
                 yield return null;
             }
-            m_playerAnimator.SetState(new JumpMid_AnimationState(m_playerAnimator));
+            switch (m_playerAnimator.PlayerAnimProperties)
+            {
+                case PlayerAnimationProperties.RUNNING:
+                    m_playerAnimator.SetState(new Running_AnimationState(m_playerAnimator));
+                    break;
+                default:
+                    m_playerAnimator.SetState(new Idle_AnimationState(m_playerAnimator));
+                    break;
+            }
             yield break;
         }
     }

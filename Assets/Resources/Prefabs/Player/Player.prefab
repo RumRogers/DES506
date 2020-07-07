@@ -74,21 +74,19 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   m_pushingSpeed: 2
-  m_maxSpeed: 2
-  m_walkingAcceleration: 15
-  m_walkingDeceleration: 15
+  m_maxSpeed: 12
+  m_walkingAcceleration: 100
+  m_walkingDeceleration: 100
   m_aimingMaxSpeed: 2
   m_aimingAcceleration: 15
   m_aimingDeceleration: 15
-  m_highlightShader: {fileID: -6465566751694194690, guid: 8300b7834b75a4c4987005cc7d185065,
-    type: 3}
-  m_spellWheel: {fileID: 0}
+  m_highlightShader: {fileID: 4800000, guid: 43f422d377633484191fb9b22d687267, type: 3}
   m_iceAcceleration: 1
   m_iceDeceleration: 1
   m_maxIceSpeed: 2.95
   m_aerialAccelleration: 5
   m_gravity: 9.81
-  m_jumpVelocity: 3
+  m_jumpVelocity: 6
   m_highJumpVelocity: 9.5
   m_jumpHeldMultiplier: 1.5
   m_maxClimbableIncline: 45
@@ -115,15 +113,21 @@ MonoBehaviour:
     type: 3}
   m_runnningAnim: {fileID: 1827226128182048838, guid: 8a8f51a800d48aa49a958a01d92df39a,
     type: 3}
-  m_jumpingAnim: {fileID: 0}
-  m_fallingAnim: {fileID: 0}
+  m_jumpStart: {fileID: 1827226128182048838, guid: d8d8ed3cfa6b7ef46969c61cf2dc3b2b,
+    type: 3}
+  m_jumpMid: {fileID: 1827226128182048838, guid: cbd9802d5663cc343b0456a51d517c58,
+    type: 3}
+  m_jumpLand: {fileID: 1827226128182048838, guid: fa31b3b924fe1a44382122d2390d0cab,
+    type: 3}
+  m_fallingAnim: {fileID: 1827226128182048838, guid: 6c7e48ca3b2e00c43989446764c0e17c,
+    type: 3}
   m_aimingAnim: {fileID: 1827226128182048838, guid: a351c5bd2e6d38140a0d608c0224c1d2,
     type: 3}
   m_castingAnim: {fileID: 1827226128182048838, guid: ec76a505b757abf4fa5fe4b1adeba8dc,
     type: 3}
   m_pushingAnim: {fileID: 0}
   m_animation: {fileID: 116125339}
-  m_playbackSpeed: 2
+  m_playbackSpeed: 3
 --- !u!114 &4580232385870872158
 MonoBehaviour:
   m_ObjectHideFlags: 0

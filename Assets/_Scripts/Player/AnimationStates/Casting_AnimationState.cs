@@ -45,17 +45,13 @@ namespace Player
             while (m_playerAnimator.Animation.isPlaying)
             {
                 //do nothing
-                Debug.Log("Casting");
                 yield return null;
             }
             //if it is still casting after it has finished playing, then transition back to aiming as the state has not been changed
             if (m_playerAnimator.PlayerAnimProperties == PlayerAnimationProperties.CASTING)
             {
                 m_playerAnimator.SetProperty(PlayerAnimationProperties.AIMING);
-
-                Debug.Log("Casting finished returning to aim");
             }
-            Debug.Log("Casting finished");
 
             yield break;
         }

@@ -12,7 +12,10 @@ namespace GameCore.System
         static SpellBook s_spellBook = null;
         static int s_playerSpells = 0;
         const string SPELLBOOK_TAG = "SpellBook";
+
         public static int p_PlayerSpells { get => s_playerSpells; }
+        public static Transform p_LastCheckpoint { get; set; }
+
         public static void UnlockSpell(SpellType spellType)
         {  
             if(s_spellBook == null)

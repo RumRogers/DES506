@@ -29,7 +29,7 @@ namespace Player
             }
             m_camera.SetState(new GameCore.Camera.Aiming_CameraState(m_camera));
             //Storing a reference to this state object to transition back to after a fall
-            m_playerEntity.PreviousGroundState = this;
+            m_playerEntity.PreviousGroundState = PlayerGroundStates.AIMING;
 
             //SpellWheel state change, probably doesn't need to be a switch statement, but would make it easier in the future if we add more states / items
             switch (m_playerEntity.EquipedItem)
