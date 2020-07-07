@@ -11,7 +11,10 @@ namespace GameCore.System
     {
         static SpellBook s_spellBook = null;
         static int s_playerSpells = 0;
+        static Dictionary<Transform, Enchantable> m_transformToEnchantableMap;
+
         const string SPELLBOOK_TAG = "SpellBook";
+        const string ENCHANTABLE_TAG = "Enchantable";
 
         public static int p_PlayerSpells { get => s_playerSpells; }
         public static Transform p_LastCheckpoint { get; set; }
@@ -29,6 +32,53 @@ namespace GameCore.System
         public static bool IsSpellUnlocked(SpellType spellType)
         {
             return Utils.Bits.GetBit(s_playerSpells, (int)spellType);
+        }
+
+        public static bool IsEnchantable(Transform t)
+        {
+            return m_transformToEnchantableMap.ContainsKey(t);
+        }
+
+        public static bool IsEnchantable(GameObject gameObj)
+        {
+            return IsEnchantable(gameObj.transform);
+        }
+
+        public static Enchantable GetEnchantable(Transform t)
+        {
+            if(IsEnchantable(t))
+            {
+                return m_transformToEnchantableMap[t];
+            }
+
+            return null;
+        }
+
+        public static Enchantable GetEnchantable(GameObject gameObj)
+        {
+            return GetEnchantable(gameObj.transform);
+        }
+
+        //public Enchantable 
+        private void Init()
+        {
+            m_transformToEnchantableMap = new Dictionary<Transform, Enchantable>();
+
+            var enchantables = GameObject.FindGameObjectsWithTag(ENCHANTABLE_TAG);
+
+            foreach(var gameObj in enchantables)
+            {
+                Enchantable enchantable = gameObj.GetComponent<Enchantable>();
+                if(enchantable != null)
+                {
+                    m_transformToEnchantableMap.Add(gameObj.transform, enchantable);
+                }
+            }
+        }
+
+        private void Start()
+        {
+            Init();
         }
 
         // All of this became obsolete when we changed core mechanic
