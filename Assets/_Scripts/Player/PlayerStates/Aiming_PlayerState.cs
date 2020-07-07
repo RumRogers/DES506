@@ -1,6 +1,5 @@
 ﻿using GameCore.Spells;
 using GameCore.System;
-using GameCore.Utils;
 using GameUI;
 using System.Collections;
 using System.Collections.Generic;
@@ -94,14 +93,8 @@ namespace Player
 
             //Casting ray forward from the camera to check if there is an enchantable object where the player is aiming
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out m_rayHitInfo, m_playerEntity.Projectile.Range + (m_camera.transform.position - m_playerEntity.transform.position).magnitude))
-            {
-                Debug.Log(m_rayHitInfo.transform.name);
-
-                if (m_rayHitInfo.transform.name == "Cube")
-                {
-                    var a = 0;
-                }
-                Enchantable enchantable = HierarchyTraverser.RetrieveEnchantableComponent(m_rayHitInfo.transform);
+            {                
+                Enchantable enchantable = LevelManager.GetEnchantable(m_rayHitInfo.transform);
                 if (enchantable != null)
                 //if (m_rayHitInfo.transform.tag == "Enchantable")
                 {
