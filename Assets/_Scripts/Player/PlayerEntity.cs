@@ -171,7 +171,7 @@ namespace Player
             Debug.Log( $"animator state: {m_animator.GetState().GetType()} player state {m_state.GetType()}" );
 
             //TEMP: F to switch equipped item type just for testing. Will be removed later 
-            if (Input.GetKeyDown(KeyCode.F))
+            /*if (Input.GetKeyDown(KeyCode.F))
             {
                 if (m_equipedItem != PlayerEquipableItems.ERASER)
                 {
@@ -181,7 +181,7 @@ namespace Player
                 {
                     EquipedItem = PlayerEquipableItems.SPELL_QUILL;
                 }
-            }
+            }*/
 
             //Dialogue trigger
             if (Input.GetButtonDown("Interact") && m_speakersInRange.Count > 0 && m_state.GetType() != typeof(Dialogue_PlayerState))
