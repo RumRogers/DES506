@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 #region tips classes
 [System.Serializable]
@@ -30,9 +31,9 @@ public class PauseMenuController : MonoBehaviour
     TextAsset m_tipsJSON;
 
     [SerializeField]
-    TMPro.TextMeshProUGUI m_tipText;
+    Text m_tipText;
     [SerializeField]
-    TMPro.TextMeshProUGUI m_tipNumText;
+    Text m_tipNumText;
 
     //Index:
     //0 -- Main Pause Menu
