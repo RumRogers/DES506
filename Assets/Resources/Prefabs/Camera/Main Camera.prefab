@@ -98,21 +98,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_cameraTarget: {fileID: 0}
-  m_defaultDistance: 6
-  m_defaultStartingAngle: 41.13
-  m_defaultMinAngle: -10
-  m_defaultMaxAngle: 30
-  m_defaultMovementSpeed: 1
+  m_defaultDistance: 20
+  m_defaultStartingAngle: 30
+  m_defaultMinAngle: -30
+  m_defaultMaxAngle: 10
+  m_defaultMovementSpeed: 20
   m_defaultLerpSpeed: 1
-  m_aimingDistance: 2.47
+  m_defaultFOV: 45
+  m_aimingDistance: 10
   m_aimingMinAngle: -90
   m_aimingMaxAngle: 90
-  m_aimingOffset: {x: 1, y: 1}
-  m_aimingMovementSpeed: 2.17
-  m_aimingLerpSpeed: 0.3
+  m_aimingOffset: {x: 2, y: 4}
+  m_aimingMovementSpeed: 20
+  m_aimingLerpSpeed: 0.03
+  m_autoAimStrength: 10
+  m_aimingFOV: 40
   m_dialogueDistance: 2
   m_dialogueAngle: 45
-  m_comebackSpeed: 1
   m_lerpCurve:
     serializedVersion: 2
     m_Curve:
@@ -146,6 +148,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  m_minDistanceFromPlayer: 0.3
   m_DefaultCanRotateVertically: 1
 --- !u!114 &2166381962610705799
 MonoBehaviour:

@@ -1,4 +1,6 @@
-﻿using GameUI;
+﻿using GameCore.Spells;
+using GameCore.System;
+using GameUI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -91,13 +93,15 @@ namespace Player
 
             //Casting ray forward from the camera to check if there is an enchantable object where the player is aiming
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out m_rayHitInfo, m_playerEntity.Projectile.Range + (m_camera.transform.position - m_playerEntity.transform.position).magnitude))
-            {
-                if (m_rayHitInfo.transform.tag == "Enchantable")
+            {                
+                Enchantable enchantable = LevelManager.GetEnchantable(m_rayHitInfo.transform);
+                if (enchantable != null)
+                //if (m_rayHitInfo.transform.tag == "Enchantable")
                 {
-                    if (m_aimedAt == null || m_aimedAt != m_rayHitInfo.transform)
+                    if (m_aimedAt == null || m_aimedAt != enchantable.transform)
                     {
-                        m_aimedAt = m_rayHitInfo.transform;
-                        SpellWheel.SetTargetEnchantable(m_rayHitInfo.transform);
+                        m_aimedAt = enchantable.transform;
+                        SpellWheel.SetTargetEnchantable(enchantable.transform);
                         if (!m_aimedAt.TryGetComponent<Renderer>(out m_aimedAtRenderer))
                         {
                             Debug.LogError($"Object {m_rayHitInfo.transform.name} doesn't have a renderer component!");

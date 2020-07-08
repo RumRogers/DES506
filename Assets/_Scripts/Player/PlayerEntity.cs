@@ -152,7 +152,7 @@ namespace Player
             m_animator = GetComponent<PlayerAnimator>(); //requried component, should be safe
             m_projectileHandler = GetComponent<Projectile.ProjectileHandler>(); //requried component, should be safe
 
-            EquipedItem = PlayerEquipableItems.ERASER;
+            EquipedItem = PlayerEquipableItems.SPELL_QUILL;
 
             SetState(new Default_PlayerState(this));
             //Setting start position for death
@@ -292,6 +292,26 @@ namespace Player
             //Nor could I think of a better name for this function
             if (collided)
             {
+                GameCore.Spells.Enchantable enchantable;
+
+                if (m_groundedHitInfo.transform.TryGetComponent<GameCore.Spells.Enchantable>(out enchantable))
+                {
+                    if (m_groundedHitInfo.transform.GetComponent<GameCore.Spells.MagicProfile>().GetMagicFingerprint().magicState.temperature == GameCore.Spells.SpellState.COUNTERSPELLED)
+                    {
+                        AddEntityProperty(PlayerEntityProperties.SLIDING);
+                    }
+                    else
+                    {
+                        //don't worry, it does check to make sure it has the property before removing 
+                        RemoveEntityProperty(PlayerEntityProperties.SLIDING);
+                    }
+                }
+                //if we didn't get the component, must not be frozen
+                else
+                {
+                    RemoveEntityProperty(PlayerEntityProperties.SLIDING);
+                }
+
                 //update the position to the point on the ground hit + half of the player's height
                 transform.position = new Vector3(transform.position.x, m_groundedHitInfo.point.y + m_playerCollider.bounds.extents.y, transform.position.z);
 
