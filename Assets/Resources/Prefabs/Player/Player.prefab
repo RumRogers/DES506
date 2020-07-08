@@ -142,7 +142,7 @@ MonoBehaviour:
   m_projectileContainerPrefab: {fileID: 2198351285241104367, guid: 938af60f827cfa942916f6028c22db93,
     type: 3}
   m_timeBetweenShots: 1
-  m_range: 5
+  m_range: 15
   m_speed: 5
   m_spellRange: 30
   m_meleeRange: 1

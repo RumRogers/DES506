@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 88ca8c153c3440643b7d7f08ec9e8327
+=======
+guid: 7da2ed0b90badfa409cfec1a3b8df5c0
+>>>>>>> Audio-Michael
 AudioImporter:
   externalObjects: {}
   serializedVersion: 6
