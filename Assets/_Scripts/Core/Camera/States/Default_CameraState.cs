@@ -71,7 +71,7 @@ namespace GameCore.Camera
 
             //needs clamping else the camera will move further and further away from the player when the button is pressed repeatedly due to the offset being addded
             Vector3 targetPosition = m_playerMoveCamera.p_CameraTarget.position - Vector3.ClampMagnitude((m_playerMoveCamera.transform.forward * m_distance) - m_offset, m_playerMoveCamera.p_DefaultDistance);
-            m_playerMoveCamera.transform.position = targetPosition;
+            m_playerMoveCamera.p_Position = targetPosition;
         }
 
 

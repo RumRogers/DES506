@@ -144,6 +144,8 @@ namespace Player
 
         private void Awake()
         {
+
+
             if (!TryGetComponent<Collider>(out m_playerCollider))
             {
                 Debug.LogError("No collider attached to the player!");
@@ -162,13 +164,22 @@ namespace Player
         // Override of automaton update function for extended functionality
         override protected void Update()
         {
+            if (m_groundedHitInfo.transform != null)
+            {
+                m_newGroundPosition = m_ground.transform.position;
+
+                //if the ground has moved since the last frame, add that movement to the player
+                if (m_newGroundPosition != m_oldGroundPosition)
+                {
+                    transform.position += (m_newGroundPosition - m_oldGroundPosition);
+                    m_oldGroundPosition = m_newGroundPosition;
+                }
+            }
             //First check if death state is triggered to save time / ensure the player cannot do something if they are alread dead
             if (HasProperty(PlayerEntityProperties.DYING))
             {
                 SetState(new Death_PlayerState(this));
             }
-
-            Debug.Log( $"animator state: {m_animator.GetState().GetType()} player state {m_state.GetType()}" );
 
             //TEMP: F to switch equipped item type just for testing. Will be removed later 
             /*if (Input.GetKeyDown(KeyCode.F))
@@ -322,16 +333,8 @@ namespace Player
                     m_oldGroundPosition = m_ground.position;
                 }
                 
-                m_newGroundPosition = m_ground.transform.position;
                 
-                //if the ground has moved since the last frame, add that movement to the player
-                if (m_newGroundPosition != m_oldGroundPosition)
-                {
-                    transform.position += (m_newGroundPosition - m_oldGroundPosition);
-                    m_oldGroundPosition = m_newGroundPosition;
-                }
             }
-
             return collided;
         }
 

@@ -32,6 +32,7 @@ namespace GameCore.Camera
         [SerializeField] float m_dialogueAngle = 33;
         [Header("General")]
         [SerializeField] AnimationCurve m_lerpCurve;
+        [SerializeField] float m_smoothFactor = 0.8f;
         [Header("Collision")]
         [SerializeField] float m_minDistanceFromPlayer = 0.3f;
 
@@ -41,6 +42,8 @@ namespace GameCore.Camera
 
         Vector3 m_cameraOffset;
         Transform m_aimedAtTransform;
+        Vector3 m_position;   //the position where the camera should end up, modified in the camera states
+        Vector3 m_oldPosition;
 
         //Public stuff, get only
         public float p_DefaultMovementSpeed { get => m_defaultMovementSpeed; }
@@ -64,6 +67,7 @@ namespace GameCore.Camera
         public Quaternion p_DefaultRotation { get => m_defaultRotation; }
         public Vector3 p_CameraOffset { get => m_cameraOffset; }
         public Vector3 p_AimingOffset { get => m_aimingOffset; }
+        public Vector3 p_Position { get => m_position; set => m_position = value; }
         public AnimationCurve p_LerpCurve { get => m_lerpCurve; }
 
         private void Start()
@@ -73,12 +77,20 @@ namespace GameCore.Camera
             m_defaultRotation = transform.rotation;
             m_cameraOffset = transform.position - m_cameraTarget.position;
             SetState(new Default_CameraState(this));
+            m_oldPosition = transform.position;
         }
 
         protected override void Update()
         {
-            base.Update();
+            //base.Update();
+        }
+
+        private void LateUpdate()
+        {
+            m_state.Manage();
             CheckCollision();
+            transform.position = Vector3.Lerp(m_oldPosition, m_position, 1);
+            m_oldPosition = m_position;
         }
 
         //Casts ray from target to camera and checks if it hits, if so moves camera to hit position
