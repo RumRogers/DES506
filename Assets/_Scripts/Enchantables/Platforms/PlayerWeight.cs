@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class PlayerWeight : MonoBehaviour
 {
-    public Rigidbody testing;
-    public Transform pointOfForce;
-    private bool playerOn = false;
-    // Start is called before the first frame update
-    void Start()
-    {
+    [SerializeField]
+    private float m_playerWeight = 10;
 
-    }
+    [SerializeField]
+    private Rigidbody m_platRigidBody;
+
+    private bool playerOn = false;
+    float m_playerDistanceFromCenter;
+
+//    BoxCollider box;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -30,7 +33,12 @@ public class PlayerWeight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(playerOn)
-            testing.AddForceAtPosition(Vector3.down * 10, pointOfForce.position);
+        //float m_playerDistanceFromCenter = Vector3.Distance(m_platRigidBody.position, transform.position);
+
+        if (playerOn)
+        {
+            m_playerDistanceFromCenter = Vector3.Distance(m_platRigidBody.position, transform.position);
+            m_platRigidBody.AddForceAtPosition(Vector3.down * m_playerWeight, transform.position);
+        }
     }
 }

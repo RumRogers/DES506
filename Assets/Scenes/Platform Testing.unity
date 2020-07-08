@@ -154,8 +154,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 115783876}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
+  m_Mass: 17.91
+  m_Drag: 2.4
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -235,6 +235,65 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &126248265
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 126248266}
+  - component: {fileID: 126248268}
+  - component: {fileID: 126248267}
+  m_Layer: 0
+  m_Name: Player Weight Check
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &126248266
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126248265}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.494, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1.0000206, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1883446233}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &126248267
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126248265}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.50000006, y: 2.04588, z: 1}
+  m_Center: {x: 0.23, y: 0.52294046, z: 0}
+--- !u!114 &126248268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126248265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08619710980ed8e41b7c657922fcf2fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_playerWeight: 20
+  m_platRigidBody: {fileID: 1883446229}
 --- !u!1 &207224133
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,13 +430,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 207224133}
-  m_LocalRotation: {x: -0, y: -0.6992918, z: -0, w: 0.7148364}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 19.07, y: 0.74, z: 37.69}
   m_LocalScale: {x: 4.1703224, y: 0.35219392, z: 3.5446267}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: -88.740005, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!4 &231225065 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4580232385870872155, guid: 3ead565c55b9919448a7c71d26aae209,
@@ -1472,6 +1531,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpellWheel
       objectReference: {fileID: 0}
+    - target: {fileID: 7337699529212502528, guid: cc17569ab18d3be469385761207d456d,
+        type: 3}
+      propertyPath: m_TagString
+      value: UI_SpellWheel
+      objectReference: {fileID: 0}
     - target: {fileID: 7337699529212502540, guid: cc17569ab18d3be469385761207d456d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2012,7 +2076,7 @@ GameObject:
   - component: {fileID: 1635181834}
   - component: {fileID: 1635181833}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Player Weight Check
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2026,7 +2090,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1635181831}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.40700004, y: 0, z: 0}
+  m_LocalPosition: {x: 0.487, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1883446233}
@@ -2043,8 +2107,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.42110434, y: 7.680539, z: 1}
-  m_Center: {x: -0.11738878, y: 3.3402698, z: 0}
+  m_Size: {x: 0.50000006, y: 2.275341, z: 1}
+  m_Center: {x: -0.25, y: 0.63767093, z: 0}
 --- !u!114 &1635181834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2057,8 +2121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08619710980ed8e41b7c657922fcf2fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testing: {fileID: 1883446229}
-  pointOfForce: {fileID: 1635181832}
+  m_playerWeight: 20
+  m_platRigidBody: {fileID: 1883446229}
 --- !u!1 &1883446224
 GameObject:
   m_ObjectHideFlags: 0
@@ -2252,6 +2316,7 @@ Transform:
   m_LocalScale: {x: 14.967565, y: 0.17563638, z: 4.0296}
   m_Children:
   - {fileID: 1635181832}
+  - {fileID: 126248266}
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
