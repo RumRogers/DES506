@@ -11,8 +11,8 @@ public class SeeSaw : Enchantable
 
     private HingeJoint m_joint;
     private Rigidbody m_rigBod;
-    private Vector3 m_smallScale = new Vector3(0.2f, 0.2f, 0.2f);
-    private Vector3 m_largeScale = new Vector3(2.0f, 2.0f, 2.0f);
+    private Vector3 m_smallScale;// = new Vector3(0.2f, 0.2f, 0.2f);
+    private Vector3 m_largeScale;// = new Vector3(2.0f, 2.0f, 2.0f);
     private float m_counter = 0;
 
     private const float c_scaleTime = 2.0f;
@@ -27,6 +27,9 @@ public class SeeSaw : Enchantable
         m_rigBod.isKinematic = m_startFrozen;
         m_joint.axis = new Vector3(0.0f, 0.0f, 1.0f);
         m_joint.anchor = new Vector3(0.0f, 0.5f, 0.0f);
+
+        m_smallScale = transform.localScale * 0.5f;
+        m_largeScale = transform.localScale * 2.0f;
     }
     
     IEnumerator ScaleObject(Vector3 scale)
