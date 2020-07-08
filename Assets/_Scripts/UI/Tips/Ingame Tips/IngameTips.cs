@@ -9,7 +9,7 @@ public class IngameTips : MonoBehaviour
     [SerializeField]
     string m_text;
 
-    [Header("Programmer Stuff")]
+    [Header("Make sure these are set!")]
     [SerializeField]
     GameObject UI;
     [SerializeField]
@@ -20,28 +20,21 @@ public class IngameTips : MonoBehaviour
         text.text = m_text;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        //if (collision.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Fucking pls");
+            text.text = m_text;
             UI.SetActive(true);
         }
     }
+   
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider other)
     {
-       // if (collision.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
             UI.SetActive(false);
-        }
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.P))
-        {
-            UI.SetActive(true);
         }
     }
 }
