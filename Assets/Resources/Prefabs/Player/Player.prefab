@@ -74,10 +74,10 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   m_pushingSpeed: 2
-  m_maxSpeed: 12
-  m_walkingAcceleration: 100
-  m_walkingDeceleration: 100
-  m_aimingMaxSpeed: 2
+  m_maxSpeed: 40
+  m_walkingAcceleration: 30
+  m_walkingDeceleration: 30
+  m_aimingMaxSpeed: 10
   m_aimingAcceleration: 15
   m_aimingDeceleration: 15
   m_highlightShader: {fileID: 4800000, guid: 43f422d377633484191fb9b22d687267, type: 3}
