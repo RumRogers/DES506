@@ -93,8 +93,14 @@
 	<object class="MixerBusPanner" id="{cf212765-abb9-4b09-ae48-d7eb25ab5c74}" />
 	<object class="MultiSound" id="{9f6e2225-a024-42da-852f-3cf18c5cdd71}">
 		<property name="pitch">
-			<value>12</value>
+			<value>6</value>
 		</property>
+		<property name="playlistMode">
+			<value>1</value>
+		</property>
+		<relationship name="modulators">
+			<destination>{b11388da-39c7-42c3-8313-cec4c286426e}</destination>
+		</relationship>
 		<relationship name="fadeOutCurve">
 			<destination>{f8f04636-7070-4e8e-8a01-d54d67d4ffbc}</destination>
 		</relationship>
@@ -129,6 +135,14 @@
 	</object>
 	<object class="MixerBusPanner" id="{b3c59f37-9d64-4c1a-b5ff-fe43417b2021}" />
 	<object class="MixerBusFader" id="{55f217ba-48bf-450a-a5d8-f3347b43a9df}" />
+	<object class="RandomizerModulator" id="{b11388da-39c7-42c3-8313-cec4c286426e}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>pitch</value>
+		</property>
+		<property name="amount">
+			<value>9</value>
+		</property>
+	</object>
 	<object class="FadeCurve" id="{f8f04636-7070-4e8e-8a01-d54d67d4ffbc}">
 		<relationship name="startPoint">
 			<destination>{06193ebb-c381-4fdb-b6e4-894febe09554}</destination>
@@ -187,7 +201,7 @@
 			<value>1</value>
 		</property>
 		<property name="curveShape">
-			<value>-1.00000048</value>
+			<value>-0.00919205695</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{53377f51-d3a7-4a2c-a1ef-58d4ad99e579}">

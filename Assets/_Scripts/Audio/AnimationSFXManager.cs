@@ -15,8 +15,13 @@ public class AnimationSFXManager : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot("event:/PlayerMovement/Player_RightStep");
     }
 
-    public void testingSFX()
+    public void playJumpSFX()
     {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Button_Click");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/PlayerMovement/Player_Jump");
+    }
+
+    public void playLandSFX()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/PlayerMovement/Player_Land");
     }
 }

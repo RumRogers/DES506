@@ -118,6 +118,9 @@
 		<property name="start">
 			<value>5.5511151231257827e-17</value>
 		</property>
+		<property name="pitch">
+			<value>12</value>
+		</property>
 		<relationship name="fadeOutCurve">
 			<destination>{105d36ac-11ba-4132-9414-371c65188cf6}</destination>
 		</relationship>
@@ -154,6 +157,9 @@
 		</property>
 		<property name="start">
 			<value>0.093596059113300156</value>
+		</property>
+		<property name="pitch">
+			<value>12</value>
 		</property>
 		<relationship name="fadeOutCurve">
 			<destination>{dfed2680-b012-4223-897d-1b0a497217fd}</destination>
@@ -192,8 +198,11 @@
 		<property name="start">
 			<value>5.5511151231257827e-17</value>
 		</property>
+		<property name="volume">
+			<value>-5</value>
+		</property>
 		<property name="pitch">
-			<value>-6</value>
+			<value>-0.699999988</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{cdf180e8-d5f2-46d2-bb67-517a2b30b4b1}</destination>
