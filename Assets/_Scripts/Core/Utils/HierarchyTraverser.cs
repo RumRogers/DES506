@@ -14,14 +14,19 @@ namespace GameCore.Utils
 
             while(t != null)
             {
-                if(LevelManager.IsEnchantable(t))
+                if(LevelManager.Instance.IsEnchantable(t))
                 {
-                    return LevelManager.GetEnchantable(t);
+                    return LevelManager.Instance.GetEnchantable(t);
                 }
 
                 t = t.parent;
             }
             return null;
+        }
+
+        public static Renderer RetrieveRendererComponent(Enchantable enchantable)
+        {
+            return enchantable.transform.GetComponentInChildren<Renderer>();
         }
     }
 }

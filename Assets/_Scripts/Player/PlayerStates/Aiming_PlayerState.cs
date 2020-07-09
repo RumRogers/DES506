@@ -1,5 +1,6 @@
 ﻿using GameCore.Spells;
 using GameCore.System;
+using GameCore.Utils;
 using GameUI;
 using System.Collections;
 using System.Collections.Generic;
@@ -94,21 +95,22 @@ namespace Player
             //Casting ray forward from the camera to check if there is an enchantable object where the player is aiming
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out m_rayHitInfo, m_playerEntity.Projectile.Range + (m_camera.transform.position - m_playerEntity.transform.position).magnitude))
             {                
-                Enchantable enchantable = LevelManager.GetEnchantable(m_rayHitInfo.transform);
+                Enchantable enchantable = HierarchyTraverser.RetrieveEnchantableComponent(m_rayHitInfo.transform);
                 if (enchantable != null)
-                //if (m_rayHitInfo.transform.tag == "Enchantable")
                 {
                     if (m_aimedAt == null || m_aimedAt != enchantable.transform)
                     {
                         m_aimedAt = enchantable.transform;
                         SpellWheel.SetTargetEnchantable(enchantable.transform);
-                        if (!m_aimedAt.TryGetComponent<Renderer>(out m_aimedAtRenderer))
+                        Renderer renderer = LevelManager.Instance.GetRenderer(enchantable);
+                        if (renderer == null)
                         {
                             Debug.LogError($"Object {m_rayHitInfo.transform.name} doesn't have a renderer component!");
                             return;
                         }
-                        m_highlightedOldShader = m_aimedAtRenderer.material.shader;
-                        m_aimedAtRenderer.material.shader = m_playerEntity.HighlightShader;
+                        m_aimedAtRenderer = renderer;
+                        m_highlightedOldShader = renderer.material.shader;
+                        renderer.material.shader = m_playerEntity.HighlightShader;
                     }
                 }
                 //if the hit object is not enchantable and there is a currently selected enchantable, set to null

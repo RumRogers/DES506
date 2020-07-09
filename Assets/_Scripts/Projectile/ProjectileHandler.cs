@@ -7,12 +7,13 @@ namespace Projectile
     //stores a pool of transforms for projectiles and cycles through them whenever the player fires (in aim mode and has pressed the left mouse button)
     public class ProjectileHandler : MonoBehaviour
     {
-        [SerializeField] Transform m_projectileContainer;
+        [SerializeField] GameObject m_projectileContainerPrefab;
         [SerializeField] float m_timeBetweenShots = 1;
         [SerializeField] float m_range = 5f;
         [SerializeField] float m_speed = 1f;
         [SerializeField] float m_spellRange = 5f;
         [SerializeField] float m_meleeRange = 1f;
+        Transform m_projectileContainer;
         int m_projectileIndex = 0;
         bool m_canFire = true;
         List<Projectile> m_projectiles = new List<Projectile>();
@@ -27,6 +28,7 @@ namespace Projectile
         // Start is called before the first frame update
         void Start()
         {
+            m_projectileContainer = GameObject.Instantiate(m_projectileContainerPrefab).transform;
             foreach (Projectile p in m_projectileContainer.GetComponentsInChildren<Projectile>())
             {
                 m_projectiles.Add(p);

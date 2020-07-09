@@ -33,10 +33,17 @@ namespace Player
         [SerializeField] AnimationClip m_jumpLand;
         [SerializeField] AnimationClip m_fallingAnim;
         [SerializeField] AnimationClip m_aimingAnim;
-        [SerializeField] AnimationClip m_castingAnim;        
-        [SerializeField] AnimationClip m_pushingAnim;
+        [SerializeField] AnimationClip m_castingAnim;
         [SerializeField] Animation m_animation;
-        [SerializeField] float m_playbackSpeed;
+        [Header("Playback Speeds")]
+        [SerializeField] float m_idleAnimSpeed = 2;
+        [SerializeField] float m_runningAnimSpeed = 2;
+        [SerializeField] float m_jumpStartAnimSpeed = 2;
+        [SerializeField] float m_jumpMidAnimSpeed = 2;
+        [SerializeField] float m_jumpLandAnimSpeed = 2;
+        [SerializeField] float m_fallingAnimSpeed = 2;
+        [SerializeField] float m_aimingAnimSpeed = 2;
+        [SerializeField] float m_castingAnimSpeed = 2;
 
         #region PUBLIC ACCESSORS
         public AnimationClip Idle { get => m_idleAnim; }
@@ -45,7 +52,6 @@ namespace Player
         public AnimationClip JumpingMid { get => m_jumpMid; }
         public AnimationClip JumpingLand { get => m_jumpLand; }
         public AnimationClip Falling { get => m_fallingAnim; }
-        public AnimationClip Pushing { get => m_pushingAnim; }
         public AnimationClip Aiming { get => m_aimingAnim; }
         public AnimationClip Casting { get => m_castingAnim; }
         public Animation Animation { get => m_animation; }
@@ -67,7 +73,33 @@ namespace Player
 
             foreach (AnimationState state in m_animation)
             {
-                state.speed = m_playbackSpeed;
+                switch (state.name)
+                {
+                    case "idle":
+                        state.speed = m_idleAnimSpeed;
+                        break;
+                    case "running":
+                        state.speed = m_runningAnimSpeed;
+                        break;
+                    case "jumpStart":
+                        state.speed = m_jumpStartAnimSpeed;
+                        break;
+                    case "jumpMid":
+                        state.speed = m_jumpMidAnimSpeed;
+                        break;
+                    case "jumpLand":
+                        state.speed = m_jumpLandAnimSpeed;
+                        break;
+                    case "falling":
+                        state.speed = m_fallingAnimSpeed;
+                        break;
+                    case "aiming":
+                        state.speed = m_aimingAnimSpeed;
+                        break;
+                    case "casting":
+                        state.speed = m_castingAnimSpeed;
+                        break;
+                }
             }
 
             SetState(new Idle_AnimationState(this));

@@ -67,7 +67,7 @@ namespace GameCore.Camera
 
             Vector3 targetPosition = m_playerMoveCamera.p_CameraTarget.position - ((m_playerMoveCamera.transform.forward * m_distance) - m_offset);
 
-            m_playerMoveCamera.transform.position = targetPosition;
+            m_playerMoveCamera.p_Position = targetPosition;
 
         }
 

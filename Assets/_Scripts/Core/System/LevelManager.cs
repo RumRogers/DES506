@@ -4,20 +4,40 @@ using UnityEngine;
 using GameCore.Rules;
 using GameCore.Spells;
 using GameUI.SpellBook;
+using GameCore.Utils;
 
 namespace GameCore.System
 {
-    public class LevelManager : MonoBehaviour
+    public class LevelManager
     {
         static SpellBook s_spellBook = null;
         static int s_playerSpells = 0;
         static Dictionary<Transform, Enchantable> m_transformToEnchantableMap;
-
+        static Dictionary<Enchantable, Renderer> m_enchantableToRendererMap;
+        static LevelManager s_instance = null;
         const string SPELLBOOK_TAG = "SpellBook";
         const string ENCHANTABLE_TAG = "Enchantable";
 
         public static int p_PlayerSpells { get => s_playerSpells; }
         public static Transform p_LastCheckpoint { get; set; }
+
+        public static LevelManager Instance 
+        { 
+            get 
+            {
+                if(s_instance == null)
+                {
+                    s_instance = new LevelManager();
+                }
+
+                return s_instance;
+            }
+        }
+
+        private LevelManager()
+        {
+            Init();
+        }
 
         public static void UnlockSpell(SpellType spellType)
         {  
@@ -34,18 +54,23 @@ namespace GameCore.System
             return Utils.Bits.GetBit(s_playerSpells, (int)spellType);
         }
 
-        public static bool IsEnchantable(Transform t)
+        public bool IsEnchantable(Transform t)
         {
             return m_transformToEnchantableMap.ContainsKey(t);
         }
 
-        public static bool IsEnchantable(GameObject gameObj)
+        public bool IsEnchantable(GameObject gameObj)
         {
             return IsEnchantable(gameObj.transform);
         }
 
-        public static Enchantable GetEnchantable(Transform t)
+        public Enchantable GetEnchantable(Transform t)
         {
+            if(m_transformToEnchantableMap == null)
+            {
+                Init();
+            }
+
             if(IsEnchantable(t))
             {
                 return m_transformToEnchantableMap[t];
@@ -53,8 +78,17 @@ namespace GameCore.System
 
             return null;
         }
+        public Renderer GetRenderer(Enchantable enchantable)
+        {
+            if(m_enchantableToRendererMap.ContainsKey(enchantable))
+            {
+                return m_enchantableToRendererMap[enchantable];
+            }
 
-        public static Enchantable GetEnchantable(GameObject gameObj)
+            return null;
+        }
+
+        public Enchantable GetEnchantable(GameObject gameObj)
         {
             return GetEnchantable(gameObj.transform);
         }
@@ -63,6 +97,7 @@ namespace GameCore.System
         private void Init()
         {
             m_transformToEnchantableMap = new Dictionary<Transform, Enchantable>();
+            m_enchantableToRendererMap = new Dictionary<Enchantable, Renderer>();
 
             var enchantables = GameObject.FindGameObjectsWithTag(ENCHANTABLE_TAG);
 
@@ -72,13 +107,14 @@ namespace GameCore.System
                 if(enchantable != null)
                 {
                     m_transformToEnchantableMap.Add(gameObj.transform, enchantable);
+
+                    Renderer renderer = HierarchyTraverser.RetrieveRendererComponent(enchantable);
+                    if(renderer != null)
+                    {
+                        m_enchantableToRendererMap.Add(enchantable, renderer);
+                    }
                 }
             }
-        }
-
-        private void Start()
-        {
-            Init();
         }
 
         // All of this became obsolete when we changed core mechanic
