@@ -12,27 +12,38 @@ namespace Player
         float m_additionalJumpForce = 10f;
         float m_maxButtonHoldTime = 0.5f;
         float m_time = 0;
+        bool m_animationFinished = false;
+        float m_entrySpeed = 0;
 
         public Jumping_PlayerState(GameCore.System.Automaton owner) : base(owner)
         {
             m_playerEntity = (PlayerEntity)m_owner;
+            
+            //get the speed when entering the state before the jump vel is added. used to store the speed for multiplying in the direction held after jump is finished
+            m_entrySpeed = m_velocity.magnitude;
+
+            m_playerEntity.Velocity = m_playerEntity.Velocity / 2;
 
             //Adds velocity based on entity property flags
             if (m_playerEntity.HasProperty(PlayerEntityProperties.JUMP_NORMAL))
-                m_velocity = new Vector3(m_playerEntity.Velocity.x, m_playerEntity.JumpVelocity, m_playerEntity.Velocity.z);
+                m_velocity = new Vector3(0, m_playerEntity.JumpVelocity, 0);
 
             if (m_playerEntity.HasProperty(PlayerEntityProperties.JUMP_HIGH))
-                m_velocity = new Vector3(m_playerEntity.Velocity.x, m_playerEntity.HighJumpVelocity, m_playerEntity.Velocity.z);
+                m_velocity = new Vector3(0, m_playerEntity.HighJumpVelocity, 0);
 
             m_additionalJumpForce = m_playerEntity.Velocity.y * m_playerEntity.JumpHeldMutliplier;
 
             m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.JUMPING);
+
+            m_playerEntity.StopAllCoroutines();
+            m_playerEntity.StartCoroutine(WaitForJumpAnimation());
         }
 
         public override void Manage()
-        {
-            if (m_playerEntity.Animator.GetState().GetType() != typeof(Jumping_AnimationState))
+        {            
+            if (m_animationFinished)
             {
+                //not functional while waiting for jump for some reason. need to fix
                 if (Input.GetButton("Jump") && m_time < m_maxButtonHoldTime)
                 {
                     //adding additional jump force gained by holding the jump button
@@ -43,7 +54,6 @@ namespace Player
                 {
                     m_time = m_maxButtonHoldTime;// setting it to max time so you cannot press jump again to gain height once you've already released it
                 }
-
                 //subtracting gravity from upwards velocity until forces equalise
                 m_velocity += (Vector3.down * m_playerEntity.Gravity) * Time.deltaTime;
 
@@ -56,9 +66,12 @@ namespace Player
                 {
                     m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Velocity.normalized.x, 0, m_playerEntity.Velocity.normalized.z));
                     m_velocity += (m_playerEntity.Direction * m_playerEntity.AerialAccelleration) * Time.deltaTime;
-                    m_velocity = new Vector3(Vector3.ClampMagnitude(m_velocity, m_playerEntity.MaxSpeed).x, m_velocity.y, Vector3.ClampMagnitude(m_velocity, m_playerEntity.MaxSpeed).z);
+                   
                 }
-
+                else if (Mathf.Abs(m_velocity.x) > 0.1f || Mathf.Abs(m_velocity.z) > 0.1f)
+                {
+                    m_velocity += (((m_velocity.normalized) * -1) * m_playerEntity.WalkingDeceleration) * Time.deltaTime;
+                }
                 m_playerEntity.Velocity = new Vector3(m_velocity.x, m_velocity.y, m_velocity.z);
 
                 if (m_playerEntity.Velocity.y < 0)
@@ -67,6 +80,20 @@ namespace Player
                     return;
                 }
             }
+        }
+
+        IEnumerator WaitForJumpAnimation()
+        {
+            while (m_playerEntity.Animator.GetState().GetType() == typeof(Jumping_AnimationState))
+            {
+                yield return null;
+            }
+            Vector3 forwardMovement = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z) * Input.GetAxisRaw("Vertical"); // removing the y component from the camera's forward vector
+            Vector3 rightMovement = Camera.main.transform.right * Input.GetAxisRaw("Horizontal");
+
+            m_velocity += (forwardMovement + rightMovement).normalized * m_entrySpeed;
+
+            m_animationFinished = true;
         }
     }
 }

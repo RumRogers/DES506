@@ -32,9 +32,11 @@ namespace GameCore.Camera
             }
             m_startFOV = m_camera.fieldOfView;
 
+            m_startRotation = m_playerMoveCamera.transform.rotation;
             m_endRotation = Quaternion.LookRotation(new Vector3(m_playerMoveCamera.transform.forward.x, 0, m_playerMoveCamera.transform.forward.z));
 
-            m_startRotation = m_playerMoveCamera.transform.rotation;
+            m_rotation.y = m_playerMoveCamera.transform.eulerAngles.y;
+
             m_startDistance = (m_playerMoveCamera.p_CameraTarget.position - m_playerMoveCamera.transform.position).magnitude;
 
             //Camera transition between current position and expected distance without changing angle.
@@ -61,7 +63,7 @@ namespace GameCore.Camera
             }
             m_rotation.y += input.y * (m_playerMoveCamera.p_AimingMovementSpeed * Time.deltaTime);
 
-            m_playerMoveCamera.transform.eulerAngles = m_rotation;
+            m_playerMoveCamera.transform.rotation = Quaternion.Lerp(m_playerMoveCamera.transform.rotation, Quaternion.Euler(m_rotation), 0.2f);
 
             m_offset = (m_playerMoveCamera.transform.right * m_playerMoveCamera.p_AimingOffset.x) + (m_playerMoveCamera.transform.up * m_playerMoveCamera.p_AimingOffset.y);
 

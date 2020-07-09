@@ -31,7 +31,7 @@ namespace Player
         public override void Manage()
         {
             //Jumping / falling state transitions
-            if (m_playerEntity.IsGrounded())
+            if (m_playerEntity.Grounded)
             {
                 //need to check if it's playable here before jump as we still want it to enter the falling state if it's not grounded, regardless of it's properties
                 if (Input.GetButtonDown("Jump") && m_playerEntity.HasProperty(PlayerEntityProperties.CAN_JUMP) && m_playerEntity.HasProperty(PlayerEntityProperties.PLAYABLE))
@@ -122,14 +122,12 @@ namespace Player
                     {
                         m_velocity += (((m_velocity.normalized) * -1) * m_playerEntity.WalkingDeceleration) * Time.deltaTime;
                     }
-                    m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.IDLE);
-
                 }
                 else
                 {
                     m_velocity.x = 0.0f;
                     m_velocity.z = 0.0f;
-
+                    m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.IDLE);
                 }
             }
 
