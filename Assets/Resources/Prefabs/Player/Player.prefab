@@ -74,21 +74,21 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   m_pushingSpeed: 2
-  m_maxSpeed: 10
-  m_walkingAcceleration: 100
-  m_walkingDeceleration: 100
-  m_aimingMaxSpeed: 10
-  m_aimingAcceleration: 15
-  m_aimingDeceleration: 15
+  m_maxSpeed: 0.1
+  m_walkingAcceleration: 1
+  m_walkingDeceleration: 1
+  m_aimingMaxSpeed: 0.1
+  m_aimingAcceleration: 1
+  m_aimingDeceleration: 1
   m_highlightShader: {fileID: 4800000, guid: 43f422d377633484191fb9b22d687267, type: 3}
   m_iceAcceleration: 1
   m_iceDeceleration: 1
   m_maxIceSpeed: 2.95
   m_aerialAccelleration: 50
-  m_gravity: 20
-  m_jumpVelocity: 10
+  m_gravity: 0.981
+  m_jumpVelocity: 0.2
   m_highJumpVelocity: 15
-  m_jumpHeldMultiplier: 1.5
+  m_jumpHeldMultiplier: 4
   m_maxClimbableIncline: 45
   m_heightPadding: 0.1
   m_groundOverlapPadding: 0.14
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_runningAnimSpeed: 2
   m_jumpStartAnimSpeed: 5
   m_jumpMidAnimSpeed: 5
-  m_jumpLandAnimSpeed: 5
+  m_jumpLandAnimSpeed: 8
   m_fallingAnimSpeed: 2
   m_aimingAnimSpeed: 2
   m_castingAnimSpeed: 2
