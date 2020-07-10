@@ -23,7 +23,7 @@ namespace Player
             m_playerEntity.Velocity += (Vector3.down * m_playerEntity.Gravity) * Time.deltaTime;
 
             //if grounded transition to previous grounded state, or if there wasn't one, transition to the default state
-            if (m_playerEntity.IsGrounded())
+            if (m_playerEntity.Grounded)
             {
                 m_playerEntity.Velocity = new Vector3(m_playerEntity.Velocity.x, 0, m_playerEntity.Velocity.z);
 
@@ -54,7 +54,6 @@ namespace Player
             {
                 m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Velocity.normalized.x, 0, m_playerEntity.Velocity.normalized.z));
                 m_velocity += (m_playerEntity.Direction * m_playerEntity.AerialAccelleration) * Time.deltaTime;
-                m_velocity = Vector3.ClampMagnitude(m_velocity, m_playerEntity.MaxSpeed);
             }
 
             m_playerEntity.Velocity = new Vector3(m_velocity.x, m_playerEntity.Velocity.y, m_velocity.z);

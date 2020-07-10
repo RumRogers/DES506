@@ -44,6 +44,9 @@ namespace Player
                 case PlayerAnimationProperties.RUNNING:
                     m_playerAnimator.SetState(new Running_AnimationState(m_playerAnimator));
                     break;
+                case PlayerAnimationProperties.AIMING:
+                    m_playerAnimator.SetState(new Aiming_AnimationState(m_playerAnimator));
+                    break;
                 default:
                     m_playerAnimator.SetState(new Idle_AnimationState(m_playerAnimator));
                     break;

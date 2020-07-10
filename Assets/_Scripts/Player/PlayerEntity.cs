@@ -72,10 +72,11 @@ namespace Player
         public Transform m_reticle;
 
         //player stats (not editor accessible)
+        bool m_grounded = true;
         Vector3 m_playerStartPosition;
         Vector3 m_velocity = Vector3.zero;
         Vector3 m_direction;
-        Collider m_playerCollider;
+        CapsuleCollider m_playerCollider;
         //GameCore.System.State m_previousGroundState;
         PlayerGroundStates m_previousGroundState;
         PlayerEquipableItems m_equipedItem;
@@ -107,6 +108,7 @@ namespace Player
         public Vector3 Velocity { get => m_velocity; set => m_velocity = value; }
         public Vector3 Direction { get => m_direction; set => m_direction = value; }
         //player stats, getters only
+        public bool Grounded { get => m_grounded; }
         public float MaxSpeed { get => m_maxSpeed; }
         public float WalkingAcceleration { get => m_walkingAcceleration; }
         public float WalkingDeceleration { get => m_walkingDeceleration; }
@@ -144,11 +146,9 @@ namespace Player
 
         private void Awake()
         {
-
-
-            if (!TryGetComponent<Collider>(out m_playerCollider))
+            if (!TryGetComponent<CapsuleCollider>(out m_playerCollider))
             {
-                Debug.LogError("No collider attached to the player!");
+                Debug.LogError("No capsule collider attached to the player!");
             }
             m_spellWheel = GameObject.FindGameObjectWithTag(s_spellWheelTag).GetComponentInChildren<GameUI.SpellWheel>();
             m_animator = GetComponent<PlayerAnimator>(); //requried component, should be safe
@@ -164,35 +164,13 @@ namespace Player
         // Override of automaton update function for extended functionality
         override protected void Update()
         {
-            if (m_groundedHitInfo.transform != null)
-            {
-                m_newGroundPosition = m_ground.transform.position;
+            m_grounded = IsGrounded();
 
-                //if the ground has moved since the last frame, add that movement to the player
-                if (m_newGroundPosition != m_oldGroundPosition)
-                {
-                    transform.position += (m_newGroundPosition - m_oldGroundPosition);
-                    m_oldGroundPosition = m_newGroundPosition;
-                }
-            }
             //First check if death state is triggered to save time / ensure the player cannot do something if they are alread dead
             if (HasProperty(PlayerEntityProperties.DYING))
             {
                 SetState(new Death_PlayerState(this));
             }
-
-            //TEMP: F to switch equipped item type just for testing. Will be removed later 
-            /*if (Input.GetKeyDown(KeyCode.F))
-            {
-                if (m_equipedItem != PlayerEquipableItems.ERASER)
-                {
-                    EquipedItem = PlayerEquipableItems.ERASER;
-                }
-                else if (m_equipedItem != PlayerEquipableItems.SPELL_QUILL)
-                {
-                    EquipedItem = PlayerEquipableItems.SPELL_QUILL;
-                }
-            }*/
 
             //Dialogue trigger
             if (Input.GetButtonDown("Interact") && m_speakersInRange.Count > 0 && m_state.GetType() != typeof(Dialogue_PlayerState))
@@ -206,7 +184,24 @@ namespace Player
             {
                 m_velocity = new Vector3(0.0f, m_velocity.y, 0.0f);
             }
-            transform.position += m_velocity * Time.deltaTime;
+
+            if (m_ground != null && m_grounded)
+            {
+                m_newGroundPosition = m_ground.transform.position;
+
+                //if the ground has moved since the last frame, add that movement to the player
+                if (m_newGroundPosition != m_oldGroundPosition)
+                {
+                    m_velocity += (m_newGroundPosition - m_oldGroundPosition);
+                }
+                m_oldGroundPosition = m_newGroundPosition;
+            }
+            else
+            {
+                m_newGroundPosition = Vector3.zero;
+                m_oldGroundPosition = Vector3.zero;
+            }
+            transform.position += m_velocity;
         }
 
         public bool IsColliding()
@@ -243,7 +238,7 @@ namespace Player
 
                     Debug.DrawLine(rayStart, (rayStart + (rayDirection * m_playerCollider.bounds.extents.z)));  //Uncomment for debug rays
 
-                    if (Physics.Raycast(rayStart, rayDirection, out m_collisionHitInfo, m_playerCollider.bounds.extents.z))
+                    if (Physics.Raycast(rayStart, rayDirection, out m_collisionHitInfo, m_playerCollider.bounds.extents.z + m_skinWidth))
                     {
                         return true;
                     }
@@ -264,6 +259,11 @@ namespace Player
         /// <returns>ground was hit</returns>
         public bool IsGrounded()
         {
+            if (m_state.GetType() == typeof(Jumping_PlayerState))
+            {
+                m_grounded = false;
+                return false;
+            }
             bool collided = false;
             Vector3 rayStart = transform.position;
             Vector3 xRaySpacing = transform.right * (m_playerCollider.bounds.extents.x / 3);
@@ -327,14 +327,18 @@ namespace Player
                 transform.position = new Vector3(transform.position.x, m_groundedHitInfo.point.y + m_playerCollider.bounds.extents.y, transform.position.z);
 
                 //if the ground has changed, change the ground and the old position
-                if(m_ground != m_groundedHitInfo.transform)
+                if (m_ground == null || m_ground != m_groundedHitInfo.transform)
                 {
                     m_ground = m_groundedHitInfo.transform;
                     m_oldGroundPosition = m_ground.position;
+                    m_newGroundPosition = m_ground.position;
                 }
-                
-                
             }
+            else
+            {
+                m_ground = null;
+            }
+            m_grounded = collided;
             return collided;
         }
 
@@ -436,6 +440,14 @@ namespace Player
             }
         }
 
+        public void OnTriggerStay(Collider other)
+        {
+            if (!other.isTrigger && (other.transform.position - transform.position).magnitude > m_playerCollider.radius)
+            {
+                transform.position += (transform.position - other.transform.position) * Time.deltaTime;
+            }
+        }
+
         public void OnTriggerExit(Collider other)
         {
             if (other.tag == "NPC")
@@ -449,6 +461,17 @@ namespace Player
                     }
                 }
             }
+        }
+
+        public void OnCollisionEnter(Collision collision)
+        {
+            transform.position += (transform.position - collision.transform.position) * Time.deltaTime;
+
+        }
+
+        public void OnCollisionStay(Collision collision)
+        {
+            transform.position += (transform.position - collision.transform.position) * Time.deltaTime;
         }
         #endregion
     }

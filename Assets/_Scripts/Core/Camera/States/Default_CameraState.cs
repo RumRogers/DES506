@@ -51,28 +51,20 @@ namespace GameCore.Camera
 
         public override void Manage()
         {
-            //don't want to adjust pitch while transitioning. 
             if (m_transitioned)
             {
-                //Togglable for debug / testing purposes, may be changed to make this behaviour hard set
-                if (m_playerMoveCamera.m_DefaultCanRotateVertically)
-                {
-                    m_rotation.x = Mathf.Clamp(m_rotation.x - (Input.GetAxis("Camera Y") * (m_playerMoveCamera.p_DefaultMovementSpeed * Time.deltaTime)), m_playerMoveCamera.p_DefaultStartingAngle + m_playerMoveCamera.p_DefaultMinAngle, m_playerMoveCamera.p_DefaultStartingAngle + m_playerMoveCamera.p_DefaultMaxAngle);
-                }
-                else
-                {
-                    m_rotation.x = m_playerMoveCamera.p_DefaultStartingAngle;
-                }
+                m_rotation.x = Mathf.Clamp(m_rotation.x - (Input.GetAxis("Camera Y") * (m_playerMoveCamera.p_DefaultMovementSpeed * Time.deltaTime)), m_playerMoveCamera.p_DefaultStartingAngle + m_playerMoveCamera.p_DefaultMinAngle, m_playerMoveCamera.p_DefaultStartingAngle + m_playerMoveCamera.p_DefaultMaxAngle);
             }
+            m_rotation.y = m_rotation.y + Input.GetAxis("Camera X") * (m_playerMoveCamera.p_DefaultMovementSpeed * Time.deltaTime);
 
-            m_rotation.y += Input.GetAxis("Camera X") * (m_playerMoveCamera.p_DefaultMovementSpeed * Time.deltaTime);
 
-            m_playerMoveCamera.transform.eulerAngles = m_rotation;
+
+            m_playerMoveCamera.transform.rotation = Quaternion.Lerp(m_playerMoveCamera.transform.rotation, Quaternion.Euler( m_rotation), 0.2f);
 
             //needs clamping else the camera will move further and further away from the player when the button is pressed repeatedly due to the offset being addded
             Vector3 targetPosition = m_playerMoveCamera.p_CameraTarget.position - Vector3.ClampMagnitude((m_playerMoveCamera.transform.forward * m_distance) - m_offset, m_playerMoveCamera.p_DefaultDistance);
             m_playerMoveCamera.p_Position = targetPosition;
-        }
+        } 
 
 
         IEnumerator Transition()

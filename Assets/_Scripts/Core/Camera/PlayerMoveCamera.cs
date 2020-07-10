@@ -43,6 +43,7 @@ namespace GameCore.Camera
         Vector3 m_cameraOffset;
         Transform m_aimedAtTransform;
         Vector3 m_position;   //the position where the camera should end up, modified in the camera states
+        Quaternion m_rotation;
         Vector3 m_oldPosition;
 
         //Public stuff, get only
@@ -65,6 +66,7 @@ namespace GameCore.Camera
         public Transform p_CameraTarget { get => m_cameraTarget; }
         public Transform p_AimedAtTransform { get => m_aimedAtTransform; set => m_aimedAtTransform = value; }
         public Quaternion p_DefaultRotation { get => m_defaultRotation; }
+        public Quaternion p_Rotation { get => m_rotation; set => m_rotation = value; }
         public Vector3 p_CameraOffset { get => m_cameraOffset; }
         public Vector3 p_AimingOffset { get => m_aimingOffset; }
         public Vector3 p_Position { get => m_position; set => m_position = value; }
@@ -89,8 +91,7 @@ namespace GameCore.Camera
         {
             m_state.Manage();
             CheckCollision();
-            transform.position = Vector3.Lerp(m_oldPosition, m_position, 1);
-            m_oldPosition = m_position;
+            transform.position = Vector3.Lerp(transform.position, m_position, m_smoothFactor);
         }
 
         //Casts ray from target to camera and checks if it hits, if so moves camera to hit position
