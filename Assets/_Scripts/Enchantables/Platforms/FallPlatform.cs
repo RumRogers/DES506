@@ -6,11 +6,16 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class FallPlatform : Enchantable
 {
+    [Header("Time Attributes")]
     [SerializeField]
     private int m_normalTimeTillFall = 1;
 
     [SerializeField]
     private int m_timeTillFallFrozen = 2;
+
+    [Header("Shake Attributes")]
+    [SerializeField]
+    private float m_shakeScale;
 
     private Rigidbody m_rigBod;
     
@@ -69,7 +74,7 @@ public class FallPlatform : Enchantable
             }
 
             else
-                transform.position = m_position + (transform.right * (Mathf.Sin(m_counter * 30)) * 0.01f);
+                transform.position = m_position + (transform.right * (Mathf.Sin(m_counter * 30)) * m_shakeScale);
 
             yield return new WaitForSeconds(Time.deltaTime);
         }

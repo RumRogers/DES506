@@ -4,44 +4,92 @@ using UnityEngine;
 
 public class Platform : Enchantable
 {
+    enum PlatformType
+    {
+        HORIZONTAL,
+        VERTICAL,
+        ROTATION
+    }
+
     #region Parameters
     [Header("Platform Parameters")]
     [SerializeField]
-    [Range(0.1f, 12.0f)]
-    private float m_motionWidth = 1.0f;
+    private float m_motionWidth = 5.0f;
 
     [SerializeField]
-    [Range(0.1f, 10.0f)]
     private float m_platformSpeed = 0.1f;
+
+    [SerializeField]
+    private PlatformType m_platType;
+
+    [Header("Scale Factors")]
+    [SerializeField]
+    private float m_smallScaleFactor;
+
+    [SerializeField]
+    private float m_largeScaleFactor;
 
     //Contained Variables
     private float m_counter = 0;
 
     private const float c_scaleTime = 2.0f;
+    private const float c_distanceFactor = 1.0f;
 
     private bool m_isMoving = true;
 
-    private Vector3 m_position = Vector3.zero;   
-    private Vector3 m_smallScale = new Vector3(0.2f, 0.2f, 0.2f);
-    private Vector3 m_largeScale = new Vector3(2.0f, 2.0f, 2.0f);
+    private Vector3 m_defaultPosition = Vector3.zero;
+    private Vector3 m_destination = Vector3.zero;
+    private Vector3 m_smallScale = Vector3.zero;
+    private Vector3 m_largeScale = Vector3.zero;
     #endregion
 
     // Start is called before the first frame update
     void Start()
     {
         //Retain original position
-        m_position = transform.position;
+        m_defaultPosition = transform.position;
+
+        m_smallScale = transform.localScale * m_smallScaleFactor;
+        m_largeScale = transform.localScale * m_largeScaleFactor;
+
         StartCoroutine(Translate());
     }
-    
+
     #region Enumerators
     IEnumerator Translate()
     {
         m_isMoving = true;
         while (true)
         {
-            m_counter += Time.deltaTime * m_platformSpeed;
-            transform.position = m_position + (transform.right * (Mathf.Sin(m_counter)) * m_motionWidth);
+            switch (m_platType)
+            {
+                case PlatformType.HORIZONTAL:
+                    if (Vector3.Distance(transform.position, m_defaultPosition) <= c_distanceFactor)
+                        m_destination = m_defaultPosition + transform.right * m_motionWidth;
+
+                    else if (Vector3.Distance(transform.position, m_defaultPosition + transform.right * m_motionWidth) <= c_distanceFactor)
+                        m_destination = m_defaultPosition;
+
+                    transform.position = Vector3.Lerp(transform.position, m_destination, m_platformSpeed/10);
+
+                    break;
+
+                case PlatformType.VERTICAL:
+                    if(Vector3.Distance(transform.position, m_defaultPosition) <= c_distanceFactor)                    
+                        m_destination = m_defaultPosition + transform.up * m_motionWidth;
+                    
+                    else if(Vector3.Distance(transform.position, m_defaultPosition + transform.up * m_motionWidth) <= c_distanceFactor)                    
+                        m_destination = m_defaultPosition;                    
+
+                    transform.position = Vector3.Lerp(transform.position, m_destination, m_platformSpeed/10);
+                    
+                    break;
+
+                case PlatformType.ROTATION:
+                    transform.RotateAround(transform.position, transform.right, m_platformSpeed);
+                    break;
+            }
+           
             yield return new WaitForSeconds(Time.deltaTime);
         }
     }
@@ -97,5 +145,16 @@ public class Platform : Enchantable
             
         StartCoroutine(ScaleObject(Vector3.one));
     }
-#endregion
+    #endregion
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawSphere(m_defaultPosition + new Vector3(0, 0, m_motionWidth), 0.6f);
+        Gizmos.DrawSphere(transform.position + new Vector3(0, 0, m_motionWidth), 0.6f);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("TEST");
+    }
 }
