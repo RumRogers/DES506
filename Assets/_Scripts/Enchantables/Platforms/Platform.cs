@@ -55,40 +55,85 @@ public class Platform : Enchantable
         StartCoroutine(Translate());
     }
 
-    #region Enumerators
-    IEnumerator Translate()
+    protected override void Update()
     {
-        m_isMoving = true;
-        while (true)
+        base.Update();
+
+        if(m_isMoving)
         {
             switch (m_platType)
             {
                 case PlatformType.HORIZONTAL:
                     if (Vector3.Distance(transform.position, m_defaultPosition) <= c_distanceFactor)
+                    {
                         m_destination = m_defaultPosition + transform.right * m_motionWidth;
+                    }
 
                     else if (Vector3.Distance(transform.position, m_defaultPosition + transform.right * m_motionWidth) <= c_distanceFactor)
+                    {
                         m_destination = m_defaultPosition;
+                    }
 
-                    transform.position = Vector3.Lerp(transform.position, m_destination, m_platformSpeed/10);
+                    transform.position = Vector3.Lerp(transform.position, m_destination, m_platformSpeed / 10);
 
                     break;
 
                 case PlatformType.VERTICAL:
-                    if(Vector3.Distance(transform.position, m_defaultPosition) <= c_distanceFactor)                    
+                    if (Vector3.Distance(transform.position, m_defaultPosition) <= c_distanceFactor)
+                    {
                         m_destination = m_defaultPosition + transform.up * m_motionWidth;
-                    
-                    else if(Vector3.Distance(transform.position, m_defaultPosition + transform.up * m_motionWidth) <= c_distanceFactor)                    
-                        m_destination = m_defaultPosition;                    
+                    }
 
-                    transform.position = Vector3.Lerp(transform.position, m_destination, m_platformSpeed/10);
-                    
+                    else if (Vector3.Distance(transform.position, m_defaultPosition + transform.up * m_motionWidth) <= c_distanceFactor)
+                    {
+                        m_destination = m_defaultPosition;
+                    }
+
+                    transform.position = Vector3.Lerp(transform.position, m_destination, m_platformSpeed / 10);
+
                     break;
 
                 case PlatformType.ROTATION:
                     transform.RotateAround(transform.position, transform.right, m_platformSpeed);
                     break;
             }
+        }
+    }
+
+    #region Enumerators
+    IEnumerator Translate()
+    {
+        m_isMoving = true;
+        while (true)
+        {
+            //switch (m_platType)
+            //{
+            //    case PlatformType.HORIZONTAL:
+            //        if (Vector3.Distance(transform.position, m_defaultPosition) <= c_distanceFactor)
+            //            m_destination = m_defaultPosition + transform.right * m_motionWidth;
+
+            //        else if (Vector3.Distance(transform.position, m_defaultPosition + transform.right * m_motionWidth) <= c_distanceFactor)
+            //            m_destination = m_defaultPosition;
+
+            //        transform.position = Vector3.Lerp(transform.position, m_destination, m_platformSpeed/10);
+
+            //        break;
+
+            //    case PlatformType.VERTICAL:
+            //        if(Vector3.Distance(transform.position, m_defaultPosition) <= c_distanceFactor)                    
+            //            m_destination = m_defaultPosition + transform.up * m_motionWidth;
+                    
+            //        else if(Vector3.Distance(transform.position, m_defaultPosition + transform.up * m_motionWidth) <= c_distanceFactor)                    
+            //            m_destination = m_defaultPosition;                    
+
+            //        transform.position = Vector3.Lerp(transform.position, m_destination, m_platformSpeed/10);
+                    
+            //        break;
+
+            //    case PlatformType.ROTATION:
+            //        transform.RotateAround(transform.position, transform.right, m_platformSpeed);
+            //        break;
+            //}
            
             yield return new WaitForSeconds(Time.deltaTime);
         }
