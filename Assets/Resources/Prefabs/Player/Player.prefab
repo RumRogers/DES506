@@ -74,7 +74,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   m_pushingSpeed: 2
-  m_maxSpeed: 0.2
+  m_maxSpeed: 0.4
   m_walkingAcceleration: 3
   m_walkingDeceleration: 3
   m_aimingMaxSpeed: 0.1
