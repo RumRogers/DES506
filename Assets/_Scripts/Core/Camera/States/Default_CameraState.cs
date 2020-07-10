@@ -57,8 +57,6 @@ namespace GameCore.Camera
             }
             m_rotation.y = m_rotation.y + Input.GetAxis("Camera X") * (m_playerMoveCamera.p_DefaultMovementSpeed * Time.deltaTime);
 
-
-
             m_playerMoveCamera.transform.rotation = Quaternion.Lerp(m_playerMoveCamera.transform.rotation, Quaternion.Euler( m_rotation), 0.2f);
 
             //needs clamping else the camera will move further and further away from the player when the button is pressed repeatedly due to the offset being addded

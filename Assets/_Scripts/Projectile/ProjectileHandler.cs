@@ -9,12 +9,14 @@ namespace Projectile
     {
         [SerializeField] GameObject m_projectileContainerPrefab;
         [SerializeField] float m_timeBetweenShots = 1;
-        [SerializeField] float m_range = 5f;
         [SerializeField] float m_speed = 1f;
         [SerializeField] float m_spellRange = 5f;
         [SerializeField] float m_meleeRange = 1f;
+
+
         Transform m_projectileContainer;
         int m_projectileIndex = 0;
+        float m_range = 5f;
         bool m_canFire = true;
         List<Projectile> m_projectiles = new List<Projectile>();
 
@@ -36,6 +38,21 @@ namespace Projectile
             }
         }
 
+
+        private void Update()
+        {
+            //TEMP only here for prototyping / changing the value in editor at runtime. to be removed in final build
+            switch (m_projectileType)
+            {
+                case Player.PlayerEquipableItems.ERASER:
+                    m_range = m_meleeRange;
+                    break;
+                case Player.PlayerEquipableItems.SPELL_QUILL:
+                    m_range = m_spellRange;
+                    break;
+            }
+        }
+
         /// <summary>
         /// Takes in a direction of travel, position to start from and an equipped item type for determining range and which spell effect should be used
         /// </summary>
@@ -46,7 +63,6 @@ namespace Projectile
         {
             if (m_canFire)
             {
-
                 //Currently still fires the particle system regardless of which item is equipped
                 m_projectiles[m_projectileIndex].Fire(direction, m_speed, m_range);
                 m_projectiles[m_projectileIndex].transform.position = startPosition;
