@@ -61,17 +61,36 @@ namespace Player
             //if button "aim" up get out of this state, axis is for joystick trigger buttons
             if (!Input.GetButton("Aim") && Input.GetAxisRaw("Aim") == 0)
             {
-                if (m_aimedAtRenderer != null)
+                m_playerEntity.SpellWheel.SetState(new GameUI.Idle_SpellWheelState(m_playerEntity.SpellWheel));
+                if (m_aimedAt)
                 {
                     m_aimedAtRenderer.material.shader = m_highlightedOldShader;
+                    m_highlightedOldShader = null;
+                    m_aimedAtRenderer = null;
+                    m_aimedAt = null;
+                    SpellWheel.SetTargetEnchantable(null);
                 }
 
+                m_playerEntity.m_reticle.gameObject.SetActive(false); 
+                //TEMP REMOVE LATER
                 m_owner.SetState(new Default_PlayerState(m_owner));
-                m_playerEntity.SpellWheel.SetState(new GameUI.Idle_SpellWheelState(m_playerEntity.SpellWheel));
-
-                m_playerEntity.m_reticle.gameObject.SetActive(false);                //TEMP REMOVE LATER
                 return;
-            } 
+            }
+
+            if (m_playerEntity.Grounded)
+            {
+                //need to check if it's playable here before jump as we still want it to enter the falling state if it's not grounded, regardless of it's properties
+                if (Input.GetButtonDown("Jump") && m_playerEntity.HasProperty(PlayerEntityProperties.CAN_JUMP) && m_playerEntity.HasProperty(PlayerEntityProperties.PLAYABLE))
+                {
+                    m_owner.SetState(new Jumping_PlayerState(m_owner));
+                    return;
+                }
+            }
+            else
+            {
+                m_owner.SetState(new Falling_PlayerState(m_owner));
+                return;
+            }
 
             //if we change items in this state, we should activate / deactivate the radial UI (probably not worth keeping as I think we change items through
             //kinda temporary code 
@@ -92,14 +111,23 @@ namespace Player
                 }
             }
 
+            Debug.DrawRay(Camera.main.transform.position + ((m_playerEntity.transform.position - m_camera.transform.position).magnitude * Camera.main.transform.forward), Camera.main.transform.forward * m_playerEntity.Projectile.Range);
+
             //Casting ray forward from the camera to check if there is an enchantable object where the player is aiming
-            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out m_rayHitInfo, m_playerEntity.Projectile.Range + (m_camera.transform.position - m_playerEntity.transform.position).magnitude))
+            if (Physics.Raycast(Camera.main.transform.position + ((m_playerEntity.transform.position - m_camera.transform.position).magnitude * Camera.main.transform.forward), //Moves the position to start parellel to the player
+                Camera.main.transform.forward, out m_rayHitInfo, m_playerEntity.Projectile.Range))
             {                
                 Enchantable enchantable = HierarchyTraverser.RetrieveEnchantableComponent(m_rayHitInfo.transform);
                 if (enchantable != null)
                 {
-                    if (m_aimedAt == null || m_aimedAt != enchantable.transform)
+                    if (m_aimedAt != enchantable.transform)
                     {
+                        //if there is a old shader, then we've been aiming at something else before so change that object's shader back to the old one before setting new variables
+                        if (m_highlightedOldShader)
+                        {
+                            m_aimedAtRenderer.material.shader = m_highlightedOldShader;
+                        }
+
                         m_aimedAt = enchantable.transform;
                         SpellWheel.SetTargetEnchantable(enchantable.transform);
                         Renderer renderer = LevelManager.Instance.GetRenderer(enchantable);
@@ -167,20 +195,7 @@ namespace Player
                 }
             }
 
-            if (m_playerEntity.Grounded)
-            {
-                //need to check if it's playable here before jump as we still want it to enter the falling state if it's not grounded, regardless of it's properties
-                if (Input.GetButtonDown("Jump") && m_playerEntity.HasProperty(PlayerEntityProperties.CAN_JUMP) && m_playerEntity.HasProperty(PlayerEntityProperties.PLAYABLE))
-                {
-                    m_owner.SetState(new Jumping_PlayerState(m_owner));
-                    return;
-                }
-            }
-            else
-            {
-                m_owner.SetState(new Falling_PlayerState(m_owner));
-                return;
-            }
+
 
             //update movement relative to the camera
             if (m_playerEntity.HasProperty(PlayerEntityProperties.PLAYABLE))

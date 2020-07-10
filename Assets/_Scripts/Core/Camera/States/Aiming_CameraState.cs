@@ -52,14 +52,22 @@ namespace GameCore.Camera
             if (m_playerMoveCamera.p_AimedAtTransform != null)
             {
                 input /= 2; //half the input, potentially expose this to the editor
-                //rotation direction fro aim assist (not normalised yet)
-                Quaternion rotationDirection = Quaternion.LookRotation(m_playerMoveCamera.p_AimedAtTransform.position - m_playerMoveCamera.transform.position, Vector3.up);
-                m_rotation = Quaternion.RotateTowards(Quaternion.Euler(m_rotation), rotationDirection, Time.deltaTime * m_playerMoveCamera.p_AutoAimStrength).eulerAngles;
+                //rotation direction for aim assist
+                Quaternion rotationDirection = Quaternion.LookRotation((m_playerMoveCamera.p_AimedAtTransform.position - m_playerMoveCamera.transform.position).normalized, m_playerMoveCamera.transform.up);
 
+                Vector3 rotation = Quaternion.RotateTowards(Quaternion.Euler(m_rotation), rotationDirection, Time.deltaTime * m_playerMoveCamera.p_AutoAimStrength).eulerAngles;
+
+                //kind of a bandaid solution, kinda bummed I couldn't find a better way but quaternions wrap around back to 360 if the angle is too low. Making aiming at things overhead cause issues with clamping rotation later 
+                if (m_rotation.x < 0 && rotation.x > 0)
+                {
+                    rotation.x = 0 - (360 - rotation.x);
+                }
+                m_rotation = rotation;
             }
             if (m_transitioned)
             {
-                m_rotation.x = Mathf.Clamp(m_rotation.x - (input.x * (m_playerMoveCamera.p_AimingMovementSpeed * Time.deltaTime)), m_playerMoveCamera.p_AimingMinAngle, m_playerMoveCamera.p_AimingMaxAngle);
+                m_rotation.x -= input.x * (m_playerMoveCamera.p_AimingMovementSpeed * Time.deltaTime);
+                m_rotation.x = Mathf.Clamp(m_rotation.x, m_playerMoveCamera.p_AimingMinAngle, m_playerMoveCamera.p_AimingMaxAngle);
             }
             m_rotation.y += input.y * (m_playerMoveCamera.p_AimingMovementSpeed * Time.deltaTime);
 
@@ -70,7 +78,6 @@ namespace GameCore.Camera
             Vector3 targetPosition = m_playerMoveCamera.p_CameraTarget.position - ((m_playerMoveCamera.transform.forward * m_distance) - m_offset);
 
             m_playerMoveCamera.p_Position = targetPosition;
-
         }
 
         IEnumerator Transition()

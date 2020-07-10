@@ -22,8 +22,6 @@ namespace Player
             //get the speed when entering the state before the jump vel is added. used to store the speed for multiplying in the direction held after jump is finished
             m_entrySpeed = m_velocity.magnitude;
 
-            m_playerEntity.Velocity = m_playerEntity.Velocity / 2;
-
             //Adds velocity based on entity property flags
             if (m_playerEntity.HasProperty(PlayerEntityProperties.JUMP_NORMAL))
                 m_velocity = new Vector3(0, m_playerEntity.JumpVelocity, 0);
