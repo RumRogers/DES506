@@ -33,7 +33,7 @@ public class Platform : Enchantable
     private float m_counter = 0;
 
     private const float c_scaleTime = 2.0f;
-    private const float c_distanceFactor = 1.0f;
+    private const float c_distanceFactor = 0.1f;
 
     private bool m_isMoving = true;
 
@@ -41,6 +41,8 @@ public class Platform : Enchantable
     private Vector3 m_destination = Vector3.zero;
     private Vector3 m_smallScale = Vector3.zero;
     private Vector3 m_largeScale = Vector3.zero;
+
+    private int m_direction = 1;
     #endregion
 
     // Start is called before the first frame update
@@ -64,32 +66,43 @@ public class Platform : Enchantable
             switch (m_platType)
             {
                 case PlatformType.HORIZONTAL:
+                    //Set the destination (done here as it varies for types)
+                    m_destination = m_defaultPosition + transform.right * m_motionWidth;
+
+                    //Alter direction based if destination is reached
                     if (Vector3.Distance(transform.position, m_defaultPosition) <= c_distanceFactor)
                     {
-                        m_destination = m_defaultPosition + transform.right * m_motionWidth;
+                        m_direction = 1;
                     }
 
-                    else if (Vector3.Distance(transform.position, m_defaultPosition + transform.right * m_motionWidth) <= c_distanceFactor)
+                    else if (Vector3.Distance(transform.position, m_destination) <= c_distanceFactor)
                     {
-                        m_destination = m_defaultPosition;
+                        m_direction = -1;
                     }
 
-                    transform.position = Vector3.Lerp(transform.position, m_destination, m_platformSpeed / 10);
+                    //Prevent clipping by moving away from walls
+                    if(Physics.Raycast(transform.position, transform.right * m_direction, c_distanceFactor + 1 * (transform.localScale.z / 2)))
+                    {
+                        m_direction = -m_direction;
+                    }
 
-                    break;
+                    transform.position += transform.right * m_direction * (Time.deltaTime * m_platformSpeed);
+                        break;
 
                 case PlatformType.VERTICAL:
+                    m_destination = m_defaultPosition + transform.up * m_motionWidth;
+
                     if (Vector3.Distance(transform.position, m_defaultPosition) <= c_distanceFactor)
                     {
-                        m_destination = m_defaultPosition + transform.up * m_motionWidth;
+                        m_direction = 1;
                     }
 
-                    else if (Vector3.Distance(transform.position, m_defaultPosition + transform.up * m_motionWidth) <= c_distanceFactor)
+                    else if (Vector3.Distance(transform.position, m_destination) <= c_distanceFactor)
                     {
-                        m_destination = m_defaultPosition;
+                        m_direction = -1;
                     }
 
-                    transform.position = Vector3.Lerp(transform.position, m_destination, m_platformSpeed / 10);
+                    transform.position += transform.up * m_direction * (Time.deltaTime * m_platformSpeed);
 
                     break;
 
@@ -106,34 +119,6 @@ public class Platform : Enchantable
         m_isMoving = true;
         while (true)
         {
-            //switch (m_platType)
-            //{
-            //    case PlatformType.HORIZONTAL:
-            //        if (Vector3.Distance(transform.position, m_defaultPosition) <= c_distanceFactor)
-            //            m_destination = m_defaultPosition + transform.right * m_motionWidth;
-
-            //        else if (Vector3.Distance(transform.position, m_defaultPosition + transform.right * m_motionWidth) <= c_distanceFactor)
-            //            m_destination = m_defaultPosition;
-
-            //        transform.position = Vector3.Lerp(transform.position, m_destination, m_platformSpeed/10);
-
-            //        break;
-
-            //    case PlatformType.VERTICAL:
-            //        if(Vector3.Distance(transform.position, m_defaultPosition) <= c_distanceFactor)                    
-            //            m_destination = m_defaultPosition + transform.up * m_motionWidth;
-                    
-            //        else if(Vector3.Distance(transform.position, m_defaultPosition + transform.up * m_motionWidth) <= c_distanceFactor)                    
-            //            m_destination = m_defaultPosition;                    
-
-            //        transform.position = Vector3.Lerp(transform.position, m_destination, m_platformSpeed/10);
-                    
-            //        break;
-
-            //    case PlatformType.ROTATION:
-            //        transform.RotateAround(transform.position, transform.right, m_platformSpeed);
-            //        break;
-            //}
            
             yield return new WaitForSeconds(Time.deltaTime);
         }

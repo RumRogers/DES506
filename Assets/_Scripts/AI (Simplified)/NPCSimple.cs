@@ -4,29 +4,38 @@ using UnityEngine;
 
 public class NPCSimple : MonoBehaviour
 {
+    #region
+    [Header("Required Components")]
     [SerializeField]
     private GameObject m_player;
 
     [SerializeField]
-    private string m_dialog; //To be added
-
-    [SerializeField]
     private Camera m_playerCamera;
+
+    [Header("NPC Behaviour")]
+    [SerializeField]
+    private string m_dialog; //To be added
 
     [SerializeField]
     private bool m_isPlayerTalking = false;
 
+    [SerializeField]
+    private float m_rotationSpeed;
+
+    [SerializeField]
+    private float m_viewRadius;
+
     //Contained members
-    private const float c_viewRadius = 5.0f;
-    private Vector3 m_playerToTarget;
-    private Vector3 m_targetVec;
+    private Vector3 m_playerToTarget = Vector3.zero;
+    private Vector3 m_targetVec = Vector3.zero;
     private Vector3 m_offset  = new Vector3( 1, 1, 0 );
+    private bool m_isPlayerInView = true;
 
     //Defaults
-    private Vector3 m_defaultPos;
+    private Vector3 m_defaultPos = Vector3.zero;
+    private Vector3 m_defaultDirection = Vector3.zero;
     private Quaternion m_defaultRot;
-    private Vector3 m_defaultDirection;
-    private bool temp = true;
+    #endregion
 
     void Start()
     {
@@ -46,42 +55,43 @@ public class NPCSimple : MonoBehaviour
         {
             case true:
                 
-                if(temp)
+                if(m_isPlayerInView)
                 {
-                    Vector3 tempVec = m_player.transform.position + (m_player.transform.forward * -2) + m_offset;
+                    Vector3 m_isPlayerInViewVec = m_player.transform.position + (m_player.transform.forward * -2) + m_offset;
                     m_playerCamera.transform.position = m_player.transform.position + (m_player.transform.forward * -2) + m_offset;
                 }
                 
-                temp = false;
+                m_isPlayerInView = false;
 
                 PlayerInteractionState();
                 break;
 
             case false:
-                if(!temp)
+                if(!m_isPlayerInView)
                 {
-                    m_playerCamera.transform.position = Vector3.Slerp(m_playerCamera.transform.position, m_defaultPos, 0.1f);// m_defaultPos;
-                    m_playerCamera.transform.rotation = Quaternion.Slerp(m_playerCamera.transform.rotation, m_defaultRot, 0.1f);
+                    m_playerCamera.transform.position = Vector3.Lerp(m_playerCamera.transform.position, m_defaultPos, 0.1f);// m_defaultPos;
+                    m_playerCamera.transform.rotation = Quaternion.Lerp(m_playerCamera.transform.rotation, m_defaultRot, 0.1f);
                 }
 
                 if (Vector3.Distance(m_playerCamera.transform.position, m_defaultPos) < 0.05f)
-                    temp = true;
+                    m_isPlayerInView = true;
 
                 DefaultState();
                 break;
         }
     }
 
+
     private void PlayerInteractionState()
     {
         //Camera changes position
-        m_player.transform.LookAt(new Vector3(transform.position.x, m_player.transform.position.y, transform.position.z));
-        
-        
+        m_player.transform.LookAt(new Vector3(transform.position.x, m_player.transform.position.y, transform.position.z));    
         
         m_playerCamera.transform.LookAt(transform);
+
         //Letter box effect?
-        //NPC's dialog 
+
+        // TEXT HERE //
     }
 
     public void PlayerInteracts()
@@ -91,7 +101,7 @@ public class NPCSimple : MonoBehaviour
 
     private void DefaultState()
     {
-        if(temp)
+        if(m_isPlayerInView)
         {
             m_defaultPos = m_playerCamera.transform.position;
             m_defaultRot = m_playerCamera.transform.rotation;
@@ -102,15 +112,15 @@ public class NPCSimple : MonoBehaviour
 
         float angle = Vector3.Angle(transform.forward, m_playerToTarget); //Needed for the turning speed
 
-        if (Vector3.Distance(m_player.transform.position, transform.position) <= c_viewRadius)
+        if (Vector3.Distance(m_player.transform.position, transform.position) <= m_viewRadius)
         {
-            m_targetVec = Vector3.RotateTowards(m_targetVec, m_playerToTarget, Time.deltaTime * (angle / 20), 0.0f);
+            m_targetVec = Vector3.RotateTowards(m_targetVec, m_playerToTarget, Time.deltaTime * (angle / 20) * m_rotationSpeed, 0.0f);
             transform.rotation = Quaternion.LookRotation(m_targetVec);
         }
         else
         {
             //Update turning speed to be inverse of angle, as it will be moving away, and as such start slow
-            m_targetVec = Vector3.RotateTowards(m_targetVec, m_defaultDirection, Time.deltaTime * (angle / 20), 0.0f);
+            m_targetVec = Vector3.RotateTowards(m_targetVec, m_defaultDirection, Time.deltaTime * (angle / 20) * m_rotationSpeed, 0.0f);
             transform.rotation = Quaternion.LookRotation(m_targetVec);
         }
     }
@@ -123,11 +133,4 @@ public class NPCSimple : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawRay(transform.position, m_targetVec * 10);
     }
-
-    //private IEnumerable TranslateCameraToOrigin()
-    //{
-
-
-    //    yield return null;
-    //}
 }

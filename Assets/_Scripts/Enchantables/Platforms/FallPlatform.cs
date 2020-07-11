@@ -17,9 +17,12 @@ public class FallPlatform : Enchantable
     [SerializeField]
     private float m_shakeScale;
 
+    [SerializeField]
+    private float m_shaleSpeed;
+
     private Rigidbody m_rigBod;
     
-    private float m_timeTillFall = 1;
+    private float m_timeTillFall = 0;
     private float m_counter = 0;
 
     private const float c_scaleTime = 2.0f;
@@ -48,6 +51,7 @@ public class FallPlatform : Enchantable
     #region Coroutines
     IEnumerator ScaleObject(Vector3 scale)
     {
+        //Reset counter as it might have been used elsewhere. Set original scale as it is needed for the lerp
         Vector3 originalScale = transform.localScale;
         m_counter = 0;
 
@@ -61,6 +65,7 @@ public class FallPlatform : Enchantable
 
     IEnumerator StartFall()
     {
+        //Reset the counter (as it might have used on scale)
         m_fallTriggerStart = true;
         m_counter = 0;
 
@@ -68,13 +73,14 @@ public class FallPlatform : Enchantable
         {
             m_counter += Time.deltaTime;
 
+            //If timer is up, fall. Otherwise, shake using call in else statement
             if (m_counter >= m_timeTillFall)
             {
                 m_rigBod.isKinematic = false;
             }
 
             else
-                transform.position = m_position + (transform.right * (Mathf.Sin(m_counter * 30)) * m_shakeScale);
+                transform.position = m_position + (transform.right * (Mathf.Sin(m_counter * m_shaleSpeed)) * m_shakeScale);
 
             yield return new WaitForSeconds(Time.deltaTime);
         }
