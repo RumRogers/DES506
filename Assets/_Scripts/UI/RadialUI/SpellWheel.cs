@@ -7,7 +7,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -58,11 +57,7 @@ namespace GameUI
         List<int> m_availableSlotIndices = new List<int>();
         [SerializeField]
         List<SpellSlotData> m_spellsOrder = new List<SpellSlotData>();
-        Dictionary<SpellType, int> m_spellTypeToTextUI = new Dictionary<SpellType, int>()
-        {
-            { SpellType.TRANSFORM_SIZE_BIG, 0 },
-            { SpellType.TRANSFORM_SIZE_SMALL, 1 }
-        };
+       
         // Start is called before the first frame update
         void Start()
         {
