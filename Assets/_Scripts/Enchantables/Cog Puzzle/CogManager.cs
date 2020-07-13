@@ -22,6 +22,19 @@ public class CogManager : MonoBehaviour
     [SerializeField]
     private bool m_tick;
 
+    [Header("Door")]
+    [SerializeField]
+    private GameObject m_door;
+
+    [SerializeField]
+    private float m_doorSpeed;
+
+    private bool m_complete = false;
+    private bool m_doorClosed = true;
+    private float m_counter = 0.0f;
+    private float m_finalY = 0.0f;
+    private Quaternion m_globRotation;
+    private IEnumerator m_openFunc;
 
     // Start is called before the first frame update
     void Start()
@@ -38,14 +51,50 @@ public class CogManager : MonoBehaviour
             //Invert the direction to have them alternate
             m_directionCheck = !m_directionCheck;
         }
+
+        m_finalY = m_door.transform.position.y + 7.5f;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Get rotation of root cog
+        m_globRotation = m_cogs[0].GlobalRotation;
+        
+        m_complete = true;  
+
         foreach (Cog c in m_cogs)
         {
+            c.GlobalRotation = m_cogs[0].transform.rotation;
 
+            if (!c.IsCorrect())
+                m_complete = false;
+        }
+
+        if(m_complete)
+        {
+            m_openFunc = OpenDoor();
+            StartCoroutine(m_openFunc);
+        }
+
+        else if(!m_complete && m_openFunc != null)
+        {
+            StopCoroutine(m_openFunc);
+        }
+    }
+
+    IEnumerator OpenDoor()
+    {
+        while (m_doorClosed)
+        {
+            m_counter += Time.deltaTime * m_doorSpeed;
+
+            m_door.transform.position += new Vector3(0, Time.deltaTime * m_doorSpeed, 0);
+
+            if (m_door.transform.position.y >= m_finalY)
+                m_doorClosed = false;
+
+            yield return new WaitForSeconds(Time.deltaTime);
         }
     }
 }
