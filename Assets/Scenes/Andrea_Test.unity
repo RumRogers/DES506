@@ -1402,7 +1402,7 @@ PrefabInstance:
     - target: {fileID: 4580232385870872151, guid: 3ead565c55b9919448a7c71d26aae209,
         type: 3}
       propertyPath: m_maxSpeed
-      value: 6
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 4580232385870872151, guid: 3ead565c55b9919448a7c71d26aae209,
         type: 3}
@@ -2020,7 +2020,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_castableSpells:
     sizeSpell: 1
-    temperatureSpell: 0
+    temperatureSpell: 1
   m_magicState:
     size: 0
     temperature: 0
