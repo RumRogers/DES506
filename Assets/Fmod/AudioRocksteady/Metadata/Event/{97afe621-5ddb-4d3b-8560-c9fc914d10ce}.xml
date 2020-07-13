@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="Event" id="{97afe621-5ddb-4d3b-8560-c9fc914d10ce}">
+		<property name="color">
+			<value>Red Light 1</value>
+		</property>
 		<property name="name">
-			<value>Footsteps</value>
+			<value>Player_Footsteps</value>
 		</property>
 		<property name="outputFormat">
 			<value>0</value>
 		</property>
 		<relationship name="folder">
-			<destination>{a3a00274-67c7-4ff1-af73-f154584e7437}</destination>
+			<destination>{409ff1bd-b2c8-4475-a05d-550c0543f979}</destination>
 		</relationship>
 		<relationship name="mixer">
 			<destination>{2d5732f8-af2b-4dd8-a427-416f7b1a05ac}</destination>
