@@ -209,8 +209,6 @@ namespace Player
                 m_oldGroundPosition = Vector3.zero;
             }
             transform.position += m_velocity;
-
-            //Debug.Log($"state {m_state.GetType()} | anim state {Animator.GetState().GetType()} | is grounded {m_grounded} | ground {m_ground}");
         }
 
         public bool IsColliding()
@@ -280,6 +278,7 @@ namespace Player
 
             rayStart.y = transform.position.y;
             RaycastHit collisionInfo;
+            float distance = 100;
 
             rayStart -= (xRaySpacing * (3 / 2)) + (zRaySpacing * (3 / 2));
 
@@ -296,9 +295,10 @@ namespace Player
                             m_groundedHitInfo = collisionInfo;
                         }
                         //for slope detection we want the shortest ray to be the hit info 
-                        else if (collisionInfo.distance < m_groundedHitInfo.distance)
+                        else if (collisionInfo.distance < distance)
                         {
                             m_groundedHitInfo = collisionInfo;
+                            distance = collisionInfo.distance;
                         }
                         collided = true;
                     }
