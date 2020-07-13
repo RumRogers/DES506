@@ -11,6 +11,9 @@ namespace GameUI.SpellBook
     public class SpellBook : Automaton
     {
         [SerializeField]
+        private KeyCode m_keyShowSpellBook = KeyCode.F1;
+
+        [SerializeField]
         Transform m_mainContainer;       
 
         [SerializeField]
@@ -31,6 +34,8 @@ namespace GameUI.SpellBook
 
         PlayerEntity m_playerEntity;
         State m_previousPlayerState = null;
+
+        public KeyCode p_keyShowSpellBook { get => m_keyShowSpellBook; }
 
         SpellType m_currentlySelectedSpell = SpellType.NONE;
         public SpellType p_CurrentlySelectedSpell { get => m_currentlySelectedSpell; }

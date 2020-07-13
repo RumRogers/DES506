@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.01.00">
 	<object class="Event" id="{b8a69ab4-d95e-486b-986b-659f5af88a80}">
 		<property name="color">
-			<value>Red Light 1</value>
+			<value>Red Light 2</value>
 		</property>
 		<property name="name">
 			<value>Player_Land</value>
@@ -11,7 +11,7 @@
 			<value>0</value>
 		</property>
 		<relationship name="folder">
-			<destination>{409ff1bd-b2c8-4475-a05d-550c0543f979}</destination>
+			<destination>{485b056e-7e2b-495d-82d8-e7d55eb4be7d}</destination>
 		</relationship>
 		<relationship name="mixer">
 			<destination>{add0ac6b-392a-44ec-83cf-6857c14dec9a}</destination>
@@ -202,7 +202,7 @@
 			<value>-5</value>
 		</property>
 		<property name="pitch">
-			<value>-0.699999988</value>
+			<value>20.5</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{cdf180e8-d5f2-46d2-bb67-517a2b30b4b1}</destination>
