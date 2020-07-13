@@ -55,6 +55,10 @@ namespace Player
                 m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Velocity.normalized.x, 0, m_playerEntity.Velocity.normalized.z));
                 m_velocity += (m_playerEntity.Direction * m_playerEntity.AerialAccelleration) * Time.deltaTime;
             }
+            else if (Mathf.Abs(m_velocity.x) > 0.1f || Mathf.Abs(m_velocity.z) > 0.1f)
+            {
+                m_velocity += (((m_velocity.normalized) * -1) * m_playerEntity.AerialDeceleration) * Time.deltaTime;
+            }
 
             m_playerEntity.Velocity = new Vector3(m_velocity.x, m_playerEntity.Velocity.y, m_velocity.z);
         }
