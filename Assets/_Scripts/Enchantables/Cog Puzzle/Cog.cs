@@ -21,6 +21,13 @@ public class Cog : Enchantable
     private Vector3 m_smallScale = Vector3.zero;
     private Vector3 m_largeScale = Vector3.zero;
 
+    public Cog(bool direction, bool tick, float smallScaleFactor, float largeScaleFactor, float speed)
+    {
+        m_isClockwise = direction;
+        m_isTicking = tick;
+        m_smallScale = transform.localScale * smallScaleFactor;
+        m_largeScale = transform.localScale * largeScaleFactor;
+    }
 
     /// <summary>
     /// The setup call for when the cog manager. Should probably change to a constructor, but seeing as it's an existing component, should be fine this way.

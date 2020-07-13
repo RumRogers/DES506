@@ -30,6 +30,7 @@ public class CogManager : MonoBehaviour
             Debug.LogError("Please add more cogs to the manager");
 
         bool m_directionCheck = true;
+
         foreach (Cog c in m_cogs)
         {
             c.SetUp(m_directionCheck, m_tick, m_smallScaleFactor, m_largeScaleFactor, m_speed);
