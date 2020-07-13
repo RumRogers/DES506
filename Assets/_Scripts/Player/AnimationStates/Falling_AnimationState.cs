@@ -22,7 +22,16 @@ namespace Player
         //while this might be true, this allows us to control which states can be transitioned into others.
         public override void Manage()
         {
-            m_playerAnimator.SetState(new JumpEnd_AnimationState(m_playerAnimator));
+            switch (m_playerAnimator.PlayerAnimProperties)
+            {
+                case PlayerAnimationProperties.JUMPING:
+                    //can actually transition to the jump start state if the player has jumped within the grace period
+                    m_playerAnimator.SetState(new Jumping_AnimationState(m_playerAnimator));
+                    break;
+                default:
+                    m_playerAnimator.SetState(new JumpEnd_AnimationState(m_playerAnimator));
+                    break;
+            }
         }
 
         IEnumerator Transition()

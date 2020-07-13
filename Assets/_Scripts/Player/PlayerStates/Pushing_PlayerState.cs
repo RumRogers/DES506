@@ -139,8 +139,6 @@ namespace Player
                 m_playerEntity.ClosestInteractable.position = finalPosition + movableOffset;
                 m_moving = false;
 
-                m_playerEntity.OnBoxFinishedMoving();
-
                 m_playerEntity.Velocity = Vector3.zero;
 
                 yield break;

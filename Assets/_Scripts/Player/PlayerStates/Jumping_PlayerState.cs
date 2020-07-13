@@ -18,9 +18,11 @@ namespace Player
         public Jumping_PlayerState(GameCore.System.Automaton owner) : base(owner)
         {
             m_playerEntity = (PlayerEntity)m_owner;
-            
+            //set the y component to 0 as we cannot guarantee that the player wasn't falling or moving downwards on a slope when we enter this state
+            m_playerEntity.Velocity = new Vector3(m_playerEntity.Velocity.x, 0, m_playerEntity.Velocity.z);
             //get the speed when entering the state before the jump vel is added. used to store the speed for multiplying in the direction held after jump is finished
-            m_entrySpeed = m_velocity.magnitude;
+            m_entrySpeed = m_playerEntity.Velocity.magnitude;
+            m_playerEntity.Velocity /= 2;
 
             //Adds velocity based on entity property flags
             if (m_playerEntity.HasProperty(PlayerEntityProperties.JUMP_NORMAL))
@@ -63,8 +65,14 @@ namespace Player
                 if (m_playerEntity.Direction != Vector3.zero)
                 {
                     m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Velocity.normalized.x, 0, m_playerEntity.Velocity.normalized.z));
-                    m_velocity += (m_playerEntity.Direction * m_playerEntity.AerialAccelleration) * Time.deltaTime;
-                   
+                    if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING))
+                    {
+                        m_velocity = Vector3.ClampMagnitude(m_velocity + (m_playerEntity.Direction * m_playerEntity.AerialAccelleration) * Time.deltaTime, m_playerEntity.IceMaxSpeed);  //seems to work nicely clamped at the max speed
+                    }
+                    else
+                    {
+                        m_velocity = Vector3.ClampMagnitude(m_velocity + (m_playerEntity.Direction * m_playerEntity.AerialAccelleration) * Time.deltaTime, m_playerEntity.MaxSpeed);  //seems to work nicely clamped at the max speed
+                    }
                 }
                 else if (Mathf.Abs(m_velocity.x) > 0.1f || Mathf.Abs(m_velocity.z) > 0.1f)
                 {

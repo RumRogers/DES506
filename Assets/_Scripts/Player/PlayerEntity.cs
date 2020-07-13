@@ -59,6 +59,7 @@ namespace Player
         [SerializeField] float m_jumpVelocity = 4.5f;
         [SerializeField] float m_highJumpVelocity = 9.5f;
         [SerializeField] float m_jumpHeldMultiplier = 1.5f;   //the amount of velocity added per second to the y axis if jump is held down, added over time, not set like jump vel
+        [SerializeField]float m_canJumpTimerLimit = 0.25f; //the time the player can be off the ground for and still jump
         [Header("Collision")]
         [SerializeField] float m_maxClimbableIncline = 45.0f;
         [SerializeField] float m_heightPadding = 0.1f;  //How far from the floor the ray should start
@@ -74,6 +75,9 @@ namespace Player
 
         //player stats (not editor accessible)
         bool m_grounded = true;
+        bool m_canJump = true;
+        float m_canJumpTimer = 0;
+        
         Vector3 m_playerStartPosition;
         Vector3 m_velocity = Vector3.zero;
         Vector3 m_direction;
@@ -110,6 +114,7 @@ namespace Player
         public Vector3 Direction { get => m_direction; set => m_direction = value; }
         //player stats, getters only
         public bool Grounded { get => m_grounded; }
+        public bool CanJump { get => m_canJump; }
         public float MaxSpeed { get => m_maxSpeed; }
         public float WalkingAcceleration { get => m_walkingAcceleration; }
         public float WalkingDeceleration { get => m_walkingDeceleration; }
@@ -167,7 +172,7 @@ namespace Player
         override protected void Update()
         {
             m_grounded = IsGrounded();
-
+            m_canJump = IsAbleToJump();
             //First check if death state is triggered to save time / ensure the player cannot do something if they are alread dead
             if (HasProperty(PlayerEntityProperties.DYING))
             {
@@ -204,6 +209,8 @@ namespace Player
                 m_oldGroundPosition = Vector3.zero;
             }
             transform.position += m_velocity;
+
+            //Debug.Log($"state {m_state.GetType()} | anim state {Animator.GetState().GetType()} | is grounded {m_grounded} | ground {m_ground}");
         }
 
         public bool IsColliding()
@@ -211,7 +218,7 @@ namespace Player
             Vector3 rayStart = transform.position;
             Vector3 rayDirection = m_velocity.normalized; //new Vector3(m_velocity.x, 0, m_velocity.z).normalized;
             Vector3 horizontalRaySpacing = Vector3.Cross(rayDirection, transform.up);    // get perpendicular vector to our direction for spacing
-            Vector3 verticalRaySpacing = new Vector3(0, m_playerCollider.bounds.extents.y / m_numVerticalRays, 0);
+            Vector3 verticalRaySpacing = new Vector3(0, m_playerCollider.bounds.size.y / m_numVerticalRays, 0);
 
             if (m_velocity.x != 0)
             {
@@ -268,8 +275,8 @@ namespace Player
             }
             bool collided = false;
             Vector3 rayStart = transform.position;
-            Vector3 xRaySpacing = transform.right * (m_playerCollider.bounds.extents.x / 3);
-            Vector3 zRaySpacing = transform.forward * (m_playerCollider.bounds.extents.z / 3);
+            Vector3 xRaySpacing = transform.right * (m_playerCollider.bounds.size.x / 3);
+            Vector3 zRaySpacing = transform.forward * (m_playerCollider.bounds.size.z / 3);
 
             rayStart.y = transform.position.y;
             RaycastHit collisionInfo;
@@ -280,7 +287,7 @@ namespace Player
             {
                 for (int z = 0; z < 3; ++z)
                 {
-                    //Debug.DrawLine(rayStart, rayStart + (-transform.up * m_playerCollider.bounds.extents.y));
+                    Debug.DrawLine(rayStart, rayStart + (-transform.up * m_playerCollider.bounds.extents.y));
                     if (Physics.Raycast(rayStart, -transform.up, out collisionInfo, m_playerCollider.bounds.extents.y + m_groundOverlapPadding))
                     {
                         //if it's the first ray, set it to the first result regardless, as we cannot compare null variables
@@ -344,8 +351,16 @@ namespace Player
             return collided;
         }
 
-        public void OnBoxFinishedMoving()
+        public bool IsAbleToJump()
         {
+            if (m_grounded)
+                return true;
+
+            m_canJumpTimer += Time.deltaTime;
+            if (m_canJumpTimer > m_canJumpTimerLimit)
+                return false;
+            else
+                return true;
         }
 
         #region MUTABLE ENTITY IMPLEMENTATION

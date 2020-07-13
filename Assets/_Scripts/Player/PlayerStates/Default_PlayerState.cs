@@ -11,7 +11,6 @@ namespace Player
 
         Vector3 m_velocity;  //local velocity varable, easier to manipulate individual components, added to the players velocity at end of Manage()
 
-
         public Default_PlayerState(GameCore.System.Automaton owner) : base(owner)
         {
             m_playerEntity = (PlayerEntity)owner;
@@ -87,19 +86,11 @@ namespace Player
                     m_playerEntity.Direction = slopeDirection;
                 }
 
-                //Overlap recovery (ground)
-                if (Vector3.Distance(m_playerEntity.transform.position, m_playerEntity.GroundHitInfo.point) < m_playerEntity.PlayerCollider.bounds.extents.y)
-                {
-                    float targetY = m_playerEntity.GroundHitInfo.point.y + (m_playerEntity.PlayerCollider.bounds.extents.y);
-                    float lerpedY = Mathf.Lerp(m_playerEntity.transform.position.y, targetY, Time.deltaTime * 10);
-                    m_playerEntity.transform.position = new Vector3(m_playerEntity.transform.position.x, lerpedY, m_playerEntity.transform.position.z);
-                }
-
                 //If there is input, add velocity in that direction, but clamp the movement speed, Y velocity should always equal zero in this state, so no need to preserve down / up velocity
                 if (m_playerEntity.Direction != Vector3.zero)
                 {
                     //rotate the player to face the direction they are traveling in
-                    m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Velocity.normalized.x, 0, m_playerEntity.Direction.z));
+                    m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Direction.normalized.x, 0, m_playerEntity.Direction.z));
                     if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING))
                     {
                         m_velocity += (m_playerEntity.Direction * m_playerEntity.IceAcceleration) * Time.deltaTime;
