@@ -98,10 +98,12 @@ namespace Player
                     }
                     else
                     {
+                        m_velocity = m_velocity.magnitude * m_playerEntity.Direction;
                         m_velocity += (m_playerEntity.Direction * m_playerEntity.WalkingAcceleration) * Time.deltaTime;
                         m_velocity = Vector3.ClampMagnitude(m_velocity, m_playerEntity.MaxSpeed);
                     }
                     m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.RUNNING);
+                    m_playerEntity.Animator.RunningState.speed = (m_velocity.magnitude / m_playerEntity.MaxSpeed) * m_playerEntity.Animator.RunningAnimSpeed;
                 }
                 else if (Mathf.Abs(m_velocity.x) > 0.1f || Mathf.Abs(m_velocity.z) > 0.1f)
                 {

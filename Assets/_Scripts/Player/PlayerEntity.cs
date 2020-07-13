@@ -199,7 +199,13 @@ namespace Player
                 //if the ground has moved since the last frame, add that movement to the player
                 if (m_newGroundPosition != m_oldGroundPosition)
                 {
-                    m_velocity += (m_newGroundPosition - m_oldGroundPosition);
+                    //some times objects moving will add a large amount of velocity to the player, if this is the case, the player likely wouldn't be able to stay on them anyway
+                    //also fixes a bug where the way this extra movment was calculated with the seesaw would shoot the player upwards
+                    Vector3 addedVel = m_newGroundPosition - m_oldGroundPosition;
+                    if (addedVel.magnitude < 20)
+                    {
+                        m_velocity += (m_newGroundPosition - m_oldGroundPosition);
+                    }
                 }
                 m_oldGroundPosition = m_newGroundPosition;
             }

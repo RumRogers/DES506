@@ -236,14 +236,6 @@ namespace Player
                     m_playerEntity.Direction = slopeDirection;
                 }
 
-                //Overlap recovery (ground)
-                if (Vector3.Distance(m_playerEntity.transform.position, m_playerEntity.GroundHitInfo.point) < m_playerEntity.PlayerCollider.bounds.extents.y)
-                {
-                    float targetY = m_playerEntity.GroundHitInfo.point.y + (m_playerEntity.PlayerCollider.bounds.extents.y);
-                    float lerpedY = Mathf.Lerp(m_playerEntity.transform.position.y, targetY, Time.deltaTime * 10);
-                    m_playerEntity.transform.position = new Vector3(m_playerEntity.transform.position.x, lerpedY, m_playerEntity.transform.position.z);
-                }
-
                 //If there is input, add velocity in that direction, but clamp the movement speed, Y velocity should always equal zero in this state, so no need to preserve down / up velocity
                 if (m_playerEntity.Direction != Vector3.zero)
                 {
@@ -254,6 +246,7 @@ namespace Player
                     }
                     else
                     {
+                        m_velocity = m_velocity.magnitude * m_playerEntity.Direction;
                         m_velocity += (m_playerEntity.Direction * m_playerEntity.AimingAcceleration) * Time.deltaTime;
                         m_velocity = Vector3.ClampMagnitude(m_velocity, m_playerEntity.AimingMaxSpeed);
                     }

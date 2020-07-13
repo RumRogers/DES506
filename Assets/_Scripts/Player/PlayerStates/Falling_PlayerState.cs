@@ -23,7 +23,7 @@ namespace Player
 
         public override void Manage()
         {
-            m_playerEntity.Velocity += (Vector3.down * m_playerEntity.Gravity) * Time.deltaTime;
+            m_playerEntity.Velocity += (Vector3.down * m_playerEntity.Gravity * 2) * Time.deltaTime;
 
             if (m_playerEntity.CanJump)
             {
