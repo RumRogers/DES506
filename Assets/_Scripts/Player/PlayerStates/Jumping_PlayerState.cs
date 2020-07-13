@@ -29,7 +29,7 @@ namespace Player
             if (m_playerEntity.HasProperty(PlayerEntityProperties.JUMP_HIGH))
                 m_velocity = new Vector3(0, m_playerEntity.HighJumpVelocity, 0);
 
-            m_additionalJumpForce = m_playerEntity.Velocity.y * m_playerEntity.JumpHeldMutliplier;
+            m_additionalJumpForce = m_velocity.y * m_playerEntity.JumpHeldMutliplier;
 
             m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.JUMPING);
 
@@ -45,7 +45,7 @@ namespace Player
                 if (Input.GetButton("Jump") && m_time < m_maxButtonHoldTime)
                 {
                     //adding additional jump force gained by holding the jump button
-                    m_playerEntity.Velocity += (Vector3.up * m_additionalJumpForce) * Time.deltaTime;
+                    m_velocity += (Vector3.up * m_additionalJumpForce) * Time.deltaTime;
                     m_time += Time.deltaTime;
                 }
                 else if (Input.GetButtonUp("Jump") || m_time > m_maxButtonHoldTime)
@@ -68,9 +68,9 @@ namespace Player
                 }
                 else if (Mathf.Abs(m_velocity.x) > 0.1f || Mathf.Abs(m_velocity.z) > 0.1f)
                 {
-                    m_velocity += (((m_velocity.normalized) * -1) * m_playerEntity.WalkingDeceleration) * Time.deltaTime;
+                    m_velocity += (((m_velocity.normalized) * -1) * m_playerEntity.AerialDeceleration) * Time.deltaTime;
                 }
-                m_playerEntity.Velocity = new Vector3(m_velocity.x, m_velocity.y, m_velocity.z);
+                m_playerEntity.Velocity = m_velocity;
 
                 if (m_playerEntity.Velocity.y < 0)
                 {

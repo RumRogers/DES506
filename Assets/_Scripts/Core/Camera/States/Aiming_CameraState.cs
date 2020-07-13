@@ -58,7 +58,7 @@ namespace GameCore.Camera
                 Vector3 rotation = Quaternion.RotateTowards(Quaternion.Euler(m_rotation), rotationDirection, Time.deltaTime * m_playerMoveCamera.p_AutoAimStrength).eulerAngles;
 
                 //kind of a bandaid solution, kinda bummed I couldn't find a better way but quaternions wrap around back to 360 if the angle is too low. Making aiming at things overhead cause issues with clamping rotation later 
-                if (m_rotation.x < 0 && rotation.x > 0)
+                if (rotation.x > m_playerMoveCamera.p_AimingMaxAngle )
                 {
                     rotation.x = 0 - (360 - rotation.x);
                 }
