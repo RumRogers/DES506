@@ -7,8 +7,6 @@ namespace GameUI.SpellBook
 {
     public class Invisible_SpellBookState : State
     {
-        public static KeyCode m_keyShowSpellBook = KeyCode.F1;
-
         SpellBook m_spellBook;
         public Invisible_SpellBookState(SpellBook owner) : base(owner)
         {
@@ -19,7 +17,7 @@ namespace GameUI.SpellBook
 
         public override void Manage()
         {
-            if(Input.GetKeyDown(m_keyShowSpellBook))
+            if(Input.GetKeyDown(m_spellBook.p_keyShowSpellBook))
             {
                 m_owner.SetState(new Active_SpellBookState(m_spellBook));
             }
