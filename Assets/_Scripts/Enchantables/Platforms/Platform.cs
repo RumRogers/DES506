@@ -67,42 +67,45 @@ public class Platform : Enchantable
             {
                 case PlatformType.HORIZONTAL:
                     //Set the destination (done here as it varies for types)
-                    m_destination = m_defaultPosition + transform.right * m_motionWidth;
+                    //m_destination = m_defaultPosition + transform.right * m_motionWidth;
 
                     //Alter direction based if destination is reached
-                    if (Vector3.Distance(transform.position, m_defaultPosition) <= c_distanceFactor)
-                    {
-                        m_direction = 1;
-                    }
+                    //if (Vector3.Distance(transform.position, m_defaultPosition) <= c_distanceFactor)
+                    //{
+                    //    m_direction = 1;
+                    //}
 
-                    else if (Vector3.Distance(transform.position, m_destination) <= c_distanceFactor)
-                    {
-                        m_direction = -1;
-                    }
+                    //else if (Vector3.Distance(transform.position, m_destination) <= c_distanceFactor)
+                    //{
+                    //    m_direction = -1;
+                    //}
 
                     //Prevent clipping by moving away from walls
-                    if(Physics.Raycast(transform.position, transform.right * m_direction, c_distanceFactor + 1 * (transform.localScale.z / 2)))
-                    {
-                        m_direction = -m_direction;
-                    }
+                    //if(Physics.Raycast(transform.position, transform.right * m_direction, c_distanceFactor + 1 * (transform.localScale.z / 2)))
+                    //{
+                    //    m_direction = -m_direction;
+                    //}
 
-                    transform.position += transform.right * m_direction * (Time.deltaTime * m_platformSpeed);
-                        break;
+                    //transform.position += transform.right * m_direction * (Time.deltaTime * m_platformSpeed);
+                    TranslatePosition(transform.right);
+                    break;
 
                 case PlatformType.VERTICAL:
-                    m_destination = m_defaultPosition + transform.up * m_motionWidth;
+                    //m_destination = m_defaultPosition + transform.up * m_motionWidth;
 
-                    if (Vector3.Distance(transform.position, m_defaultPosition) <= c_distanceFactor)
-                    {
-                        m_direction = 1;
-                    }
+                    //if (Vector3.Distance(transform.position, m_defaultPosition) <= c_distanceFactor)
+                    //{
+                    //    m_direction = 1;
+                    //}
 
-                    else if (Vector3.Distance(transform.position, m_destination) <= c_distanceFactor)
-                    {
-                        m_direction = -1;
-                    }
+                    //else if (Vector3.Distance(transform.position, m_destination) <= c_distanceFactor)
+                    //{
+                    //    m_direction = -1;
+                    //}
 
-                    transform.position += transform.up * m_direction * (Time.deltaTime * m_platformSpeed);
+                    //transform.position += transform.up * m_direction * (Time.deltaTime * m_platformSpeed);
+
+                    TranslatePosition(transform.up);
 
                     break;
 
@@ -183,8 +186,25 @@ public class Platform : Enchantable
         Gizmos.DrawSphere(transform.position + new Vector3(0, 0, m_motionWidth), 0.6f);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void TranslatePosition(Vector3 direction)
     {
-        Debug.Log("TEST");
+        m_destination = m_defaultPosition + direction * m_motionWidth;
+
+        if (Vector3.Distance(transform.position, m_defaultPosition) <= c_distanceFactor)
+        {
+            m_direction = 1;
+        }
+
+        else if (Vector3.Distance(transform.position, m_destination) <= c_distanceFactor)
+        {
+            m_direction = -1;
+        }
+
+        if (Physics.Raycast(transform.position, direction * m_direction, c_distanceFactor + 1 * (transform.localScale.z / 2)))
+        {
+            m_direction = -m_direction;
+        }
+
+        transform.position += direction * m_direction * (Time.deltaTime * m_platformSpeed);
     }
 }
