@@ -4099,8 +4099,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a4a153d9016fad409598d5c966557b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_shrinkSpellSFX: {fileID: 0}
-  m_enlargeSpellSFX: {fileID: 0}
+  m_shrinkSpellSFX: {fileID: 3527441442036735292, guid: c858deb5d7b834f408148afcc1984218,
+    type: 3}
+  m_enlargeSpellSFX: {fileID: 823886751311533561, guid: 7172979037907ae45a5f0b743f4c35c2,
+    type: 3}
   m_infernoSpellSFX: {fileID: 0}
   m_coldSpellSFX: {fileID: 0}
 --- !u!114 &1292172248
@@ -4594,6 +4596,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_motionWidth: 3
   m_platformSpeed: 2
+  m_platType: 0
+  m_smallScaleFactor: 0
+  m_largeScaleFactor: 0
 --- !u!114 &1423714909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4879,8 +4884,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a4a153d9016fad409598d5c966557b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_shrinkSpellSFX: {fileID: 0}
-  m_enlargeSpellSFX: {fileID: 0}
+  m_shrinkSpellSFX: {fileID: 3527441442036735292, guid: c858deb5d7b834f408148afcc1984218,
+    type: 3}
+  m_enlargeSpellSFX: {fileID: 823886751311533561, guid: 7172979037907ae45a5f0b743f4c35c2,
+    type: 3}
   m_infernoSpellSFX: {fileID: 0}
   m_coldSpellSFX: {fileID: 0}
 --- !u!114 &1439155145
@@ -5057,6 +5064,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_motionWidth: 12
   m_platformSpeed: 2
+  m_platType: 0
+  m_smallScaleFactor: 0
+  m_largeScaleFactor: 0
 --- !u!114 &1461961825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5732,8 +5742,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a4a153d9016fad409598d5c966557b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_shrinkSpellSFX: {fileID: 0}
-  m_enlargeSpellSFX: {fileID: 0}
+  m_shrinkSpellSFX: {fileID: 3527441442036735292, guid: c858deb5d7b834f408148afcc1984218,
+    type: 3}
+  m_enlargeSpellSFX: {fileID: 823886751311533561, guid: 7172979037907ae45a5f0b743f4c35c2,
+    type: 3}
   m_infernoSpellSFX: {fileID: 0}
   m_coldSpellSFX: {fileID: 0}
 --- !u!114 &1562994312
@@ -6844,8 +6856,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a4a153d9016fad409598d5c966557b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_shrinkSpellSFX: {fileID: 0}
-  m_enlargeSpellSFX: {fileID: 0}
+  m_shrinkSpellSFX: {fileID: 3527441442036735292, guid: c858deb5d7b834f408148afcc1984218,
+    type: 3}
+  m_enlargeSpellSFX: {fileID: 823886751311533561, guid: 7172979037907ae45a5f0b743f4c35c2,
+    type: 3}
   m_infernoSpellSFX: {fileID: 0}
   m_coldSpellSFX: {fileID: 0}
 --- !u!114 &1815796853
@@ -7558,6 +7572,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_motionWidth: 12
   m_platformSpeed: 2
+  m_platType: 0
+  m_smallScaleFactor: 0
+  m_largeScaleFactor: 0
 --- !u!114 &1961139463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9235,8 +9252,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a4a153d9016fad409598d5c966557b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_shrinkSpellSFX: {fileID: 0}
-  m_enlargeSpellSFX: {fileID: 0}
+  m_shrinkSpellSFX: {fileID: 3527441442036735292, guid: c858deb5d7b834f408148afcc1984218,
+    type: 3}
+  m_enlargeSpellSFX: {fileID: 823886751311533561, guid: 7172979037907ae45a5f0b743f4c35c2,
+    type: 3}
   m_infernoSpellSFX: {fileID: 0}
   m_coldSpellSFX: {fileID: 0}
 --- !u!114 &2084276382419464057
