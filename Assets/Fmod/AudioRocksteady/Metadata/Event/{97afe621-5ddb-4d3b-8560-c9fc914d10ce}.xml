@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.01.00">
 	<object class="Event" id="{97afe621-5ddb-4d3b-8560-c9fc914d10ce}">
 		<property name="color">
-			<value>Red Light 1</value>
+			<value>Red Light 2</value>
 		</property>
 		<property name="name">
 			<value>Player_LeftStep</value>
@@ -11,7 +11,7 @@
 			<value>0</value>
 		</property>
 		<relationship name="folder">
-			<destination>{409ff1bd-b2c8-4475-a05d-550c0543f979}</destination>
+			<destination>{485b056e-7e2b-495d-82d8-e7d55eb4be7d}</destination>
 		</relationship>
 		<relationship name="mixer">
 			<destination>{2d5732f8-af2b-4dd8-a427-416f7b1a05ac}</destination>
@@ -93,7 +93,7 @@
 	<object class="MixerBusPanner" id="{bcb72a0c-c93e-4f0c-a809-75d04bbd65c2}" />
 	<object class="MultiSound" id="{6b79765a-4617-4cfc-bc9e-d7abacad6e6c}">
 		<property name="pitch">
-			<value>6</value>
+			<value>9</value>
 		</property>
 		<property name="playlistMode">
 			<value>1</value>

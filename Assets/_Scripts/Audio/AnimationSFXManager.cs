@@ -5,23 +5,31 @@ using FMOD.Studio;
 
 public class AnimationSFXManager : MonoBehaviour
 {
+    //Player Movement
+
     public void playLeftstepSFX ()
     {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/PlayerMovement/Player_LeftStep");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/PLAYER/MOVEMENT/Player_LeftStep");
     }
 
     public void playRightstepSFX()
     {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/PlayerMovement/Player_RightStep");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/PLAYER/MOVEMENT/Player_RightStep");
     }
 
     public void playJumpSFX()
     {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/PlayerMovement/Player_Jump");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/PLAYER/MOVEMENT/Player_Jump");
     }
 
     public void playLandSFX()
     {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/PlayerMovement/Player_Land");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/PLAYER/MOVEMENT/Player_Land");
+    }
+
+    //Player Spellcasting
+    public void spellcastSFX()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SPELLS/Spell_Cast");
     }
 }
