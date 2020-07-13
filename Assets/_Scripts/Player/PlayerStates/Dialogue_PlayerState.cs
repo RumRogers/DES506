@@ -7,24 +7,33 @@ namespace Player {
     {
         PlayerEntity m_playerEntity;
         GameCore.Camera.PlayerMoveCamera m_playerMoveCamera;
-        Transform m_speaker;
+        GameObject m_speaker;
 
-        public Dialogue_PlayerState(GameCore.System.Automaton owner) : base(owner)
+        GameUI.Dialogue.Dialogue m_dialogue;
+
+        public Dialogue_PlayerState(GameCore.System.Automaton owner, GameObject target = null) : base(owner)
         {
             m_playerEntity = (PlayerEntity)owner;
 
+            m_speaker = target;
 
-            float closestDistance = 100;
-
-            foreach (Transform t in m_playerEntity.SpeakersInRange)
+            if(!m_speaker.TryGetComponent<GameUI.Dialogue.Dialogue>(out m_dialogue))
             {
-                float distance = (t.position - m_playerEntity.transform.position).magnitude;
-                if (distance < closestDistance)
-                {
-                    closestDistance = distance;
-                    m_speaker = t;
-                }
+                Debug.Log("Target has no dialogue script attached");
             }
+
+
+            ////float closestDistance = 100;
+
+            //foreach (Transform t in m_playerEntity.SpeakersInRange)
+            //{
+            //    float distance = (t.position - m_playerEntity.transform.position).magnitude;
+            //    if (distance < closestDistance)
+            //    {
+            //        closestDistance = distance;
+            //        m_speaker = t;
+            //    }
+            //}
 
             if (!Camera.main.TryGetComponent<GameCore.Camera.PlayerMoveCamera>(out m_playerMoveCamera))
             {
@@ -33,10 +42,10 @@ namespace Player {
             }
             else
             {
-                m_playerMoveCamera.SetState(new GameCore.Camera.Dialogue_CameraState(m_playerMoveCamera, m_speaker));
+                m_playerMoveCamera.SetState(new GameCore.Camera.Dialogue_CameraState(m_playerMoveCamera, m_speaker.transform));
             }
 
-            Vector3 lookDir = m_speaker.position - m_playerEntity.transform.position;
+            Vector3 lookDir = m_speaker.transform.position - m_playerEntity.transform.position;
             lookDir.y = 0;
             m_playerEntity.transform.rotation = Quaternion.LookRotation(lookDir);
             m_playerEntity.Velocity = Vector3.zero;
@@ -47,9 +56,15 @@ namespace Player {
 
         public override void Manage()
         {
+            if (!m_dialogue.GetDialogueHasStarted())
+            {
+                m_dialogue.StartDialogue();
+            }
+
             if (Input.GetButtonDown("Submit"))
             {
                 //advance dialogue here
+                m_dialogue.FillNextLine();
             }
             else if (Input.GetButtonDown("Cancel"))
             {
