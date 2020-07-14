@@ -74,8 +74,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   m_pushingSpeed: 2
-  m_maxSpeed: 0.4
-  m_walkingAcceleration: 3
+  m_maxSpeed: 0.2
+  m_walkingAcceleration: 1
   m_walkingDeceleration: 20
   m_aimingMaxSpeed: 0.1
   m_aimingAcceleration: 1
@@ -89,7 +89,7 @@ MonoBehaviour:
   m_gravity: 0.59
   m_jumpVelocity: 0.2
   m_highJumpVelocity: 15
-  m_jumpHeldMultiplier: 4
+  m_jumpHeldMultiplier: 1
   m_canJumpTimerLimit: 0.25
   m_maxClimbableIncline: 45
   m_heightPadding: 0.1
