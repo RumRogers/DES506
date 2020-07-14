@@ -8,6 +8,7 @@ namespace GameCore.GameState
     public class Paused_State : GameCore.System.State
     { 
         GameStateController controller;
+        GameObject m_playerEntity;
 
         public Paused_State(GameCore.System.Automaton owner) : base(owner)
         {
@@ -19,6 +20,8 @@ namespace GameCore.GameState
             {
                 Debug.Log("Failed to find GameStateController script from owner");
             }
+
+            m_playerEntity.
 
             controller.GetPauseMenu().SetActive(true);
 
