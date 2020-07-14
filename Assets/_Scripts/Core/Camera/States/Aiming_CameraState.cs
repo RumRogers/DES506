@@ -49,7 +49,7 @@ namespace GameCore.Camera
         {
             Vector2 input = new Vector2(Input.GetAxis("Camera Y"), Input.GetAxis("Camera X"));
             //if what the camera is pointing at is of interest (enchantable)
-            if (m_playerMoveCamera.p_AimedAtTransform != null)
+            if (m_playerMoveCamera.p_AimedAtTransform != null && m_playerMoveCamera.p_AutoAimOn)
             {
                 input /= 2; //half the input, potentially expose this to the editor
                 //rotation direction for aim assist
