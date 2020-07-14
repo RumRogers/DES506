@@ -15,7 +15,10 @@ public class FallPlatform : Enchantable
     private float m_shakeScale;
 
     [SerializeField]
-    private float m_shaleSpeed;
+    private float m_shakeSpeed;
+
+    [SerializeField]
+    private GameObject m_platform;
 
     private Rigidbody m_rigBod;
     
@@ -39,6 +42,7 @@ public class FallPlatform : Enchantable
     {
         m_rigBod = GetComponent<Rigidbody>();
         m_rigBod.isKinematic = true;
+        m_platform.GetComponent<Rigidbody>().isKinematic = true;
         m_position = transform.position;
         m_timeTillFall = m_normalTimeTillFall;
         m_rotation = transform.rotation;
@@ -90,12 +94,14 @@ public class FallPlatform : Enchantable
                 if (m_counter >= m_timeTillFall)
                 {
                     m_rigBod.isKinematic = false;
+                    m_platform.GetComponent<Rigidbody>().isKinematic = false;
                 }
 
                 else //Shaking  
                 {
-                    transform.RotateAround(transform.position, transform.forward, m_rotation.z + (Mathf.Sin(m_counter * 0.01f)));
+                    //transform.RotateAround(transform.position, transform.forward, m_rotation.z + (Mathf.Sin(m_counter * 0.1f)));
                     //transform.position = m_position + (transform.right * (Mathf.Sin(m_counter * m_shaleSpeed)) * m_shakeScale);
+                    m_platform.transform.position = m_position + (transform.right * (Mathf.Sin(m_counter * m_shakeSpeed)) * m_shakeScale);
                 }
                     
 
@@ -116,6 +122,7 @@ public class FallPlatform : Enchantable
             {
                 m_counter = 0;
                 m_rigBod.isKinematic = true;
+                m_platform.GetComponent<Rigidbody>().isKinematic = true;
                 transform.position = m_position;
                 m_fallTriggerStart = false;
             }

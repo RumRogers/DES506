@@ -14,6 +14,7 @@ public class SeeSaw : Enchantable
     private Vector3 m_smallScale;// = new Vector3(0.2f, 0.2f, 0.2f);
     private Vector3 m_largeScale;// = new Vector3(2.0f, 2.0f, 2.0f);
     private float m_counter = 0;
+    private Renderer m_renderer;
 
     private const float c_scaleTime = 2.0f;
     // Start is called before the first frame update
@@ -22,6 +23,7 @@ public class SeeSaw : Enchantable
         //Bring in and check vital components
         m_joint = GetComponent<HingeJoint>();
         m_rigBod = GetComponent<Rigidbody>();
+        m_renderer = GetComponent<Renderer>();
 
         //Defaults for the hinge and rigid body
         m_rigBod.isKinematic = m_startFrozen;
@@ -43,6 +45,11 @@ public class SeeSaw : Enchantable
             m_counter += Time.deltaTime;
             yield return new WaitForSeconds(Time.deltaTime);
         }
+    }
+
+    public Vector3 GetDimensions()
+    {
+        return m_renderer.bounds.size;
     }
 
     #region Spell Functions
