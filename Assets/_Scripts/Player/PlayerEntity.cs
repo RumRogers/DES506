@@ -253,7 +253,6 @@ namespace Player
                         // if hit, modify movement to use the perpendicular vector (-up because we want the players right, not the walls right)
                         Vector3 wallCross = Vector3.Cross(m_collisionHitInfo.normal, -Vector3.up).normalized;
                         Debug.DrawRay(m_collisionHitInfo.point, wallCross * 10, Color.red);
-                        Debug.Log($"{Vector3.Angle(wallCross, m_velocity.normalized)}");
 
                         if (Vector3.Angle(wallCross, m_velocity.normalized) > 90)
                             wallCross *= -1;

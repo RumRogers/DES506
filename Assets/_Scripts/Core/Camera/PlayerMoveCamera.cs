@@ -92,9 +92,9 @@ namespace GameCore.Camera
         private void LateUpdate()
         {
             m_state.Manage();
-            CheckCollision();
             transform.position = Vector3.Lerp(transform.position, m_position, m_smoothFactor);
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0);//never want the camera to roll
+            CheckCollision();
         }
 
         //Casts ray from target to camera and checks if it hits, if so moves camera to hit position
