@@ -81,14 +81,16 @@ MonoBehaviour:
   m_aimingAcceleration: 1
   m_aimingDeceleration: 1
   m_highlightShader: {fileID: 4800000, guid: 43f422d377633484191fb9b22d687267, type: 3}
-  m_iceAcceleration: 0.2
+  m_iceAcceleration: 1
   m_iceDeceleration: 0.1
-  m_maxIceSpeed: 0.1
+  m_maxIceSpeed: 0.6
   m_aerialAccelleration: 0.5
+  m_aerialDeceleration: 5
   m_gravity: 0.59
   m_jumpVelocity: 0.2
   m_highJumpVelocity: 15
   m_jumpHeldMultiplier: 4
+  m_canJumpTimerLimit: 0.25
   m_maxClimbableIncline: 45
   m_heightPadding: 0.1
   m_groundOverlapPadding: 0.3
@@ -142,7 +144,6 @@ MonoBehaviour:
   m_projectileContainerPrefab: {fileID: 2198351285241104367, guid: 938af60f827cfa942916f6028c22db93,
     type: 3}
   m_timeBetweenShots: 1
-  m_range: 15
   m_speed: 5
   m_spellRange: 30
   m_meleeRange: 1
