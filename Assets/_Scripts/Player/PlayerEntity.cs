@@ -187,10 +187,7 @@ namespace Player
 
             base.Update();
 
-            if (IsColliding())
-            {
-                m_velocity = new Vector3(0.0f, m_velocity.y, 0.0f);
-            }
+            CheckCollisions();
 
             if (m_ground != null && m_grounded)
             {
@@ -217,7 +214,7 @@ namespace Player
             transform.position += m_velocity;
         }
 
-        public bool IsColliding()
+        public void CheckCollisions()
         {
             Vector3 rayStart = transform.position;
             Vector3 rayDirection = m_velocity.normalized; //new Vector3(m_velocity.x, 0, m_velocity.z).normalized;
@@ -253,15 +250,24 @@ namespace Player
 
                     if (Physics.Raycast(rayStart, rayDirection, out m_collisionHitInfo, m_playerCollider.bounds.extents.z + m_skinWidth))
                     {
-                        return true;
+                        // if hit, modify movement to use the perpendicular vector (-up because we want the players right, not the walls right)
+                        Vector3 wallCross = Vector3.Cross(m_collisionHitInfo.normal, -Vector3.up).normalized;
+                        Debug.DrawRay(m_collisionHitInfo.point, wallCross * 10, Color.red);
+                        Debug.Log($"{Vector3.Angle(wallCross, m_velocity.normalized)}");
+
+                        if (Vector3.Angle(wallCross, m_velocity.normalized) > 90)
+                            wallCross *= -1;
+
+                        m_velocity.x = wallCross.x * m_velocity.magnitude;
+                        m_velocity.z = wallCross.z * m_velocity.magnitude;
+
+                        return;
                     }
                     rayStart += verticalRaySpacing;
                 }
                 rayStart += horizontalRaySpacing;
                 rayStart.y = (transform.position.y - verticalRaySpacing.y) + m_heightPadding;
             }
-
-            return false; 
         }
 
         //Public because it will only be called in certain states

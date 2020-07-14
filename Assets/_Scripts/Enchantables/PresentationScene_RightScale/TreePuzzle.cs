@@ -17,11 +17,13 @@ namespace GameEnchantables
         }
         protected override void SpellSizeBig(Spell spell)
         {
+            m_animator.ResetTrigger(SHRINK_TRIGGER);
             m_animator.SetTrigger(ENLARGE_TRIGGER);
         }
 
         protected override void SpellSizeSmall(Spell spell)
         {
+            m_animator.ResetTrigger(ENLARGE_TRIGGER);
             m_animator.SetTrigger(SHRINK_TRIGGER);
         }
     }

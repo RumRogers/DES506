@@ -15,12 +15,25 @@ namespace GameCore.GameState
 
         GameStateController controller;
         PlayerEntity m_playerEntity;
-        State m_prevoiusState = null;
+        //State m_prevoiusState = null;
 
         public Playing_State(GameCore.System.Automaton owner) : base(owner)
         {
             Time.timeScale = 1.0f;
+            Cursor.visible = false;
 
+            if (!owner.TryGetComponent<GameStateController>(out controller))
+            {
+                Debug.Log("Failed to find GameStateController script from owner");
+            }
+
+            controller.GetPauseMenu().SetActive(false);
+            Debug.Log("Game is unpaused");
+        }
+
+        public Playing_State(GameCore.System.Automaton owner, State prevState) : base(owner)
+        {
+            Time.timeScale = 1.0f;
             Cursor.visible = false;
 
             if (!owner.TryGetComponent<GameStateController>(out controller))
@@ -29,10 +42,9 @@ namespace GameCore.GameState
             }
 
             m_playerEntity = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerEntity>();
-           
+            m_playerEntity.SetState(prevState);
 
             controller.GetPauseMenu().SetActive(false);
-
             Debug.Log("Game is unpaused");
         }
 

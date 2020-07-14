@@ -11,11 +11,12 @@ namespace GameCore.GameState
     { 
         GameStateController controller;
         PlayerEntity m_playerEntity;
+        State m_previousState;
 
         public Paused_State(GameCore.System.Automaton owner) : base(owner)
         {
             Time.timeScale = 0;
-
+            
             Cursor.visible = true;
 
             if (!owner.TryGetComponent<GameStateController>(out controller))
@@ -24,8 +25,11 @@ namespace GameCore.GameState
             }
 
             m_playerEntity = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerEntity>();
-           
+
+            m_previousState = m_playerEntity.GetState();
+
             m_playerEntity.SetState(new Idle_PlayerState(m_playerEntity));
+            
 
             controller.GetPauseMenu().SetActive(true);
 
@@ -36,7 +40,7 @@ namespace GameCore.GameState
         {
             if (Input.GetKeyUp(KeyCode.Escape))
             {
-                m_owner.SetState(new Playing_State(m_owner));
+                m_owner.SetState(new Playing_State(m_owner, m_previousState));
             }
         }
     }
