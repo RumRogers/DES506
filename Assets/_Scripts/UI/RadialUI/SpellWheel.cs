@@ -1,4 +1,4 @@
-﻿//#define CHECK_FOR_UNLOCKED_SPELLS
+﻿#define CHECK_FOR_UNLOCKED_SPELLS
 
 using GameCore.Spells;
 using GameCore.System;
