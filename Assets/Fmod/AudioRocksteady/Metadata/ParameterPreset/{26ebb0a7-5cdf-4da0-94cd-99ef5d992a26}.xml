@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="ParameterPreset" id="{26ebb0a7-5cdf-4da0-94cd-99ef5d992a26}">
+		<property name="name">
+			<value>TriggerBoxFirstLevelMusic</value>
+		</property>
+		<relationship name="folder">
+			<destination>{aa375782-3cb4-4e64-9e35-67783ac79736}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{82c79a1d-f16c-49cf-85d6-1f70088d5ff2}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{82c79a1d-f16c-49cf-85d6-1f70088d5ff2}">
+		<property name="maximum">
+			<value>3</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

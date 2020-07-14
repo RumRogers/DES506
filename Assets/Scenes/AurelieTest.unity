@@ -326,6 +326,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1984978172}
     m_Modifications:
+    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
+        type: 3}
+      propertyPath: m_Name
+      value: InkBolt (3)
+      objectReference: {fileID: 0}
     - target: {fileID: 1424418927591661895, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -380,11 +385,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
-        type: 3}
-      propertyPath: m_Name
-      value: InkBolt (3)
       objectReference: {fileID: 0}
     - target: {fileID: 1424418927486112099, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
@@ -516,7 +516,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 33, y: 33, z: 40}
+  m_Size: {x: 33, y: 33, z: 50}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &486942529
 MeshRenderer:
@@ -591,6 +591,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1984978172}
     m_Modifications:
+    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
+        type: 3}
+      propertyPath: m_Name
+      value: InkBolt (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 1424418927591661895, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -645,11 +650,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
-        type: 3}
-      propertyPath: m_Name
-      value: InkBolt (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ece4949563f9f54685d142252628d0b, type: 3}
@@ -758,6 +758,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1984978172}
     m_Modifications:
+    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
+        type: 3}
+      propertyPath: m_Name
+      value: InkBolt (4)
+      objectReference: {fileID: 0}
     - target: {fileID: 1424418927591661895, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -812,11 +817,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
-        type: 3}
-      propertyPath: m_Name
-      value: InkBolt (4)
       objectReference: {fileID: 0}
     - target: {fileID: 1424418927486112099, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
@@ -1223,7 +1223,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 33, y: 33, z: 40}
+  m_Size: {x: 33, y: 33, z: 50}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1078913773
 MeshRenderer:
@@ -1292,6 +1292,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1984978172}
     m_Modifications:
+    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
+        type: 3}
+      propertyPath: m_Name
+      value: InkBolt (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 1424418927591661895, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1347,11 +1352,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
-        type: 3}
-      propertyPath: m_Name
-      value: InkBolt (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 1424418927486112099, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
       propertyPath: prewarm
@@ -1396,7 +1396,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 33, y: 33, z: 40}
+  m_Size: {x: 33, y: 33, z: 50}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1160967782
 MeshRenderer:
@@ -1452,7 +1452,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1160967780}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 108.13, y: 131.6, z: -211.7}
+  m_LocalPosition: {x: 108.13, y: 131.6, z: -217}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1470,10 +1470,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CollisionTag: 
+  CollisionTag: Player
   Event: event:/MUSIC/MusicTutorial
-  PlayEvent: 7
-  StopEvent: 8
+  PlayEvent: 3
+  StopEvent: 4
   AllowFadeout: 1
   TriggerOnce: 0
   Preload: 0
@@ -1588,6 +1588,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1984978172}
     m_Modifications:
+    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
+        type: 3}
+      propertyPath: m_Name
+      value: InkBolt (6)
+      objectReference: {fileID: 0}
     - target: {fileID: 1424418927591661895, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1643,11 +1648,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
-        type: 3}
-      propertyPath: m_Name
-      value: InkBolt (6)
-      objectReference: {fileID: 0}
     - target: {fileID: 1424418927486112099, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
       propertyPath: prewarm
@@ -1674,6 +1674,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1984978172}
     m_Modifications:
+    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
+        type: 3}
+      propertyPath: m_Name
+      value: InkBolt
+      objectReference: {fileID: 0}
     - target: {fileID: 1424418927591661895, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1729,11 +1734,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
-        type: 3}
-      propertyPath: m_Name
-      value: InkBolt
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ece4949563f9f54685d142252628d0b, type: 3}
 --- !u!4 &1478952557 stripped
@@ -1755,6 +1755,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1984978172}
     m_Modifications:
+    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
+        type: 3}
+      propertyPath: m_Name
+      value: InkBolt (7)
+      objectReference: {fileID: 0}
     - target: {fileID: 1424418927591661895, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1810,11 +1815,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
-        type: 3}
-      propertyPath: m_Name
-      value: InkBolt (7)
-      objectReference: {fileID: 0}
     - target: {fileID: 1424418927486112099, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
       propertyPath: prewarm
@@ -1829,6 +1829,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1984978172}
     m_Modifications:
+    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
+        type: 3}
+      propertyPath: m_Name
+      value: InkBolt (5)
+      objectReference: {fileID: 0}
     - target: {fileID: 1424418927591661895, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1883,11 +1888,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
-        type: 3}
-      propertyPath: m_Name
-      value: InkBolt (5)
       objectReference: {fileID: 0}
     - target: {fileID: 1424418927486112099, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
