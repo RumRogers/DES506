@@ -22,14 +22,12 @@ namespace Player
             m_playerEntity.Velocity = new Vector3(m_playerEntity.Velocity.x, 0, m_playerEntity.Velocity.z);
             //get the speed when entering the state before the jump vel is added. used to store the speed for multiplying in the direction held after jump is finished
             m_entrySpeed = m_playerEntity.Velocity.magnitude;
-            m_playerEntity.Velocity /= 2;
-
             //Adds velocity based on entity property flags
             if (m_playerEntity.HasProperty(PlayerEntityProperties.JUMP_NORMAL))
-                m_velocity = new Vector3(0, m_playerEntity.JumpVelocity, 0);
+                m_velocity = new Vector3(m_playerEntity.Velocity.x, m_playerEntity.JumpVelocity, m_playerEntity.Velocity.z);
 
             if (m_playerEntity.HasProperty(PlayerEntityProperties.JUMP_HIGH))
-                m_velocity = new Vector3(0, m_playerEntity.HighJumpVelocity, 0);
+                m_velocity = new Vector3(m_playerEntity.Velocity.x, m_playerEntity.HighJumpVelocity, m_playerEntity.Velocity.z);
 
             m_additionalJumpForce = m_velocity.y * m_playerEntity.JumpHeldMutliplier;
 
@@ -67,17 +65,18 @@ namespace Player
                     m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Velocity.normalized.x, 0, m_playerEntity.Velocity.normalized.z));
                     if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING))
                     {
-                        m_velocity = Vector3.ClampMagnitude(m_velocity + (m_playerEntity.Direction * m_playerEntity.AerialAccelleration) * Time.deltaTime, m_playerEntity.IceMaxSpeed);  //seems to work nicely clamped at the max speed
+                        m_velocity = Vector3.ClampMagnitude(m_velocity + (m_playerEntity.Direction * m_playerEntity.AerialAcceleration) * Time.deltaTime, m_playerEntity.IceMaxSpeed);  //seems to work nicely clamped at the max speed
                     }
                     else
                     {
-                        m_velocity = Vector3.ClampMagnitude(m_velocity + (m_playerEntity.Direction * m_playerEntity.AerialAccelleration) * Time.deltaTime, m_playerEntity.MaxSpeed);  //seems to work nicely clamped at the max speed
+                        m_velocity = Vector3.ClampMagnitude(m_velocity + (m_playerEntity.Direction * m_playerEntity.AerialAcceleration) * Time.deltaTime, m_playerEntity.MaxSpeed);  //seems to work nicely clamped at the max speed
                     }
                 }
                 else if (Mathf.Abs(m_velocity.x) > 0.1f || Mathf.Abs(m_velocity.z) > 0.1f)
                 {
                     m_velocity += (((m_velocity.normalized) * -1) * m_playerEntity.AerialDeceleration) * Time.deltaTime;
                 }
+
                 m_playerEntity.Velocity = m_velocity;
 
                 if (m_playerEntity.Velocity.y < 0)
@@ -97,7 +96,11 @@ namespace Player
             Vector3 forwardMovement = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z) * Input.GetAxisRaw("Vertical"); // removing the y component from the camera's forward vector
             Vector3 rightMovement = Camera.main.transform.right * Input.GetAxisRaw("Horizontal");
 
-            m_velocity += (forwardMovement + rightMovement).normalized * m_entrySpeed;
+            //if there is some movement, change the direction of the jump. Allows the player to re asses the jump before leaving the ground
+            if (forwardMovement + rightMovement != Vector3.zero)
+            {
+                m_velocity = (Vector3.up * m_velocity.y) + ((forwardMovement + rightMovement).normalized * m_entrySpeed);
+            }
 
             m_animationFinished = true;
         }

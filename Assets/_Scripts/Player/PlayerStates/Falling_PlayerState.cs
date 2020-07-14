@@ -37,7 +37,6 @@ namespace Player
             if (m_playerEntity.Grounded)
             {
                 m_playerEntity.Velocity = new Vector3(m_playerEntity.Velocity.x, 0, m_playerEntity.Velocity.z);
-                m_playerEntity.Velocity = Vector3.zero;
                 switch (m_playerEntity.PreviousGroundState)
                 {
                     case PlayerGroundStates.AIMING:
@@ -65,11 +64,11 @@ namespace Player
                 m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Velocity.normalized.x, 0, m_playerEntity.Velocity.normalized.z));
                 if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING))
                 {
-                    m_velocity = Vector3.ClampMagnitude(m_velocity + (m_playerEntity.Direction * m_playerEntity.AerialAccelleration) * Time.deltaTime, m_playerEntity.IceMaxSpeed);  //seems to work nicely clamped at the max speed
+                    m_velocity = Vector3.ClampMagnitude(m_velocity + (m_playerEntity.Direction * m_playerEntity.AerialAcceleration) * Time.deltaTime, m_playerEntity.IceMaxSpeed);  //seems to work nicely clamped at the max speed
                 }
                 else
                 {
-                    m_velocity = Vector3.ClampMagnitude(m_velocity + (m_playerEntity.Direction * m_playerEntity.AerialAccelleration) * Time.deltaTime, m_playerEntity.MaxSpeed);  //seems to work nicely clamped at the max speed
+                    m_velocity = Vector3.ClampMagnitude(m_velocity + (m_playerEntity.Direction * m_playerEntity.AerialAcceleration) * Time.deltaTime, m_playerEntity.MaxSpeed);  //seems to work nicely clamped at the max speed
                 }
             }
             else if (Mathf.Abs(m_velocity.x) > 0.1f || Mathf.Abs(m_velocity.z) > 0.1f)

@@ -20,11 +20,12 @@ namespace Player
             {
                 Debug.LogError("Cannot get PlayerMoveCamera Component on Main Camera!");
             }
-            m_camera.SetState(new GameCore.Camera.Default_CameraState(m_camera));
 
             m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.IDLE);
             //Storing a reference to this state object to transition back to after a fall
             m_playerEntity.PreviousGroundState = PlayerGroundStates.DEFAULT;
+
+            m_playerEntity.m_reticle.gameObject.SetActive(false);
         }
 
         public override void Manage()

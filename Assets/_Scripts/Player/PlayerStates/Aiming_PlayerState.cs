@@ -30,7 +30,6 @@ namespace Player
             {
                 Debug.LogError("Cannot get PlayerMoveCamera Component on Main Camera!");
             }
-            m_camera.SetState(new GameCore.Camera.Aiming_CameraState(m_camera));
             //Storing a reference to this state object to transition back to after a fall
             m_playerEntity.PreviousGroundState = PlayerGroundStates.AIMING;
 
@@ -48,6 +47,8 @@ namespace Player
                     break;
             }
 
+            m_camera.SetState(new GameCore.Camera.Aiming_CameraState(m_camera));
+
             m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.AIMING);
 
             m_itemEquipped = m_playerEntity.EquipedItem;
@@ -57,11 +58,11 @@ namespace Player
 
         public override void Manage()
         {
-
             //if button "aim" up get out of this state, axis is for joystick trigger buttons
             if (!Input.GetButton("Aim") && Input.GetAxisRaw("Aim") == 0)
             {
                 m_playerEntity.SpellWheel.SetState(new GameUI.Idle_SpellWheelState(m_playerEntity.SpellWheel));
+                m_camera.SetState(new GameCore.Camera.Default_CameraState(m_camera));
                 if (m_aimedAt)
                 {
                     m_aimedAtRenderer.material.shader = m_highlightedOldShader;

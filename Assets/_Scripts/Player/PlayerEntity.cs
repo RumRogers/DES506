@@ -53,7 +53,7 @@ namespace Player
         [SerializeField] float m_iceDeceleration = 1f;
         [SerializeField] float m_maxIceSpeed = 2.0f;
         [Header("Air Movement")]
-        [SerializeField] float m_aerialAccelleration = 5.0f;
+        [SerializeField] float m_aerialAcceleration = 5.0f;
         [SerializeField] float m_aerialDeceleration = 5.0f;
         [SerializeField] float m_gravity = 9.81f;
         [SerializeField] float m_jumpVelocity = 4.5f;
@@ -125,7 +125,7 @@ namespace Player
         public float IceAcceleration { get => m_iceAcceleration; }
         public float IceDeceleration { get => m_iceDeceleration; }
         public float IceMaxSpeed { get => m_maxIceSpeed; }
-        public float AerialAccelleration { get => m_aerialAccelleration; }
+        public float AerialAcceleration { get => m_aerialAcceleration; }
         public float AerialDeceleration { get => m_aerialDeceleration; }
         public float JumpHeldMutliplier { get => m_jumpHeldMultiplier; }
         public float PushSpeed { get => m_pushingSpeed; }
