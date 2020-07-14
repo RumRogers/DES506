@@ -76,7 +76,7 @@ MonoBehaviour:
   m_pushingSpeed: 2
   m_maxSpeed: 0.4
   m_walkingAcceleration: 3
-  m_walkingDeceleration: 3
+  m_walkingDeceleration: 20
   m_aimingMaxSpeed: 0.1
   m_aimingAcceleration: 1
   m_aimingDeceleration: 1
