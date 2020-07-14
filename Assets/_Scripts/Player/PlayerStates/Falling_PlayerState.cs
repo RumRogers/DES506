@@ -56,20 +56,14 @@ namespace Player
             Vector3 forwardMovement = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z) * Input.GetAxisRaw("Vertical"); // removing the y component from the camera's forward vector
             Vector3 rightMovement = Camera.main.transform.right * Input.GetAxisRaw("Horizontal");
             m_playerEntity.Direction = (forwardMovement + rightMovement).normalized;
-            
+
 
             //if there is an input, move in that direction, but clamp the magnitude (speed) so they cannot exceed max speed while in the air
             if (m_playerEntity.Direction != Vector3.zero)
             {
                 m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Velocity.normalized.x, 0, m_playerEntity.Velocity.normalized.z));
-                if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING))
-                {
-                    m_velocity = Vector3.ClampMagnitude(m_velocity + (m_playerEntity.Direction * m_playerEntity.AerialAcceleration) * Time.deltaTime, m_playerEntity.IceMaxSpeed);  //seems to work nicely clamped at the max speed
-                }
-                else
-                {
-                    m_velocity += (m_playerEntity.Direction * m_playerEntity.AerialAcceleration) * Time.deltaTime;  //seems to work nicely clamped at the max speed
-                }
+
+                m_velocity += (m_playerEntity.Direction * m_playerEntity.AerialAcceleration) * Time.deltaTime;  //seems to work nicely clamped at the max speed
             }
             else if (Mathf.Abs(m_velocity.x) > 0.1f || Mathf.Abs(m_velocity.z) > 0.1f)
             {

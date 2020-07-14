@@ -63,14 +63,8 @@ namespace Player
                 if (m_playerEntity.Direction != Vector3.zero)
                 {
                     m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Velocity.normalized.x, 0, m_playerEntity.Velocity.normalized.z));
-                    if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING))
-                    {
-                        m_velocity = Vector3.ClampMagnitude(m_velocity + (m_playerEntity.Direction * m_playerEntity.AerialAcceleration) * Time.deltaTime, m_playerEntity.IceMaxSpeed);  //seems to work nicely clamped at the max speed
-                    }
-                    else
-                    {
-                        m_velocity += (m_playerEntity.Direction * m_playerEntity.AerialAcceleration) * Time.deltaTime;  //seems to work nicely clamped at the max speed
-                    }
+
+                    m_velocity += (m_playerEntity.Direction * m_playerEntity.AerialAcceleration) * Time.deltaTime;  //seems to work nicely clamped at the max speed                    
                 }
                 else if (Mathf.Abs(m_velocity.x) > 0.1f || Mathf.Abs(m_velocity.z) > 0.1f)
                 {
