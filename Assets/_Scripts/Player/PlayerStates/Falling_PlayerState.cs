@@ -68,7 +68,7 @@ namespace Player
                 }
                 else
                 {
-                    m_velocity = Vector3.ClampMagnitude(m_velocity + (m_playerEntity.Direction * m_playerEntity.AerialAcceleration) * Time.deltaTime, m_playerEntity.MaxSpeed);  //seems to work nicely clamped at the max speed
+                    m_velocity += (m_playerEntity.Direction * m_playerEntity.AerialAcceleration) * Time.deltaTime;  //seems to work nicely clamped at the max speed
                 }
             }
             else if (Mathf.Abs(m_velocity.x) > 0.1f || Mathf.Abs(m_velocity.z) > 0.1f)

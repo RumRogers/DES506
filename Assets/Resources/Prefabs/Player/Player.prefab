@@ -84,13 +84,13 @@ MonoBehaviour:
   m_iceAcceleration: 1
   m_iceDeceleration: 0.1
   m_maxIceSpeed: 0.6
-  m_aerialAccelleration: 0.5
-  m_aerialDeceleration: 5
+  m_aerialAcceleration: 0.1
+  m_aerialDeceleration: 0.1
   m_gravity: 0.59
   m_jumpVelocity: 0.2
   m_highJumpVelocity: 15
   m_jumpHeldMultiplier: 1
-  m_canJumpTimerLimit: 0.25
+  m_canJumpTimerLimit: 0.4
   m_maxClimbableIncline: 45
   m_heightPadding: 0.1
   m_groundOverlapPadding: 0.3
