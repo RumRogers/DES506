@@ -28,7 +28,7 @@ namespace GameUI.SpellBook
 
         public override void Manage()
         {
-            if(Input.GetKeyDown(m_keyHideSpellBook))
+            if(Input.GetKeyDown(m_spellBook.p_keyShowSpellBook))
             {
                 m_owner.SetState(new Invisible_SpellBookState(m_spellBook));
                 return;

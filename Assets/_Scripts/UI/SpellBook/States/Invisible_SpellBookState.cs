@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.Interactions;
 
 namespace GameUI.SpellBook
 {
@@ -15,8 +16,9 @@ namespace GameUI.SpellBook
         }
 
 
+
         public override void Manage()
-        {
+        {          
             if(Input.GetKeyDown(m_spellBook.p_keyShowSpellBook))
             {
                 m_owner.SetState(new Active_SpellBookState(m_spellBook));

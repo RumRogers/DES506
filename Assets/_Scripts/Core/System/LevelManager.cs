@@ -47,6 +47,8 @@ namespace GameCore.System
             }
             Utils.Bits.SetBit(ref s_playerSpells, (int)spellType);
             s_spellBook.UnlockSpell(spellType);
+            s_spellBook.SetState(new Active_SpellBookState(s_spellBook)); 
+            s_spellBook.SetSelectedSpell(spellType);
         }
 
         public static bool IsSpellUnlocked(SpellType spellType)
