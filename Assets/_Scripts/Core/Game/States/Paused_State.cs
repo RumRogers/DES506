@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Player;
+using GameCore.System;
 
 namespace GameCore.GameState
 {
@@ -8,7 +10,7 @@ namespace GameCore.GameState
     public class Paused_State : GameCore.System.State
     { 
         GameStateController controller;
-        GameObject m_playerEntity;
+        PlayerEntity m_playerEntity;
 
         public Paused_State(GameCore.System.Automaton owner) : base(owner)
         {
@@ -21,7 +23,9 @@ namespace GameCore.GameState
                 Debug.Log("Failed to find GameStateController script from owner");
             }
 
-            m_playerEntity.
+            m_playerEntity = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerEntity>();
+           
+            m_playerEntity.SetState(new Idle_PlayerState(m_playerEntity));
 
             controller.GetPauseMenu().SetActive(true);
 

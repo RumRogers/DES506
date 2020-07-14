@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameCore.System;
 
 namespace GameCore.GameState
 {
@@ -9,6 +10,7 @@ namespace GameCore.GameState
     {
         [SerializeField]
         GameObject m_pauseMenu;
+        public State m_prevPlayerState;
 
         void Awake()
         {
