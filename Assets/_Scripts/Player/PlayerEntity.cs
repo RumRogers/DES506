@@ -189,7 +189,6 @@ namespace Player
 
             CheckCollisions();
 
-
             if (m_ground != null && m_grounded)
             {
                 m_newGroundPosition = m_ground.transform.position;
@@ -253,8 +252,15 @@ namespace Player
                     {
                         // if hit, modify movement to use the perpendicular vector (-up because we want the players right, not the walls right)
                         Vector3 wallCross = Vector3.Cross(m_collisionHitInfo.normal, -Vector3.up).normalized;
-                        m_velocity.x *= wallCross.x;
-                        m_velocity.z *= wallCross.z;
+                        Debug.DrawRay(m_collisionHitInfo.point, wallCross * 10, Color.red);
+                        Debug.Log($"{Vector3.Angle(wallCross, m_velocity.normalized)}");
+
+                        if (Vector3.Angle(wallCross, m_velocity.normalized) > 90)
+                            wallCross *= -1;
+
+                        m_velocity.x = wallCross.x * m_velocity.magnitude;
+                        m_velocity.z = wallCross.z * m_velocity.magnitude;
+
                         return;
                     }
                     rayStart += verticalRaySpacing;
