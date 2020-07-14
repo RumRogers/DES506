@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Player {
+namespace Player
+{
     public class Dialogue_PlayerState : GameCore.System.State
     {
         PlayerEntity m_playerEntity;
@@ -17,23 +18,25 @@ namespace Player {
 
             m_speaker = target;
 
-            if(!m_speaker.TryGetComponent<GameUI.Dialogue.Dialogue>(out m_dialogue))
+            if (!m_speaker.TryGetComponent<GameUI.Dialogue.Dialogue>(out m_dialogue))
             {
                 Debug.Log("Target has no dialogue script attached");
             }
 
+            if (!m_speaker)
+            {
+                float closestDistance = 100;
 
-            ////float closestDistance = 100;
-
-            //foreach (Transform t in m_playerEntity.SpeakersInRange)
-            //{
-            //    float distance = (t.position - m_playerEntity.transform.position).magnitude;
-            //    if (distance < closestDistance)
-            //    {
-            //        closestDistance = distance;
-            //        m_speaker = t;
-            //    }
-            //}
+                foreach (Transform t in m_playerEntity.SpeakersInRange)
+                {
+                    float distance = (t.position - m_playerEntity.transform.position).magnitude;
+                    if (distance < closestDistance)
+                    {
+                        closestDistance = distance;
+                        m_speaker = t.gameObject;
+                    }
+                }
+            }
 
             if (!Camera.main.TryGetComponent<GameCore.Camera.PlayerMoveCamera>(out m_playerMoveCamera))
             {

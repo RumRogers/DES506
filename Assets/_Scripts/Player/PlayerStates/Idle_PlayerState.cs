@@ -11,6 +11,7 @@ namespace Player
 
         public Idle_PlayerState(PlayerEntity owner) : base(owner)
         {
+            owner.Animator.SetProperty(PlayerAnimationProperties.IDLE);
             owner.Velocity = Vector3.zero;
         }
 

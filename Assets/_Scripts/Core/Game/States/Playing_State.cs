@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Player;
+using GameCore.System;
 
 namespace GameCore.GameState
 {
@@ -12,11 +14,12 @@ namespace GameCore.GameState
         //I'd like to do this programatically but it's pretty redundant when Automaton already has this functionality.
 
         GameStateController controller;
+        PlayerEntity m_playerEntity;
+        //State m_prevoiusState = null;
 
         public Playing_State(GameCore.System.Automaton owner) : base(owner)
         {
             Time.timeScale = 1.0f;
-
             Cursor.visible = false;
 
             if (!owner.TryGetComponent<GameStateController>(out controller))
@@ -25,7 +28,23 @@ namespace GameCore.GameState
             }
 
             controller.GetPauseMenu().SetActive(false);
+            Debug.Log("Game is unpaused");
+        }
 
+        public Playing_State(GameCore.System.Automaton owner, State prevState) : base(owner)
+        {
+            Time.timeScale = 1.0f;
+            Cursor.visible = false;
+
+            if (!owner.TryGetComponent<GameStateController>(out controller))
+            {
+                Debug.Log("Failed to find GameStateController script from owner");
+            }
+
+            m_playerEntity = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerEntity>();
+            m_playerEntity.SetState(prevState);
+
+            controller.GetPauseMenu().SetActive(false);
             Debug.Log("Game is unpaused");
         }
 

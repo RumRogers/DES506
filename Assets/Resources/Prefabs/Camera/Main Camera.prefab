@@ -112,6 +112,7 @@ MonoBehaviour:
   m_aimingMovementSpeed: 20
   m_aimingLerpSpeed: 0.03
   m_autoAimStrength: 10
+  m_autoAimOn: 0
   m_aimingFOV: 40
   m_dialogueDistance: 2
   m_dialogueAngle: 45

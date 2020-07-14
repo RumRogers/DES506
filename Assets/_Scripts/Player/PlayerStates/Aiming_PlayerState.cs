@@ -30,7 +30,6 @@ namespace Player
             {
                 Debug.LogError("Cannot get PlayerMoveCamera Component on Main Camera!");
             }
-            m_camera.SetState(new GameCore.Camera.Aiming_CameraState(m_camera));
             //Storing a reference to this state object to transition back to after a fall
             m_playerEntity.PreviousGroundState = PlayerGroundStates.AIMING;
 
@@ -48,6 +47,8 @@ namespace Player
                     break;
             }
 
+            m_camera.SetState(new GameCore.Camera.Aiming_CameraState(m_camera));
+
             m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.AIMING);
 
             m_itemEquipped = m_playerEntity.EquipedItem;
@@ -57,11 +58,11 @@ namespace Player
 
         public override void Manage()
         {
-
             //if button "aim" up get out of this state, axis is for joystick trigger buttons
             if (!Input.GetButton("Aim") && Input.GetAxisRaw("Aim") == 0)
             {
                 m_playerEntity.SpellWheel.SetState(new GameUI.Idle_SpellWheelState(m_playerEntity.SpellWheel));
+                m_camera.SetState(new GameCore.Camera.Default_CameraState(m_camera));
                 if (m_aimedAt)
                 {
                     m_aimedAtRenderer.material.shader = m_highlightedOldShader;
@@ -236,14 +237,6 @@ namespace Player
                     m_playerEntity.Direction = slopeDirection;
                 }
 
-                //Overlap recovery (ground)
-                if (Vector3.Distance(m_playerEntity.transform.position, m_playerEntity.GroundHitInfo.point) < m_playerEntity.PlayerCollider.bounds.extents.y)
-                {
-                    float targetY = m_playerEntity.GroundHitInfo.point.y + (m_playerEntity.PlayerCollider.bounds.extents.y);
-                    float lerpedY = Mathf.Lerp(m_playerEntity.transform.position.y, targetY, Time.deltaTime * 10);
-                    m_playerEntity.transform.position = new Vector3(m_playerEntity.transform.position.x, lerpedY, m_playerEntity.transform.position.z);
-                }
-
                 //If there is input, add velocity in that direction, but clamp the movement speed, Y velocity should always equal zero in this state, so no need to preserve down / up velocity
                 if (m_playerEntity.Direction != Vector3.zero)
                 {
@@ -254,6 +247,7 @@ namespace Player
                     }
                     else
                     {
+                        m_velocity = m_velocity.magnitude * m_playerEntity.Direction;
                         m_velocity += (m_playerEntity.Direction * m_playerEntity.AimingAcceleration) * Time.deltaTime;
                         m_velocity = Vector3.ClampMagnitude(m_velocity, m_playerEntity.AimingMaxSpeed);
                     }

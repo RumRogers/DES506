@@ -26,6 +26,7 @@ namespace GameCore.Camera
         [SerializeField] float m_aimingMovementSpeed = 10;
         [SerializeField] float m_aimingLerpSpeed = 0.3f;
         [SerializeField] float m_autoAimStrength = 10f;
+        [SerializeField] bool m_autoAimOn = true;
         [SerializeField] float m_aimingFOV = 40f;
         [Header("Dialogue")]
         [SerializeField] float m_dialogueDistance = 1;
@@ -47,6 +48,7 @@ namespace GameCore.Camera
         Vector3 m_oldPosition;
 
         //Public stuff, get only
+        public bool p_AutoAimOn { get => m_autoAimOn; }
         public float p_DefaultMovementSpeed { get => m_defaultMovementSpeed; }
         public float p_DefaultLerpSpeed { get => m_defaultLerpSpeed; }
         public float p_DefaultDistance { get => m_defaultDistance; }
@@ -90,9 +92,9 @@ namespace GameCore.Camera
         private void LateUpdate()
         {
             m_state.Manage();
-            CheckCollision();
             transform.position = Vector3.Lerp(transform.position, m_position, m_smoothFactor);
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0);//never want the camera to roll
+            CheckCollision();
         }
 
         //Casts ray from target to camera and checks if it hits, if so moves camera to hit position

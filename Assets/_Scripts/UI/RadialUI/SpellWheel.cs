@@ -1,4 +1,4 @@
-﻿//#define CHECK_FOR_UNLOCKED_SPELLS
+﻿#define CHECK_FOR_UNLOCKED_SPELLS
 
 using GameCore.Spells;
 using GameCore.System;
@@ -57,17 +57,18 @@ namespace GameUI
         List<int> m_availableSlotIndices = new List<int>();
         [SerializeField]
         List<SpellSlotData> m_spellsOrder = new List<SpellSlotData>();
-        
+       
         // Start is called before the first frame update
         void Start()
         {
             m_rectTransform = GetComponent<RectTransform>();
-            m_bgImage = GetComponent<Image>();
+            m_bgImage = transform.GetChild(0).GetChild(1).GetComponent<Image>();
             m_originalBGAlpha = m_bgImage.color.a;
             m_circleCenter = m_rectTransform.rect.center;      
             m_circleRadius = (m_bgImage.rectTransform.rect.width - m_circleThickness / 2f) / 2f;
             m_arrowPanel = GameObject.FindGameObjectWithTag(ARROW_PANEL_TAG).transform;
-            m_firstSlotRotation = 2f * GetAngleStep();
+            //m_firstSlotRotation = 2f * GetAngleStep();
+            m_firstSlotRotation = .5f * Mathf.PI;
             InitMap();
             InitCircle();
 
@@ -268,8 +269,17 @@ namespace GameUI
         {
             for(int i = 0; i < m_spellsOrder.Count; ++i)
             {
+                int textIdx = (int)m_spellsOrder[i].spellId + 1;
                 Image spellIcon = m_spellSlots[i].GetChild(1).GetChild(0).GetComponent<Image>();
-                Text spellName = m_spellSlots[i].GetChild(1).GetChild(1).GetComponent<Text>();
+                Text spellName = m_spellSlots[i].GetChild(1).GetChild(textIdx).GetComponent<Text>();
+
+                for(int j = 1; j <= 3; ++j)
+                {                    
+                    if (j != textIdx)
+                    {
+                        Destroy(m_spellSlots[i].GetChild(1).GetChild(j).gameObject);
+                    }
+                }
 
                 spellIcon.sprite = m_spellsOrder[i].spellSprite;
                 spellName.text = m_spellsOrder[i].spellName;

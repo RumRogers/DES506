@@ -53,12 +53,13 @@ namespace Player
         [SerializeField] float m_iceDeceleration = 1f;
         [SerializeField] float m_maxIceSpeed = 2.0f;
         [Header("Air Movement")]
-        [SerializeField] float m_aerialAccelleration = 5.0f;
+        [SerializeField] float m_aerialAcceleration = 5.0f;
         [SerializeField] float m_aerialDeceleration = 5.0f;
         [SerializeField] float m_gravity = 9.81f;
         [SerializeField] float m_jumpVelocity = 4.5f;
         [SerializeField] float m_highJumpVelocity = 9.5f;
         [SerializeField] float m_jumpHeldMultiplier = 1.5f;   //the amount of velocity added per second to the y axis if jump is held down, added over time, not set like jump vel
+        [SerializeField]float m_canJumpTimerLimit = 0.25f; //the time the player can be off the ground for and still jump
         [Header("Collision")]
         [SerializeField] float m_maxClimbableIncline = 45.0f;
         [SerializeField] float m_heightPadding = 0.1f;  //How far from the floor the ray should start
@@ -74,6 +75,9 @@ namespace Player
 
         //player stats (not editor accessible)
         bool m_grounded = true;
+        bool m_canJump = true;
+        float m_canJumpTimer = 0;
+        
         Vector3 m_playerStartPosition;
         Vector3 m_velocity = Vector3.zero;
         Vector3 m_direction;
@@ -110,6 +114,7 @@ namespace Player
         public Vector3 Direction { get => m_direction; set => m_direction = value; }
         //player stats, getters only
         public bool Grounded { get => m_grounded; }
+        public bool CanJump { get => m_canJump; }
         public float MaxSpeed { get => m_maxSpeed; }
         public float WalkingAcceleration { get => m_walkingAcceleration; }
         public float WalkingDeceleration { get => m_walkingDeceleration; }
@@ -120,7 +125,7 @@ namespace Player
         public float IceAcceleration { get => m_iceAcceleration; }
         public float IceDeceleration { get => m_iceDeceleration; }
         public float IceMaxSpeed { get => m_maxIceSpeed; }
-        public float AerialAccelleration { get => m_aerialAccelleration; }
+        public float AerialAcceleration { get => m_aerialAcceleration; }
         public float AerialDeceleration { get => m_aerialDeceleration; }
         public float JumpHeldMutliplier { get => m_jumpHeldMultiplier; }
         public float PushSpeed { get => m_pushingSpeed; }
@@ -167,7 +172,7 @@ namespace Player
         override protected void Update()
         {
             m_grounded = IsGrounded();
-
+            m_canJump = IsAbleToJump();
             //First check if death state is triggered to save time / ensure the player cannot do something if they are alread dead
             if (HasProperty(PlayerEntityProperties.DYING))
             {
@@ -182,10 +187,7 @@ namespace Player
 
             base.Update();
 
-            if (IsColliding())
-            {
-                m_velocity = new Vector3(0.0f, m_velocity.y, 0.0f);
-            }
+            CheckCollisions();
 
             if (m_ground != null && m_grounded)
             {
@@ -194,7 +196,13 @@ namespace Player
                 //if the ground has moved since the last frame, add that movement to the player
                 if (m_newGroundPosition != m_oldGroundPosition)
                 {
-                    m_velocity += (m_newGroundPosition - m_oldGroundPosition);
+                    //some times objects moving will add a large amount of velocity to the player, if this is the case, the player likely wouldn't be able to stay on them anyway
+                    //also fixes a bug where the way this extra movment was calculated with the seesaw would shoot the player upwards
+                    Vector3 addedVel = m_newGroundPosition - m_oldGroundPosition;
+                    if (addedVel.magnitude < 20)
+                    {
+                        m_velocity += (m_newGroundPosition - m_oldGroundPosition);
+                    }
                 }
                 m_oldGroundPosition = m_newGroundPosition;
             }
@@ -206,12 +214,12 @@ namespace Player
             transform.position += m_velocity;
         }
 
-        public bool IsColliding()
+        public void CheckCollisions()
         {
             Vector3 rayStart = transform.position;
             Vector3 rayDirection = m_velocity.normalized; //new Vector3(m_velocity.x, 0, m_velocity.z).normalized;
             Vector3 horizontalRaySpacing = Vector3.Cross(rayDirection, transform.up);    // get perpendicular vector to our direction for spacing
-            Vector3 verticalRaySpacing = new Vector3(0, m_playerCollider.bounds.extents.y / m_numVerticalRays, 0);
+            Vector3 verticalRaySpacing = new Vector3(0, m_playerCollider.bounds.size.y / m_numVerticalRays, 0);
 
             if (m_velocity.x != 0)
             {
@@ -238,19 +246,27 @@ namespace Player
                 for (int y = 0; y < m_numVerticalRays; ++y)
                 {
 
-                    Debug.DrawLine(rayStart, (rayStart + (rayDirection * m_playerCollider.bounds.extents.z)));  //Uncomment for debug rays
+                    Debug.DrawLine(rayStart, (rayStart + (rayDirection * (m_playerCollider.bounds.extents.z + m_skinWidth))));  //Uncomment for debug rays
 
                     if (Physics.Raycast(rayStart, rayDirection, out m_collisionHitInfo, m_playerCollider.bounds.extents.z + m_skinWidth))
                     {
-                        return true;
+                        // if hit, modify movement to use the perpendicular vector (-up because we want the players right, not the walls right)
+                        Vector3 wallCross = Vector3.Cross(m_collisionHitInfo.normal, -Vector3.up).normalized;
+                        Debug.DrawRay(m_collisionHitInfo.point, wallCross * 10, Color.red);
+
+                        if (Vector3.Angle(wallCross, m_velocity.normalized) > 90)
+                            wallCross *= -1;
+
+                        m_velocity.x = wallCross.x * m_velocity.magnitude;
+                        m_velocity.z = wallCross.z * m_velocity.magnitude;
+
+                        return;
                     }
                     rayStart += verticalRaySpacing;
                 }
                 rayStart += horizontalRaySpacing;
                 rayStart.y = (transform.position.y - verticalRaySpacing.y) + m_heightPadding;
             }
-
-            return false; 
         }
 
         //Public because it will only be called in certain states
@@ -268,11 +284,12 @@ namespace Player
             }
             bool collided = false;
             Vector3 rayStart = transform.position;
-            Vector3 xRaySpacing = transform.right * (m_playerCollider.bounds.extents.x / 3);
-            Vector3 zRaySpacing = transform.forward * (m_playerCollider.bounds.extents.z / 3);
+            Vector3 xRaySpacing = transform.right * (m_playerCollider.bounds.size.x / 3);
+            Vector3 zRaySpacing = transform.forward * (m_playerCollider.bounds.size.z / 3);
 
             rayStart.y = transform.position.y;
             RaycastHit collisionInfo;
+            float distance = 100;
 
             rayStart -= (xRaySpacing * (3 / 2)) + (zRaySpacing * (3 / 2));
 
@@ -280,7 +297,7 @@ namespace Player
             {
                 for (int z = 0; z < 3; ++z)
                 {
-                    //Debug.DrawLine(rayStart, rayStart + (-transform.up * m_playerCollider.bounds.extents.y));
+                    Debug.DrawLine(rayStart, rayStart + (-transform.up * m_playerCollider.bounds.extents.y));
                     if (Physics.Raycast(rayStart, -transform.up, out collisionInfo, m_playerCollider.bounds.extents.y + m_groundOverlapPadding))
                     {
                         //if it's the first ray, set it to the first result regardless, as we cannot compare null variables
@@ -289,9 +306,10 @@ namespace Player
                             m_groundedHitInfo = collisionInfo;
                         }
                         //for slope detection we want the shortest ray to be the hit info 
-                        else if (collisionInfo.distance < m_groundedHitInfo.distance)
+                        else if (collisionInfo.distance < distance)
                         {
                             m_groundedHitInfo = collisionInfo;
+                            distance = collisionInfo.distance;
                         }
                         collided = true;
                     }
@@ -344,8 +362,16 @@ namespace Player
             return collided;
         }
 
-        public void OnBoxFinishedMoving()
+        public bool IsAbleToJump()
         {
+            if (m_grounded)
+                return true;
+
+            m_canJumpTimer += Time.deltaTime;
+            if (m_canJumpTimer > m_canJumpTimerLimit)
+                return false;
+            else
+                return true;
         }
 
         #region MUTABLE ENTITY IMPLEMENTATION

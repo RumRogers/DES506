@@ -49,7 +49,7 @@ namespace GameCore.Camera
         {
             Vector2 input = new Vector2(Input.GetAxis("Camera Y"), Input.GetAxis("Camera X"));
             //if what the camera is pointing at is of interest (enchantable)
-            if (m_playerMoveCamera.p_AimedAtTransform != null)
+            if (m_playerMoveCamera.p_AimedAtTransform != null && m_playerMoveCamera.p_AutoAimOn)
             {
                 input /= 2; //half the input, potentially expose this to the editor
                 //rotation direction for aim assist
@@ -58,18 +58,22 @@ namespace GameCore.Camera
                 Vector3 rotation = Quaternion.RotateTowards(Quaternion.Euler(m_rotation), rotationDirection, Time.deltaTime * m_playerMoveCamera.p_AutoAimStrength).eulerAngles;
 
                 //kind of a bandaid solution, kinda bummed I couldn't find a better way but quaternions wrap around back to 360 if the angle is too low. Making aiming at things overhead cause issues with clamping rotation later 
-                if (rotation.x > m_playerMoveCamera.p_AimingMaxAngle )
+                if (rotation.x > m_playerMoveCamera.p_AimingMaxAngle)
                 {
                     rotation.x = 0 - (360 - rotation.x);
                 }
                 m_rotation = rotation;
             }
-            if (m_transitioned)
-            {
-                m_rotation.x -= input.x * (m_playerMoveCamera.p_AimingMovementSpeed * Time.deltaTime);
-                m_rotation.x = Mathf.Clamp(m_rotation.x, m_playerMoveCamera.p_AimingMinAngle, m_playerMoveCamera.p_AimingMaxAngle);
-            }
+
+            m_rotation.x -= input.x * (m_playerMoveCamera.p_AimingMovementSpeed * Time.deltaTime);
+            m_rotation.x = Mathf.Clamp(m_rotation.x, m_playerMoveCamera.p_AimingMinAngle, m_playerMoveCamera.p_AimingMaxAngle);
+
             m_rotation.y += input.y * (m_playerMoveCamera.p_AimingMovementSpeed * Time.deltaTime);
+
+            if (!m_transitioned)
+            {
+                //m_endRotation = Quaternion.Euler(m_rotation);
+            }
 
             m_playerMoveCamera.transform.rotation = Quaternion.Lerp(m_playerMoveCamera.transform.rotation, Quaternion.Euler(m_rotation), 0.2f);
 
@@ -87,7 +91,7 @@ namespace GameCore.Camera
             while (true)
             {
                 m_distance = Mathf.Lerp(m_startDistance, m_playerMoveCamera.p_AimingDistance, time);
-                m_rotation.x = Quaternion.Lerp(m_startRotation, m_endRotation, time).eulerAngles.x;
+                //m_rotation.x = Quaternion.Lerp(m_startRotation, m_endRotation, time).eulerAngles.x;
 
                 m_camera.fieldOfView = Mathf.Lerp(m_startFOV, m_playerMoveCamera.p_AimingFOV, time);
 
