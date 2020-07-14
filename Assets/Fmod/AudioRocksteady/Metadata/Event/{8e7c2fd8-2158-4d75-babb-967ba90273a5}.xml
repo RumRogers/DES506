@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="Event" id="{8e7c2fd8-2158-4d75-babb-967ba90273a5}">
+		<property name="color">
+			<value>Green</value>
+		</property>
 		<property name="name">
 			<value>MusicFirstLevel</value>
 		</property>
@@ -31,6 +34,9 @@
 		<relationship name="timeline">
 			<destination>{c8202226-71df-4693-a608-2b28d5f5e9cc}</destination>
 		</relationship>
+		<relationship name="banks">
+			<destination>{1933e6df-eee8-4ae3-905c-2634778428f6}</destination>
+		</relationship>
 	</object>
 	<object class="EventMixer" id="{14fb4250-0f17-4d62-804f-140b59a322ee}">
 		<relationship name="masterBus">
@@ -50,7 +56,7 @@
 			<destination>{9d375376-5a3e-458a-bd6a-a09eecd8dd82}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{1bee7568-393c-4edc-aba7-4864cce72802}</destination>
+			<destination>{1285f4bf-98f8-449f-bec5-0797608eb976}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{b8cf61c0-46ef-43fa-945d-a3622e4771b2}" />
@@ -72,6 +78,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{4b88ce1e-fa10-4eb7-bbbb-cfd3de219e42}">
+		<property name="volume">
+			<value>-4.5</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{bd49d58e-f7c0-4863-bbaf-28f2e46e2f71}</destination>
 		</relationship>
