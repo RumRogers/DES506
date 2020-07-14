@@ -79,13 +79,13 @@ MonoBehaviour:
   m_walkingDeceleration: 20
   m_aimingMaxSpeed: 0.1
   m_aimingAcceleration: 1
-  m_aimingDeceleration: 1
+  m_aimingDeceleration: 20
   m_highlightShader: {fileID: 4800000, guid: 43f422d377633484191fb9b22d687267, type: 3}
-  m_iceAcceleration: 1
+  m_iceAcceleration: 0.1
   m_iceDeceleration: 0.1
-  m_maxIceSpeed: 0.6
-  m_aerialAcceleration: 0.1
-  m_aerialDeceleration: 0.1
+  m_maxIceSpeed: 0.2
+  m_aerialAcceleration: 1
+  m_aerialDeceleration: 1
   m_gravity: 0.59
   m_jumpVelocity: 0.2
   m_highJumpVelocity: 15
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_groundOverlapPadding: 0.3
   m_numHorizontalRays: 3
   m_numVerticalRays: 3
-  m_skinWidth: 0.1
+  m_skinWidth: 0.6
   m_playerEntityProperties: 26
   m_reticle: {fileID: 0}
 --- !u!114 &4580232385870872153

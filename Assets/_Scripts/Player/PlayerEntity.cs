@@ -249,7 +249,7 @@ namespace Player
                 for (int y = 0; y < m_numVerticalRays; ++y)
                 {
 
-                    Debug.DrawLine(rayStart, (rayStart + (rayDirection * m_playerCollider.bounds.extents.z)));  //Uncomment for debug rays
+                    Debug.DrawLine(rayStart, (rayStart + (rayDirection * (m_playerCollider.bounds.extents.z + m_skinWidth))));  //Uncomment for debug rays
 
                     if (Physics.Raycast(rayStart, rayDirection, out m_collisionHitInfo, m_playerCollider.bounds.extents.z + m_skinWidth))
                     {
