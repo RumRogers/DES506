@@ -42,6 +42,8 @@ namespace GameCore.GameState
             {
                 m_owner.SetState(new Playing_State(m_owner, m_previousState));
             }
+            //oof
+            Cursor.lockState = CursorLockMode.Confined;
         }
     }
 }

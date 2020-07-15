@@ -98,6 +98,11 @@ public class PauseMenuController : MonoBehaviour
         }
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
     #region Sub-Menu Handling
 
     public void DisplayMenu(int index)
