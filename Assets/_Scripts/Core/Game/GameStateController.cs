@@ -10,11 +10,23 @@ namespace GameCore.GameState
         [SerializeField]
         GameObject m_pauseMenu;
 
+        [SerializeField]
+        GameObject[] m_OtherUIsToHide;
+
+        [SerializeField]
+        Texture2D m_mouseCursor;
+
+
         GameCore.System.State m_prevState = null;
 
         void Awake()
         {
             SetState(new Playing_State(this));
+
+            if (m_mouseCursor)
+            {
+                Cursor.SetCursor(m_mouseCursor, Vector2.zero, CursorMode.Auto);
+            }
         }
 
         override protected void Update()

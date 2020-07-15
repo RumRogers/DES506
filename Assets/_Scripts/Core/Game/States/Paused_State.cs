@@ -28,7 +28,6 @@ namespace GameCore.GameState
             m_playerEntity.SetState(new Idle_PlayerState(m_playerEntity));
 
             controller.SetPrevState(m_previousState);
-
             controller.GetPauseMenu().SetActive(true);
 
             Debug.Log("Game is paused");
