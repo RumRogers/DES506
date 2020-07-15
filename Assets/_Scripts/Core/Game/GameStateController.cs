@@ -10,6 +10,8 @@ namespace GameCore.GameState
         [SerializeField]
         GameObject m_pauseMenu;
 
+        GameCore.System.State m_prevState = null;
+
         void Awake()
         {
             SetState(new Playing_State(this));
@@ -29,12 +31,17 @@ namespace GameCore.GameState
         //to deal with this ugliness.
         public void ResumeButtonPress() 
         {
-            SetState(new Playing_State(this));
+            SetState(new Playing_State(this, m_prevState));
         }
 
         public bool IsPaused()
         {
             return typeof(Paused_State).IsInstanceOfType(m_state);
+        }
+
+        public void SetPrevState(GameCore.System.State state)
+        {
+            m_prevState = state;
         }
 
     }
