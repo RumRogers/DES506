@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9b048d8bd0dadae4fb9c0e1cb9654c0d
+guid: 6c2e1d6280b08b940b8dbefeb889e451
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
@@ -7,8 +7,23 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Leaf
-    second: {fileID: 2100000, guid: d1fe0db63d0b3a14f905522dcf3d89e6, type: 2}
+      name: Bridge_Metal3
+    second: {fileID: 2100000, guid: 609355b4c59335945bd2fcf4a2067718, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bridge_Small_Supports2
+    second: {fileID: 2100000, guid: 620a06f6f8a013443a840c2a84ce3de2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bridge_Wood3
+    second: {fileID: 2100000, guid: 5c06936ef676b9a43ad7d1ee1abfbbd3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bridge_Wood_Supports2
+    second: {fileID: 2100000, guid: b64aa3d689364a647a3597baab7fbb4b, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

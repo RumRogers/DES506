@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9b048d8bd0dadae4fb9c0e1cb9654c0d
+guid: b70ad96bb7534624bb6c0bbd7b1c2e12
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Leaf
-    second: {fileID: 2100000, guid: d1fe0db63d0b3a14f905522dcf3d89e6, type: 2}
+      name: blinn1
+    second: {fileID: 2100000, guid: 2c7267a11a4f80d43b86d48fb72c1524, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -92,7 +92,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
