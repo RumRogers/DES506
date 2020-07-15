@@ -10,9 +10,24 @@ namespace GameCore.GameState
         [SerializeField]
         GameObject m_pauseMenu;
 
+        [SerializeField]
+        GameObject m_OtherUIsToHide;
+
+        [SerializeField]
+        Texture2D m_mouseCursor;
+
+
+        GameCore.System.State m_prevState = null;
+
         void Awake()
         {
             SetState(new Playing_State(this));
+
+            if (m_mouseCursor)
+            {
+                //Manually offset the whitespace for now
+                Cursor.SetCursor(m_mouseCursor, new Vector2(10, 0), CursorMode.Auto);
+            }
         }
 
         override protected void Update()
@@ -29,7 +44,7 @@ namespace GameCore.GameState
         //to deal with this ugliness.
         public void ResumeButtonPress() 
         {
-            SetState(new Playing_State(this));
+            SetState(new Playing_State(this, m_prevState));
         }
 
         public bool IsPaused()
@@ -37,5 +52,14 @@ namespace GameCore.GameState
             return typeof(Paused_State).IsInstanceOfType(m_state);
         }
 
+        public void SetPrevState(GameCore.System.State state)
+        {
+            m_prevState = state;
+        }
+
+        public void SetIngameUIActive(bool active) //temp, disabling everything will probably break stuff!
+        {
+            m_OtherUIsToHide.SetActive(active);
+        }
     }
 }

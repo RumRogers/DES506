@@ -17,45 +17,43 @@ namespace GameCore.GameState
         PlayerEntity m_playerEntity;
         //State m_prevoiusState = null;
 
-        public Playing_State(GameCore.System.Automaton owner) : base(owner)
+        public Playing_State(GameCore.GameState.GameStateController owner) : base(owner)
         {
             Time.timeScale = 1.0f;
             Cursor.visible = false;
 
-            if (!owner.TryGetComponent<GameStateController>(out controller))
-            {
-                Debug.Log("Failed to find GameStateController script from owner");
-            }
+            controller = owner;
 
             controller.GetPauseMenu().SetActive(false);
             Debug.Log("Game is unpaused");
         }
 
-        public Playing_State(GameCore.System.Automaton owner, State prevState) : base(owner)
+        public Playing_State(GameCore.GameState.GameStateController owner, State prevState) : base(owner)
         {
             Time.timeScale = 1.0f;
             Cursor.visible = false;
 
-            if (!owner.TryGetComponent<GameStateController>(out controller))
-            {
-                Debug.Log("Failed to find GameStateController script from owner");
-            }
+            controller = owner;
 
             m_playerEntity = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerEntity>();
             m_playerEntity.SetState(prevState);
 
-            Cursor.lockState = CursorLockMode.Locked;
+            
 
             controller.GetPauseMenu().SetActive(false);
             Debug.Log("Game is unpaused");
+
+            controller.SetIngameUIActive(true);
         }
 
         public override void Manage()
         {
             if (Input.GetKeyUp(KeyCode.Escape))
             {
-                m_owner.SetState(new Paused_State(m_owner));
+                m_owner.SetState(new Paused_State(controller));
             }
+            //more oof
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 }
