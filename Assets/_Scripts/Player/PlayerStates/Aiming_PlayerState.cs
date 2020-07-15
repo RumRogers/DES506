@@ -72,24 +72,9 @@ namespace Player
                     SpellWheel.SetTargetEnchantable(null);
                 }
 
-                m_playerEntity.m_reticle.gameObject.SetActive(false); 
+                m_playerEntity.m_reticle.gameObject.SetActive(false);
                 //TEMP REMOVE LATER
                 m_owner.SetState(new Default_PlayerState(m_owner));
-                return;
-            }
-
-            if (m_playerEntity.Grounded)
-            {
-                //need to check if it's playable here before jump as we still want it to enter the falling state if it's not grounded, regardless of it's properties
-                if (Input.GetButtonDown("Jump") && m_playerEntity.HasProperty(PlayerEntityProperties.CAN_JUMP) && m_playerEntity.HasProperty(PlayerEntityProperties.PLAYABLE))
-                {
-                    m_owner.SetState(new Jumping_PlayerState(m_owner));
-                    return;
-                }
-            }
-            else
-            {
-                m_owner.SetState(new Falling_PlayerState(m_owner));
                 return;
             }
 
@@ -112,12 +97,10 @@ namespace Player
                 }
             }
 
-            Debug.DrawRay(Camera.main.transform.position + ((m_playerEntity.transform.position - m_camera.transform.position).magnitude * Camera.main.transform.forward), Camera.main.transform.forward * m_playerEntity.Projectile.Range);
-
             //Casting ray forward from the camera to check if there is an enchantable object where the player is aiming
             if (Physics.Raycast(Camera.main.transform.position + ((m_playerEntity.transform.position - m_camera.transform.position).magnitude * Camera.main.transform.forward), //Moves the position to start parellel to the player
                 Camera.main.transform.forward, out m_rayHitInfo, m_playerEntity.Projectile.Range))
-            {                
+            {
                 Enchantable enchantable = HierarchyTraverser.RetrieveEnchantableComponent(m_rayHitInfo.transform);
                 if (enchantable != null)
                 {
@@ -134,7 +117,7 @@ namespace Player
                         Renderer renderer = LevelManager.Instance.GetRenderer(enchantable);
                         if (renderer == null)
                         {
-                            Debug.LogError($"Object {m_rayHitInfo.transform.name} doesn't have a renderer component!");
+                            Debug.LogError($"Enchantable Object {m_rayHitInfo.transform.name} doesn't have a renderer component!");
                             return;
                         }
                         m_aimedAtRenderer = renderer;
@@ -196,88 +179,70 @@ namespace Player
                 }
             }
 
+            //rotate the player to face the direction they are aiming in
+            m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z));
 
-
-            //update movement relative to the camera
-            if (m_playerEntity.HasProperty(PlayerEntityProperties.PLAYABLE))
+            //Slope detection 
+            //if the slope is climable, modify the direction the player is traveling in 
+            float slopeAngle = Vector3.Angle(m_playerEntity.GroundHitInfo.normal, Vector3.up);
+            if (slopeAngle < m_playerEntity.MaxClimableAngle)
             {
-                //Directional input
-                Vector3 forwardMovement = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z) * Input.GetAxis("Vertical"); // removing the y component from the camera's forward vector
-                Vector3 rightMovement = Camera.main.transform.right * Input.GetAxis("Horizontal");
-                m_playerEntity.Direction = (forwardMovement + rightMovement).normalized;
-
-                //rotate the player to face the direction they are aiming in
-                m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z));
-
-                //Slope detection 
-                //if the slope is climable, modify the direction the player is traveling in 
-                float slopeAngle = Vector3.Angle(m_playerEntity.GroundHitInfo.normal, Vector3.up);
-                if (slopeAngle < m_playerEntity.MaxClimableAngle)
+                Vector3 slopeDirection = Vector3.zero;
+                if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING) && slopeAngle > 1)
                 {
-                    Vector3 slopeDirection = Vector3.zero;
-                    if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING) && slopeAngle > 1)
+                    //get the players right based on direction of movement, then use it to calculate the new direction of travel
+                    Vector3 playerRight = Vector3.Cross(m_playerEntity.transform.forward, -m_playerEntity.transform.up);
+                    //getting the slope angle for the ground the player is walking on
+                    slopeDirection = Vector3.Cross(playerRight, m_playerEntity.GroundHitInfo.normal);
+                    if (slopeDirection.y > 0)
                     {
-                        //get the players right based on direction of movement, then use it to calculate the new direction of travel
-                        Vector3 playerRight = Vector3.Cross(m_playerEntity.transform.forward, -m_playerEntity.transform.up);
-                        //getting the slope angle for the ground the player is walking on
-                        slopeDirection = Vector3.Cross(playerRight, m_playerEntity.GroundHitInfo.normal);
-                        if (slopeDirection.y > 0)
-                        {
-                            slopeDirection *= -1;
-                        }
-                    }
-                    else
-                    {
-                        //get the players right based on direction of movement, then use it to calculate the new direction of travel
-                        Vector3 playerRight = Vector3.Cross(m_playerEntity.Direction, -m_playerEntity.transform.up);
-                        //getting the slope angle for the ground the player is walking on
-                        slopeDirection = Vector3.Cross(playerRight, m_playerEntity.GroundHitInfo.normal);
-                    }
-
-                    m_playerEntity.Direction = slopeDirection;
-                }
-
-                //If there is input, add velocity in that direction, but clamp the movement speed, Y velocity should always equal zero in this state, so no need to preserve down / up velocity
-                if (m_playerEntity.Direction != Vector3.zero)
-                {
-                    if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING))
-                    {
-                        m_velocity += (m_playerEntity.Direction * m_playerEntity.IceAcceleration) * Time.deltaTime;
-                        m_velocity = Vector3.ClampMagnitude(m_velocity, m_playerEntity.IceMaxSpeed);
-                    }
-                    else
-                    {
-                        m_velocity = m_velocity.magnitude * m_playerEntity.Direction;
-                        m_velocity += (m_playerEntity.Direction * m_playerEntity.AimingAcceleration) * Time.deltaTime;
-                        m_velocity = Vector3.ClampMagnitude(m_velocity, m_playerEntity.AimingMaxSpeed);
-                    }
-                }
-                else if (Mathf.Abs(m_velocity.x) > 0.1f || Mathf.Abs(m_velocity.z) > 0.1f)
-                {
-                    if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING))
-                    {
-                        m_velocity += (((m_velocity.normalized) * -1) * m_playerEntity.IceDeceleration) * Time.deltaTime;
-                    }
-                    else
-                    {
-                        m_velocity += (((m_velocity.normalized) * -1) * m_playerEntity.AimingDeceleration) * Time.deltaTime;
+                        slopeDirection *= -1;
                     }
                 }
                 else
                 {
-                    m_velocity.x = 0.0f;
-                    m_velocity.z = 0.0f;
+                    //get the players right based on direction of movement, then use it to calculate the new direction of travel
+                    Vector3 playerRight = Vector3.Cross(m_playerEntity.Direction, -m_playerEntity.transform.up);
+                    //getting the slope angle for the ground the player is walking on
+                    slopeDirection = Vector3.Cross(playerRight, m_playerEntity.GroundHitInfo.normal);
                 }
+
+                m_playerEntity.Direction = slopeDirection;
             }
 
+            //If there is input, add velocity in that direction, but clamp the movement speed, Y velocity should always equal zero in this state, so no need to preserve down / up velocity
+            if (m_playerEntity.Direction != Vector3.zero)
+            {
+                if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING))
+                {
+                    m_velocity += (m_playerEntity.Direction * m_playerEntity.IceAcceleration) * Time.deltaTime;
+                    m_velocity = Vector3.ClampMagnitude(m_velocity, m_playerEntity.IceMaxSpeed);
+                }
+                else
+                {
+                    m_velocity = m_velocity.magnitude * m_playerEntity.Direction;
+                    m_velocity += (m_playerEntity.Direction * m_playerEntity.AimingAcceleration) * Time.deltaTime;
+                    m_velocity = Vector3.ClampMagnitude(m_velocity, m_playerEntity.AimingMaxSpeed);
+                }
+            }
+            else if (Mathf.Abs(m_velocity.x) > 0.1f || Mathf.Abs(m_velocity.z) > 0.1f)
+            {
+                if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING))
+                {
+                    m_velocity += (((m_velocity.normalized) * -1) * m_playerEntity.IceDeceleration) * Time.deltaTime;
+                }
+                else
+                {
+                    m_velocity += (((m_velocity.normalized) * -1) * m_playerEntity.AimingDeceleration) * Time.deltaTime;
+                }
+            }
             else
             {
-                m_velocity.x = 0;
-                m_velocity.z = 0;
+                m_velocity.x = 0.0f;
+                m_velocity.z = 0.0f;
             }
 
             m_playerEntity.Velocity = m_velocity;
-
         }
     }
 }

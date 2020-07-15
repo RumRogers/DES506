@@ -41,28 +41,24 @@ namespace Player
         {            
             if (m_animationFinished)
             {
-                //not functional while waiting for jump for some reason. need to fix
+                //Holding jump to go higher
                 if (Input.GetButton("Jump") && m_time < m_maxButtonHoldTime)
                 {
                     //adding additional jump force gained by holding the jump button
-                    m_velocity += (Vector3.up * m_additionalJumpForce) * Time.deltaTime;
-                    m_time += Time.deltaTime;
+                    m_velocity += (Vector3.up * m_additionalJumpForce) * Time.fixedDeltaTime;
+                    m_time += Time.fixedDeltaTime;
                 }
                 else if (Input.GetButtonUp("Jump") || m_time > m_maxButtonHoldTime)
                 {
                     m_time = m_maxButtonHoldTime;// setting it to max time so you cannot press jump again to gain height once you've already released it
                 }
-                //subtracting gravity from upwards velocity until forces equalise
-                m_velocity += (Vector3.down * m_playerEntity.Gravity) * Time.deltaTime;
 
-                //Directional input, slower in mid air
-                Vector3 forwardMovement = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z) * Input.GetAxisRaw("Vertical"); // removing the y component from the camera's forward vector
-                Vector3 rightMovement = Camera.main.transform.right * Input.GetAxisRaw("Horizontal");
-                m_playerEntity.Direction = (forwardMovement + rightMovement).normalized;
+                //subtracting gravity from upwards velocity until forces equalise
+                m_velocity += (Vector3.down * m_playerEntity.Gravity) * Time.fixedDeltaTime;
 
                 if (m_playerEntity.Direction != Vector3.zero)
                 {
-                    Vector3 nonVerticalMovement = new Vector3(m_velocity.x, 0, m_velocity.z) + (m_playerEntity.Direction * m_playerEntity.AerialAcceleration) * Time.deltaTime;
+                    Vector3 nonVerticalMovement = new Vector3(m_velocity.x, 0, m_velocity.z) + (m_playerEntity.Direction * m_playerEntity.AerialAcceleration) * Time.fixedDeltaTime;
                     m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Velocity.normalized.x, 0, m_playerEntity.Velocity.normalized.z));
                     if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING))
                     {
@@ -75,12 +71,12 @@ namespace Player
                 }
                 else if (Mathf.Abs(m_velocity.x) > 0.1f || Mathf.Abs(m_velocity.z) > 0.1f)
                 {
-                    m_velocity += (((m_velocity.normalized) * -1) * m_playerEntity.AerialDeceleration) * Time.deltaTime;
+                    m_velocity += (((m_velocity.normalized) * -1) * m_playerEntity.AerialDeceleration) * Time.fixedDeltaTime;
                 }
 
                 m_playerEntity.Velocity = m_velocity;
 
-                if (m_playerEntity.Velocity.y < 0)
+                if (m_velocity.y < 0)
                 {
                     m_owner.SetState(new Falling_PlayerState(m_owner));
                     return;

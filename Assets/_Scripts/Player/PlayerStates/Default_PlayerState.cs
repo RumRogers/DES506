@@ -34,35 +34,8 @@ namespace Player
         {
             if (m_landingAnimationFinished)
             {
-                //Jumping / falling state transitions
-                if (m_playerEntity.Grounded)
-                {
-                    //need to check if it's playable here before jump as we still want it to enter the falling state if it's not grounded, regardless of it's properties
-                    if (Input.GetButtonDown("Jump") && m_playerEntity.HasProperty(PlayerEntityProperties.CAN_JUMP) && m_playerEntity.HasProperty(PlayerEntityProperties.PLAYABLE))
-                    {
-                        m_owner.SetState(new Jumping_PlayerState(m_owner));
-                        return;
-                    }
-                }
-                else
-                {
-                    m_owner.SetState(new Falling_PlayerState(m_owner));
-                    return;
-                }
                 if (m_playerEntity.HasProperty(PlayerEntityProperties.PLAYABLE))
                 {
-                    //Pushing state transition, gets closest interactable and switches state if there are interactables in range 
-                    if (Input.GetButtonDown("Aim") || Input.GetAxisRaw("Aim") == 1)
-                    {
-                        m_owner.SetState(new Aiming_PlayerState(m_owner));
-                        return;
-                    }
-
-                    //Directional input
-                    Vector3 forwardMovement = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z) * Input.GetAxis("Vertical"); // removing the y component from the camera's forward vector
-                    Vector3 rightMovement = Camera.main.transform.right * Input.GetAxis("Horizontal");
-                    m_playerEntity.Direction = (forwardMovement + rightMovement).normalized;
-
                     //Slope detection 
                     //if the slope is climable, modify the direction the player is traveling in 
                     float slopeAngle = Vector3.Angle(m_playerEntity.GroundHitInfo.normal, Vector3.up);
@@ -98,28 +71,17 @@ namespace Player
                         m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Direction.normalized.x, 0, m_playerEntity.Direction.z));
                         if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING))
                         {
-                            m_velocity += (m_playerEntity.Direction * m_playerEntity.IceAcceleration) * Time.deltaTime;
+                            m_velocity += (m_playerEntity.Direction * m_playerEntity.IceAcceleration) * Time.fixedDeltaTime;
                             m_velocity = Vector3.ClampMagnitude(m_velocity, m_playerEntity.IceMaxSpeed);
                         }
                         else
                         {
                             m_velocity = m_velocity.magnitude * m_playerEntity.Direction;
-                            m_velocity += (m_playerEntity.Direction * m_playerEntity.WalkingAcceleration) * Time.deltaTime;
+                            m_velocity += (m_playerEntity.Direction * m_playerEntity.WalkingAcceleration) * Time.fixedDeltaTime;
                             m_velocity = Vector3.ClampMagnitude(m_velocity, m_playerEntity.MaxSpeed);
                             m_playerEntity.Animator.RunningState.speed = (m_velocity.magnitude / m_playerEntity.MaxSpeed) * m_playerEntity.Animator.RunningAnimSpeed;
                         }
                         m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.RUNNING);
-                    }
-                    else if (Mathf.Abs(m_velocity.x) > 0.1f || Mathf.Abs(m_velocity.z) > 0.1f)
-                    {
-                        if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING))
-                        {
-                            m_velocity += (((m_velocity.normalized) * -1) * m_playerEntity.IceDeceleration) * Time.deltaTime;
-                        }
-                        else
-                        {
-                            m_velocity += (((m_velocity.normalized) * -1) * m_playerEntity.WalkingDeceleration) * Time.deltaTime;
-                        }
                     }
                     else
                     {
@@ -128,7 +90,6 @@ namespace Player
                         m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.IDLE);
                     }
                 }
-
                 else
                 {
                     m_velocity.x = 0;

@@ -53,9 +53,9 @@ namespace GameCore.Camera
         {
             if (m_transitioned)
             {
-                m_rotation.x = Mathf.Clamp(m_rotation.x - (Input.GetAxis("Camera Y") * (m_playerMoveCamera.p_DefaultMovementSpeed * Time.deltaTime)), m_playerMoveCamera.p_DefaultStartingAngle + m_playerMoveCamera.p_DefaultMinAngle, m_playerMoveCamera.p_DefaultStartingAngle + m_playerMoveCamera.p_DefaultMaxAngle);
+                m_rotation.x = Mathf.Clamp(m_rotation.x - (Input.GetAxis("Camera Y") * (m_playerMoveCamera.p_DefaultMovementSpeed * Time.fixedDeltaTime)), m_playerMoveCamera.p_DefaultStartingAngle + m_playerMoveCamera.p_DefaultMinAngle, m_playerMoveCamera.p_DefaultStartingAngle + m_playerMoveCamera.p_DefaultMaxAngle);
             }
-            m_rotation.y = m_rotation.y + Input.GetAxis("Camera X") * (m_playerMoveCamera.p_DefaultMovementSpeed * Time.deltaTime);
+            m_rotation.y = m_rotation.y + Input.GetAxis("Camera X") * (m_playerMoveCamera.p_DefaultMovementSpeed * Time.fixedDeltaTime);
 
             m_playerMoveCamera.transform.rotation = Quaternion.Lerp(m_playerMoveCamera.transform.rotation, Quaternion.Euler( m_rotation), 0.2f);
 
