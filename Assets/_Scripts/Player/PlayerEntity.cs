@@ -419,7 +419,7 @@ namespace Player
 
         bool IsFalling()
         {
-            return !m_ground && m_state.GetType() != typeof(Falling_PlayerState);
+            return !m_ground && (m_state.GetType() != typeof(Falling_PlayerState) && m_state.GetType() != typeof(Jumping_PlayerState));
         }
 
         #region MUTABLE ENTITY IMPLEMENTATION

@@ -76,7 +76,7 @@ namespace Player
 
                 m_playerEntity.Velocity = m_velocity;
 
-                if (m_playerEntity.Velocity.y < 0)
+                if (m_velocity.y < 0)
                 {
                     m_owner.SetState(new Falling_PlayerState(m_owner));
                     return;
