@@ -17,6 +17,7 @@ public class FallPlatform : Enchantable
     [SerializeField]
     private float m_shakeSpeed;
 
+    [Header("Required Objects")]
     [SerializeField]
     private GameObject m_platform;
 
@@ -29,6 +30,7 @@ public class FallPlatform : Enchantable
     private const float c_respawnTime = 5.0f;
 
     private Vector3 m_position = Vector3.zero;
+    private Vector3 m_platBasePosition = Vector3.zero;
     private Vector3 m_smallScale = new Vector3(0.2f, 0.2f, 0.2f);
     private Vector3 m_largeScale = new Vector3(2.0f, 2.0f, 2.0f);
 
@@ -43,6 +45,7 @@ public class FallPlatform : Enchantable
         m_rigBod.isKinematic = true;
         m_platform.GetComponent<Rigidbody>().isKinematic = true;
         m_position = transform.position;
+        m_platBasePosition = m_platform.transform.position;
         m_timeTillFall = m_normalTimeTillFall;
     }
 
@@ -99,7 +102,7 @@ public class FallPlatform : Enchantable
                 {
                     //transform.RotateAround(transform.position, transform.forward, m_rotation.z + (Mathf.Sin(m_counter * 0.1f)));
                     //transform.position = m_position + (transform.right * (Mathf.Sin(m_counter * m_shaleSpeed)) * m_shakeScale);
-                    m_platform.transform.position = m_position + (transform.right * (Mathf.Sin(m_counter * m_shakeSpeed)) * m_shakeScale);
+                    m_platform.transform.position = m_platBasePosition + (transform.right * (Mathf.Sin(m_counter * m_shakeSpeed)) * m_shakeScale);
                 }
                     
 
@@ -121,7 +124,8 @@ public class FallPlatform : Enchantable
                 m_counter = 0;
                 m_rigBod.isKinematic = true;
                 m_platform.GetComponent<Rigidbody>().isKinematic = true;
-                transform.position = m_position;
+                m_platform.transform.position = m_position;
+                transform.position = m_platBasePosition;
                 m_fallTriggerStart = false;
             }
 
