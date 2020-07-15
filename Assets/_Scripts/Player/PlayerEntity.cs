@@ -284,7 +284,7 @@ namespace Player
                         //if we come to a corner, stop completely
                         if (Physics.Raycast(transform.position, wallCross, m_playerCollider.bounds.extents.z + m_skinWidth))
                         {
-                            m_velocity = Vector3.zero;
+                            m_velocity = new Vector3(0, m_velocity.y, 0);
                             return;
                         }
 
@@ -292,7 +292,7 @@ namespace Player
                             wallCross *= -1;
 
                         m_velocity.x = wallCross.x * (m_velocity.magnitude * (Vector3.Angle(-m_collisionHitInfo.normal, transform.forward) / 90));  //should be a faster movement if the angle is lower
-                        m_velocity.z = wallCross.z * (m_velocity.magnitude * (Vector3.Angle(-m_collisionHitInfo.normal, transform.forward) / 90));
+                        m_velocity.z = wallCross.z * (m_velocity.magnitude * (Vector3.Angle(-m_collisionHitInfo.normal, transform.forward) / 90));  //dividing by 90 as if we're at 90 or greater it should be parallel and therefore moving at max speed
 
                         return;
                     }
@@ -402,8 +402,6 @@ namespace Player
                 return true;
             if (m_state.GetType() != typeof(Falling_PlayerState) || m_hasJumped)
                 return false;
-
-            Debug.Log(m_canJumpTimer);
 
             m_canJumpTimer += Time.deltaTime;
             if (m_canJumpTimer > m_canJumpTimerLimit)
