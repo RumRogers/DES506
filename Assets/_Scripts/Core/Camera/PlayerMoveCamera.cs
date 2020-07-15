@@ -89,7 +89,7 @@ namespace GameCore.Camera
             //base.Update();
         }
 
-        private void LateUpdate()
+        private void FixedUpdate()
         {
             m_state.Manage();
             transform.position = Vector3.Lerp(transform.position, m_position, m_smoothFactor);

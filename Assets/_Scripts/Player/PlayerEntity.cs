@@ -76,6 +76,7 @@ namespace Player
         //player stats (not editor accessible)
         bool m_grounded = true;
         bool m_canJump = true;
+        bool m_hasJumped = false;
         float m_canJumpTimer = 0;
         
         Vector3 m_playerStartPosition;
@@ -115,6 +116,7 @@ namespace Player
         //player stats, getters only
         public bool Grounded { get => m_grounded; }
         public bool CanJump { get => m_canJump; }
+        public bool HasJumped { get => m_hasJumped; set => m_hasJumped = value; }
         public float MaxSpeed { get => m_maxSpeed; }
         public float WalkingAcceleration { get => m_walkingAcceleration; }
         public float WalkingDeceleration { get => m_walkingDeceleration; }
@@ -128,6 +130,7 @@ namespace Player
         public float AerialAcceleration { get => m_aerialAcceleration; }
         public float AerialDeceleration { get => m_aerialDeceleration; }
         public float JumpHeldMutliplier { get => m_jumpHeldMultiplier; }
+        public float CanJumpTimer { get => m_canJumpTimer; set => m_canJumpTimer = value; }
         public float PushSpeed { get => m_pushingSpeed; }
         public float Gravity { get => m_gravity; }
         public float JumpVelocity { get => m_jumpVelocity; }
@@ -171,12 +174,32 @@ namespace Player
         // Override of automaton update function for extended functionality
         override protected void Update()
         {
+            //Directional input
+            Vector3 forwardMovement = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z) * Input.GetAxis("Vertical"); // removing the y component from the camera's forward vector
+            Vector3 rightMovement = Camera.main.transform.right * Input.GetAxis("Horizontal");
+            m_direction = (forwardMovement + rightMovement).normalized;
+
             m_grounded = IsGrounded();
-            m_canJump = IsAbleToJump();
             //First check if death state is triggered to save time / ensure the player cannot do something if they are alread dead
             if (HasProperty(PlayerEntityProperties.DYING))
             {
                 SetState(new Death_PlayerState(this));
+            }
+
+            if (IsFalling())
+            {
+                SetState(new Falling_PlayerState(this));
+            }
+
+            if (IsAbleToJump() && Input.GetButtonDown("Jump"))
+            {
+                m_hasJumped = true;
+                SetState(new Jumping_PlayerState(this));
+            }
+
+            if (IsAbleToAim() && (Input.GetButtonDown("Aim") || Input.GetAxisRaw("Aim") == 1))
+            {
+                SetState(new Aiming_PlayerState(this));
             }
 
             //Dialogue trigger
@@ -184,7 +207,10 @@ namespace Player
             {
                 SetState(new Dialogue_PlayerState(this));
             }
+        }
 
+        private void FixedUpdate()
+        {
             base.Update();
 
             CheckCollisions();
@@ -211,6 +237,7 @@ namespace Player
                 m_newGroundPosition = Vector3.zero;
                 m_oldGroundPosition = Vector3.zero;
             }
+
             transform.position += m_velocity;
         }
 
@@ -373,12 +400,26 @@ namespace Player
         {
             if (m_grounded)
                 return true;
+            if (m_state.GetType() != typeof(Falling_PlayerState) || m_hasJumped)
+                return false;
+
+            Debug.Log(m_canJumpTimer);
 
             m_canJumpTimer += Time.deltaTime;
             if (m_canJumpTimer > m_canJumpTimerLimit)
                 return false;
             else
                 return true;
+        }
+
+        bool IsAbleToAim()
+        {
+            return m_state.GetType() == typeof(Default_PlayerState);
+        }
+
+        bool IsFalling()
+        {
+            return !m_ground && m_state.GetType() != typeof(Falling_PlayerState);
         }
 
         #region MUTABLE ENTITY IMPLEMENTATION
