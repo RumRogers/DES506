@@ -11,7 +11,7 @@ namespace GameCore.GameState
         GameObject m_pauseMenu;
 
         [SerializeField]
-        GameObject[] m_OtherUIsToHide;
+        GameObject m_OtherUIsToHide;
 
         [SerializeField]
         Texture2D m_mouseCursor;
@@ -25,7 +25,8 @@ namespace GameCore.GameState
 
             if (m_mouseCursor)
             {
-                Cursor.SetCursor(m_mouseCursor, Vector2.zero, CursorMode.Auto);
+                //Manually offset the whitespace for now
+                Cursor.SetCursor(m_mouseCursor, new Vector2(10, 0), CursorMode.Auto);
             }
         }
 
@@ -56,5 +57,9 @@ namespace GameCore.GameState
             m_prevState = state;
         }
 
+        public void SetIngameUIActive(bool active) //temp, disabling everything will probably break stuff!
+        {
+            m_OtherUIsToHide.SetActive(active);
+        }
     }
 }

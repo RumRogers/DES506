@@ -38,10 +38,12 @@ namespace GameCore.GameState
             m_playerEntity = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerEntity>();
             m_playerEntity.SetState(prevState);
 
-            Cursor.lockState = CursorLockMode.Locked;
+            
 
             controller.GetPauseMenu().SetActive(false);
             Debug.Log("Game is unpaused");
+
+            controller.SetIngameUIActive(true);
         }
 
         public override void Manage()
@@ -50,6 +52,8 @@ namespace GameCore.GameState
             {
                 m_owner.SetState(new Paused_State(controller));
             }
+            //more oof
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 }

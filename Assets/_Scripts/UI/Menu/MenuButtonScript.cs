@@ -73,7 +73,7 @@ public class MenuButtonScript : MonoBehaviour
 
         if (m_mouseCursor)
         {
-            Cursor.SetCursor(m_mouseCursor, Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(m_mouseCursor, new Vector2(10, 0), CursorMode.Auto);
         }
     }
 
