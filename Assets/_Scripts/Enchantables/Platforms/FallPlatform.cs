@@ -29,7 +29,6 @@ public class FallPlatform : Enchantable
     private const float c_respawnTime = 5.0f;
 
     private Vector3 m_position = Vector3.zero;
-    private Quaternion m_rotation;//= Vector3.zero;
     private Vector3 m_smallScale = new Vector3(0.2f, 0.2f, 0.2f);
     private Vector3 m_largeScale = new Vector3(2.0f, 2.0f, 2.0f);
 
@@ -45,7 +44,6 @@ public class FallPlatform : Enchantable
         m_platform.GetComponent<Rigidbody>().isKinematic = true;
         m_position = transform.position;
         m_timeTillFall = m_normalTimeTillFall;
-        m_rotation = transform.rotation;
     }
 
     private void OnTriggerEnter(Collider other)

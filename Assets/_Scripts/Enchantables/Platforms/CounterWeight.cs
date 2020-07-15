@@ -33,7 +33,6 @@ public class CounterWeight : Enchantable
     private const float c_scaleTime = 2.0f;
     
     private Rigidbody m_rigidBody;
-
     private Renderer m_renderer;
 
     private void Start()
@@ -42,13 +41,13 @@ public class CounterWeight : Enchantable
         m_largeScale = transform.localScale * m_largeScaleFactor;
 
         m_rigidBody = GetComponent<Rigidbody>();
+        m_renderer = GetComponent<Renderer>();
 
         m_defaultMass = m_rigidBody.mass;
 
-        m_renderer = GetComponent<Renderer>();
-
         if(m_seesaw == null)
         {
+
             Debug.LogError("The " + transform.name + " is missing it's seesaw reference");
         }
     }
@@ -56,15 +55,13 @@ public class CounterWeight : Enchantable
     protected override void Update()
     {
         base.Update();
-        m_dimensions = m_renderer.bounds.size;
 
-        RaycastHit m_rayHit;
+        Vector3 m_size = m_renderer.bounds.size;
 
-        float temp = m_seesaw.GetDimensions().y/2 - m_dimensions.y/2;
-
-        //transform.position = new Vector3(transform.position.x, temp, transform.position.z);
-        //keep box the distance of half platdim, and half box dim (both in the y) with relation to the up vector
-        //float temp = m_dimensions.y - ;
+        if (!Physics.Raycast(transform.position, -transform.up, m_size.y/2))
+        {
+            m_rigidBody.AddForceAtPosition(-transform.up * 30, transform.position);
+        }
     }
 
     IEnumerator ScaleObject(Vector3 scale)
