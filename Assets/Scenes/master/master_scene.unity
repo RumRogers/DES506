@@ -783,6 +783,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1297201435}
     m_Modifications:
+    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
+        type: 3}
+      propertyPath: m_Name
+      value: InkBolt (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 1424418927591661895, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -837,11 +842,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
-        type: 3}
-      propertyPath: m_Name
-      value: InkBolt (2)
       objectReference: {fileID: 0}
     - target: {fileID: 1424418927486112099, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
@@ -14797,6 +14797,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1297201435}
     m_Modifications:
+    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
+        type: 3}
+      propertyPath: m_Name
+      value: InkBolt (4)
+      objectReference: {fileID: 0}
     - target: {fileID: 1424418927591661895, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14851,11 +14856,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
-        type: 3}
-      propertyPath: m_Name
-      value: InkBolt (4)
       objectReference: {fileID: 0}
     - target: {fileID: 1424418927486112099, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
@@ -29445,6 +29445,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1297201435}
     m_Modifications:
+    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
+        type: 3}
+      propertyPath: m_Name
+      value: InkBolt (3)
+      objectReference: {fileID: 0}
     - target: {fileID: 1424418927591661895, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -29499,11 +29504,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
-        type: 3}
-      propertyPath: m_Name
-      value: InkBolt (3)
       objectReference: {fileID: 0}
     - target: {fileID: 1424418927486112099, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
@@ -33771,6 +33771,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1297201435}
     m_Modifications:
+    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
+        type: 3}
+      propertyPath: m_Name
+      value: InkBolt (7)
+      objectReference: {fileID: 0}
     - target: {fileID: 1424418927591661895, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -33825,11 +33830,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
-        type: 3}
-      propertyPath: m_Name
-      value: InkBolt (7)
       objectReference: {fileID: 0}
     - target: {fileID: 1424418927486112099, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
@@ -36918,6 +36918,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1037894112}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1537864328 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3360299220940538243, guid: 56de03b2459cb91438e45be580274375,
+    type: 3}
+  m_PrefabInstance: {fileID: 1612622883}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1539132618
 GameObject:
   m_ObjectHideFlags: 0
@@ -37230,6 +37236,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1297201435}
     m_Modifications:
+    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
+        type: 3}
+      propertyPath: m_Name
+      value: InkBolt (6)
+      objectReference: {fileID: 0}
     - target: {fileID: 1424418927591661895, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -37284,11 +37295,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
-        type: 3}
-      propertyPath: m_Name
-      value: InkBolt (6)
       objectReference: {fileID: 0}
     - target: {fileID: 1424418927486112099, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
@@ -39776,6 +39782,11 @@ PrefabInstance:
       propertyPath: m_mouseCursor
       value: 
       objectReference: {fileID: 2800000, guid: fef06ee9881725949b5656bcad093ac6, type: 3}
+    - target: {fileID: 2693838763329123509, guid: 19b4b3f449e78d34e9a7399029da3229,
+        type: 3}
+      propertyPath: m_OtherUIsToHide
+      value: 
+      objectReference: {fileID: 1537864328}
     - target: {fileID: 7336825309819388492, guid: 19b4b3f449e78d34e9a7399029da3229,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -43988,6 +43999,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1297201435}
     m_Modifications:
+    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
+        type: 3}
+      propertyPath: m_Name
+      value: InkBolt (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 1424418927591661895, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -44042,11 +44058,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
-        type: 3}
-      propertyPath: m_Name
-      value: InkBolt (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ece4949563f9f54685d142252628d0b, type: 3}
@@ -46161,6 +46172,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1297201435}
     m_Modifications:
+    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
+        type: 3}
+      propertyPath: m_Name
+      value: InkBolt
+      objectReference: {fileID: 0}
     - target: {fileID: 1424418927591661895, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -46215,11 +46231,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
-        type: 3}
-      propertyPath: m_Name
-      value: InkBolt
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ece4949563f9f54685d142252628d0b, type: 3}
@@ -46735,6 +46746,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1297201435}
     m_Modifications:
+    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
+        type: 3}
+      propertyPath: m_Name
+      value: InkBolt (5)
+      objectReference: {fileID: 0}
     - target: {fileID: 1424418927591661895, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -46789,11 +46805,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
-        type: 3}
-      propertyPath: m_Name
-      value: InkBolt (5)
       objectReference: {fileID: 0}
     - target: {fileID: 1424418927486112099, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
