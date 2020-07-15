@@ -41325,6 +41325,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HowToRun_TipPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 8101528423779651029, guid: 176c8a22d45b8c5419e7b3b4cf55b2f7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2322193898956864102, guid: 176c8a22d45b8c5419e7b3b4cf55b2f7,
         type: 3}
       propertyPath: m_LocalPosition.x
