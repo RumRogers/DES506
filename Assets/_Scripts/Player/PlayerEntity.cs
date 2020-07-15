@@ -254,11 +254,18 @@ namespace Player
                         Vector3 wallCross = Vector3.Cross(m_collisionHitInfo.normal, -Vector3.up).normalized;
                         Debug.DrawRay(m_collisionHitInfo.point, wallCross * 10, Color.red);
 
+                        //if we come to a corner, stop completely
+                        if (Physics.Raycast(transform.position, wallCross, m_playerCollider.bounds.extents.z + m_skinWidth))
+                        {
+                            m_velocity = Vector3.zero;
+                            return;
+                        }
+
                         if (Vector3.Angle(wallCross, m_velocity.normalized) > 90)
                             wallCross *= -1;
 
-                        m_velocity.x = wallCross.x * m_velocity.magnitude;
-                        m_velocity.z = wallCross.z * m_velocity.magnitude;
+                        m_velocity.x = wallCross.x * (m_velocity.magnitude * (Vector3.Angle(-m_collisionHitInfo.normal, transform.forward) / 90));  //should be a faster movement if the angle is lower
+                        m_velocity.z = wallCross.z * (m_velocity.magnitude * (Vector3.Angle(-m_collisionHitInfo.normal, transform.forward) / 90));
 
                         return;
                     }

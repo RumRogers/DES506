@@ -6622,6 +6622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4d6e319fbd15a40b6d313c44fa47a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_keyShowSpellBook: 9
   m_mainContainer: {fileID: 7529084371835941636}
   m_lockedSpellSlots:
   - {fileID: 5896222477814815273}
