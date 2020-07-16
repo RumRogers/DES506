@@ -11,7 +11,7 @@ namespace GameCore.GameState
         GameObject m_pauseMenu;
 
         [SerializeField]
-        GameObject m_OtherUIsToHide;
+        GameObject[] m_OtherUIsToHide;
 
         [SerializeField]
         Texture2D m_mouseCursor;
@@ -59,7 +59,10 @@ namespace GameCore.GameState
 
         public void SetIngameUIActive(bool active) //temp, disabling everything will probably break stuff!
         {
-            m_OtherUIsToHide.SetActive(active);
+            foreach (GameObject go in m_OtherUIsToHide)
+            {
+                go.SetActive(active);
+            }
         }
     }
 }
