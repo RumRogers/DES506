@@ -17,6 +17,10 @@ public class CounterWeight : Enchantable
     [SerializeField]
     private float m_smallMass;
 
+    [Header("Force")]
+    [SerializeField]
+    private float m_dropForce;
+
     [Header("Vital Component")]
     [SerializeField]
     private SeeSaw m_seesaw;
@@ -60,7 +64,7 @@ public class CounterWeight : Enchantable
 
         if (!Physics.Raycast(transform.position, -transform.up, m_size.y/2))
         {
-            m_rigidBody.AddForceAtPosition(-transform.up * 30, transform.position);
+            m_rigidBody.AddForceAtPosition(Vector3.down * m_dropForce, transform.position);
         }
     }
 

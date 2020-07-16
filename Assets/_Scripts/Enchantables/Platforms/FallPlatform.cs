@@ -115,6 +115,7 @@ public class FallPlatform : Enchantable
 
     IEnumerator Respawn()
     {
+        Debug.Log("Respawn called");
         while(true)
         {
             m_counter += Time.deltaTime;
@@ -124,8 +125,8 @@ public class FallPlatform : Enchantable
                 m_counter = 0;
                 m_rigBod.isKinematic = true;
                 m_platform.GetComponent<Rigidbody>().isKinematic = true;
-                m_platform.transform.position = m_position;
-                transform.position = m_platBasePosition;
+                m_platform.transform.position = m_platBasePosition;
+                transform.position = m_position;
                 m_fallTriggerStart = false;
             }
 
