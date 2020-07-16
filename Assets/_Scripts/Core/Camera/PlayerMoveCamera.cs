@@ -98,7 +98,7 @@ namespace GameCore.Camera
             m_input = new Vector2(Input.GetAxis("Camera Y"), Input.GetAxis("Camera X"));
             m_state.Manage();
 
-            transform.position = Vector3.Lerp(transform.position, m_position, m_smoothFactor * Time.deltaTime);
+            transform.position = m_position;
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0);//never want the camera to roll
             CheckCollision();
         }

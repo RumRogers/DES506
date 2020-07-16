@@ -68,7 +68,7 @@ namespace GameCore.Camera
             m_rotation.y += input.y * (m_playerMoveCamera.p_AimingMovementSpeed);
 
 
-            m_playerMoveCamera.transform.rotation = Quaternion.Lerp(m_playerMoveCamera.transform.rotation, Quaternion.Euler(m_rotation), (m_playerMoveCamera.p_SmoothFactor - 0.1f) * Time.deltaTime);
+            m_playerMoveCamera.transform.rotation = Quaternion.Euler(m_rotation);
 
             m_offset = (m_playerMoveCamera.transform.right * m_playerMoveCamera.p_AimingOffset.x) + (m_playerMoveCamera.transform.up * m_playerMoveCamera.p_AimingOffset.y);
 
