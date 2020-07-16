@@ -13,8 +13,8 @@ namespace GameCore.GameState
         [SerializeField]
         GameObject[] m_OtherUIsToHide;
 
-        [SerializeField]
-        Texture2D m_mouseCursor;
+        //[SerializeField]
+        //Texture2D m_mouseCursor;
 
 
         GameCore.System.State m_prevState = null;
@@ -23,11 +23,11 @@ namespace GameCore.GameState
         {
             SetState(new Playing_State(this));
 
-            if (m_mouseCursor)
-            {
-                //Manually offset the whitespace for now
-                Cursor.SetCursor(m_mouseCursor, new Vector2(10, 0), CursorMode.Auto);
-            }
+            //if (m_mouseCursor)
+            //{
+            //    //Manually offset the whitespace for now
+            //    Cursor.SetCursor(m_mouseCursor, new Vector2(10, 0), CursorMode.Auto);
+            //}
         }
 
         override protected void Update()
