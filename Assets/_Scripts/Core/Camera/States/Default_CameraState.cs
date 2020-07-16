@@ -53,11 +53,11 @@ namespace GameCore.Camera
         {
             if (m_transitioned)
             {
-                m_rotation.x = Mathf.Clamp(m_rotation.x - (Input.GetAxis("Camera Y") * (m_playerMoveCamera.p_DefaultMovementSpeed * Time.fixedDeltaTime)), m_playerMoveCamera.p_DefaultStartingAngle + m_playerMoveCamera.p_DefaultMinAngle, m_playerMoveCamera.p_DefaultStartingAngle + m_playerMoveCamera.p_DefaultMaxAngle);
+                m_rotation.x = Mathf.Clamp(m_rotation.x - (m_playerMoveCamera.p_Input.x * (m_playerMoveCamera.p_DefaultMovementSpeed)), m_playerMoveCamera.p_DefaultStartingAngle + m_playerMoveCamera.p_DefaultMinAngle, m_playerMoveCamera.p_DefaultStartingAngle + m_playerMoveCamera.p_DefaultMaxAngle);
             }
-            m_rotation.y = m_rotation.y + Input.GetAxis("Camera X") * (m_playerMoveCamera.p_DefaultMovementSpeed * Time.fixedDeltaTime);
+            m_rotation.y = m_rotation.y + m_playerMoveCamera.p_Input.y * (m_playerMoveCamera.p_DefaultMovementSpeed);
 
-            m_playerMoveCamera.transform.rotation = Quaternion.Lerp(m_playerMoveCamera.transform.rotation, Quaternion.Euler( m_rotation), 0.2f);
+            m_playerMoveCamera.transform.rotation = Quaternion.Lerp(m_playerMoveCamera.transform.rotation, Quaternion.Euler(m_rotation), (m_playerMoveCamera.p_SmoothFactor - 0.1f) * Time.deltaTime);
 
             //needs clamping else the camera will move further and further away from the player when the button is pressed repeatedly due to the offset being addded
             Vector3 targetPosition = m_playerMoveCamera.p_CameraTarget.position - Vector3.ClampMagnitude((m_playerMoveCamera.transform.forward * m_distance) - m_offset, m_playerMoveCamera.p_DefaultDistance);
@@ -76,7 +76,7 @@ namespace GameCore.Camera
 
                 m_camera.fieldOfView = Mathf.Lerp(m_startFOV, m_playerMoveCamera.p_DefaultFOV, time);
 
-                time += Time.fixedDeltaTime * m_playerMoveCamera.p_DefaultLerpSpeed;
+                time += Time.deltaTime * m_playerMoveCamera.p_DefaultLerpSpeed;
                 time = m_playerMoveCamera.p_LerpCurve.Evaluate(time);
 
                 if (time > 0.99f)
@@ -87,7 +87,7 @@ namespace GameCore.Camera
                     m_transitioned = true;
                     yield break;
                 }
-                yield return new WaitForFixedUpdate();
+                yield return new WaitForEndOfFrame();
             }
         }
     }

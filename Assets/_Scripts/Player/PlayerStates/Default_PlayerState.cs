@@ -97,6 +97,7 @@ namespace Player
                 }
 
                 m_playerEntity.Velocity = m_velocity;
+
             }
         }
 

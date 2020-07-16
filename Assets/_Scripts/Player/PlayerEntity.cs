@@ -82,6 +82,9 @@ namespace Player
         Vector3 m_playerStartPosition;
         Vector3 m_velocity = Vector3.zero;
         Vector3 m_direction;
+        Vector3 m_position;
+        Vector3 m_positionLastFrame;
+        float m_time;
         CapsuleCollider m_playerCollider;
         //GameCore.System.State m_previousGroundState;
         PlayerGroundStates m_previousGroundState;
@@ -169,6 +172,8 @@ namespace Player
             SetState(new Default_PlayerState(this));
             //Setting start position for death
             m_playerStartPosition = transform.position;
+            m_position = transform.position;
+            m_positionLastFrame = transform.position;
         }
 
         // Override of automaton update function for extended functionality
@@ -179,7 +184,6 @@ namespace Player
             Vector3 rightMovement = Camera.main.transform.right * Input.GetAxis("Horizontal");
             m_direction = (forwardMovement + rightMovement).normalized;
 
-            m_grounded = IsGrounded();
             //First check if death state is triggered to save time / ensure the player cannot do something if they are alread dead
             if (HasProperty(PlayerEntityProperties.DYING))
             {
@@ -207,12 +211,17 @@ namespace Player
             {
                 SetState(new Dialogue_PlayerState(this));
             }
+
+            //Here we lerp from the position at the start of fixed update to the position after we update phyiscs by a step based on the time till the next fixed update
+            m_time += Time.deltaTime;
+            transform.position = Vector3.Lerp(m_positionLastFrame, m_position, m_time / Time.fixedDeltaTime);
         }
 
         private void FixedUpdate()
         {
             base.Update();
 
+            m_grounded = IsGrounded();
             CheckCollisions();
 
             if (m_ground != null && m_grounded)
@@ -238,7 +247,9 @@ namespace Player
                 m_oldGroundPosition = Vector3.zero;
             }
 
-            transform.position += m_velocity;
+            m_position += m_velocity;
+            m_positionLastFrame = transform.position;
+            m_time = 0;
         }
 
         public void CheckCollisions()
@@ -344,6 +355,8 @@ namespace Player
                         {
                             m_groundedHitInfo = collisionInfo;
                             distance = collisionInfo.distance;
+
+                            m_position = new Vector3(m_position.x, m_groundedHitInfo.point.y + PlayerCollider.bounds.extents.y, m_position.z);
                         }
                         collided = true;
                     }

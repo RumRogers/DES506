@@ -44,7 +44,7 @@ namespace GameCore.Camera
         //Gets mouse input and rotates around the player by making the camera face the player, the subtracting it's forward vector by the desired distance
         public override void Manage()
         {
-            Vector2 input = new Vector2(Input.GetAxis("Camera Y"), Input.GetAxis("Camera X"));
+            Vector2 input = m_playerMoveCamera.p_Input;
             //if what the camera is pointing at is of interest (enchantable)
             if (m_playerMoveCamera.p_AimedAtTransform != null && m_playerMoveCamera.p_AutoAimOn)
             {
@@ -62,13 +62,13 @@ namespace GameCore.Camera
                 m_rotation = rotation;
             }
 
-            m_rotation.x -= input.x * (m_playerMoveCamera.p_AimingMovementSpeed * Time.fixedDeltaTime);
+            m_rotation.x -= input.x * (m_playerMoveCamera.p_AimingMovementSpeed);
             m_rotation.x = Mathf.Clamp(m_rotation.x, m_playerMoveCamera.p_AimingMinAngle, m_playerMoveCamera.p_AimingMaxAngle);
 
-            m_rotation.y += input.y * (m_playerMoveCamera.p_AimingMovementSpeed * Time.fixedDeltaTime);
+            m_rotation.y += input.y * (m_playerMoveCamera.p_AimingMovementSpeed);
 
 
-            m_playerMoveCamera.transform.rotation = Quaternion.Lerp(m_playerMoveCamera.transform.rotation, Quaternion.Euler(m_rotation), 0.2f);
+            m_playerMoveCamera.transform.rotation = Quaternion.Lerp(m_playerMoveCamera.transform.rotation, Quaternion.Euler(m_rotation), (m_playerMoveCamera.p_SmoothFactor - 0.1f) * Time.deltaTime);
 
             m_offset = (m_playerMoveCamera.transform.right * m_playerMoveCamera.p_AimingOffset.x) + (m_playerMoveCamera.transform.up * m_playerMoveCamera.p_AimingOffset.y);
 
@@ -86,7 +86,7 @@ namespace GameCore.Camera
                 m_distance = Mathf.Lerp(m_startDistance, m_playerMoveCamera.p_AimingDistance, time);
                 m_camera.fieldOfView = Mathf.Lerp(m_startFOV, m_playerMoveCamera.p_AimingFOV, time);
 
-                time += Time.fixedDeltaTime * m_playerMoveCamera.p_AimingLerpSpeed;
+                time += Time.deltaTime * m_playerMoveCamera.p_AimingLerpSpeed;
                 time = m_playerMoveCamera.p_LerpCurve.Evaluate(time);
 
                 if (time > 0.99f)
@@ -97,7 +97,7 @@ namespace GameCore.Camera
                     yield break;
                 }
                 
-                yield return new WaitForFixedUpdate();
+                yield return new WaitForEndOfFrame();
             }
         }
     }
