@@ -409,6 +409,13 @@ namespace Player
             return collided;
         }
 
+        public void Respawn(Vector3 position)
+        {
+            m_position = position;
+            m_positionLastFrame = position;
+            transform.position = position;
+        }
+
         public bool IsAbleToJump()
         {
             if (m_grounded)
