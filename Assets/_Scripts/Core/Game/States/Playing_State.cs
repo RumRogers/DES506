@@ -38,8 +38,6 @@ namespace GameCore.GameState
             m_playerEntity = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerEntity>();
             m_playerEntity.SetState(prevState);
 
-            
-
             controller.GetPauseMenu().SetActive(false);
             Debug.Log("Game is unpaused");
 

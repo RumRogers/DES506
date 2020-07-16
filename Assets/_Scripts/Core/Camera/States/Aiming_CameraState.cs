@@ -52,7 +52,7 @@ namespace GameCore.Camera
                 //rotation direction for aim assist
                 Quaternion rotationDirection = Quaternion.LookRotation((m_playerMoveCamera.p_AimedAtTransform.position - m_playerMoveCamera.transform.position).normalized, m_playerMoveCamera.transform.up);
 
-                Vector3 rotation = Quaternion.RotateTowards(Quaternion.Euler(m_rotation), rotationDirection, Time.deltaTime * m_playerMoveCamera.p_AutoAimStrength).eulerAngles;
+                Vector3 rotation = Quaternion.RotateTowards(Quaternion.Euler(m_rotation), rotationDirection, Time.fixedDeltaTime * m_playerMoveCamera.p_AutoAimStrength).eulerAngles;
 
                 //kind of a bandaid solution, kinda bummed I couldn't find a better way but quaternions wrap around back to 360 if the angle is too low. Making aiming at things overhead cause issues with clamping rotation later 
                 if (rotation.x > m_playerMoveCamera.p_AimingMaxAngle)
@@ -62,10 +62,10 @@ namespace GameCore.Camera
                 m_rotation = rotation;
             }
 
-            m_rotation.x -= input.x * (m_playerMoveCamera.p_AimingMovementSpeed * Time.deltaTime);
+            m_rotation.x -= input.x * (m_playerMoveCamera.p_AimingMovementSpeed * Time.fixedDeltaTime);
             m_rotation.x = Mathf.Clamp(m_rotation.x, m_playerMoveCamera.p_AimingMinAngle, m_playerMoveCamera.p_AimingMaxAngle);
 
-            m_rotation.y += input.y * (m_playerMoveCamera.p_AimingMovementSpeed * Time.deltaTime);
+            m_rotation.y += input.y * (m_playerMoveCamera.p_AimingMovementSpeed * Time.fixedDeltaTime);
 
 
             m_playerMoveCamera.transform.rotation = Quaternion.Lerp(m_playerMoveCamera.transform.rotation, Quaternion.Euler(m_rotation), 0.2f);
@@ -86,7 +86,7 @@ namespace GameCore.Camera
                 m_distance = Mathf.Lerp(m_startDistance, m_playerMoveCamera.p_AimingDistance, time);
                 m_camera.fieldOfView = Mathf.Lerp(m_startFOV, m_playerMoveCamera.p_AimingFOV, time);
 
-                time += Time.deltaTime * m_playerMoveCamera.p_AimingLerpSpeed;
+                time += Time.fixedDeltaTime * m_playerMoveCamera.p_AimingLerpSpeed;
                 time = m_playerMoveCamera.p_LerpCurve.Evaluate(time);
 
                 if (time > 0.99f)
@@ -96,8 +96,8 @@ namespace GameCore.Camera
                     m_camera.fieldOfView = m_playerMoveCamera.p_AimingFOV;
                     yield break;
                 }
-
-                yield return null;
+                
+                yield return new WaitForFixedUpdate();
             }
         }
     }

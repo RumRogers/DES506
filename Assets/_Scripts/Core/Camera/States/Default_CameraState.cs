@@ -76,7 +76,7 @@ namespace GameCore.Camera
 
                 m_camera.fieldOfView = Mathf.Lerp(m_startFOV, m_playerMoveCamera.p_DefaultFOV, time);
 
-                time += Time.deltaTime * m_playerMoveCamera.p_DefaultLerpSpeed;
+                time += Time.fixedDeltaTime * m_playerMoveCamera.p_DefaultLerpSpeed;
                 time = m_playerMoveCamera.p_LerpCurve.Evaluate(time);
 
                 if (time > 0.99f)
@@ -87,8 +87,7 @@ namespace GameCore.Camera
                     m_transitioned = true;
                     yield break;
                 }
-
-                yield return null;
+                yield return new WaitForFixedUpdate();
             }
         }
     }
