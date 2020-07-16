@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9b123910107f8df40a152d21517894f0
+guid: 434923a880a8ab940b6041aad009292b
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
@@ -7,13 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Rock_Main
-    second: {fileID: 2100000, guid: a742f942b80ac87438033c6b4832b476, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Rock_Top
-    second: {fileID: 2100000, guid: 4f4ec3f7e8a7aff44b42203f367af478, type: 2}
+      name: FlowerTexture
+    second: {fileID: 2100000, guid: d28f462a7199be6418e1f66562a973d3, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

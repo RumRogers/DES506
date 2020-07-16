@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9b123910107f8df40a152d21517894f0
+guid: 358178eeab39c3646811fcaf7a5620e1
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
@@ -7,13 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Rock_Main
-    second: {fileID: 2100000, guid: a742f942b80ac87438033c6b4832b476, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Rock_Top
-    second: {fileID: 2100000, guid: 4f4ec3f7e8a7aff44b42203f367af478, type: 2}
+      name: Sign_Texture
+    second: {fileID: 2100000, guid: 00738e6145771264d9160d9fba0ee69c, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -46,7 +41,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importVisibility: 1

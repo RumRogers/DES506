@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9b123910107f8df40a152d21517894f0
+guid: f81c0575d2fdf764abd9a7a1a11b16cc
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
@@ -7,13 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Rock_Main
-    second: {fileID: 2100000, guid: a742f942b80ac87438033c6b4832b476, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Rock_Top
-    second: {fileID: 2100000, guid: 4f4ec3f7e8a7aff44b42203f367af478, type: 2}
+      name: Debris_Texture
+    second: {fileID: 2100000, guid: 43374559b87c56142b2f1af0d081fcd9, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
