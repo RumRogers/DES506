@@ -46,9 +46,11 @@ namespace GameCore.Camera
         Vector3 m_position;   //the position where the camera should end up, modified in the camera states
         Quaternion m_rotation;
         Vector3 m_oldPosition;
+        Vector2 m_input;
 
         //Public stuff, get only
         public bool p_AutoAimOn { get => m_autoAimOn; }
+        public float p_SmoothFactor { get => m_smoothFactor; }
         public float p_DefaultMovementSpeed { get => m_defaultMovementSpeed; }
         public float p_DefaultLerpSpeed { get => m_defaultLerpSpeed; }
         public float p_DefaultDistance { get => m_defaultDistance; }
@@ -72,6 +74,7 @@ namespace GameCore.Camera
         public Vector3 p_CameraOffset { get => m_cameraOffset; }
         public Vector3 p_AimingOffset { get => m_aimingOffset; }
         public Vector3 p_Position { get => m_position; set => m_position = value; }
+        public Vector3 p_Input { get => m_input; }
         public AnimationCurve p_LerpCurve { get => m_lerpCurve; }
 
         private void Start()
@@ -82,6 +85,7 @@ namespace GameCore.Camera
             m_cameraOffset = transform.position - m_cameraTarget.position;
             SetState(new Default_CameraState(this));
             m_oldPosition = transform.position;
+
         }
 
         protected override void Update()
@@ -89,10 +93,12 @@ namespace GameCore.Camera
             //base.Update();
         }
 
-        private void FixedUpdate()
+        private void LateUpdate()
         {
+            m_input = new Vector2(Input.GetAxis("Camera Y"), Input.GetAxis("Camera X"));
             m_state.Manage();
-            transform.position = Vector3.Lerp(transform.position, m_position, m_smoothFactor);
+
+            transform.position = m_position;
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0);//never want the camera to roll
             CheckCollision();
         }

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9b123910107f8df40a152d21517894f0
+guid: a31543f72e05ce647810629c51f747f1
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
@@ -7,13 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Rock_Main
-    second: {fileID: 2100000, guid: a742f942b80ac87438033c6b4832b476, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Rock_Top
-    second: {fileID: 2100000, guid: 4f4ec3f7e8a7aff44b42203f367af478, type: 2}
+      name: Apple_Texture
+    second: {fileID: 2100000, guid: 61fa7605131258f4490bab228119ecc1, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

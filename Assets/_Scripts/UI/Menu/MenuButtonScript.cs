@@ -21,8 +21,8 @@ public class MenuButtonScript : MonoBehaviour
     [SerializeField]
     Text playButtonText; //Used to determine whether the play button should say "begin" or "continue"
 
-    [SerializeField]
-    Texture2D m_mouseCursor;
+    //[SerializeField]
+    //Texture2D m_mouseCursor;
 
     //Array index (set in editor):
     //   0 -- Splash Screen
@@ -71,10 +71,10 @@ public class MenuButtonScript : MonoBehaviour
             playButtonText.text = "Begin";
         }
 
-        if (m_mouseCursor)
-        {
-            Cursor.SetCursor(m_mouseCursor, new Vector2(10, 0), CursorMode.Auto);
-        }
+        //if (m_mouseCursor)
+        //{
+        //    Cursor.SetCursor(m_mouseCursor, new Vector2(10, 0), CursorMode.Auto);
+        //}
     }
 
     public void CloseGame()
