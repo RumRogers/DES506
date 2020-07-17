@@ -57,53 +57,18 @@ public class Platform : Enchantable
         StartCoroutine(Translate());
     }
 
-    protected override void Update()
+    private void FixedUpdate()
     {
-        base.Update();
-
-        if(m_isMoving)
+        if (m_isMoving)
         {
             switch (m_platType)
             {
                 case PlatformType.HORIZONTAL:
-                    //Set the destination (done here as it varies for types)
-                    //m_destination = m_defaultPosition + transform.right * m_motionWidth;
 
-                    //Alter direction based if destination is reached
-                    //if (Vector3.Distance(transform.position, m_defaultPosition) <= c_distanceFactor)
-                    //{
-                    //    m_direction = 1;
-                    //}
-
-                    //else if (Vector3.Distance(transform.position, m_destination) <= c_distanceFactor)
-                    //{
-                    //    m_direction = -1;
-                    //}
-
-                    //Prevent clipping by moving away from walls
-                    //if(Physics.Raycast(transform.position, transform.right * m_direction, c_distanceFactor + 1 * (transform.localScale.z / 2)))
-                    //{
-                    //    m_direction = -m_direction;
-                    //}
-
-                    //transform.position += transform.right * m_direction * (Time.deltaTime * m_platformSpeed);
                     TranslatePosition(transform.right);
                     break;
 
                 case PlatformType.VERTICAL:
-                    //m_destination = m_defaultPosition + transform.up * m_motionWidth;
-
-                    //if (Vector3.Distance(transform.position, m_defaultPosition) <= c_distanceFactor)
-                    //{
-                    //    m_direction = 1;
-                    //}
-
-                    //else if (Vector3.Distance(transform.position, m_destination) <= c_distanceFactor)
-                    //{
-                    //    m_direction = -1;
-                    //}
-
-                    //transform.position += transform.up * m_direction * (Time.deltaTime * m_platformSpeed);
 
                     TranslatePosition(transform.up);
 
