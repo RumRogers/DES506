@@ -128,22 +128,14 @@ namespace Player
                 //if the hit object is not enchantable and there is a currently selected enchantable, set to null
                 else if (m_aimedAt)
                 {
-                    m_aimedAtRenderer.material.shader = m_highlightedOldShader;
-                    m_highlightedOldShader = null;
-                    m_aimedAtRenderer = null;
-                    m_aimedAt = null;
-                    SpellWheel.SetTargetEnchantable(null);
+                    ResetAimedAt();
                 }
             }
             //not sure about this condition as it is similar to the one above...
             //if it doesn't hit and there is an aimed at transform, set to null also
             else if (m_aimedAt)
             {
-                m_aimedAtRenderer.material.shader = m_highlightedOldShader;
-                m_highlightedOldShader = null;
-                m_aimedAtRenderer = null;
-                m_aimedAt = null;
-                SpellWheel.SetTargetEnchantable(null);
+                ResetAimedAt();
             }
 
             //Setting the cameras aimed at transfrom for the aiming camera state. Not sure if we could move the functionality for the shader changing there? or if it makes sense to be here?
@@ -151,31 +143,35 @@ namespace Player
 
             if ((Input.GetButtonDown("Fire") || Input.GetAxisRaw("Fire") != 0))
             {
-                //TEMP (kinda): Currently only fires if the equipped item is the quill, in future it should fire regardless but shoot a different projectile based on the equiped item passed to the projectile handler when
-                //the equipped item is changed on the player 
-                m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.CASTING);
-                if (m_playerEntity.EquipedItem == PlayerEquipableItems.SPELL_QUILL)
+                if (m_aimedAt)
                 {
-                    Vector3 direction = Vector3.zero;
-
-                    if (m_rayHitInfo.point != Vector3.zero)
+                    //TEMP (kinda): Currently only fires if the equipped item is the quill, in future it should fire regardless but shoot a different projectile based on the equiped item passed to the projectile handler when
+                    //the equipped item is changed on the player 
+                    m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.CASTING);
+                    if (m_playerEntity.EquipedItem == PlayerEquipableItems.SPELL_QUILL)
                     {
-                        direction = m_rayHitInfo.point - m_playerEntity.transform.position;
+                        Vector3 direction = Vector3.zero;
+
+                        if (m_rayHitInfo.point != Vector3.zero)
+                        {
+                            direction = m_rayHitInfo.point - m_playerEntity.transform.position;
+                        }
+                        else
+                        {
+                            direction = (Camera.main.transform.position + (Camera.main.transform.forward * m_playerEntity.Projectile.Range)) - m_playerEntity.transform.position;
+                        }
+                        m_playerEntity.Projectile.FireProjectile(direction.normalized, m_playerEntity.transform.position + (m_playerEntity.transform.forward * 2f));
                     }
                     else
                     {
-                        direction = (Camera.main.transform.position + (Camera.main.transform.forward * m_playerEntity.Projectile.Range)) - m_playerEntity.transform.position;
+                        //make sure that there is an enchantable script attached before casting a new spell
+                        GameCore.Spells.Enchantable enchantable;
+                        if (m_aimedAt.TryGetComponent<GameCore.Spells.Enchantable>(out enchantable))
+                        {
+                            enchantable.CastSpell(new GameCore.Spells.Spell(GameCore.Spells.SpellType.TRANSFORM_RESET));
+                        }
                     }
-                    m_playerEntity.Projectile.FireProjectile(direction.normalized, m_playerEntity.transform.position + (m_playerEntity.transform.forward * 2f));
-                }
-                else if (m_aimedAt)
-                {
-                    //make sure that there is an enchantable script attached before casting a new spell
-                    GameCore.Spells.Enchantable enchantable;
-                    if (m_aimedAt.TryGetComponent<GameCore.Spells.Enchantable>(out enchantable))
-                    {
-                        enchantable.CastSpell(new GameCore.Spells.Spell(GameCore.Spells.SpellType.TRANSFORM_RESET));
-                    }
+                    ResetAimedAt();
                 }
             }
 
@@ -243,6 +239,15 @@ namespace Player
             }
 
             m_playerEntity.Velocity = m_velocity;
+        }
+
+        void ResetAimedAt()
+        {
+            m_aimedAtRenderer.material.shader = m_highlightedOldShader;
+            m_highlightedOldShader = null;
+            m_aimedAtRenderer = null;
+            m_aimedAt = null;
+            SpellWheel.SetTargetEnchantable(null);
         }
     }
 }
