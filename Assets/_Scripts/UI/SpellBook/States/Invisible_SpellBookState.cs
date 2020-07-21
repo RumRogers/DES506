@@ -13,6 +13,7 @@ namespace GameUI.SpellBook
         {
             m_spellBook = owner;
             m_spellBook.Hide();
+            FMODUnity.RuntimeManager.PlayOneShot("event:/UI/SpellBook/SpellBookClose");
         }
 
 
@@ -22,6 +23,7 @@ namespace GameUI.SpellBook
             if(Input.GetKeyDown(m_spellBook.p_keyShowSpellBook))
             {
                 m_owner.SetState(new Active_SpellBookState(m_spellBook));
+                FMODUnity.RuntimeManager.PlayOneShot("event:/UI/SpellBook/SpellBookOpen");
             }
         }
     }
