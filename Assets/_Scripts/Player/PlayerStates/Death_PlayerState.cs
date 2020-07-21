@@ -31,11 +31,21 @@ namespace Player
             {
                 m_playerEntity.Velocity += (Vector3.down * m_playerEntity.Gravity) * Time.fixedDeltaTime;
             }
-            /*else
-            {
-                m_playerEntity.RemoveEntityProperty(PlayerEntityProperties.DYING);
-                m_playerEntity.SetState(new Default_PlayerState(m_playerEntity));
-            }*/
+            else
+            {                
+                m_playerEntity.Animator.SetState(new Recovering_AnimationState(m_playerEntity.Animator));
+                m_playerEntity.StartCoroutine(OnDeathSequenceEnded());
+            }
+        }
+
+        private IEnumerator OnDeathSequenceEnded()
+        {
+            yield return new WaitForSeconds(1.5f);
+            m_playerEntity.RemoveEntityProperty(PlayerEntityProperties.DYING);
+            
+            m_playerEntity.SetState(new Default_PlayerState(m_playerEntity));
+            m_playerEntity.Animator.SetState(new Idle_AnimationState(m_playerEntity.Animator));
+            m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.IDLE);
         }
     }
 }

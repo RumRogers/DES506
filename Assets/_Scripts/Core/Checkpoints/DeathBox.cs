@@ -25,7 +25,8 @@ namespace GameCore.Checkpoints
             {
                 // uncomment this for crappy unstable behavior
                 //m_playerEntity.SetState(new Death_PlayerState(m_playerEntity));
-                m_playerEntity.Respawn(LevelManager.p_LastCheckpoint.position + m_respawningOffset);
+                //m_playerEntity.Respawn(LevelManager.p_LastCheckpoint.position + m_respawningOffset);
+                m_playerEntity.Respawn(LevelManager.p_LastCheckpoint.position);
             }
         }
     }
