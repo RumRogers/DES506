@@ -20,7 +20,7 @@ namespace VisualEffects
         const float FROZEN_LERP_VALUE = 1.0f;
         const float DEFAULT_LERP_VALUE = 0.0f;
         const float LERP_TIME = 2.0f;
-        const string BLEND_SHADER_PATH = "Shaders/Blend/UnlitBlendTexture";
+        const string BLEND_SHADER_PATH = "Shaders/Blend/LitBlendShader";
         const string ICE_TEX_DEFAULT_PATH = "Art Assets/Ice Tiles/IceTemp";
 
         // Start is called before the first frame update
@@ -61,7 +61,7 @@ namespace VisualEffects
             //if Frozen and we haven't already lerped to frozen
             if (m_magicProfile.GetMagicFingerprint().magicState.temperature == GameCore.Spells.SpellState.COUNTERSPELLED && !m_lerped)
             {
-                m_renderer.material.shader = m_blendShader;
+                //m_renderer.material.shader = m_blendShader;
                 m_lerped = true;
                 StopAllCoroutines();
                 StartCoroutine(TransitionBetweenStates(FROZEN_LERP_VALUE, LERP_TIME));
@@ -95,7 +95,7 @@ namespace VisualEffects
                     m_matLerpValue = lerpTowards;
                     if (lerpTowards == DEFAULT_LERP_VALUE)
                     {
-                        m_renderer.material.shader = m_originalShader;
+                       //m_renderer.material.shader = m_originalShader;
                     }
                     yield break;
                 }

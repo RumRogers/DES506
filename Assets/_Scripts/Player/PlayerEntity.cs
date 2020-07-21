@@ -66,6 +66,7 @@ namespace Player
         [SerializeField] float m_groundOverlapPadding = 0.1f;   //How far the player can sink before overlap recovery takes place
         [SerializeField] int m_numHorizontalRays = 3;
         [SerializeField] int m_numVerticalRays = 3;
+        [SerializeField] int m_numGroundedRays = 3;
         [SerializeField] float m_skinWidth = 0.2f; // the distance from the outside of the object the rays start
         [Header("Properties")]
         [SerializeField] PlayerEntityProperties m_playerEntityProperties;
@@ -184,6 +185,8 @@ namespace Player
             Vector3 rightMovement = Camera.main.transform.right * Input.GetAxis("Horizontal");
             m_direction = (forwardMovement + rightMovement).normalized;
 
+            m_grounded = IsGrounded();
+
             //First check if death state is triggered to save time / ensure the player cannot do something if they are alread dead
             if (HasProperty(PlayerEntityProperties.DYING))
             {
@@ -226,7 +229,7 @@ namespace Player
         {
             base.Update();
 
-            m_grounded = IsGrounded();
+            
             CheckCollisions();
 
             if (m_ground != null && m_grounded)
@@ -260,7 +263,7 @@ namespace Player
         public void CheckCollisions()
         {
             Vector3 rayStart = transform.position;
-            Vector3 rayDirection = m_velocity.normalized; //new Vector3(m_velocity.x, 0, m_velocity.z).normalized;
+            Vector3 rayDirection = new Vector3(m_velocity.x, 0, m_velocity.z).normalized; //m_velocity.normalized;
             Vector3 horizontalRaySpacing = Vector3.Cross(rayDirection, transform.up);    // get perpendicular vector to our direction for spacing
             Vector3 verticalRaySpacing = new Vector3(0, m_playerCollider.bounds.size.y / m_numVerticalRays, 0);
 
@@ -334,21 +337,22 @@ namespace Player
             }
             bool collided = false;
             Vector3 rayStart = transform.position;
-            Vector3 xRaySpacing = transform.right * (m_playerCollider.bounds.size.x / 3);
-            Vector3 zRaySpacing = transform.forward * (m_playerCollider.bounds.size.z / 3);
+            Vector3 xRaySpacing = transform.right * (m_playerCollider.bounds.size.x / m_numGroundedRays);
+            Vector3 zRaySpacing = transform.forward * (m_playerCollider.bounds.size.z / m_numGroundedRays);
 
             rayStart.y = transform.position.y;
             RaycastHit collisionInfo;
             float distance = 100;
 
-            rayStart -= (xRaySpacing * (3 / 2)) + (zRaySpacing * (3 / 2));
+            rayStart -= (xRaySpacing * (m_numGroundedRays / 2)) + (zRaySpacing * (m_numGroundedRays / 2));
 
-            for (int x = 0; x < 3; ++x)
+            for (int x = 0; x < m_numGroundedRays; ++x)
             {
-                for (int z = 0; z < 3; ++z)
+                for (int z = 0; z < m_numGroundedRays; ++z)
                 {
-                    Debug.DrawLine(rayStart, rayStart + (-transform.up * m_playerCollider.bounds.extents.y));
-                    if (Physics.Raycast(rayStart, -transform.up, out collisionInfo, m_playerCollider.bounds.extents.y + m_groundOverlapPadding))
+                    Debug.DrawLine(rayStart, rayStart + (-transform.up * (m_playerCollider.bounds.extents.y - m_velocity.y)));
+                    //Subtracting velocity y from the length (velocity y is negative when we're falling) to check if we would land next frame, if so count it as landing this frame.
+                    if (Physics.Raycast(rayStart, -transform.up, out collisionInfo, (m_playerCollider.bounds.extents.y + m_groundOverlapPadding) - (m_velocity.y)))
                     {
                         //if it's the first ray, set it to the first result regardless, as we cannot compare null variables
                         if (x == 0 && z == 0)
@@ -368,7 +372,7 @@ namespace Player
                     rayStart += zRaySpacing;
                 }
                 rayStart += xRaySpacing;
-                rayStart -= zRaySpacing * (3);
+                rayStart -= zRaySpacing * m_numGroundedRays;
             }
 
             //I realise this means this function does more than one thing, which surely is a cardinal sin, however I couldn't find a better place to execute this just yet
