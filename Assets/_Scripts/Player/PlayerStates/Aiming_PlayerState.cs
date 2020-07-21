@@ -171,7 +171,6 @@ namespace Player
                             enchantable.CastSpell(new GameCore.Spells.Spell(GameCore.Spells.SpellType.TRANSFORM_RESET));
                         }
                     }
-                    ResetAimedAt();
                 }
             }
 
