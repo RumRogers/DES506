@@ -255,7 +255,7 @@ namespace Player
         public void CheckCollisions()
         {
             Vector3 rayStart = transform.position;
-            Vector3 rayDirection = m_velocity.normalized; //new Vector3(m_velocity.x, 0, m_velocity.z).normalized;
+            Vector3 rayDirection = new Vector3(m_velocity.x, 0, m_velocity.z).normalized; //m_velocity.normalized;
             Vector3 horizontalRaySpacing = Vector3.Cross(rayDirection, transform.up);    // get perpendicular vector to our direction for spacing
             Vector3 verticalRaySpacing = new Vector3(0, m_playerCollider.bounds.size.y / m_numVerticalRays, 0);
 

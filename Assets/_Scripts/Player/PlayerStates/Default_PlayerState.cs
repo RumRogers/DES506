@@ -32,71 +32,83 @@ namespace Player
 
         public override void Manage()
         {
-
-            if (m_playerEntity.HasProperty(PlayerEntityProperties.PLAYABLE))
+            if (m_landingAnimationFinished)
             {
-                //Slope detection 
-                //if the slope is climable, modify the direction the player is traveling in 
-                float slopeAngle = Vector3.Angle(m_playerEntity.GroundHitInfo.normal, Vector3.up);
-                if (slopeAngle < m_playerEntity.MaxClimableAngle && slopeAngle > 0)
+                if (m_playerEntity.HasProperty(PlayerEntityProperties.PLAYABLE))
                 {
-                    Vector3 slopeDirection = Vector3.zero;
-                    if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING))
+                    //Slope detection 
+                    //if the slope is climable, modify the direction the player is traveling in 
+                    float slopeAngle = Vector3.Angle(m_playerEntity.GroundHitInfo.normal, Vector3.up);
+                    if (slopeAngle < m_playerEntity.MaxClimableAngle && slopeAngle > 0)
                     {
-                        //get the players right based on direction of movement, then use it to calculate the new direction of travel
-                        Vector3 playerRight = Vector3.Cross(m_playerEntity.transform.forward, -m_playerEntity.transform.up);
-                        //getting the slope angle for the ground the player is walking on
-                        slopeDirection = Vector3.Cross(playerRight, m_playerEntity.GroundHitInfo.normal);
-                        if (slopeDirection.y > 0)
+                        Vector3 slopeDirection = Vector3.zero;
+                        if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING))
                         {
-                            slopeDirection *= -1;
+                            //get the players right based on direction of movement, then use it to calculate the new direction of travel
+                            Vector3 playerRight = Vector3.Cross(m_playerEntity.transform.forward, -m_playerEntity.transform.up);
+                            //getting the slope angle for the ground the player is walking on
+                            slopeDirection = Vector3.Cross(playerRight, m_playerEntity.GroundHitInfo.normal);
+                            if (slopeDirection.y > 0)
+                            {
+                                slopeDirection *= -1;
+                            }
                         }
+                        else
+                        {
+                            //get the players right based on direction of movement, then use it to calculate the new direction of travel
+                            Vector3 playerRight = Vector3.Cross(m_playerEntity.Direction, -m_playerEntity.transform.up);
+                            //getting the slope angle for the ground the player is walking on
+                            slopeDirection = Vector3.Cross(playerRight, m_playerEntity.GroundHitInfo.normal);
+                        }
+
+                        m_playerEntity.Direction = slopeDirection;
+                    }
+
+                    //If there is input, add velocity in that direction, but clamp the movement speed, Y velocity should always equal zero in this state, so no need to preserve down / up velocity
+                    if (m_playerEntity.Direction != Vector3.zero)
+                    {
+                        //rotate the player to face the direction they are traveling in
+                        m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Direction.normalized.x, 0, m_playerEntity.Direction.z));
+                        if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING))
+                        {
+                            m_velocity += (m_playerEntity.Direction * m_playerEntity.IceAcceleration) * Time.fixedDeltaTime;
+                            m_velocity = Vector3.ClampMagnitude(m_velocity, m_playerEntity.IceMaxSpeed);
+                        }
+                        else
+                        {
+                            m_velocity = m_velocity.magnitude * m_playerEntity.Direction;
+                            m_velocity += (m_playerEntity.Direction * m_playerEntity.WalkingAcceleration) * Time.fixedDeltaTime;
+                            m_velocity = Vector3.ClampMagnitude(m_velocity, m_playerEntity.MaxSpeed);
+                            m_playerEntity.Animator.RunningState.speed = (m_velocity.magnitude / m_playerEntity.MaxSpeed) * m_playerEntity.Animator.RunningAnimSpeed;
+                        }
+                        m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.RUNNING);
                     }
                     else
                     {
-                        //get the players right based on direction of movement, then use it to calculate the new direction of travel
-                        Vector3 playerRight = Vector3.Cross(m_playerEntity.Direction, -m_playerEntity.transform.up);
-                        //getting the slope angle for the ground the player is walking on
-                        slopeDirection = Vector3.Cross(playerRight, m_playerEntity.GroundHitInfo.normal);
+                        m_velocity.x = 0.0f;
+                        m_velocity.z = 0.0f;
+                        m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.IDLE);
                     }
-
-                    m_playerEntity.Direction = slopeDirection;
-                }
-
-                //If there is input, add velocity in that direction, but clamp the movement speed, Y velocity should always equal zero in this state, so no need to preserve down / up velocity
-                if (m_playerEntity.Direction != Vector3.zero)
-                {
-                    //rotate the player to face the direction they are traveling in
-                    m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Direction.normalized.x, 0, m_playerEntity.Direction.z));
-                    if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING))
-                    {
-                        m_velocity += (m_playerEntity.Direction * m_playerEntity.IceAcceleration) * Time.fixedDeltaTime;
-                        m_velocity = Vector3.ClampMagnitude(m_velocity, m_playerEntity.IceMaxSpeed);
-                    }
-                    else
-                    {
-                        m_velocity = m_velocity.magnitude * m_playerEntity.Direction;
-                        m_velocity += (m_playerEntity.Direction * m_playerEntity.WalkingAcceleration) * Time.fixedDeltaTime;
-                        m_velocity = Vector3.ClampMagnitude(m_velocity, m_playerEntity.MaxSpeed);
-                        m_playerEntity.Animator.RunningState.speed = (m_velocity.magnitude / m_playerEntity.MaxSpeed) * m_playerEntity.Animator.RunningAnimSpeed;
-                    }
-                    m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.RUNNING);
                 }
                 else
                 {
-                    m_velocity.x = 0.0f;
-                    m_velocity.z = 0.0f;
-                    m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.IDLE);
+                    m_velocity.x = 0;
+                    m_velocity.z = 0;
                 }
-            }
-            else
-            {
-                m_velocity.x = 0;
-                m_velocity.z = 0;
-            }
 
-            m_playerEntity.Velocity = m_velocity;
+                m_playerEntity.Velocity = m_velocity;
+
+            }
         }
 
+        IEnumerator WaitForLandingAnimation()
+        {
+            m_landingAnimationFinished = false;
+            while (m_playerEntity.Animator.GetState().GetType() == typeof(JumpEnd_AnimationState))
+            {
+                yield return null;
+            }
+            m_landingAnimationFinished = true;
+        }
     }
 }
