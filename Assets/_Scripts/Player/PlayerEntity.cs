@@ -187,30 +187,35 @@ namespace Player
             //First check if death state is triggered to save time / ensure the player cannot do something if they are alread dead
             if (HasProperty(PlayerEntityProperties.DYING))
             {
-                SetState(new Death_PlayerState(this));
+                //SetState(new Death_PlayerState(this));
+                
             }
 
-            if (IsFalling())
+            else
             {
-                SetState(new Falling_PlayerState(this));
-            }
+                if (IsFalling())
+                {
+                    SetState(new Falling_PlayerState(this));
+                }
 
-            if (IsAbleToJump() && Input.GetButtonDown("Jump"))
-            {
-                m_hasJumped = true;
-                SetState(new Jumping_PlayerState(this));
-            }
+                if (IsAbleToJump() && Input.GetButtonDown("Jump"))
+                {
+                    m_hasJumped = true;
+                    SetState(new Jumping_PlayerState(this));
+                }
 
-            if (IsAbleToAim() && (Input.GetButtonDown("Aim") || Input.GetAxisRaw("Aim") == 1))
-            {
-                SetState(new Aiming_PlayerState(this));
-            }
+                if (IsAbleToAim() && (Input.GetButtonDown("Aim") || Input.GetAxisRaw("Aim") == 1))
+                {
+                    SetState(new Aiming_PlayerState(this));
+                }
 
-            //Dialogue trigger
-            if (Input.GetButtonDown("Interact") && m_speakersInRange.Count > 0 && m_state.GetType() != typeof(Dialogue_PlayerState))
-            {
-                SetState(new Dialogue_PlayerState(this));
+                //Dialogue trigger
+                if (Input.GetButtonDown("Interact") && m_speakersInRange.Count > 0 && m_state.GetType() != typeof(Dialogue_PlayerState))
+                {
+                    SetState(new Dialogue_PlayerState(this));
+                }
             }
+            
 
             //Here we lerp from the position at the start of fixed update to the position after we update phyiscs by a step based on the time till the next fixed update
             m_time += Time.deltaTime;
@@ -414,6 +419,7 @@ namespace Player
             m_position = position;
             m_positionLastFrame = position;
             transform.position = position;
+            m_velocity = Vector3.zero;
         }
 
         public bool IsAbleToJump()
