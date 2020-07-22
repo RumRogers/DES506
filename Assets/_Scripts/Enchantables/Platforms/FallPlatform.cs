@@ -1,6 +1,5 @@
 ﻿using GameCore.Spells;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -18,6 +17,7 @@ public class FallPlatform : Enchantable
     private float m_shakeSpeed;
 
     [Header("Required Objects")]
+    [Tooltip("The fall platform is made it two parts, and as such needs a reference to the visual component")]
     [SerializeField]
     private GameObject m_platform;
 
@@ -41,11 +41,22 @@ public class FallPlatform : Enchantable
     // Start is called before the first frame update
     void Start()
     {
+        //Get and set rigidbody
         m_rigBod = GetComponent<Rigidbody>();
+
+        if (m_rigBod == null)
+            Debug.LogError("The object " + name + " is missing it's rigidbody");
+
         m_rigBod.isKinematic = true;
+
+        //Subplatform has a rigidibody for now, but might be redundant
         m_platform.GetComponent<Rigidbody>().isKinematic = true;
+
+        //Set respawn variables
         m_position = transform.position;
         m_platBasePosition = m_platform.transform.position;
+
+        //Redundant, can be removed as there is now only one time
         m_timeTillFall = m_normalTimeTillFall;
     }
 
@@ -98,10 +109,8 @@ public class FallPlatform : Enchantable
                     m_platform.GetComponent<Rigidbody>().isKinematic = false;
                 }
 
-                else //Shaking  
+                else //Until it falls, it will shake  
                 {
-                    //transform.RotateAround(transform.position, transform.forward, m_rotation.z + (Mathf.Sin(m_counter * 0.1f)));
-                    //transform.position = m_position + (transform.right * (Mathf.Sin(m_counter * m_shaleSpeed)) * m_shakeScale);
                     m_platform.transform.position = m_platBasePosition + (transform.right * (Mathf.Sin(m_counter * m_shakeSpeed)) * m_shakeScale);
                 }
                     

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using GameUI.Dialogue;
 using UnityEngine;
 
 public class NPCSimple : MonoBehaviour
@@ -25,6 +26,9 @@ public class NPCSimple : MonoBehaviour
     [SerializeField]
     private float m_viewRadius;
 
+    [SerializeField]
+    private LetterBox m_letterBox;
+
     //Contained members
     private Vector3 m_playerToTarget = Vector3.zero;
     private Vector3 m_targetVec = Vector3.zero;
@@ -35,6 +39,7 @@ public class NPCSimple : MonoBehaviour
     private Vector3 m_defaultPos = Vector3.zero;
     private Vector3 m_defaultDirection = Vector3.zero;
     private Quaternion m_defaultRot;
+    private Dialogue m_dialogue;
     #endregion
 
     void Start()
@@ -45,17 +50,26 @@ public class NPCSimple : MonoBehaviour
         m_defaultPos = m_playerCamera.transform.position;
         m_defaultRot = m_playerCamera.transform.rotation;
 
-        if (!m_player || !m_playerCamera)
+        m_dialogue = GetComponent<Dialogue>();
+
+        if (!m_player || !m_playerCamera || !m_dialogue || !m_letterBox)
             Debug.LogError(name + " is missing a component");
+
+        //m_dialogue.StartDialogue();
     }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+            m_isPlayerTalking = true;
+
         switch(m_isPlayerTalking)
         {
             case true:
-                
-                if(m_isPlayerInView)
+
+                m_letterBox.TurnOn();
+
+                if (m_isPlayerInView)
                 {
                     Vector3 m_isPlayerInViewVec = m_player.transform.position + (m_player.transform.forward * -2) + m_offset;
                     m_playerCamera.transform.position = m_player.transform.position + (m_player.transform.forward * -2) + m_offset;
@@ -67,7 +81,11 @@ public class NPCSimple : MonoBehaviour
                 break;
 
             case false:
-                if(!m_isPlayerInView)
+
+                m_letterBox.TurnOff();
+
+
+                if (!m_isPlayerInView)
                 {
                     m_playerCamera.transform.position = Vector3.Lerp(m_playerCamera.transform.position, m_defaultPos, 0.1f);// m_defaultPos;
                     m_playerCamera.transform.rotation = Quaternion.Lerp(m_playerCamera.transform.rotation, m_defaultRot, 0.1f);
@@ -84,16 +102,18 @@ public class NPCSimple : MonoBehaviour
 
     private void PlayerInteractionState()
     {
-        //Camera changes position
         m_player.transform.LookAt(new Vector3(transform.position.x, m_player.transform.position.y, transform.position.z));    
         
         m_playerCamera.transform.LookAt(transform);
 
-        //Letter box effect?
-
-        // TEXT HERE //
+        //Translate camera into position
+        //once camera is in place start dialog
+        //move letterboxes into place 
     }
 
+    /// <summary>
+    /// Inverts a bool to handle player interaction
+    /// </summary>
     public void PlayerInteracts()
     {
         m_isPlayerTalking = !m_isPlayerTalking;

@@ -1,6 +1,5 @@
 ﻿using GameCore.Spells;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Cog : Enchantable
@@ -20,30 +19,19 @@ public class Cog : Enchantable
     [SerializeField]
     private SizeState m_solutionSize = SizeState.DEFAULT;
 
-    [SerializeField]
-    private bool m_isRotating; //Only exposed temperarily 
-
-    [SerializeField] 
-    private bool m_iStopIt = false; //Only exposed temperarily 
+    //Rotation controls
+    private bool m_isRotating; 
+    private bool m_iStopIt = false;
 
     //Cog Behaviour
     private bool m_isTicking;
     private bool m_isClockwise;
     private float m_cogSpeed;
 
-
     //Spell Components
     private bool m_isFrozen;
     private bool m_isLarge = false;
     private bool m_isSmall = false;
-
-    public bool IsFrozen { get { return m_isFrozen; } }
-    public bool IsLarge { get { return m_size == SizeState.LARGE; } }
-    public bool IsSmall { get { return m_size == SizeState.SMALL; } }
-    public bool IsRotating { get { return m_isRotating; } }
-
-    public Quaternion GlobalRotation { get { return m_globalRotation; }  set { m_globalRotation = value; } }
-
 
     private float m_counter = 0;
 
@@ -55,6 +43,23 @@ public class Cog : Enchantable
 
     private IEnumerator m_rotationReference;
 
+    //Public accessors 
+    //Should be removed, unless frozen is explicitly needed
+    public bool IsFrozen { get { return m_isFrozen; } }
+    public bool IsLarge { get { return m_size == SizeState.LARGE; } }
+    public bool IsSmall { get { return m_size == SizeState.SMALL; } }
+    public bool IsRotating { get { return m_isRotating; } }
+
+    public Quaternion GlobalRotation { get { return m_globalRotation; } set { m_globalRotation = value; } }
+
+    /// <summary>
+    /// The initialiser function for the cog, to allow for shared information
+    /// </summary>
+    /// <param name="direction"></param>
+    /// <param name="tick"></param>
+    /// <param name="smallScaleFactor"></param>
+    /// <param name="largeScaleFactor"></param>
+    /// <param name="speed"></param>
     public void SetUp(bool direction, bool tick, float smallScaleFactor, float largeScaleFactor, float speed)
     {
         m_isClockwise = direction;

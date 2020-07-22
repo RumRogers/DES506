@@ -43,6 +43,8 @@ public class Platform : Enchantable
     private Vector3 m_largeScale = Vector3.zero;
 
     private int m_direction = 1;
+
+    private IEnumerator m_translateFunction;
     #endregion
 
     // Start is called before the first frame update
@@ -54,7 +56,9 @@ public class Platform : Enchantable
         m_smallScale = transform.localScale * m_smallScaleFactor;
         m_largeScale = transform.localScale * m_largeScaleFactor;
 
-        StartCoroutine(Translate());
+        m_translateFunction = Translate();
+
+        StartCoroutine(m_translateFunction);
     }
 
     private void FixedUpdate()
@@ -64,14 +68,11 @@ public class Platform : Enchantable
             switch (m_platType)
             {
                 case PlatformType.HORIZONTAL:
-
                     TranslatePosition(transform.right);
                     break;
 
                 case PlatformType.VERTICAL:
-
                     TranslatePosition(transform.up);
-
                     break;
 
                 case PlatformType.ROTATION:
@@ -82,9 +83,11 @@ public class Platform : Enchantable
     }
 
     #region Enumerators
+    //Remove
     IEnumerator Translate()
     {
         m_isMoving = true;
+
         while (true)
         {
            
@@ -111,7 +114,7 @@ public class Platform : Enchantable
     {
         if(m_isMoving)
         {
-            StopCoroutine(Translate());
+            StopCoroutine(m_translateFunction);
             m_isMoving = false;
         }
     }
@@ -130,7 +133,7 @@ public class Platform : Enchantable
     {
         if (!m_isMoving)
         {
-            StartCoroutine(Translate());
+            StartCoroutine(m_translateFunction);
         }
     }
 
@@ -138,7 +141,7 @@ public class Platform : Enchantable
     {
         if (!m_isMoving)
         {
-            StartCoroutine(Translate());
+            StartCoroutine(m_translateFunction);
         }
             
         StartCoroutine(ScaleObject(Vector3.one));
@@ -151,10 +154,15 @@ public class Platform : Enchantable
         Gizmos.DrawSphere(transform.position + new Vector3(0, 0, m_motionWidth), 0.6f);
     }
 
+    /// <summary>
+    /// This is the update based function. Please put it in Fixed update.
+    /// </summary>
+    /// <param name="direction">This is for the directional vector (i.e. up vector) </param>
     private void TranslatePosition(Vector3 direction)
     {
         m_destination = m_defaultPosition + direction * m_motionWidth;
 
+        //Check if the platform has reached it's destination
         if (Vector3.Distance(transform.position, m_defaultPosition) <= c_distanceFactor)
         {
             m_direction = 1;
@@ -165,6 +173,7 @@ public class Platform : Enchantable
             m_direction = -1;
         }
 
+        //Prevents the platform overlapping with other objects
         if (Physics.Raycast(transform.position, direction * m_direction, c_distanceFactor + 1 * (transform.localScale.z / 2)))
         {
             m_direction = -m_direction;

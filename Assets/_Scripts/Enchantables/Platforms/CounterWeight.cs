@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody), typeof(Renderer))]
 public class CounterWeight : Enchantable
 {
     [Header("Large Scale")]
@@ -41,18 +41,20 @@ public class CounterWeight : Enchantable
 
     private void Start()
     {
+        //Set scale types based on objects original scale & scale factors
         m_smallScale = transform.localScale * m_smallScaleFactor;
         m_largeScale = transform.localScale * m_largeScaleFactor;
 
+        //Required components
         m_rigidBody = GetComponent<Rigidbody>();
         m_renderer = GetComponent<Renderer>();
 
         m_defaultMass = m_rigidBody.mass;
 
-        if(m_seesaw == null)
+        if(m_seesaw == null || m_rigidBody == null || m_renderer == null)
         {
 
-            Debug.LogError("The " + transform.name + " is missing it's seesaw reference");
+            Debug.LogError("The " + transform.name + " is missing vital component");
         }
     }
 
@@ -62,6 +64,7 @@ public class CounterWeight : Enchantable
 
         Vector3 m_size = m_renderer.bounds.size;
 
+        //Check if object is falling, ensures added speed without messing with weight
         if (!Physics.Raycast(transform.position, -transform.up, m_size.y/2))
         {
             m_rigidBody.AddForceAtPosition(Vector3.down * m_dropForce, transform.position);
