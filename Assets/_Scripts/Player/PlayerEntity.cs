@@ -81,6 +81,7 @@ namespace Player
         
         Vector3 m_playerStartPosition;
         Vector3 m_velocity = Vector3.zero;
+        Vector3 m_groundAddedVelocity = Vector3.zero;
         Vector3 m_direction;
         Vector3 m_position;
         Vector3 m_positionLastFrame;
@@ -153,6 +154,7 @@ namespace Player
         public List<Transform> SpeakersInRange { get => m_speakersInRange; set => m_speakersInRange = value; }
         public PlayerEquipableItems EquipedItem { get => m_equipedItem; set { m_equipedItem = value; m_projectileHandler.ChangeProjectileStatsBasedOnItem(value); } }   //changes projectile stats too
         public AnimationCurve PushMovementCurve { get => m_pushMovementCurve; }
+        public Vector3 GroundAddedVelocity { get => m_groundAddedVelocity; } //the velocity of the thing we're stood on
         #endregion
 
         static string s_spellWheelTag = "UI_SpellWheel";
@@ -233,8 +235,8 @@ namespace Player
                 {
                     //some times objects moving will add a large amount of velocity to the player, if this is the case, the player likely wouldn't be able to stay on them anyway
                     //also fixes a bug where the way this extra movment was calculated with the seesaw would shoot the player upwards
-                    Vector3 addedVel = m_newGroundPosition - m_oldGroundPosition;
-                    if (addedVel.magnitude < 20)
+                    m_groundAddedVelocity = m_newGroundPosition - m_oldGroundPosition;
+                    if (m_groundAddedVelocity.magnitude < 20)
                     {
                         m_velocity += (m_newGroundPosition - m_oldGroundPosition);
                     }

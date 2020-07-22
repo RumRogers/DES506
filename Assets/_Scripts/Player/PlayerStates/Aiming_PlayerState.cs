@@ -225,15 +225,15 @@ namespace Player
                     m_velocity = Vector3.ClampMagnitude(m_velocity, m_playerEntity.AimingMaxSpeed);
                 }
             }
-            else if (Mathf.Abs(m_velocity.x) > 0.1f || Mathf.Abs(m_velocity.z) > 0.1f)
+            else if (Mathf.Abs(m_velocity.x - m_playerEntity.GroundAddedVelocity.x) > 0.1 || Mathf.Abs(m_velocity.z - m_playerEntity.GroundAddedVelocity.z) > 0.1)
             {
                 if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING))
                 {
-                    m_velocity += (((m_velocity.normalized) * -1) * m_playerEntity.IceDeceleration) * Time.deltaTime;
+                    m_velocity += (m_velocity * -1) * m_playerEntity.IceDeceleration * Time.fixedDeltaTime;
                 }
                 else
                 {
-                    m_velocity += (((m_velocity.normalized) * -1) * m_playerEntity.AimingDeceleration) * Time.deltaTime;
+                    m_velocity += (m_velocity * -1) * m_playerEntity.WalkingDeceleration * Time.fixedDeltaTime;
                 }
             }
             else
