@@ -11,6 +11,9 @@ namespace GameUI
     {
         SpellWheel m_spellWheel;
         Enchantable m_lastTargetEnchantable = null;
+        bool m_locked = false;
+
+
         public Aiming_SpellWheelState(SpellWheel owner) : base(owner)
         {
             m_spellWheel = owner;
@@ -21,6 +24,11 @@ namespace GameUI
 
         public override void Manage()
         {
+            if(SpellWheel.p_Aiming)
+            {
+                return;
+            }
+
             if (HasTargetEnchantedChanged())
             {
                 OnTargetEnchantedChanged();
@@ -58,10 +66,22 @@ namespace GameUI
             if(newTargetEnchantable != null)
             {
                 m_spellWheel.PopulateSpellSlots();
-                m_spellWheel.AimAtFirstAvailableSlot();
+                if(m_spellWheel.p_AvailableSlots > 0)
+                {
+                    m_spellWheel.AimAtFirstAvailableSlot();
+                }
+                else
+                {
+                    m_spellWheel.HideSelectionArrow();
+                }
             }
 
             m_lastTargetEnchantable = newTargetEnchantable;
+        }
+
+        private void Unlock()
+        {
+            m_locked = false;
         }
     }
 }

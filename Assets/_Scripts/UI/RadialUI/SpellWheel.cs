@@ -1,5 +1,6 @@
 ﻿#define CHECK_FOR_UNLOCKED_SPELLS
 
+using FMOD;
 using GameCore.Spells;
 using GameCore.System;
 using GameCore.Utils;
@@ -22,6 +23,8 @@ namespace GameUI
 
     public class SpellWheel : Automaton
     {
+        public static bool p_Aiming { get; private set; }
+        public static bool p_Active { get; private set; }
         static Dictionary<Transform, Enchantable> s_gameTransformToEnchantable = new Dictionary<Transform, Enchantable>();
         private static Enchantable s_targetEnchantable = null;
         const string ARROW_PANEL_TAG = "UI_SpellWheel_Arrow";
@@ -47,6 +50,8 @@ namespace GameUI
         Dictionary<Transform, SpellType> m_spellSlotToSpellType = new Dictionary<Transform, SpellType>();
         //Dictionary<Transform, Transform> m_spellActiveObj = new Dictionary<Transform, Transform>();
         [SerializeField]
+        float m_wheelPointerLerpRotationSpeed = 5f;
+        [SerializeField]
         Enchantable m_targetEnchantable = null;
         [SerializeField]
         Vector2 m_circleCenter;
@@ -57,7 +62,9 @@ namespace GameUI
         List<int> m_availableSlotIndices = new List<int>();
         [SerializeField]
         List<SpellSlotData> m_spellsOrder = new List<SpellSlotData>();
-       
+        int m_currentSlotAimedAt = -1;
+        public int p_AvailableSlots { get => m_availableSlotIndices.Count; }
+
         // Start is called before the first frame update
         void Start()
         {
@@ -71,6 +78,8 @@ namespace GameUI
             m_firstSlotRotation = .5f * Mathf.PI;
             InitMap();
             InitCircle();
+            p_Aiming = false;
+            p_Active = false;
 
             SetState(new Idle_SpellWheelState(this));
         }
@@ -137,23 +146,43 @@ namespace GameUI
             }
 
             m_arrowPanel.gameObject.SetActive(showSpells);
+            p_Active = showSpells;
         }
+
+        public void HideSelectionArrow()
+        {
+            m_arrowPanel.gameObject.SetActive(false);
+        }     
 
         public void AimAtFirstAvailableSlot()
         {
+            if(m_availableSlotIndices.Count == 0)
+            {
+                return;
+            }
             m_targetSlotIdx = 0;
             AimAtSlot(m_availableSlotIndices[m_targetSlotIdx]);
         }
 
         public void AimAtNextSlot()
         {
+            if (m_availableSlotIndices.Count == 0)
+            {
+                return;
+            }
+
             m_targetSlotIdx = (m_targetSlotIdx + 1) % m_availableSlotIndices.Count;
             AimAtSlot(m_availableSlotIndices[m_targetSlotIdx]);
         }
 
         public void AimAtPrevSlot()
-        {            
-            if(--m_targetSlotIdx < 0)
+        {
+            if (m_availableSlotIndices.Count == 0)
+            {
+                return;
+            }
+
+            if (--m_targetSlotIdx < 0)
             {
                 m_targetSlotIdx = m_availableSlotIndices.Count - 1;
             }
@@ -162,9 +191,32 @@ namespace GameUI
 
         private void AimAtSlot(int slotNumber)
         {
-            float angleStep = GetAngleStep();
-            float thetaDeg = (slotNumber * angleStep - m_firstSlotRotation) * Mathf.Rad2Deg;            
-            m_arrowPanel.transform.rotation = Quaternion.Euler(0f, 0f, -90f - thetaDeg);
+            if(m_currentSlotAimedAt == slotNumber)
+            {
+                float angleStep = GetAngleStep();
+                float thetaDeg = (slotNumber * angleStep - m_firstSlotRotation) * Mathf.Rad2Deg;
+
+                for (int i = 0; i < m_spellSlots.Count; i++)
+                {
+
+                    if (i == slotNumber)
+                    {
+                        m_spellSlots[i].GetChild(0).gameObject.SetActive(true);
+                        m_spellSlots[i].GetChild(1).GetChild(1).gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        m_spellSlots[i].GetChild(0).gameObject.SetActive(false);
+                        m_spellSlots[i].GetChild(1).GetChild(1).gameObject.SetActive(false);
+                    }
+                }
+
+                m_arrowPanel.transform.rotation = Quaternion.Euler(0f, 0f, -90f - thetaDeg);
+                return;
+            }
+            m_currentSlotAimedAt = slotNumber;
+            /*float angleStep = GetAngleStep();
+            float thetaDeg = (slotNumber * angleStep - m_firstSlotRotation) * Mathf.Rad2Deg;  
             
             for (int i = 0; i < m_spellSlots.Count; i++)
             {
@@ -179,7 +231,49 @@ namespace GameUI
                     m_spellSlots[i].GetChild(0).gameObject.SetActive(false);
                     m_spellSlots[i].GetChild(1).GetChild(1).gameObject.SetActive(false);
                 }
-            }      
+            }
+
+            //m_arrowPanel.transform.rotation = Quaternion.Euler(0f, 0f, -90f - thetaDeg);
+            StartCoroutine(SmoothlyRotatePointerTo(Quaternion.Euler(0f, 0f, -90f - thetaDeg)));*/
+            StartCoroutine(AimAtSlotSmoothly(slotNumber));
+        }
+
+        private IEnumerator AimAtSlotSmoothly(int slotNumber)
+        {
+            p_Aiming = true;
+            float angleStep = GetAngleStep();
+            float thetaDeg = (slotNumber * angleStep - m_firstSlotRotation) * Mathf.Rad2Deg;
+
+            yield return StartCoroutine(SmoothlyRotatePointerTo(Quaternion.Euler(0f, 0f, -90f - thetaDeg)));
+
+            for (int i = 0; i < m_spellSlots.Count; i++)
+            {
+
+                if (i == slotNumber)
+                {
+                    m_spellSlots[i].GetChild(0).gameObject.SetActive(true);
+                    m_spellSlots[i].GetChild(1).GetChild(1).gameObject.SetActive(true);
+                }
+                else
+                {
+                    m_spellSlots[i].GetChild(0).gameObject.SetActive(false);
+                    m_spellSlots[i].GetChild(1).GetChild(1).gameObject.SetActive(false);
+                }
+            }
+
+            p_Aiming = false;
+        }
+        private IEnumerator SmoothlyRotatePointerTo(Quaternion targetRotation)
+        {
+            float t = 0f;
+            Quaternion sourceRotation = m_arrowPanel.transform.rotation;
+
+            while (t < 1)
+            {
+                m_arrowPanel.transform.rotation = Quaternion.Lerp(sourceRotation, targetRotation, t);
+                t += Time.deltaTime * m_wheelPointerLerpRotationSpeed;
+                yield return new WaitForSeconds(Time.deltaTime);
+            }
         }
 
         private float GetAngleStep()
@@ -288,6 +382,11 @@ namespace GameUI
 
         public void CastSelectedSpell()
         {
+            if (m_availableSlotIndices.Count == 0)
+            {
+                return;
+            }
+
             s_targetEnchantable.CastSpell(new Spell(m_spellSlotToSpellType[m_spellSlots[m_availableSlotIndices[m_targetSlotIdx]]]));            
         }
     }
