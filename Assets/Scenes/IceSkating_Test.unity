@@ -2774,7 +2774,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9c5dbd444f911184c905606e429190e3, type: 2}
+  - {fileID: 2100000, guid: b6ad244d5f7994f88b58834ef7d20eea, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3263,6 +3263,16 @@ PrefabInstance:
       propertyPath: m_highlightShader
       value: 
       objectReference: {fileID: 4800000, guid: 43f422d377633484191fb9b22d687267, type: 3}
+    - target: {fileID: 4580232385870872151, guid: 3ead565c55b9919448a7c71d26aae209,
+        type: 3}
+      propertyPath: m_maxIceSpeed
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4580232385870872151, guid: 3ead565c55b9919448a7c71d26aae209,
+        type: 3}
+      propertyPath: m_iceAcceleration
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4580232385870872158, guid: 3ead565c55b9919448a7c71d26aae209,
         type: 3}
       propertyPath: m_projectileContainer
@@ -7001,6 +7011,9 @@ MonoBehaviour:
   m_largeMass: 20
   m_smallScaleFactor: 0.5
   m_smallMass: 0
+  m_dropForce: 0
+  m_seesaw: {fileID: 0}
+  m_dimensions: {x: 0, y: 0, z: 0}
 --- !u!114 &1815796852
 MonoBehaviour:
   m_ObjectHideFlags: 0
