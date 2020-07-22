@@ -11,8 +11,6 @@ namespace GameUI
     {
         SpellWheel m_spellWheel;
         Enchantable m_lastTargetEnchantable = null;
-        bool m_locked = false;
-
 
         public Aiming_SpellWheelState(SpellWheel owner) : base(owner)
         {
@@ -77,11 +75,6 @@ namespace GameUI
             }
 
             m_lastTargetEnchantable = newTargetEnchantable;
-        }
-
-        private void Unlock()
-        {
-            m_locked = false;
         }
     }
 }

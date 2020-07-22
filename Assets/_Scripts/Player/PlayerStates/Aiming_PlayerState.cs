@@ -158,7 +158,7 @@ namespace Player
                 //TEMP (kinda): Currently only fires if the equipped item is the quill, in future it should fire regardless but shoot a different projectile based on the equiped item passed to the projectile handler when
                 //the equipped item is changed on the player 
                 m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.CASTING);
-                Debug.Log("Casting");
+
                 if (m_playerEntity.EquipedItem == PlayerEquipableItems.SPELL_QUILL)
                 {
                     Vector3 direction = Vector3.zero;
