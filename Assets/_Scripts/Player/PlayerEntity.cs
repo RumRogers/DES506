@@ -201,6 +201,10 @@ namespace Player
             if (IsAbleToJump() && Input.GetButtonDown("Jump"))
             {
                 m_hasJumped = true;
+                if (m_state.GetType() == typeof(Aiming_PlayerState))
+                {
+                    ((Aiming_PlayerState)m_state).ResetAimedAt();
+                }
                 SetState(new Jumping_PlayerState(this));
             }
 
