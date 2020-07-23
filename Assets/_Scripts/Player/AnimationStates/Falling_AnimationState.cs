@@ -28,6 +28,9 @@ namespace Player
                     //can actually transition to the jump start state if the player has jumped within the grace period
                     m_playerAnimator.SetState(new Jumping_AnimationState(m_playerAnimator));
                     break;
+                case PlayerAnimationProperties.FREE_FALLING:
+                    m_playerAnimator.SetState(new FreeFalling_AnimationState(m_playerAnimator));
+                    break;
                 default:
                     m_playerAnimator.SetState(new JumpEnd_AnimationState(m_playerAnimator));
                     break;

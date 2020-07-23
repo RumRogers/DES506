@@ -19,7 +19,8 @@ namespace GameCore.Checkpoints
         {
             if(other.transform == m_playerEntity.transform)
             {
-                m_playerEntity.Respawn(LevelManager.p_LastCheckpoint.position);
+                m_playerEntity.Respawn(LevelManager.p_LastCheckpoint.position + Vector3.up * 20f);
+                m_playerEntity.AddEntityProperty(PlayerEntityProperties.DYING);
                 //m_playerEntity.transform.position = LevelManager.p_LastCheckpoint.position;
             }
         }

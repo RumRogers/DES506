@@ -187,12 +187,12 @@ namespace Player
             m_direction = (forwardMovement + rightMovement).normalized;
 
             //First check if death state is triggered to save time / ensure the player cannot do something if they are alread dead
-            if (HasProperty(PlayerEntityProperties.DYING))
+            if (HasProperty(PlayerEntityProperties.DYING) && m_state.GetType() != typeof(Death_PlayerState))
             {
                 SetState(new Death_PlayerState(this));
             }
 
-            if (IsFalling())
+            if (IsFalling() && m_state.GetType() != typeof(Falling_PlayerState))
             {
                 SetState(new Falling_PlayerState(this));
             }
@@ -257,7 +257,7 @@ namespace Player
         public void CheckCollisions()
         {
             Vector3 rayStart = transform.position;
-            Vector3 rayDirection = m_velocity.normalized; //new Vector3(m_velocity.x, 0, m_velocity.z).normalized;
+            Vector3 rayDirection = new Vector3(m_velocity.x, 0, m_velocity.z).normalized;
             Vector3 horizontalRaySpacing = Vector3.Cross(rayDirection, transform.up);    // get perpendicular vector to our direction for spacing
             Vector3 verticalRaySpacing = new Vector3(0, m_playerCollider.bounds.size.y / m_numVerticalRays, 0);
 

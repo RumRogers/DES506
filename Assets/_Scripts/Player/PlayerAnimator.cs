@@ -17,7 +17,9 @@ namespace Player
         AIMING,
         CASTING,
         PUSHING,
-        DYING
+        DYING,
+        FREE_FALLING,
+        RECOVERING
     }
 
     public class PlayerAnimator : GameCore.System.Automaton
@@ -34,6 +36,8 @@ namespace Player
         [SerializeField] AnimationClip m_fallingAnim;
         [SerializeField] AnimationClip m_aimingAnim;
         [SerializeField] AnimationClip m_castingAnim;
+        [SerializeField] AnimationClip m_freeFallingAnim;
+        [SerializeField] AnimationClip m_recoveringAmim;
         [SerializeField] Animation m_animation;
         [Header("Playback Speeds")]
         [SerializeField] float m_idleAnimSpeed = 2;
@@ -44,6 +48,8 @@ namespace Player
         [SerializeField] float m_fallingAnimSpeed = 2;
         [SerializeField] float m_aimingAnimSpeed = 2;
         [SerializeField] float m_castingAnimSpeed = 2;
+        [SerializeField] float m_freeFallingAnimSpeed = 2;
+        [SerializeField] float m_recoveringAnimSpeed = 2;
 
         //non serialized fields
         AnimationState m_idleState;
@@ -54,6 +60,8 @@ namespace Player
         AnimationState m_fallingState;
         AnimationState m_aimingState;
         AnimationState m_castingState;
+        AnimationState m_freeFallingState;
+        AnimationState m_recoveringState;
 
         #region PUBLIC ACCESSORS
         public AnimationClip Idle { get => m_idleAnim; }
@@ -64,6 +72,8 @@ namespace Player
         public AnimationClip Falling { get => m_fallingAnim; }
         public AnimationClip Aiming { get => m_aimingAnim; }
         public AnimationClip Casting { get => m_castingAnim; }
+        public AnimationClip FreeFalling { get => m_freeFallingAnim; }
+        public AnimationClip Recovering { get => m_recoveringAmim; }
 
         public AnimationState IdleState { get => m_idleState; }
         public AnimationState RunningState { get => m_runningState; }
@@ -73,6 +83,8 @@ namespace Player
         public AnimationState FallingState { get => m_fallingState; }
         public AnimationState AimingState { get => m_aimingState; }
         public AnimationState CastingState { get => m_castingState; }
+        public AnimationState FreeFallingState { get => m_freeFallingState; }
+        public AnimationState RecoveringState { get => m_recoveringState; }
 
         public float RunningAnimSpeed { get => m_runningAnimSpeed; }
 
@@ -92,6 +104,8 @@ namespace Player
             m_animation.AddClip(m_fallingAnim, "falling");
             m_animation.AddClip(m_aimingAnim, "aiming");
             m_animation.AddClip(m_castingAnim, "casting");
+            m_animation.AddClip(m_freeFallingAnim, "freeFalling");
+            m_animation.AddClip(m_recoveringAmim, "recovering");
 
             foreach (AnimationState state in m_animation)
             {
@@ -129,6 +143,15 @@ namespace Player
                         state.speed = m_castingAnimSpeed;
                         m_castingState = state;
                         break;
+                    case "freeFalling":
+                        state.speed = m_freeFallingAnimSpeed;
+                        m_freeFallingState = state;
+                        break;
+                    case "recovering":
+                        state.speed = m_recoveringAnimSpeed;
+                        m_recoveringState = state;
+                        break;
+                        
                 }
             }
 
