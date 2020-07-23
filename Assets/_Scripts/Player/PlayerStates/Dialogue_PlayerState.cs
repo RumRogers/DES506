@@ -15,7 +15,6 @@ namespace Player
         public Dialogue_PlayerState(GameCore.System.Automaton owner, GameObject target = null) : base(owner)
         {
             m_playerEntity = (PlayerEntity)owner;
-
             m_speaker = target;
 
             if (!m_speaker.TryGetComponent<GameUI.Dialogue.Dialogue>(out m_dialogue))
@@ -23,6 +22,8 @@ namespace Player
                 Debug.Log("Target has no dialogue script attached");
                 m_playerEntity.SetState(new Default_PlayerState(m_playerEntity));
             }
+
+            m_dialogue.SetDialogueHasStarted(false);
 
             if (!m_speaker)
             {
@@ -75,14 +76,18 @@ namespace Player
                 }
                 else
                 {
+                    m_dialogue.DisableUI();
                     m_owner.SetState(new Default_PlayerState(m_owner));
+                    m_playerMoveCamera.SetState(new GameCore.Camera.Default_CameraState(m_playerMoveCamera));
                 }
 
             }
            // else if (Input.GetButtonDown("Cancel"))
             else if (Input.GetKeyUp(KeyCode.E))
             {
+                m_dialogue.DisableUI();
                 m_owner.SetState(new Default_PlayerState(m_owner));
+                m_playerMoveCamera.SetState(new GameCore.Camera.Default_CameraState(m_playerMoveCamera));
             }
         }
     }
