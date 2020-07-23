@@ -65,11 +65,7 @@ namespace Player
                 m_camera.SetState(new GameCore.Camera.Default_CameraState(m_camera));
                 if (m_aimedAt)
                 {
-                    m_aimedAtRenderer.material.shader = m_highlightedOldShader;
-                    m_highlightedOldShader = null;
-                    m_aimedAtRenderer = null;
-                    m_aimedAt = null;
-                    SpellWheel.SetTargetEnchantable(null);
+                    ResetAimedAt();
                 }
 
                 m_playerEntity.m_reticle.gameObject.SetActive(false);
@@ -128,22 +124,14 @@ namespace Player
                 //if the hit object is not enchantable and there is a currently selected enchantable, set to null
                 else if (m_aimedAt)
                 {
-                    m_aimedAtRenderer.material.shader = m_highlightedOldShader;
-                    m_highlightedOldShader = null;
-                    m_aimedAtRenderer = null;
-                    m_aimedAt = null;
-                    SpellWheel.SetTargetEnchantable(null);
+                    ResetAimedAt();
                 }
             }
             //not sure about this condition as it is similar to the one above...
             //if it doesn't hit and there is an aimed at transform, set to null also
             else if (m_aimedAt)
             {
-                m_aimedAtRenderer.material.shader = m_highlightedOldShader;
-                m_highlightedOldShader = null;
-                m_aimedAtRenderer = null;
-                m_aimedAt = null;
-                SpellWheel.SetTargetEnchantable(null);
+                ResetAimedAt();
             }
 
             //Setting the cameras aimed at transfrom for the aiming camera state. Not sure if we could move the functionality for the shader changing there? or if it makes sense to be here?
@@ -248,6 +236,15 @@ namespace Player
             }
 
             m_playerEntity.Velocity = m_velocity;
+        }
+
+        public void ResetAimedAt()
+        {
+            m_aimedAtRenderer.material.shader = m_highlightedOldShader;
+            m_highlightedOldShader = null;
+            m_aimedAtRenderer = null;
+            m_aimedAt = null;
+            SpellWheel.SetTargetEnchantable(null);
         }
     }
 }

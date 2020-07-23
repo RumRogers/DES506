@@ -93,12 +93,13 @@ namespace Player
                         {
                             m_velocity += (m_velocity * -1) * m_playerEntity.WalkingDeceleration * Time.fixedDeltaTime;
                         }
+                        m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.IDLE);
+
                     }
                     else
                     {
                         m_velocity.x = 0.0f;
                         m_velocity.z = 0.0f;
-                        m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.IDLE);
                     }
                 }
                 else

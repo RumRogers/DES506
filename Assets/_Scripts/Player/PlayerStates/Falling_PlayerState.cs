@@ -20,7 +20,7 @@ namespace Player
 
         public override void Manage()
         {
-            m_playerEntity.Velocity += (Vector3.down * m_playerEntity.Gravity * 2) * Time.deltaTime;
+            m_velocity += (Vector3.down * m_playerEntity.Gravity * 2) * Time.deltaTime;
 
             //if grounded transition to previous grounded state, or if there wasn't one, transition to the default state
             if (m_playerEntity.Grounded)
@@ -46,7 +46,7 @@ namespace Player
             //if there is an input, move in that direction, but clamp the magnitude (speed) so they cannot exceed max speed while in the air
             if (m_playerEntity.Direction != Vector3.zero)
             {
-                Vector3 nonVerticalMovement = new Vector3(m_velocity.x, 0, m_velocity.z) + (m_playerEntity.Direction * m_playerEntity.AerialAcceleration) * Time.deltaTime;
+                Vector3 nonVerticalMovement = new Vector3(m_velocity.x, 0, m_velocity.z) + (m_playerEntity.Direction * m_playerEntity.AerialAcceleration) * Time.fixedDeltaTime;
                 m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Velocity.normalized.x, 0, m_playerEntity.Velocity.normalized.z));
                 if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING))
                 {
@@ -59,10 +59,10 @@ namespace Player
             }
             else if (Mathf.Abs(m_velocity.x) > 0.1f || Mathf.Abs(m_velocity.z) > 0.1f)
             {
-                m_velocity += (((m_velocity.normalized) * -1) * m_playerEntity.AerialDeceleration) * Time.deltaTime;
+                m_velocity += (((m_velocity.normalized) * -1) * m_playerEntity.AerialDeceleration) * Time.fixedDeltaTime;
             }
 
-            m_playerEntity.Velocity = new Vector3(m_velocity.x, m_playerEntity.Velocity.y, m_velocity.z);
+            m_playerEntity.Velocity = m_velocity;
         }
     }
 }

@@ -20,7 +20,7 @@ namespace VisualEffects
         const float FROZEN_LERP_VALUE = 1.0f;
         const float DEFAULT_LERP_VALUE = 0.0f;
         const float LERP_TIME = 2.0f;
-        const string BLEND_SHADER_PATH = "Shaders/Blend/UnlitBlendTexture";
+        const string BLEND_SHADER_PATH = "Shaders/Blend/LitBlendShader";
 
         // Start is called before the first frame update
         void Start()
