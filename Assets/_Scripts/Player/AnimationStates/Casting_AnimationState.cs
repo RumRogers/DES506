@@ -41,7 +41,14 @@ namespace Player
 
         IEnumerator Transition()
         {
-            m_playerAnimator.Animation.Play("casting", PlayMode.StopAll);
+            try
+            {
+                m_playerAnimator.Animation.Play("casting", PlayMode.StopAll);
+            }
+            catch
+            {
+                Debug.LogError("Casting animation not set in editor or is null for some other reason");
+            }
             while (m_playerAnimator.Animation.isPlaying)
             {
                 //do nothing

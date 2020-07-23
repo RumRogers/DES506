@@ -39,7 +39,14 @@ namespace Player
 
         IEnumerator Transition()
         {
-            m_playerAnimator.Animation.Play("slidingMid", PlayMode.StopAll);
+            try
+            {
+                m_playerAnimator.Animation.Play("slidingMid", PlayMode.StopAll);
+            }
+            catch
+            {
+                Debug.LogError("Sliding Mid animation not set in editor or is null for some other reason");
+            }
             yield break;
         }
     }

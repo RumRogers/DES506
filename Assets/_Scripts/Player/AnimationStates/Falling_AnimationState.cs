@@ -39,7 +39,14 @@ namespace Player
 
         IEnumerator Transition()
         {
-            m_playerAnimator.Animation.Play("falling", PlayMode.StopAll);
+            try
+            {
+                m_playerAnimator.Animation.Play("falling", PlayMode.StopAll);
+            }
+            catch
+            {
+                Debug.LogError("Falling animation not set in editor or is null for some other reason");
+            }
             yield break;
         }
     }

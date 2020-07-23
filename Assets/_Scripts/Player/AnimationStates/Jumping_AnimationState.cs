@@ -36,7 +36,14 @@ namespace Player
 
         IEnumerator Transition()
         {
-            m_playerAnimator.Animation.Play("jumpStart", PlayMode.StopAll);
+            try
+            {
+                m_playerAnimator.Animation.Play("jumpStart", PlayMode.StopAll);
+            }
+            catch
+            {
+                Debug.LogError("Jump Start animation not set in editor or is null for some other reason");
+            }
             while (m_playerAnimator.Animation.isPlaying)
             {
                 //do nothing

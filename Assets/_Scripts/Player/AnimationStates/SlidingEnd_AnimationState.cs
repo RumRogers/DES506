@@ -27,8 +27,14 @@ namespace Player
 
         IEnumerator Transition()
         {
-            m_playerAnimator.Animation.Play("slidingEnd", PlayMode.StopAll);
-
+            try
+            {
+                m_playerAnimator.Animation.Play("slidingEnd", PlayMode.StopAll);
+            }
+            catch
+            {
+                Debug.LogError("Sliding End animation not set in editor or is null for some other reason");
+            }
             while (m_playerAnimator.Animation.isPlaying)
             {
                 yield return null;

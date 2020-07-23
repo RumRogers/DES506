@@ -48,7 +48,14 @@ namespace Player
 
         IEnumerator Transition()
         {
-            m_playerAnimator.Animation.Play("idle", PlayMode.StopAll);
+            try
+            {
+                m_playerAnimator.Animation.Play("idle", PlayMode.StopAll);
+            }
+            catch
+            {
+                Debug.LogError("Idle animation not set in editor or is null for some other reason");
+            }
             yield break;
         }
     }

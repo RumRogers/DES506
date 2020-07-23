@@ -52,6 +52,7 @@ namespace Player
         [SerializeField] float m_iceAcceleration = 1f;
         [SerializeField] float m_iceDeceleration = 1f;
         [SerializeField] float m_maxIceSpeed = 2.0f;
+        [SerializeField] [Range(0.0f, 1.0f)] float m_slidingAnimationSpeedThreshold = 0.4f;
         [Header("Air Movement")]
         [SerializeField] float m_aerialAcceleration = 5.0f;
         [SerializeField] float m_aerialDeceleration = 5.0f;
@@ -156,6 +157,7 @@ namespace Player
         public PlayerEquipableItems EquipedItem { get => m_equipedItem; set { m_equipedItem = value; m_projectileHandler.ChangeProjectileStatsBasedOnItem(value); } }   //changes projectile stats too
         public AnimationCurve PushMovementCurve { get => m_pushMovementCurve; }
         public Vector3 GroundAddedVelocity { get => m_groundAddedVelocity; } //the velocity of the thing we're stood on
+        public float SlidingAnimationSpeedThreshold { get => m_slidingAnimationSpeedThreshold; }
         #endregion
 
         static string s_spellWheelTag = "UI_SpellWheel";

@@ -33,7 +33,14 @@ namespace Player
 
         IEnumerator Transition()
         {
-            m_playerAnimator.Animation.Play("jumpLand", PlayMode.StopAll);
+            try
+            {
+                m_playerAnimator.Animation.Play("jumpLand", PlayMode.StopAll);
+            }
+            catch
+            {
+                Debug.LogError("Jump Landing animation not set in editor or is null for some other reason");
+            }
             while (m_playerAnimator.Animation.isPlaying)
             {
                 //do nothing

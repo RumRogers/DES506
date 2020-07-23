@@ -84,6 +84,7 @@ MonoBehaviour:
   m_iceAcceleration: 1
   m_iceDeceleration: 0.1
   m_maxIceSpeed: 0.6
+  m_slidingAnimationSpeedThreshold: 0.9
   m_aerialAcceleration: 1
   m_aerialDeceleration: 1
   m_gravity: 0.9
@@ -114,15 +115,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_idleAnim: {fileID: 7400000, guid: e9382c04f5b45964793b8e214ae47561, type: 2}
   m_runnningAnim: {fileID: 7400000, guid: 774eb888745328c47b5b7163d2a00647, type: 2}
-  m_jumpStart: {fileID: 7400000, guid: 79b0a7d8867b25d45b37cfd6fe47788d, type: 2}
-  m_jumpMid: {fileID: 7400000, guid: eb963190d3bd9154fb9ba77c0bf7debd, type: 2}
-  m_jumpLand: {fileID: 7400000, guid: fd8dd3fc3296a5241867f72c6e6f8479, type: 2}
+  m_jumpStartAnim: {fileID: 7400000, guid: 79b0a7d8867b25d45b37cfd6fe47788d, type: 2}
+  m_jumpMidAnim: {fileID: 7400000, guid: eb963190d3bd9154fb9ba77c0bf7debd, type: 2}
+  m_jumpLandAnim: {fileID: 7400000, guid: fd8dd3fc3296a5241867f72c6e6f8479, type: 2}
   m_fallingAnim: {fileID: 1827226128182048838, guid: 6c7e48ca3b2e00c43989446764c0e17c,
     type: 3}
   m_aimingAnim: {fileID: 7400000, guid: 4952ab0e4f9dc7b4182930cb72f8f717, type: 2}
   m_castingAnim: {fileID: 7400000, guid: c73f8f878cae7f04ea23b848ad58b89a, type: 2}
   m_freeFallingAnim: {fileID: 7400000, guid: e67b733f5bbb3a24b832a97fbd8dfc05, type: 2}
   m_recoveringAmim: {fileID: 7400000, guid: 009c069e1c559064ea09b3580b9775a0, type: 2}
+  m_slidingStartAnim: {fileID: 7400000, guid: b38396f4a11f3ae4ba0fbbbcf1bf556a, type: 2}
+  m_slidingMidAnim: {fileID: 7400000, guid: 3df5b9709b529eb41bab36bf741a83cf, type: 2}
+  m_slidingEndAnim: {fileID: 7400000, guid: d63f199583ea1924f9177e0c8e95f9c5, type: 2}
   m_animation: {fileID: 116125339}
   m_idleAnimSpeed: 2
   m_runningAnimSpeed: 2
@@ -134,6 +138,9 @@ MonoBehaviour:
   m_castingAnimSpeed: 2
   m_freeFallingAnimSpeed: 2
   m_recoveringAnimSpeed: 2
+  m_slidingStartAnimSpeed: 2
+  m_slidingMidAnimSpeed: 2
+  m_slidingEndAnimSpeed: 2
 --- !u!114 &4580232385870872158
 MonoBehaviour:
   m_ObjectHideFlags: 0

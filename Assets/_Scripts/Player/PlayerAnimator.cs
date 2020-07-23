@@ -58,6 +58,7 @@ namespace Player
         [SerializeField] float m_slidingMidAnimSpeed = 2;
         [SerializeField] float m_slidingEndAnimSpeed = 2;
 
+        //in hindsight we don't actually need all of these things, however doesn't hurt to have them if we need them
         //non serialized fields
         AnimationState m_idleState;
         AnimationState m_runningState;
@@ -111,21 +112,27 @@ namespace Player
         // Start is called before the first frame update
         void Start()
         {
-            SetProperty(PlayerAnimationProperties.IDLE);
-            m_animation.AddClip(m_idleAnim, "idle");
-            m_animation.AddClip(m_runnningAnim, "running");
-            m_animation.AddClip(m_jumpStartAnim, "jumpStart");
-            m_animation.AddClip(m_jumpMidAnim, "jumpMid");
-            m_animation.AddClip(m_jumpLandAnim, "jumpLand");
-            m_animation.AddClip(m_fallingAnim, "falling");
-            m_animation.AddClip(m_aimingAnim, "aiming");
-            m_animation.AddClip(m_castingAnim, "casting");
-            m_animation.AddClip(m_freeFallingAnim, "freeFalling");
-            m_animation.AddClip(m_recoveringAmim, "recovering");
-            m_animation.AddClip(m_slidingStartAnim, "slidingStart");
-            m_animation.AddClip(m_slidingMidAnim, "slidingMid");
-            m_animation.AddClip(m_slidingEndAnim, "slidingEnd");
-
+            try
+            {
+                SetProperty(PlayerAnimationProperties.IDLE);
+                m_animation.AddClip(m_idleAnim, "idle");
+                m_animation.AddClip(m_runnningAnim, "running");
+                m_animation.AddClip(m_jumpStartAnim, "jumpStart");
+                m_animation.AddClip(m_jumpMidAnim, "jumpMid");
+                m_animation.AddClip(m_jumpLandAnim, "jumpLand");
+                m_animation.AddClip(m_fallingAnim, "falling");
+                m_animation.AddClip(m_aimingAnim, "aiming");
+                m_animation.AddClip(m_castingAnim, "casting");
+                m_animation.AddClip(m_freeFallingAnim, "freeFalling");
+                m_animation.AddClip(m_recoveringAmim, "recovering");
+                m_animation.AddClip(m_slidingStartAnim, "slidingStart");
+                m_animation.AddClip(m_slidingMidAnim, "slidingMid");
+                m_animation.AddClip(m_slidingEndAnim, "slidingEnd");
+            }
+            catch
+            {
+                Debug.LogWarning("One or more animations for the player are not set in editor");
+            }
             foreach (AnimationState state in m_animation)
             {
                 switch (state.name)

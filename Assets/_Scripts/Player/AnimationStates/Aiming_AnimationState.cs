@@ -44,7 +44,14 @@ namespace Player
 
         IEnumerator Transition()
         {
-            m_playerAnimator.Animation.Play("aiming", PlayMode.StopAll);
+            try
+            {
+                m_playerAnimator.Animation.Play("aiming", PlayMode.StopAll);
+            }
+            catch
+            {
+                Debug.LogError("Aiming animation not set in editor or is null for some other reason");
+            }
             yield break;
         }
     }

@@ -95,7 +95,10 @@ namespace Player
                         }
                         if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING))
                         {
-                            m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.SLIDING);
+                            if (m_playerEntity.Velocity.magnitude / m_playerEntity.IceMaxSpeed < m_playerEntity.SlidingAnimationSpeedThreshold)
+                            {
+                                m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.SLIDING);
+                            }
                         }
                         else
                         {

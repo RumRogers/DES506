@@ -47,7 +47,14 @@ namespace Player
 
         IEnumerator Transition()
         {
-            m_playerAnimator.Animation.Play("running", PlayMode.StopAll);
+            try
+            {
+                m_playerAnimator.Animation.Play("running", PlayMode.StopAll);
+            }
+            catch
+            {
+                Debug.LogError("Running animation not set in editor or is null for some other reason");
+            }
             yield break;
         }
     }

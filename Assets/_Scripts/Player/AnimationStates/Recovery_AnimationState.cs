@@ -30,7 +30,14 @@ namespace Player
 
         IEnumerator Transition()
         {
-            m_playerAnimator.Animation.Play("recovering", PlayMode.StopAll);
+            try
+            {
+                m_playerAnimator.Animation.Play("recovering", PlayMode.StopAll);
+            }
+            catch
+            {
+                Debug.LogError("Death Recovering animation not set in editor or is null for some other reason");
+            }
             yield return null;
         }
     }

@@ -30,7 +30,14 @@ namespace Player
 
         IEnumerator Transition()
         {
-            m_playerAnimator.Animation.Play("freeFalling", PlayMode.StopAll);
+            try
+            {
+                m_playerAnimator.Animation.Play("freeFalling", PlayMode.StopAll);
+            }
+            catch
+            {
+                Debug.LogError("Aiming animation not set in editor or is null for some other reason");
+            }
             yield return null;
         }
     }

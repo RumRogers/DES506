@@ -30,7 +30,14 @@ namespace Player
 
         IEnumerator Transition()
         {
-            m_playerAnimator.Animation.Play("jumpMid", PlayMode.StopAll);
+            try
+            {
+                m_playerAnimator.Animation.Play("jumpMid", PlayMode.StopAll);
+            }
+            catch
+            {
+                Debug.LogError("Jump Mid animation not set in editor or is null for some other reason");
+            }
             while (m_playerAnimator.Animation.isPlaying)
             {
                 //do nothing
