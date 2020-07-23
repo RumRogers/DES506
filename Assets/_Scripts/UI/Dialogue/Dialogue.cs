@@ -45,15 +45,11 @@ namespace GameUI.Dialogue
 
         public void StartDialogue()
         {
-            foreach(Line s in m_lines.lines)
-            {
-                Debug.Log(s.text);
-                
-            }
-
+            m_lineIndex = 0;
             m_TextUI.SetActive(true);
             StartFillingLine(m_lineIndex);
             ++m_lineIndex;
+
             if (m_lineIndex < m_lines.lines.Length - 1)
             {
                 ++m_lineIndex;
@@ -81,9 +77,19 @@ namespace GameUI.Dialogue
             }
         }
 
+        public void DisableUI()
+        {
+            m_TextUI.SetActive(false);
+        }
+
         public bool GetDialogueHasStarted()
         {
             return m_dialogueHasStarted;
+        }
+
+        public void SetDialogueHasStarted(bool val)
+        {
+            m_dialogueHasStarted = val;
         }
 
         public bool GetLastLineReached()
@@ -93,7 +99,8 @@ namespace GameUI.Dialogue
 
         void StartFillingLine(int index)
         {
-            StartCoroutine(GameUI.Dialogue.StringHelpers.FillDialogueBox(m_DialogueText, m_lines.lines[index].text, m_scrollSpeed));
+            //StartCoroutine(GameUI.Dialogue.StringHelpers.FillDialogueBox(m_DialogueText, m_lines.lines[index].text, m_scrollSpeed));
+            m_DialogueText.text = m_lines.lines[index].text;
         }
 
     }
