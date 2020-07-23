@@ -79,7 +79,7 @@ namespace Player
                             m_velocity = m_velocity.magnitude * m_playerEntity.Direction;
                             m_velocity += (m_playerEntity.Direction * m_playerEntity.WalkingAcceleration) * Time.fixedDeltaTime;
                             m_velocity = Vector3.ClampMagnitude(m_velocity, m_playerEntity.MaxSpeed);
-                            m_playerEntity.Animator.RunningState.speed = (m_velocity.magnitude / m_playerEntity.MaxSpeed) * m_playerEntity.Animator.RunningAnimSpeed;
+                            //m_playerEntity.Animator.RunningState.speed = (m_velocity.magnitude / m_playerEntity.MaxSpeed) * m_playerEntity.Animator.RunningAnimSpeed;
                         }
                         m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.RUNNING);
                     }
@@ -93,11 +93,18 @@ namespace Player
                         {
                             m_velocity += (m_velocity * -1) * m_playerEntity.WalkingDeceleration * Time.fixedDeltaTime;
                         }
-                        m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.IDLE);
-
+                        if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING))
+                        {
+                            m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.SLIDING);
+                        }
+                        else
+                        {
+                            m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.IDLE);
+                        }
                     }
                     else
                     {
+                        m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.IDLE);
                         m_velocity.x = 0.0f;
                         m_velocity.z = 0.0f;
                     }
