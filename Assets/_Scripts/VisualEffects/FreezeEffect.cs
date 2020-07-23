@@ -21,6 +21,7 @@ namespace VisualEffects
         const float DEFAULT_LERP_VALUE = 0.0f;
         const float LERP_TIME = 2.0f;
         const string BLEND_SHADER_PATH = "Shaders/Blend/LitBlendShader";
+        const string ICE_TEX_DEFAULT_PATH = "Art Assets/Ice Tiles/IceTemp";
 
         // Start is called before the first frame update
         void Start()
@@ -40,6 +41,18 @@ namespace VisualEffects
             m_renderer.SetPropertyBlock(m_matBlock);
             m_originalShader = m_renderer.material.shader;
             m_blendShader = Resources.Load<Shader>(BLEND_SHADER_PATH);
+            m_renderer.material.shader = m_blendShader;
+
+            //if not declaired, set to default ice texture
+            if (m_iceTexture == null)
+            {
+                m_iceTexture = Resources.Load<Texture>(ICE_TEX_DEFAULT_PATH);
+            }
+
+            if (m_mainTexture == null)
+            {
+                m_mainTexture = m_renderer.material.mainTexture;
+            }
         }
 
         // Update is called once per frame
