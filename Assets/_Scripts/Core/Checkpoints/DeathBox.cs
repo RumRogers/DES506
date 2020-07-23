@@ -7,7 +7,11 @@ using UnityEngine;
 namespace GameCore.Checkpoints
 {
     public class DeathBox : MonoBehaviour
-    {        
+    {
+        [Header("Respawning offset Vector")]
+        [SerializeField]
+        Vector3 m_respawningOffset = new Vector3(0f, 150f, 0f);
+
         PlayerEntity m_playerEntity;
 
         private void Start()
@@ -19,7 +23,8 @@ namespace GameCore.Checkpoints
         {
             if(other.transform == m_playerEntity.transform)
             {
-                m_playerEntity.Respawn(LevelManager.p_LastCheckpoint.position + Vector3.up * 20f);
+                m_playerEntity.Respawn(LevelManager.p_LastCheckpoint.position + m_respawningOffset);
+                m_playerEntity.Velocity = Vector3.zero;
                 m_playerEntity.AddEntityProperty(PlayerEntityProperties.DYING);
                 //m_playerEntity.transform.position = LevelManager.p_LastCheckpoint.position;
             }
