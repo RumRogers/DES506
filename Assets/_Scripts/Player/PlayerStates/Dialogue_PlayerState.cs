@@ -75,14 +75,14 @@ namespace Player
                 }
                 else
                 {
-                    m_playerEntity.SetState(new Default_PlayerState(m_playerEntity));
+                    m_owner.SetState(new Default_PlayerState(m_owner));
                 }
 
             }
            // else if (Input.GetButtonDown("Cancel"))
             else if (Input.GetKeyUp(KeyCode.E))
             {
-                m_playerEntity.SetState(new Default_PlayerState(m_playerEntity));
+                m_owner.SetState(new Default_PlayerState(m_owner));
             }
         }
     }
