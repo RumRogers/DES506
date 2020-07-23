@@ -22,6 +22,9 @@ namespace Player
         {
             switch (m_playerAnimator.PlayerAnimProperties)
             {
+                case PlayerAnimationProperties.SLIDING:
+                    m_playerAnimator.SetState(new Sliding_AnimationState(m_playerAnimator));
+                    break;
                 case PlayerAnimationProperties.JUMPING:
                     m_owner.SetState(new Jumping_AnimationState(m_owner));
                     break;

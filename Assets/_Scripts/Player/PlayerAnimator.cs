@@ -19,7 +19,8 @@ namespace Player
         PUSHING,
         DYING,
         FREE_FALLING,
-        RECOVERING
+        RECOVERING,
+        SLIDING
     }
 
     public class PlayerAnimator : GameCore.System.Automaton
@@ -30,14 +31,17 @@ namespace Player
 
         [SerializeField] AnimationClip m_idleAnim;
         [SerializeField] AnimationClip m_runnningAnim;
-        [SerializeField] AnimationClip m_jumpStart;
-        [SerializeField] AnimationClip m_jumpMid;
-        [SerializeField] AnimationClip m_jumpLand;
+        [SerializeField] AnimationClip m_jumpStartAnim;
+        [SerializeField] AnimationClip m_jumpMidAnim;
+        [SerializeField] AnimationClip m_jumpLandAnim;
         [SerializeField] AnimationClip m_fallingAnim;
         [SerializeField] AnimationClip m_aimingAnim;
         [SerializeField] AnimationClip m_castingAnim;
         [SerializeField] AnimationClip m_freeFallingAnim;
         [SerializeField] AnimationClip m_recoveringAmim;
+        [SerializeField] AnimationClip m_slidingStartAnim;
+        [SerializeField] AnimationClip m_slidingMidAnim;
+        [SerializeField] AnimationClip m_slidingEndAnim;
         [SerializeField] Animation m_animation;
         [Header("Playback Speeds")]
         [SerializeField] float m_idleAnimSpeed = 2;
@@ -50,6 +54,9 @@ namespace Player
         [SerializeField] float m_castingAnimSpeed = 2;
         [SerializeField] float m_freeFallingAnimSpeed = 2;
         [SerializeField] float m_recoveringAnimSpeed = 2;
+        [SerializeField] float m_slidingStartAnimSpeed = 2;
+        [SerializeField] float m_slidingMidAnimSpeed = 2;
+        [SerializeField] float m_slidingEndAnimSpeed = 2;
 
         //non serialized fields
         AnimationState m_idleState;
@@ -62,18 +69,24 @@ namespace Player
         AnimationState m_castingState;
         AnimationState m_freeFallingState;
         AnimationState m_recoveringState;
+        AnimationState m_slidingStartState;
+        AnimationState m_slidingMidState;
+        AnimationState m_slidingEndState;
 
         #region PUBLIC ACCESSORS
         public AnimationClip Idle { get => m_idleAnim; }
         public AnimationClip Running { get => m_runnningAnim; }
-        public AnimationClip JumpingStart { get => m_jumpStart; }
-        public AnimationClip JumpingMid { get => m_jumpMid; }
-        public AnimationClip JumpingLand { get => m_jumpLand; }
+        public AnimationClip JumpingStart { get => m_jumpStartAnim; }
+        public AnimationClip JumpingMid { get => m_jumpMidAnim; }
+        public AnimationClip JumpingLand { get => m_jumpLandAnim; }
         public AnimationClip Falling { get => m_fallingAnim; }
         public AnimationClip Aiming { get => m_aimingAnim; }
         public AnimationClip Casting { get => m_castingAnim; }
         public AnimationClip FreeFalling { get => m_freeFallingAnim; }
         public AnimationClip Recovering { get => m_recoveringAmim; }
+        public AnimationClip SlidingStart { get => m_slidingStartAnim; }
+        public AnimationClip SlidingMid { get => m_slidingMidAnim; }
+        public AnimationClip SlidingEnd { get => m_slidingEndAnim; }
 
         public AnimationState IdleState { get => m_idleState; }
         public AnimationState RunningState { get => m_runningState; }
@@ -85,6 +98,9 @@ namespace Player
         public AnimationState CastingState { get => m_castingState; }
         public AnimationState FreeFallingState { get => m_freeFallingState; }
         public AnimationState RecoveringState { get => m_recoveringState; }
+        public AnimationState SlidingStartState { get => m_slidingStartState; }
+        public AnimationState SlidingMidState { get => m_slidingMidState; }
+        public AnimationState SlidingEndState { get => m_slidingEndState; }
 
         public float RunningAnimSpeed { get => m_runningAnimSpeed; }
 
@@ -98,14 +114,17 @@ namespace Player
             SetProperty(PlayerAnimationProperties.IDLE);
             m_animation.AddClip(m_idleAnim, "idle");
             m_animation.AddClip(m_runnningAnim, "running");
-            m_animation.AddClip(m_jumpStart, "jumpStart");
-            m_animation.AddClip(m_jumpMid, "jumpMid");
-            m_animation.AddClip(m_jumpLand, "jumpLand");
+            m_animation.AddClip(m_jumpStartAnim, "jumpStart");
+            m_animation.AddClip(m_jumpMidAnim, "jumpMid");
+            m_animation.AddClip(m_jumpLandAnim, "jumpLand");
             m_animation.AddClip(m_fallingAnim, "falling");
             m_animation.AddClip(m_aimingAnim, "aiming");
             m_animation.AddClip(m_castingAnim, "casting");
             m_animation.AddClip(m_freeFallingAnim, "freeFalling");
             m_animation.AddClip(m_recoveringAmim, "recovering");
+            m_animation.AddClip(m_slidingStartAnim, "slidingStart");
+            m_animation.AddClip(m_slidingMidAnim, "slidingMid");
+            m_animation.AddClip(m_slidingEndAnim, "slidingEnd");
 
             foreach (AnimationState state in m_animation)
             {
@@ -151,7 +170,18 @@ namespace Player
                         state.speed = m_recoveringAnimSpeed;
                         m_recoveringState = state;
                         break;
-                        
+                    case "slidingStart":
+                        state.speed = m_slidingMidAnimSpeed;
+                        m_slidingStartState = state;
+                        break;
+                    case "slidingMid":
+                        state.speed = m_slidingMidAnimSpeed;
+                        m_slidingStartState = state;
+                        break;
+                    case "slidingEnd":
+                        state.speed = m_slidingEndAnimSpeed;
+                        m_slidingStartState = state;
+                        break;
                 }
             }
 
