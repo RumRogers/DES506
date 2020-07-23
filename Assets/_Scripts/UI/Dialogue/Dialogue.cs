@@ -5,9 +5,15 @@ using UnityEngine.UI;
 
 namespace GameUI.Dialogue
 {
+    [System.Serializable]
     public class Line //going to set this up this way so we can extend the line class to include additional info, i.e. Speaker, options, etc.
     {
         public string text;
+    }
+    [System.Serializable]
+    public class Lines
+    {
+        public Line[] lines;
     }
 
     public class Dialogue : MonoBehaviour
@@ -15,33 +21,42 @@ namespace GameUI.Dialogue
         Transform m_player;
         Transform m_talkingNPC;
 
+        [SerializeField]
         GameObject m_TextUI;
+        [SerializeField]
         Text m_DialogueText;
 
         [SerializeField]
         TextAsset m_convoJSON;
 
-        Line[] m_lines;
+        Lines m_lines;
 
         int m_lineIndex = 0;
         [SerializeField]
-        float m_scrollSpeed;
+        float m_scrollSpeed = 0.05f;
 
         bool m_lastLineReached = false;
         bool m_dialogueHasStarted = false;
 
         private void Awake()
         {
-            m_lines = JsonUtility.FromJson<Line[]>(m_convoJSON.text);
+            m_lines = JsonUtility.FromJson<Lines>(m_convoJSON.text);
         }
 
         public void StartDialogue()
         {
+            foreach(Line s in m_lines.lines)
+            {
+                Debug.Log(s.text);
+                
+            }
+
             m_TextUI.SetActive(true);
             StartFillingLine(m_lineIndex);
-            if (m_lineIndex < m_lines.Length - 1)
+            ++m_lineIndex;
+            if (m_lineIndex < m_lines.lines.Length - 1)
             {
-                m_lineIndex++;
+                ++m_lineIndex;
             }
             else
             {
@@ -55,7 +70,7 @@ namespace GameUI.Dialogue
         public void FillNextLine()
         {
             StartFillingLine(m_lineIndex);
-            if (m_lineIndex < m_lines.Length - 1)
+            if (m_lineIndex < m_lines.lines.Length - 1)
             {
                 m_lineIndex++;
             }
@@ -78,7 +93,7 @@ namespace GameUI.Dialogue
 
         void StartFillingLine(int index)
         {
-            StartCoroutine(GameUI.Dialogue.StringHelpers.FillDialogueBox(m_DialogueText, m_lines[index].text, m_scrollSpeed));
+            StartCoroutine(GameUI.Dialogue.StringHelpers.FillDialogueBox(m_DialogueText, m_lines.lines[index].text, m_scrollSpeed));
         }
 
     }

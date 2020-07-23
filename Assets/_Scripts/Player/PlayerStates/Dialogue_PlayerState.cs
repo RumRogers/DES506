@@ -21,6 +21,7 @@ namespace Player
             if (!m_speaker.TryGetComponent<GameUI.Dialogue.Dialogue>(out m_dialogue))
             {
                 Debug.Log("Target has no dialogue script attached");
+                m_playerEntity.SetState(new Default_PlayerState(m_playerEntity));
             }
 
             if (!m_speaker)
@@ -64,14 +65,24 @@ namespace Player
                 m_dialogue.StartDialogue();
             }
 
-            if (Input.GetButtonDown("Submit"))
+           // if (Input.GetButtonDown("Submit"))
+            if (Input.GetKeyUp(KeyCode.Return))
             {
-                //advance dialogue here
-                m_dialogue.FillNextLine();
+                if (!m_dialogue.GetLastLineReached())
+                {
+                    //advance dialogue here
+                    m_dialogue.FillNextLine();
+                }
+                else
+                {
+                    m_playerEntity.SetState(new Default_PlayerState(m_playerEntity));
+                }
+
             }
-            else if (Input.GetButtonDown("Cancel"))
+           // else if (Input.GetButtonDown("Cancel"))
+            else if (Input.GetKeyUp(KeyCode.E))
             {
-                m_owner.SetState(new Default_PlayerState(m_owner));
+                m_playerEntity.SetState(new Default_PlayerState(m_playerEntity));
             }
         }
     }

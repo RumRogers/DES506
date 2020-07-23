@@ -43,7 +43,7 @@ public class PauseMenuController : MonoBehaviour
         m_tipObj = JsonUtility.FromJson<Tips>(m_tipsJSON.text);
 
         m_tipsAmount = m_tipObj.tips.Length;
-        Debug.Log(m_tipsAmount);
+        //Debug.Log(m_tipsAmount);
     }
 
     public void UpdateTipText()
