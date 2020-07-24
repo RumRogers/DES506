@@ -53,7 +53,7 @@ namespace Player
 
             m_itemEquipped = m_playerEntity.EquipedItem;
             //temp
-            m_playerEntity.m_reticle.gameObject.SetActive(true);
+            m_playerEntity.Reticle.gameObject.SetActive(true);
         }
 
         public override void Manage()
@@ -68,7 +68,7 @@ namespace Player
                     ResetAimedAt();
                 }
 
-                m_playerEntity.m_reticle.gameObject.SetActive(false);
+                m_playerEntity.Reticle.gameObject.SetActive(false);
                 //TEMP REMOVE LATER
                 m_owner.SetState(new Default_PlayerState(m_owner));
                 return;

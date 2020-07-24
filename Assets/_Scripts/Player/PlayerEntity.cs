@@ -73,8 +73,7 @@ namespace Player
         [Header("Properties")]
         [SerializeField] PlayerEntityProperties m_playerEntityProperties;
 
-        [Header("TEMP")]
-        public Transform m_reticle;
+
 
         //player stats (not editor accessible)
         bool m_grounded = true;
@@ -94,6 +93,7 @@ namespace Player
         PlayerGroundStates m_previousGroundState;
         PlayerEquipableItems m_equipedItem;
         GameUI.SpellWheel m_spellWheel;
+        Transform m_reticle;
 
         //aim state / projectiles
         Projectile.ProjectileHandler m_projectileHandler;
@@ -153,6 +153,7 @@ namespace Player
         //Get and Settable
         public PlayerGroundStates PreviousGroundState { get => m_previousGroundState; set => m_previousGroundState = value; }
         public Transform ClosestInteractable { get => m_closestInteractable; set => m_closestInteractable = value; }
+        public Transform Reticle { get => m_reticle; }
         public List<Transform> InteractablesInRange { get => m_interactablesInRange; set => m_interactablesInRange = value; }   //to be removed, but unsure if we'll have other interactibles so may as well leave it
         public List<Transform> SpeakersInRange { get => m_speakersInRange; set => m_speakersInRange = value; }
         public PlayerEquipableItems EquipedItem { get => m_equipedItem; set { m_equipedItem = value; m_projectileHandler.ChangeProjectileStatsBasedOnItem(value); } }   //changes projectile stats too
@@ -162,9 +163,16 @@ namespace Player
         #endregion
 
         static string s_spellWheelTag = "UI_SpellWheel";
+        const string CROSSHAIR_FILEPATH = "Prefabs/UI/SpellWheel/UI_Reticle";
 
         private void Awake()
         {
+            Transform canvas = GameObject.Find("Canvas").transform;
+
+            GameObject reticle = Instantiate(Resources.Load<GameObject>(CROSSHAIR_FILEPATH), canvas);
+
+            m_reticle = reticle.transform;
+
             if (!TryGetComponent<CapsuleCollider>(out m_playerCollider))
             {
                 Debug.LogError("No capsule collider attached to the player!");

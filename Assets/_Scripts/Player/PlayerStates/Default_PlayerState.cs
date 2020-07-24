@@ -27,7 +27,7 @@ namespace Player
             //Storing a reference to this state object to transition back to after a fall
             m_playerEntity.PreviousGroundState = PlayerGroundStates.DEFAULT;
 
-            m_playerEntity.m_reticle.gameObject.SetActive(false);
+            m_playerEntity.Reticle.gameObject.SetActive(false);
         }
 
         public override void Manage()
