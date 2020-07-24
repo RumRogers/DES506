@@ -69,6 +69,7 @@ namespace Player
         [SerializeField] int m_numVerticalRays = 3;
         [SerializeField] int m_numGroundedRays = 3;
         [SerializeField] float m_skinWidth = 0.2f; // the distance from the outside of the object the rays start
+        [SerializeField] [Range(0.0f, 1.0f)] float m_groundRayStartHeight = 0.25f; //percentage of the player colider height where ground check rays will start
         [Header("Properties")]
         [SerializeField] PlayerEntityProperties m_playerEntityProperties;
 
@@ -337,11 +338,14 @@ namespace Player
                 return false;
             }
             bool collided = false;
-            Vector3 rayStart = transform.position;
+            //sets ray start point to a percentage of the total height based on the value m_groundRayStartHeight
+            Vector3 rayStart = (m_playerCollider.transform.position - (Vector3.up * (m_playerCollider.height / 2)) + (m_groundRayStartHeight * (Vector3.up * (m_playerCollider.height))));
+            //ray length is equal to the distance from the ray start point to the players feet (lowest point of the collider) minus our y velocity
+            float rayLength = (rayStart.y - (m_playerCollider.transform.position.y - m_playerCollider.height / 2) + m_groundOverlapPadding) - m_velocity.y;
             Vector3 xRaySpacing = transform.right * (m_playerCollider.bounds.size.x / m_numGroundedRays);
             Vector3 zRaySpacing = transform.forward * (m_playerCollider.bounds.size.z / m_numGroundedRays);
 
-            rayStart.y = transform.position.y;
+            //rayStart.y = transform.position.y;
             RaycastHit collisionInfo;
             float distance = 100;
 
@@ -351,9 +355,9 @@ namespace Player
             {
                 for (int z = 0; z < m_numGroundedRays; ++z)
                 {
-                    Debug.DrawLine(rayStart, rayStart + (-transform.up * m_playerCollider.bounds.extents.y));
+                    Debug.DrawLine(rayStart, rayStart + (-transform.up * rayLength));
                     //Subtracting velocity y from the length (velocity y is negative when we're falling) to check if we would land next frame, if so count it as landing this frame.
-                    if (Physics.Raycast(rayStart, -transform.up, out collisionInfo, (m_playerCollider.bounds.extents.y + m_groundOverlapPadding) - m_velocity.y ))
+                    if (Physics.Raycast(rayStart, -transform.up, out collisionInfo, rayLength))
                     {
                         //if it's the first ray, set it to the first result regardless, as we cannot compare null variables
                         if (x == 0 && z == 0)
