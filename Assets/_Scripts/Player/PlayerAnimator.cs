@@ -57,6 +57,8 @@ namespace Player
         [SerializeField] float m_slidingStartAnimSpeed = 2;
         [SerializeField] float m_slidingMidAnimSpeed = 2;
         [SerializeField] float m_slidingEndAnimSpeed = 2;
+        [Header("Properties")]
+        [SerializeField] float m_timeOnGroundBeforeRecovering = 1;
 
         //in hindsight we don't actually need all of these things, however doesn't hurt to have them if we need them
         //non serialized fields
@@ -104,6 +106,8 @@ namespace Player
         public AnimationState SlidingEndState { get => m_slidingEndState; }
 
         public float RunningAnimSpeed { get => m_runningAnimSpeed; }
+        public float RecoverAnimSpeed { get => m_recoveringAnimSpeed; }
+        public float TimeOnGroundBeforeRecover { get => m_timeOnGroundBeforeRecovering; }
 
         public Animation Animation { get => m_animation; }
         public PlayerAnimationProperties PlayerAnimProperties { get => m_playerAnimProperties; }

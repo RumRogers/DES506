@@ -33,12 +33,32 @@ namespace Player
             try
             {
                 m_playerAnimator.Animation.Play("recovering", PlayMode.StopAll);
+                //setting the speed to 0 on the first frame, waiting for the animation to start playing
+                m_playerAnimator.RecoveringState.speed = 0;
+                m_playerAnimator.StartCoroutine(WaitForRecoverToStart());
             }
             catch
             {
                 Debug.LogError("Death Recovering animation not set in editor or is null for some other reason");
             }
             yield return null;
+        }
+
+        IEnumerator WaitForRecoverToStart()
+        {
+            float time = 0;
+            while (true)
+            {
+                time += Time.deltaTime;
+
+                if (time > m_playerAnimator.TimeOnGroundBeforeRecover)
+                {
+                    //setting the speed to the original full speed after waiting, allowing the animation to play out
+                    m_playerAnimator.RecoveringState.speed = m_playerAnimator.RecoverAnimSpeed;
+                    yield break;
+                }
+                yield return null;
+            }            
         }
     }
 }
