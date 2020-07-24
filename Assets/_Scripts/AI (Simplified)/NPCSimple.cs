@@ -29,6 +29,13 @@ public class NPCSimple : MonoBehaviour
     [SerializeField]
     private LetterBox m_letterBox;
 
+    [Header("Animations")]
+    [SerializeField]
+    private Animation m_defaultAnimation;
+
+    [SerializeField]
+    private Animation m_talkingAnimation;
+
     //Contained members
     private Vector3 m_playerToTarget = Vector3.zero;
     private Vector3 m_targetVec = Vector3.zero;
