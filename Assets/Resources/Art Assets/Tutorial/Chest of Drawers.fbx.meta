@@ -3,7 +3,17 @@ guid: fd97b8b724e98e0428b1f4b87f89c3a7
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Chest_of_Drawers
+    second: {fileID: 2100000, guid: 522333eb447540945be09415ffb2ae7e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Scroll
+    second: {fileID: 2100000, guid: a22e2f881a8f89e4f8916703f609e009, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

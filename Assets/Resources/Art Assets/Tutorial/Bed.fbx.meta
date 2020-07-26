@@ -3,7 +3,22 @@ guid: 2eec5d719406cf8419411d670e3887e5
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bed_Covers
+    second: {fileID: 2100000, guid: 9635cbb5c0987284f8f21f83c89925ba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bed_Pillow
+    second: {fileID: 2100000, guid: 477579c1e1fd7cf4fb476c2d127a68f6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bed_Wood
+    second: {fileID: 2100000, guid: 65dc50e72a4f7ed4a909210b4f9c860f, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

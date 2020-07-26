@@ -3,7 +3,27 @@ guid: 2587c0ba3dce6f04db322c2fd4cdb294
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Desk
+    second: {fileID: 2100000, guid: 693c9921f36f9c440b7a3ec64b1786a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ink_Pot
+    second: {fileID: 2100000, guid: 5367698f557f0964f858d5224dbd366b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Quill
+    second: {fileID: 2100000, guid: d3b1dad927d9d2c4c9c7eacbae277a6d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Scroll
+    second: {fileID: 2100000, guid: a22e2f881a8f89e4f8916703f609e009, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

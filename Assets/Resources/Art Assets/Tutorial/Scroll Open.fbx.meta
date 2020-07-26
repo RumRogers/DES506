@@ -3,7 +3,12 @@ guid: e040d41d6f749fd4080c4b509ea36dec
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Scroll
+    second: {fileID: 2100000, guid: a22e2f881a8f89e4f8916703f609e009, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

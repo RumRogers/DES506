@@ -3,7 +3,27 @@ guid: 50d7127402fcd6e4a8e064d1cc72f186
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bookcase
+    second: {fileID: 2100000, guid: 73ff6ce77f08f6c4fa64f18dfa933f2b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bottles
+    second: {fileID: 2100000, guid: 818f8dc10b79eb54980c011226b00354, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cauldron
+    second: {fileID: 2100000, guid: 05e341cdf18d8ae4282e6125756f1faa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Scroll
+    second: {fileID: 2100000, guid: a22e2f881a8f89e4f8916703f609e009, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

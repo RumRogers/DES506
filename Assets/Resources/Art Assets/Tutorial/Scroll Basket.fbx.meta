@@ -3,7 +3,17 @@ guid: f08b22012d162704690483d781746cbb
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Basket
+    second: {fileID: 2100000, guid: 4334ddf76fde33b44aaf258e5a80481a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Scroll
+    second: {fileID: 2100000, guid: a22e2f881a8f89e4f8916703f609e009, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
