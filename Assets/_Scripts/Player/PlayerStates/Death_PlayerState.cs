@@ -6,12 +6,18 @@ namespace Player
 {
     public class Death_PlayerState : GameCore.System.State
     {
+        GameCore.Camera.PlayerMoveCamera m_camera;
         PlayerEntity m_playerEntity;
         bool m_animFinished = false;
 
 
         public Death_PlayerState(GameCore.System.Automaton owner) : base(owner)
         {
+            if (!Camera.main.transform.TryGetComponent<GameCore.Camera.PlayerMoveCamera>(out m_camera))
+            {
+                Debug.LogError("Cannot get PlayerMoveCamera Component on Main Camera!");
+            }
+
             m_playerEntity = (PlayerEntity)owner;
             m_playerEntity.transform.position = m_playerEntity.PlayerStartPosition;
 
@@ -25,6 +31,7 @@ namespace Player
                 m_playerEntity.RemoveEntityProperty(PlayerEntityProperties.DYING);
                 m_playerEntity.transform.GetChild(0).GetChild(0).transform.localEulerAngles = Vector3.zero;
                 m_playerEntity.SetState(new Default_PlayerState(m_playerEntity));
+                m_camera.SetState(new GameCore.Camera.Default_CameraState(m_camera));
             }
 
             if (!m_playerEntity.Grounded)

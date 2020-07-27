@@ -434,6 +434,7 @@ namespace Player
 
         public void Respawn(Vector3 position)
         {
+            m_velocity = Vector3.zero;
             m_position = position;
             m_positionLastFrame = position;
             transform.position = position;
