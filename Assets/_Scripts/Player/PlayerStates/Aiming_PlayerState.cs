@@ -19,11 +19,17 @@ namespace Player
         Transform m_aimedAt = null;
         Renderer m_aimedAtRenderer = null;
         Shader m_highlightedOldShader = null;
+        Texture m_baseTexture = null;
+        Color m_baseColor;
 
         PlayerEquipableItems m_itemEquipped;
 
-        public Aiming_PlayerState(GameCore.System.Automaton owner) : base(owner)
+        private RFX4_EffectEvent m_vfxHandler;
+
+        public Aiming_PlayerState(GameCore.System.Automaton owner, RFX4_EffectEvent vfx) : base(owner)
         {
+            m_vfxHandler = vfx;
+
             m_playerEntity = (PlayerEntity)owner;
             m_velocity = m_playerEntity.Velocity;
             if (!Camera.main.transform.TryGetComponent<GameCore.Camera.PlayerMoveCamera>(out m_camera))
@@ -117,8 +123,16 @@ namespace Player
                             return;
                         }
                         m_aimedAtRenderer = renderer;
+                        
+                        //Retaun original attributes
                         m_highlightedOldShader = renderer.material.shader;
+                        m_baseTexture = renderer.material.mainTexture;
+                        m_baseColor = renderer.material.color;
+
+                        //Set new attributes for highlight effect
                         renderer.material.shader = m_playerEntity.HighlightShader;
+                        renderer.material.SetTexture("_Texture", m_baseTexture);
+                        renderer.material.SetColor("_Color", m_baseColor);
                     }
                 }
                 //if the hit object is not enchantable and there is a currently selected enchantable, set to null
@@ -159,7 +173,10 @@ namespace Player
                     {
                         direction = (Camera.main.transform.position + (Camera.main.transform.forward * m_playerEntity.Projectile.Range)) - m_playerEntity.transform.position;
                     }
-                    m_playerEntity.Projectile.FireProjectile(direction.normalized, m_playerEntity.transform.position + (m_playerEntity.transform.forward * 2f));
+
+                    //m_vfxHandler.ActivateCharacterEffect();
+                    m_vfxHandler.ActivateEffect();
+                    //m_playerEntity.Projectile.FireProjectile(direction.normalized, m_playerEntity.transform.position + (m_playerEntity.transform.forward * 2f));
                 }
                 else if (m_aimedAt)
                 {
@@ -167,6 +184,7 @@ namespace Player
                     GameCore.Spells.Enchantable enchantable;
                     if (m_aimedAt.TryGetComponent<GameCore.Spells.Enchantable>(out enchantable))
                     {
+                        
                         enchantable.CastSpell(new GameCore.Spells.Spell(GameCore.Spells.SpellType.TRANSFORM_RESET));
                     }
                 }

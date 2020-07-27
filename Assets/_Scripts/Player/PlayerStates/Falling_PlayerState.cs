@@ -10,6 +10,8 @@ namespace Player
 
         Vector3 m_velocity; //local velocity varable, easier to manipulate individual components, added to the players velocity at end of Manage()
 
+        //Just an empty one to get rid of an error
+        RFX4_EffectEvent temp;
         public Falling_PlayerState(GameCore.System.Automaton owner) : base(owner)
         {
             m_playerEntity = (PlayerEntity)owner;
@@ -31,7 +33,7 @@ namespace Player
                 switch (m_playerEntity.PreviousGroundState)
                 {
                     case PlayerGroundStates.AIMING:
-                        m_playerEntity.SetState(new Aiming_PlayerState(m_playerEntity));
+                        m_playerEntity.SetState(new Aiming_PlayerState(m_playerEntity, temp));
                         break;
                     case PlayerGroundStates.DEFAULT:
                         m_playerEntity.SetState(new Default_PlayerState(m_playerEntity));

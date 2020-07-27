@@ -18,6 +18,7 @@ TagManager:
   - Collectible
   - SpellBook
   - UI_SpellWheel
+  - SpellVFX
   layers:
   - Default
   - TransparentFX

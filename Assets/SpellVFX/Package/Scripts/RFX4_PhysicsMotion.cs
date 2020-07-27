@@ -86,6 +86,10 @@ public class RFX4_PhysicsMotion : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         if (isCollided && !effectSettings.UseCollisionDetection) return;
+
+        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "SpellVFX")
+            return;
+
         foreach (ContactPoint contact in collision.contacts)
         {
             if (!isCollided)

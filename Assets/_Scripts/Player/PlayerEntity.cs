@@ -72,8 +72,7 @@ namespace Player
         [SerializeField] [Range(0.0f, 1.0f)] float m_groundRayStartHeight = 0.25f; //percentage of the player colider height where ground check rays will start
         [Header("Properties")]
         [SerializeField] PlayerEntityProperties m_playerEntityProperties;
-
-
+        [SerializeField] public RFX4_EffectEvent m_spellSfx;
 
         //player stats (not editor accessible)
         bool m_grounded = true;
@@ -221,7 +220,7 @@ namespace Player
 
             if (IsAbleToAim() && (Input.GetButtonDown("Aim") || Input.GetAxisRaw("Aim") == 1))
             {
-                SetState(new Aiming_PlayerState(this));
+                SetState(new Aiming_PlayerState(this, m_spellSfx));
             }
 
             //Dialogue trigger

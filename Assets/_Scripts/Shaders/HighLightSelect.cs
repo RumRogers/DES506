@@ -9,6 +9,14 @@ public class HighLightSelect : MonoBehaviour
     public Material m_outlineMat;
     public Renderer renderer;
 
+    [SerializeField]
+    private Shader m_defaultShader;
+
+    [SerializeField]
+    private Shader m_highlightShader;
+
+    private Texture m_tex;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +31,8 @@ public class HighLightSelect : MonoBehaviour
 
     private void OnMouseOver()
     {
-        renderer.material = m_outlineMat;
+        m_tex = renderer.material.mainTexture;
+
+        renderer.material.shader = m_highlightShader;
     }
 }

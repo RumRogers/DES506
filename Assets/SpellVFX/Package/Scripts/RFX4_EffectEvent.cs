@@ -42,10 +42,11 @@ public class RFX4_EffectEvent : MonoBehaviour
 
     public void Update()
     {
-        AttachPoint.LookAt(OverrideAttachPointToTarget);
+        //AttachPoint.LookAt(OverrideAttachPointToTarget);
     }
     public void ActivateEffect()
     {
+        //Debug.Log("Spell Cast");
 
         if (MainEffect == null) 
             return;
@@ -58,13 +59,6 @@ public class RFX4_EffectEvent : MonoBehaviour
             instance = Instantiate(MainEffect, AttachPoint.transform.position, Quaternion.LookRotation(-(AttachPoint.position - OverrideAttachPointToTarget.position)));
 
         instance.transform.position = AttachPoint.transform.position + AttachPoint.transform.forward * m_forwardOffset;
-
-        //if (OverrideAttachPointToTarget == null)
-        //    instance = Instantiate(MainEffect, pos, AttachPoint.rotation);
-
-        //else
-        //    instance = Instantiate(MainEffect, pos, Quaternion.LookRotation(-(pos - OverrideAttachPointToTarget.position)));
-
 
         UpdateEffectForMobileIsNeed(instance);
         
