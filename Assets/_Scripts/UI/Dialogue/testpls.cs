@@ -4,16 +4,39 @@ using UnityEngine;
 
 public class testpls : MonoBehaviour
 {
+    Player.PlayerEntity m_player = null;
+
+    bool canTalk = false;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Pls");
+            canTalk = true;
+     
+            if (!m_player)
+            {
+                m_player = other.gameObject.GetComponent<Player.PlayerEntity>();
+            }
+        }
+    }
 
-            Player.PlayerEntity m_player = other.gameObject.GetComponent<Player.PlayerEntity>();
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            canTalk = false;
+        }
+    }
 
-            m_player.SetState(new Player.Dialogue_PlayerState(m_player, this.gameObject));
+    private void Update()
+    {
+        if (canTalk)
+        {
+            if (Input.GetKeyUp(KeyCode.E))
+            {
+                m_player.SetState(new Player.Dialogue_PlayerState(m_player, this.gameObject));
+            }
         }
     }
 }

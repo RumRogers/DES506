@@ -48,7 +48,6 @@ namespace GameUI.Dialogue
             m_lineIndex = 0;
             m_TextUI.SetActive(true);
             StartFillingLine(m_lineIndex);
-            ++m_lineIndex;
 
             if (m_lineIndex < m_lines.lines.Length - 1)
             {
