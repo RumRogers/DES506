@@ -5692,7 +5692,8 @@ PrefabInstance:
         type: 3}
       propertyPath: m_highlightShader
       value: 
-      objectReference: {fileID: 4800000, guid: 43f422d377633484191fb9b22d687267, type: 3}
+      objectReference: {fileID: -6465566751694194690, guid: a122dc2cd7f1c1b4baaa0fd118aea88c,
+        type: 3}
     - target: {fileID: 4580232385870872151, guid: 3ead565c55b9919448a7c71d26aae209,
         type: 3}
       propertyPath: m_gravity
@@ -5703,6 +5704,11 @@ PrefabInstance:
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 377049087}
+    - target: {fileID: 4580232385870872151, guid: 3ead565c55b9919448a7c71d26aae209,
+        type: 3}
+      propertyPath: m_spellSfx
+      value: 
+      objectReference: {fileID: 995098098}
     - target: {fileID: 4580232385870872158, guid: 3ead565c55b9919448a7c71d26aae209,
         type: 3}
       propertyPath: m_projectileContainer
@@ -24334,6 +24340,34 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 990206018}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &995098092 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4580232385870872150, guid: 3ead565c55b9919448a7c71d26aae209,
+    type: 3}
+  m_PrefabInstance: {fileID: 222356531}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &995098098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995098092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f3a75ebaaa03d94180c577cee7363ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharacterEffect: {fileID: 1748139164946814, guid: 4f14e37b24a0f9c41a81220f59ae87f6,
+    type: 3}
+  CharacterAttachPoint: {fileID: 1728674438}
+  CharacterEffect_DestroyTime: 10
+  MainEffect: {fileID: 1748139164946814, guid: 4f14e37b24a0f9c41a81220f59ae87f6, type: 3}
+  AttachPoint: {fileID: 1728674438}
+  OverrideAttachPointToTarget: {fileID: 0}
+  Effect_DestroyTime: 10
+  m_forwardOffset: 2
+  IsMobile: 0
 --- !u!1001 &997703582
 PrefabInstance:
   m_ObjectHideFlags: 0
