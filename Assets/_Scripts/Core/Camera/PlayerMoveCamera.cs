@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using GameCore.System;
 
 namespace GameCore.Camera
 {
     public class PlayerMoveCamera : Automaton
     {
+        const string FADEIMAGE_PATH = "Prefabs/UI/CameraFade/CameraEffectCanvas";
+
         [SerializeField]
         Transform m_cameraTarget;
         Quaternion m_defaultRotation;
@@ -48,6 +51,11 @@ namespace GameCore.Camera
         Vector3 m_oldPosition;
         Vector2 m_input;
 
+        //Camera fade vars
+        Image m_cameraFadeImage;
+        GameObject m_cameraFadeObject;
+        bool m_fadeOngoing = false;
+
         //Public stuff, get only
         public bool p_AutoAimOn { get => m_autoAimOn; }
         public float p_SmoothFactor { get => m_smoothFactor; }
@@ -86,11 +94,23 @@ namespace GameCore.Camera
             SetState(new Default_CameraState(this));
             m_oldPosition = transform.position;
 
+            m_cameraFadeObject = Instantiate(Resources.Load<GameObject>(FADEIMAGE_PATH));
+            m_cameraFadeImage = m_cameraFadeObject.GetComponentInChildren<Image>();
+            m_cameraFadeImage.color = new Color(0, 0, 0, 0);
+
         }
 
         protected override void Update()
         {
             //base.Update();
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                StartCoroutine(FadeToColour(Color.black, 3));
+            }
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                StartCoroutine(FadeToColour(new Color(0, 0, 0, 0), 3));
+            }
         }
 
         private void LateUpdate()
@@ -129,6 +149,32 @@ namespace GameCore.Camera
                 targetToWall *= distanceToWall;
                 //set transform to that point
                 transform.position = m_cameraTarget.position + targetToWall;
+            }
+        }
+
+        public IEnumerator FadeToColour(Color colour, float timeToColour)
+        {
+            if (colour == m_cameraFadeImage.color || m_fadeOngoing)
+                yield break;
+
+            float time = 0;
+            Color startingColour = m_cameraFadeImage.color;
+            m_fadeOngoing = true;
+            while (true)
+            {
+                time += Time.deltaTime;
+
+                float percomp = time / timeToColour;
+
+                m_cameraFadeImage.color = Color.Lerp(startingColour, colour, percomp);
+
+                if (time > timeToColour)
+                {
+                    m_fadeOngoing = false;
+                    m_cameraFadeImage.color = colour;
+                    yield break;
+                }
+                yield return null;
             }
         }
     }

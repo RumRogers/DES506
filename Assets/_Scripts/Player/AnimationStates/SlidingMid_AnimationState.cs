@@ -41,7 +41,8 @@ namespace Player
         {
             try
             {
-                m_playerAnimator.Animation.Play("slidingMid", PlayMode.StopAll);
+                m_playerAnimator.Animation.CrossFadeQueued("slidingMid", 0.2f);
+                m_playerAnimator.Animation.PlayQueued("slidingMid");
             }
             catch
             {

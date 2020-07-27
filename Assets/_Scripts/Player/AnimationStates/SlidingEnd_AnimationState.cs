@@ -29,7 +29,8 @@ namespace Player
         {
             try
             {
-                m_playerAnimator.Animation.Play("slidingEnd", PlayMode.StopAll);
+                m_playerAnimator.Animation.CrossFade("slidingEnd", 0.2f, PlayMode.StopAll);
+                //m_playerAnimator.Animation.Play("slidingEnd", PlayMode.StopAll);
             }
             catch
             {

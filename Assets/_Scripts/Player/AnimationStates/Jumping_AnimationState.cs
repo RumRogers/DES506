@@ -38,7 +38,8 @@ namespace Player
         {
             try
             {
-                m_playerAnimator.Animation.Play("jumpStart", PlayMode.StopAll);
+                m_playerAnimator.Animation.CrossFade("jumpStart", 0.1f);
+                //m_playerAnimator.Animation.Play("jumpStart");
             }
             catch
             {

@@ -38,7 +38,8 @@ namespace Player
         {
             try
             {
-                m_playerAnimator.Animation.Play("slidingStart", PlayMode.StopAll);
+                m_playerAnimator.Animation.CrossFade("slidingStart", 0.2f);
+                //m_playerAnimator.Animation.PlayQueued("slidingStart");
             }
             catch
             {

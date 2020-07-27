@@ -119,6 +119,7 @@ namespace Player
         //player stats, Mutable
         public Vector3 Velocity { get => m_velocity; set => m_velocity = value; }
         public Vector3 Direction { get => m_direction; set => m_direction = value; }
+        public Vector3 Position { get => transform.position; set { m_position = value; m_positionLastFrame = value; transform.position = value; } }
         //player stats, getters only
         public bool Grounded { get => m_grounded; }
         public bool CanJump { get => m_canJump; }
@@ -203,7 +204,7 @@ namespace Player
                 SetState(new Death_PlayerState(this));
             }
 
-            if (IsFalling() && m_state.GetType() != typeof(Falling_PlayerState))
+            if (IsFalling())
             {
                 SetState(new Falling_PlayerState(this));
             }
@@ -441,7 +442,7 @@ namespace Player
 
         public bool IsAbleToJump()
         {
-            if (m_grounded)
+            if (m_grounded && !HasProperty(PlayerEntityProperties.DYING))
                 return true;
             if (m_state.GetType() != typeof(Falling_PlayerState) || m_hasJumped)
                 return false;
@@ -460,7 +461,7 @@ namespace Player
 
         bool IsFalling()
         {
-            return !m_ground && (m_state.GetType() != typeof(Falling_PlayerState) && m_state.GetType() != typeof(Jumping_PlayerState));
+            return !m_ground && (m_state.GetType() != typeof(Falling_PlayerState) && m_state.GetType() != typeof(Jumping_PlayerState)) && !HasProperty(PlayerEntityProperties.DYING);
         }
 
         #region MUTABLE ENTITY IMPLEMENTATION

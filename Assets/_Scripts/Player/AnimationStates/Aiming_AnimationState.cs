@@ -46,7 +46,8 @@ namespace Player
         {
             try
             {
-                m_playerAnimator.Animation.Play("aiming", PlayMode.StopAll);
+                m_playerAnimator.Animation.CrossFade("aiming", 0.2f, PlayMode.StopAll);
+                m_playerAnimator.Animation.PlayQueued("aiming");
             }
             catch
             {

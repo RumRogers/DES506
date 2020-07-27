@@ -50,7 +50,8 @@ namespace Player
         {
             try
             {
-                m_playerAnimator.Animation.Play("idle", PlayMode.StopAll);
+                m_playerAnimator.Animation.CrossFade("idle", 0.2f, PlayMode.StopAll);
+                m_playerAnimator.Animation.PlayQueued("idle");
             }
             catch
             {

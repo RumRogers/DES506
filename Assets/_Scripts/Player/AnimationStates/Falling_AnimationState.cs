@@ -41,7 +41,8 @@ namespace Player
         {
             try
             {
-                m_playerAnimator.Animation.Play("falling", PlayMode.StopAll);
+                m_playerAnimator.Animation.CrossFade("falling", 0.2f, PlayMode.StopAll);
+                m_playerAnimator.Animation.PlayQueued("falling");
             }
             catch
             {

@@ -32,7 +32,8 @@ namespace Player
         {
             try
             {
-                m_playerAnimator.Animation.Play("jumpMid", PlayMode.StopAll);
+                //m_playerAnimator.Animation.Blend("jumpMid", 0.5f);
+                m_playerAnimator.Animation.Play("jumpMid");
             }
             catch
             {
