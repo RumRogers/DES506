@@ -28,6 +28,7 @@ namespace GameCore.Checkpoints
                 m_playerEntity.Velocity = Vector3.zero;
                 m_playerEntity.AddEntityProperty(PlayerEntityProperties.DYING);
                 //m_playerEntity.transform.position = LevelManager.p_LastCheckpoint.position;
+                FMODUnity.RuntimeManager.PlayOneShot("event:/PLAYER/MOVEMENT/Respawn/Respawn_FallOut");
             }
         }
     }

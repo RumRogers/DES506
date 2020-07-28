@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="EncodableAsset" id="{5f385c61-c433-4e41-af06-75d99ae444af}">
+		<property name="assetPath">
+			<value>PlayerMovement/Respawn/</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{9937f860-8fbb-46f5-bf06-8a9c030d1b0c}</destination>
+		</relationship>
+	</object>
+</objects>

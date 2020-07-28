@@ -27,6 +27,16 @@ public class AnimationSFXManager : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot("event:/PLAYER/MOVEMENT/Player_Land");
     }
 
+    public void playRespawnRecover()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/PLAYER/MOVEMENT/Respawn/Respawn_Recover");
+    }
+
+    public void playRespawnGetup()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/PLAYER/MOVEMENT/Respawn/Respawn_GetUp");
+    }
+
     //Player Spellcasting
     public void spellcastSFX()
     {

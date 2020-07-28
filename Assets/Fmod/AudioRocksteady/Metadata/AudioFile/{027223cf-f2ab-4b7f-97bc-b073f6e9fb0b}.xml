@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{027223cf-f2ab-4b7f-97bc-b073f6e9fb0b}">
+		<property name="assetPath">
+			<value>PlayerMovement/Respawn/Repawn_ScreamOut6.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>2</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{9937f860-8fbb-46f5-bf06-8a9c030d1b0c}</destination>
+		</relationship>
+	</object>
+</objects>
