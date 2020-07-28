@@ -6,25 +6,9 @@ using UnityEngine;
 public class NPCSimple : MonoBehaviour
 {
     #region
-    [Header("Required Components")]
-    [SerializeField]
-    private GameObject m_player;
-
-    [SerializeField]
-    private Camera m_playerCamera;
-
     [Header("NPC Behaviour")]
     [SerializeField]
-    private string m_dialog; //To be added
-
-    [SerializeField]
     private bool m_isPlayerTalking = false;
-
-    [SerializeField]
-    private float m_rotationSpeed;
-
-    [SerializeField]
-    private float m_viewRadius;
 
     [SerializeField]
     private LetterBox m_letterBox;
@@ -45,7 +29,7 @@ public class NPCSimple : MonoBehaviour
 
     void Start()
     {
-        m_state = new NPCStateDefault(m_defaultAnimation, m_rotationSpeed, m_player, m_viewRadius, m_letterBox, transform);
+       // m_state = new NPCStateDefault(m_defaultAnimation, m_rotationSpeed, m_player, m_viewRadius, m_letterBox, transform);
     }
 
     void Update()
@@ -53,17 +37,6 @@ public class NPCSimple : MonoBehaviour
         m_state.StateUpdate();
     }
 
-
-    private void PlayerInteractionState()
-    {
-        m_player.transform.LookAt(new Vector3(transform.position.x, m_player.transform.position.y, transform.position.z));    
-        
-        m_playerCamera.transform.LookAt(transform);
-
-        //Translate camera into position
-        //once camera is in place start dialog
-        //move letterboxes into place 
-    }
 
     /// <summary>
     /// Inverts a bool to handle player interaction

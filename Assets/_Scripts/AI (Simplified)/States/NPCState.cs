@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class NPCState : MonoBehaviour
 {
     private Animation m_stateAnimation;
-
+    protected Animator m_animator;
     protected LetterBox m_letterBox;
 
     protected bool m_isPlayerInView = true;
@@ -24,11 +24,10 @@ public abstract class NPCState : MonoBehaviour
     /// Constructor for the NPC base state 
     /// </summary>
     /// <param name="animation">Provide state animation</param>
-    public NPCState(Animation animation)
+    public NPCState(Animator animation)
     {
-        m_stateAnimation = animation;
+        animation.Play("Default");
     }
-
 
     /// <summary>
     /// Call each frame to update and perform NPC related operations
