@@ -19,16 +19,17 @@ namespace Player
         {
             m_respawnPoint = GameCore.System.LevelManager.p_LastCheckpoint.position;
 
+            m_playerEntity = (PlayerEntity)owner;
+            m_playerEntity.Velocity = Vector3.zero; //making sure we're actually at 0 velocity for some reason it's not enough to do it in the respawn function
+
+            m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.FREE_FALLING);
+
             if (!Camera.main.transform.TryGetComponent(out m_camera))
             {
                 Debug.LogError("Cannot get PlayerMoveCamera Component on Main Camera!");
             }
 
             m_camera.SetState(new GameCore.Camera.Respawn_CameraState(m_camera, m_respawnPoint));
-
-            m_playerEntity = (PlayerEntity)owner;
-            m_playerEntity.transform.position = m_playerEntity.PlayerStartPosition;
-            m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.FREE_FALLING);
 
             //start falling
             FMODUnity.RuntimeManager.PlayOneShot(m_playerEntity.FallingAudioEvent, m_playerEntity.transform.position);    //@TODO: Fill with serialised event from player entity
@@ -53,7 +54,7 @@ namespace Player
                 }
                 else
                 {
-                    m_playerEntity.Velocity -= Vector3.up * (m_playerEntity.Gravity * 0.01f) * Time.fixedDeltaTime;
+                    m_playerEntity.Velocity -= Vector3.up * m_playerEntity.Gravity * Time.fixedDeltaTime;
                 }
 
             }

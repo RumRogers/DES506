@@ -21,8 +21,8 @@ namespace GameCore.Camera
             m_endPosition -= m_playerMoveCamera.transform.forward * m_playerMoveCamera.p_DefaultDistance;
 
             m_playerMoveCamera.StopAllCoroutines();
-            m_playerMoveCamera.StartCoroutine(Transition());
             m_playerMoveCamera.StartCoroutine(m_playerMoveCamera.FadeToColour(Color.black, 0.2f));
+            m_playerMoveCamera.StartCoroutine(Transition());
         }
 
         public override void Manage()
@@ -36,7 +36,7 @@ namespace GameCore.Camera
 
             while (true)
             {
-                time += Time.deltaTime * m_playerMoveCamera.p_DefaultLerpSpeed; //should change to respawn lerp speed
+                time += Time.deltaTime * 2.0f; //should change to respawn lerp speed
 
                 //m_playerMoveCamera.p_Position = Vector3.Lerp(m_startPosition, m_endPosition, time);
 

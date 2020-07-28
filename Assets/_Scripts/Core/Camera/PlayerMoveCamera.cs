@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using GameCore.System;
-
+using System;
 namespace GameCore.Camera
 {
     public class PlayerMoveCamera : Automaton
@@ -103,14 +103,6 @@ namespace GameCore.Camera
         protected override void Update()
         {
             //base.Update();
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                StartCoroutine(FadeToColour(Color.black, 3));
-            }
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                StartCoroutine(FadeToColour(new Color(0, 0, 0, 0), 3));
-            }
         }
 
         private void LateUpdate()
@@ -172,6 +164,34 @@ namespace GameCore.Camera
                 {
                     m_fadeOngoing = false;
                     m_cameraFadeImage.color = colour;
+                    yield break;
+                }
+                yield return null;
+            }
+        }
+
+        //overloaded function that takes a lambda callback
+        public IEnumerator FadeToColour(Color colour, float timeToColour, Func<bool> callback)
+        {
+            if (colour == m_cameraFadeImage.color || m_fadeOngoing)
+                yield break;
+
+            float time = 0;
+            Color startingColour = m_cameraFadeImage.color;
+            m_fadeOngoing = true;
+            while (true)
+            {
+                time += Time.deltaTime;
+
+                float percomp = time / timeToColour;
+
+                m_cameraFadeImage.color = Color.Lerp(startingColour, colour, percomp);
+
+                if (time > timeToColour)
+                {
+                    m_fadeOngoing = false;
+                    m_cameraFadeImage.color = colour;
+                    callback();
                     yield break;
                 }
                 yield return null;
