@@ -62,6 +62,8 @@ namespace Player
         [SerializeField] float m_jumpHeldMultiplier = 1.5f;   //the amount of velocity added per second to the y axis if jump is held down, added over time, not set like jump vel
         [SerializeField]float m_canJumpTimerLimit = 0.25f; //the time the player can be off the ground for and still jump
         [Header("Collision")]
+        [SerializeField] float m_playerRadius = 1;
+        [SerializeField] float m_playerHeight = 4;
         [SerializeField] float m_maxClimbableIncline = 45.0f;
         [SerializeField] float m_heightPadding = 0.1f;  //How far from the floor the ray should start
         [SerializeField] float m_groundOverlapPadding = 0.1f;   //How far the player can sink before overlap recovery takes place
@@ -69,6 +71,7 @@ namespace Player
         [SerializeField] int m_numVerticalRays = 3;
         [SerializeField] int m_numGroundedRays = 3;
         [SerializeField] float m_skinWidth = 0.2f; // the distance from the outside of the object the rays start
+        [SerializeField] float m_additionalRayLength = 0.3f;
         [SerializeField] [Range(0.0f, 1.0f)] float m_groundRayStartHeight = 0.25f; //percentage of the player colider height where ground check rays will start
         [Header("Audio")]
         [SerializeField] string m_fallingEvent;
@@ -283,26 +286,15 @@ namespace Player
             Vector3 rayStart = transform.position;
             Vector3 rayDirection = new Vector3(m_velocity.x, 0, m_velocity.z).normalized;
             Vector3 horizontalRaySpacing = Vector3.Cross(rayDirection, transform.up);    // get perpendicular vector to our direction for spacing
-            Vector3 verticalRaySpacing = new Vector3(0, m_playerCollider.bounds.size.y / m_numVerticalRays, 0);
+            Vector3 verticalRaySpacing = new Vector3(0, m_playerHeight / m_numVerticalRays, 0);
 
-            if (m_velocity.x != 0)
-            {
-                //rayStart = transform.position + ((m_playerCollider.bounds.extents.x /2) * (rayDirection));
-                horizontalRaySpacing *= (m_playerCollider.bounds.extents.z * 2);
-            }
-            if (m_velocity.z != 0)
-            {
-                //rayStart = transform.position + ((m_playerCollider.bounds.extents.z /2) * rayDirection);  //enable if you want rays to start at the outer edge of the player
-                horizontalRaySpacing *= (m_playerCollider.bounds.extents.x * 2);
-            }
-            else if (m_velocity.x != 0 && m_velocity.z != 0)
-            {
-                horizontalRaySpacing /= horizontalRaySpacing.magnitude;
-            }
+            //rayStart = transform.position + ((m_playerCollider.bounds.extents.z /2) * rayDirection);  //enable if you want rays to start at the outer edge of the player
+            horizontalRaySpacing *= (m_playerRadius * 2);
+           
             horizontalRaySpacing /= m_numHorizontalRays;
             horizontalRaySpacing -= horizontalRaySpacing * m_skinWidth; //adding a variable width from the outer edge of the collider (should help with the player "sticking" to things
 
-            rayStart -= (verticalRaySpacing * (m_numHorizontalRays/ 2)) + ((horizontalRaySpacing) * (m_numVerticalRays / 2)); //ray start is currently at center of the object and needs to be offset
+            rayStart -= (verticalRaySpacing * (m_numHorizontalRays/ 2)) + ((horizontalRaySpacing) * (m_numVerticalRays / 2)); //ray start is at center of the object and needs to be offset
             rayStart.y += m_heightPadding;  //Rasing off the ground by padding value
 
             for (int x = 0; x < m_numHorizontalRays; ++x)
@@ -310,23 +302,37 @@ namespace Player
                 for (int y = 0; y < m_numVerticalRays; ++y)
                 {
 
-                    Debug.DrawLine(rayStart, (rayStart + (rayDirection * (m_playerCollider.bounds.extents.z + m_skinWidth))));  //Uncomment for debug rays
+                    Debug.DrawLine(rayStart, (rayStart + (rayDirection * (m_playerRadius + m_additionalRayLength))));  //Uncomment for debug rays
 
-                    if (Physics.Raycast(rayStart, rayDirection, out m_collisionHitInfo, m_playerCollider.bounds.extents.z + m_skinWidth))
+                    if (Physics.Raycast(rayStart, rayDirection, out m_collisionHitInfo, m_playerRadius + m_additionalRayLength))
                     {
                         // if hit, modify movement to use the perpendicular vector (-up because we want the players right, not the walls right)
                         Vector3 wallCross = Vector3.Cross(m_collisionHitInfo.normal, -Vector3.up).normalized;
-                        Debug.DrawRay(m_collisionHitInfo.point, wallCross * 10, Color.red);
 
-                        //if we come to a corner, stop completely
-                        if (Physics.Raycast(transform.position, wallCross, m_playerCollider.bounds.extents.z + m_skinWidth))
-                        {
-                            m_velocity = new Vector3(0, m_velocity.y, 0);
-                            return;
-                        }
+                        Vector3 horizontalWallRaySpacing = -m_collisionHitInfo.normal;
+                        horizontalWallRaySpacing = (horizontalWallRaySpacing * (m_playerRadius * 2)) / m_numHorizontalRays;
+
+                        Vector3 wallRayStart = transform.position - ((horizontalWallRaySpacing * (m_numHorizontalRays / 2)) + (verticalRaySpacing * (m_numVerticalRays / 2)));
 
                         if (Vector3.Angle(wallCross, m_velocity.normalized) > 90)
                             wallCross *= -1;
+
+                        for (int j = 0; j < m_numHorizontalRays; ++j)
+                        {
+                            for (int k = 0; k < m_numVerticalRays; ++k)
+                            {
+                                Debug.DrawRay(wallRayStart, wallCross * (m_playerRadius + m_additionalRayLength), Color.red);
+                                //if we come to a corner, stop completely
+                                if (Physics.Raycast(wallRayStart, wallCross, m_playerRadius + m_additionalRayLength))
+                                {
+                                    m_velocity = new Vector3(0, m_velocity.y, 0);
+                                    return;
+                                }
+                                wallRayStart += verticalRaySpacing;
+                            }
+                            wallRayStart += horizontalWallRaySpacing;
+                            wallRayStart.y = (transform.position.y - verticalRaySpacing.y);
+                        }
 
                         m_velocity.x = wallCross.x * (m_velocity.magnitude * (Vector3.Angle(-m_collisionHitInfo.normal, transform.forward) / 90));  //should be a faster movement if the angle is lower
                         m_velocity.z = wallCross.z * (m_velocity.magnitude * (Vector3.Angle(-m_collisionHitInfo.normal, transform.forward) / 90));  //dividing by 90 as if we're at 90 or greater it should be parallel and therefore moving at max speed
@@ -355,17 +361,18 @@ namespace Player
             }
             bool collided = false;
             //sets ray start point to a percentage of the total height based on the value m_groundRayStartHeight
-            Vector3 rayStart = (m_playerCollider.transform.position - (Vector3.up * (m_playerCollider.height / 2)) + (m_groundRayStartHeight * (Vector3.up * (m_playerCollider.height))));
+            Vector3 rayStart = (transform.position - (Vector3.up * (m_playerHeight / 2)) + (m_groundRayStartHeight * (Vector3.up * (m_playerHeight))));
             //ray length is equal to the distance from the ray start point to the players feet (lowest point of the collider) minus our y velocity
-            float rayLength = (rayStart.y - (m_playerCollider.transform.position.y - m_playerCollider.height / 2) + m_groundOverlapPadding) - m_velocity.y;
-            Vector3 xRaySpacing = transform.right * (m_playerCollider.bounds.size.x / m_numGroundedRays);
-            Vector3 zRaySpacing = transform.forward * (m_playerCollider.bounds.size.z / m_numGroundedRays);
+            float rayLength = (rayStart.y - (transform.position.y - m_playerHeight/ 2) + m_groundOverlapPadding) - m_velocity.y;
+            Vector3 xRaySpacing = transform.right * ((m_playerRadius * 2) / m_numGroundedRays);
+            Vector3 zRaySpacing = transform.forward * ((m_playerRadius * 2) / m_numGroundedRays);
 
             //rayStart.y = transform.position.y;
             RaycastHit collisionInfo;
             float distance = 100;
 
             rayStart -= (xRaySpacing * (m_numGroundedRays / 2)) + (zRaySpacing * (m_numGroundedRays / 2));
+
 
             for (int x = 0; x < m_numGroundedRays; ++x)
             {
@@ -386,7 +393,7 @@ namespace Player
                             m_groundedHitInfo = collisionInfo;
                             distance = collisionInfo.distance;
 
-                            m_position = new Vector3(m_position.x, m_groundedHitInfo.point.y + PlayerCollider.bounds.extents.y, m_position.z);
+                            m_position = new Vector3(m_position.x, m_groundedHitInfo.point.y + (m_playerHeight / 2), m_position.z);
                             m_velocity.y = 0;
                         }
                         collided = true;
@@ -422,7 +429,7 @@ namespace Player
                 }
 
                 //update the position to the point on the ground hit + half of the player's height
-                transform.position = new Vector3(transform.position.x, m_groundedHitInfo.point.y + m_playerCollider.bounds.extents.y, transform.position.z);
+                transform.position = new Vector3(transform.position.x, m_groundedHitInfo.point.y + (m_playerHeight / 2), transform.position.z);
 
                 //if the ground has changed, change the ground and the old position
                 if (m_ground == null || m_ground != m_groundedHitInfo.transform)
@@ -568,9 +575,10 @@ namespace Player
 
         public void OnTriggerStay(Collider other)
         {
-            if (!other.isTrigger && (other.transform.position - transform.position).magnitude > m_playerCollider.radius)
+            if (!other.isTrigger && (other.transform.position - transform.position).magnitude > m_playerRadius)
             {
-                transform.position += (transform.position - other.transform.position) * Time.deltaTime;
+                //m_velocity = Vector3.zero;
+                Position += (transform.position - other.transform.position) * Time.deltaTime;
             }
         }
 
@@ -591,13 +599,13 @@ namespace Player
 
         public void OnCollisionEnter(Collision collision)
         {
-            transform.position += (transform.position - collision.transform.position) * Time.deltaTime;
-
+            Position += (transform.position - collision.transform.position) * Time.deltaTime;
+            
         }
 
         public void OnCollisionStay(Collision collision)
         {
-            transform.position += (transform.position - collision.transform.position) * Time.deltaTime;
+            Position += (transform.position - collision.transform.position) * Time.deltaTime;
         }
         #endregion
     }
