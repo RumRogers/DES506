@@ -3,114 +3,115 @@ using System.Collections;
 
 public class RFX4_EffectEvent : MonoBehaviour
 {
-    [Header("Quil Spell Effect")]
+    [Header("Spell Effect")]
     [SerializeField]
-    private GameObject CharacterEffect;
+    private GameObject m_spellEffect;
 
     [SerializeField]
-    private Transform CharacterAttachPoint;
-
+    private Transform m_spellCastPoint;
+    
     [SerializeField]
-    private float CharacterEffect_DestroyTime = 10;
-    [Space]
-
-    //public GameObject CharacterEffect2;
-    //public Transform CharacterAttachPoint2;
-    //public float CharacterEffect2_DestroyTime = 10;
-    //[Space]
-
-    [Header("Main Spell Effect")]
-    [SerializeField]
-    private GameObject MainEffect;
-
-    [SerializeField]
-    private Transform AttachPoint;
-
-    [SerializeField]
-    private Transform OverrideAttachPointToTarget;
-
-    [SerializeField]
-    private float Effect_DestroyTime = 10;
+    private float m_spellDestroyTime;
 
     [SerializeField]
     private float m_forwardOffset;
-    //public GameObject AdditionalEffect;
-    //public Transform AdditionalEffectAttachPoint;
-    //public float AdditionalEffect_DestroyTime = 10;
 
-    [HideInInspector] public bool IsMobile;
+    //private GameObject CharacterEffect;
+    //private Transform CharacterAttachPoint;
+    //private float CharacterEffect_DestroyTime = 10;
 
-    public void Update()
+
+    [Space]
+
+    [Header("Eraser Spell Effect")]
+    [SerializeField]
+    private GameObject m_eraserEffect;
+
+    [SerializeField]
+    private Transform m_eraserCastPoint;
+
+    [SerializeField]
+    private float m_eraserDestroyTime;
+
+
+
+
+    //private GameObject MainEffect;
+
+    //private Transform AttachPoint;
+
+    //private Transform OverrideAttachPointToTarget;
+
+    //private float Effect_DestroyTime = 10;
+
+
+    private float m_distance;
+
+    public void CastSpellEffect()
     {
-        //AttachPoint.LookAt(OverrideAttachPointToTarget);
-    }
-    public void ActivateEffect()
-    {
-        //Debug.Log("Spell Cast");
-
-        if (MainEffect == null) 
+        if (!m_spellEffect)
             return;
-        
-        GameObject instance;
-        if (OverrideAttachPointToTarget == null)
-            instance = Instantiate(MainEffect, AttachPoint.transform.position, AttachPoint.transform.rotation);
 
-        else
-            instance = Instantiate(MainEffect, AttachPoint.transform.position, Quaternion.LookRotation(-(AttachPoint.position - OverrideAttachPointToTarget.position)));
+        GameObject m_instance;
 
-        instance.transform.position = AttachPoint.transform.position + AttachPoint.transform.forward * m_forwardOffset;
+        m_instance = Instantiate(m_spellEffect, m_spellCastPoint.position, m_spellCastPoint.rotation);
 
-        UpdateEffectForMobileIsNeed(instance);
-        
-        if (Effect_DestroyTime > 0.01f) 
-            Destroy(instance, Effect_DestroyTime);
+        m_instance.transform.position = m_spellCastPoint.position + m_spellCastPoint.forward * m_forwardOffset;
+
+        if (m_spellDestroyTime > 0.01f)
+            Destroy(m_instance, m_spellDestroyTime);
     }
 
-    //public void ActivateAdditionalEffect()
+    public void CastEraserEffect(Vector3 targetPos)
+    {
+        if (!m_eraserEffect)
+            return;
+
+        GameObject m_instance;
+
+        m_distance = Vector3.Distance(m_eraserCastPoint.transform.position, targetPos);
+
+        m_instance = Instantiate(m_eraserEffect, m_eraserCastPoint.position, m_eraserCastPoint.rotation);
+
+        m_instance.transform.position = m_eraserCastPoint.position + m_eraserCastPoint.forward * m_forwardOffset;
+
+        m_instance.transform.RotateAround(m_instance.transform.right, -m_distance * 0.0174533f);
+
+        if (m_spellDestroyTime > 0.01f)
+            Destroy(m_instance, m_spellDestroyTime);
+    }
+
+    //private void ActivateEffect()
     //{
-    //    if (AdditionalEffect == null) return;
-    //    if (AdditionalEffectAttachPoint != null)
-    //    {
-    //        var instance = Instantiate(AdditionalEffect, AdditionalEffectAttachPoint.transform.position, AdditionalEffectAttachPoint.transform.rotation);
-    //        UpdateEffectForMobileIsNeed(instance);
-    //        if (AdditionalEffect_DestroyTime > 0.01f) Destroy(instance, AdditionalEffect_DestroyTime);
-    //    }
-    //    else AdditionalEffect.SetActive(true);
+    //    if (MainEffect == null) 
+    //        return;
+        
+    //    GameObject instance;
+    //    if (OverrideAttachPointToTarget == null)
+    //        instance = Instantiate(MainEffect, AttachPoint.transform.position, AttachPoint.transform.rotation);
+
+    //    else
+    //        instance = Instantiate(MainEffect, AttachPoint.transform.position, Quaternion.LookRotation(-(AttachPoint.position - OverrideAttachPointToTarget.position)));
+
+    //    instance.transform.position = AttachPoint.transform.position + AttachPoint.transform.forward * m_forwardOffset;
+
+
+    //    instance.transform.RotateAround(instance.transform.right, -m_distance * 0.0174533f);
+
+        
+    //    if (Effect_DestroyTime > 0.01f) 
+    //        Destroy(instance, Effect_DestroyTime);
     //}
 
-    public void ActivateCharacterEffect()
-    {
-        if (CharacterEffect == null)
-            return;
-        
-        //var instance = Instantiate(CharacterEffect, pos, CharacterAttachPoint.transform.rotation, CharacterAttachPoint.transform);
-        var instance = Instantiate(CharacterEffect, CharacterAttachPoint.transform.position, CharacterAttachPoint.transform.rotation, CharacterAttachPoint.transform);
-        
-        UpdateEffectForMobileIsNeed(instance);
-        
-        if (CharacterEffect_DestroyTime > 0.01f)
-            Destroy(instance, CharacterEffect_DestroyTime);
-    }
-
-    //public void ActivateCharacterEffect2()
+    //private void ActivateCharacterEffect()
     //{
-    //    if (CharacterEffect2 == null) return;
-    //    var instance = Instantiate(CharacterEffect2, CharacterAttachPoint2.transform.position, CharacterAttachPoint2.transform.rotation, CharacterAttachPoint2);
-    //    UpdateEffectForMobileIsNeed(instance);
-    //    if (CharacterEffect2_DestroyTime > 0.01f) Destroy(instance, CharacterEffect2_DestroyTime);
+    //    if (CharacterEffect == null)
+    //        return;
+        
+    //    var instance = Instantiate(CharacterEffect, CharacterAttachPoint.transform.position, CharacterAttachPoint.transform.rotation, CharacterAttachPoint.transform);
+      
+        
+    //    if (CharacterEffect_DestroyTime > 0.01f)
+    //        Destroy(instance, CharacterEffect_DestroyTime);
     //}
-
-    void UpdateEffectForMobileIsNeed(GameObject instance)
-    {
-        //if (IsMobile)
-        {
-            var effectSettings = instance.GetComponent<RFX4_EffectSettings>();
-            if (effectSettings != null)
-            {
-                //effectSettings.EffectQuality = IsMobile ? RFX4_EffectSettings.Quality.Mobile : RFX4_EffectSettings.Quality.PC;
-                //effectSettings.ForceInitialize();
-            }
-        }
-    }
-
 }
