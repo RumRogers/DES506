@@ -36,7 +36,7 @@ public class SpellTesting : MonoBehaviour
 
     void CastSpell()
     {
-        eventHandler.ActivateEffect();
+     
        // eventHandler.ActivateCharacterEffect();
     }
 }

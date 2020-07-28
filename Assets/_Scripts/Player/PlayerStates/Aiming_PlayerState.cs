@@ -174,17 +174,17 @@ namespace Player
                         direction = (Camera.main.transform.position + (Camera.main.transform.forward * m_playerEntity.Projectile.Range)) - m_playerEntity.transform.position;
                     }
 
-                    //m_vfxHandler.ActivateCharacterEffect();
-                    m_vfxHandler.ActivateEffect();
-                    //m_playerEntity.Projectile.FireProjectile(direction.normalized, m_playerEntity.transform.position + (m_playerEntity.transform.forward * 2f));
+                    m_vfxHandler.CastSpellEffect();
+
+                   // m_vfxHandler.CastSpellEffect();
                 }
                 else if (m_aimedAt)
                 {
+                    m_vfxHandler.CastEraserEffect(m_rayHitInfo.transform.position);
                     //make sure that there is an enchantable script attached before casting a new spell
                     GameCore.Spells.Enchantable enchantable;
                     if (m_aimedAt.TryGetComponent<GameCore.Spells.Enchantable>(out enchantable))
                     {
-                        
                         enchantable.CastSpell(new GameCore.Spells.Spell(GameCore.Spells.SpellType.TRANSFORM_RESET));
                     }
                 }
