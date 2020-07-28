@@ -9,6 +9,7 @@ namespace Player
         GameCore.Camera.PlayerMoveCamera m_camera;
         PlayerEntity m_playerEntity;
         bool m_animFinished = false;
+        bool m_waitingForAnim = false;
         float m_distanceFromGroundBeforeHover = 2;
         bool m_finishedHover = false;
         bool m_hovering = false;
@@ -16,48 +17,51 @@ namespace Player
 
         public Death_PlayerState(GameCore.System.Automaton owner) : base(owner)
         {
-            m_playerEntity = (PlayerEntity)owner;
-            m_playerEntity.transform.position = m_playerEntity.PlayerStartPosition;
-
-            m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.FREE_FALLING);
+            m_respawnPoint = GameCore.System.LevelManager.p_LastCheckpoint.position;
 
             if (!Camera.main.transform.TryGetComponent(out m_camera))
             {
                 Debug.LogError("Cannot get PlayerMoveCamera Component on Main Camera!");
             }
 
-            m_respawnPoint = GameCore.System.LevelManager.p_LastCheckpoint.position;
             m_camera.SetState(new GameCore.Camera.Respawn_CameraState(m_camera, m_respawnPoint));
+
+            m_playerEntity = (PlayerEntity)owner;
+            m_playerEntity.transform.position = m_playerEntity.PlayerStartPosition;
+            m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.FREE_FALLING);
+
+            //start falling
+            FMODUnity.RuntimeManager.PlayOneShot(m_playerEntity.FallingAudioEvent, m_playerEntity.transform.position);    //@TODO: Fill with serialised event from player entity
         }
 
         public override void Manage()
         {
-            if (m_animFinished)
-            {
-                m_playerEntity.RemoveEntityProperty(PlayerEntityProperties.DYING);
-                m_playerEntity.transform.GetChild(0).GetChild(0).transform.localEulerAngles = Vector3.zero;
-                m_playerEntity.SetState(new Default_PlayerState(m_playerEntity));
-                m_camera.SetState(new GameCore.Camera.Default_CameraState(m_camera));
-            }
-
             if (!m_playerEntity.Grounded)
             {
                 //Checking to see if they should start hovering
                 if (Vector3.Distance(m_playerEntity.transform.position + m_playerEntity.Velocity, m_respawnPoint) < m_distanceFromGroundBeforeHover && !m_finishedHover && !m_hovering)
                 {
                     // start hover coroutine
+                    FMODUnity.RuntimeManager.PlayOneShot(m_playerEntity.HoveringAudioEvent, m_playerEntity.transform.position);    //@TODO: Fill with serialised event from player entity
                     m_playerEntity.Position = m_respawnPoint + Vector3.up * m_distanceFromGroundBeforeHover;
                     m_playerEntity.StartCoroutine(Hover(1.0f, 0.5f , 6.0f));                    
                 }
 
-                if (!m_hovering)
+                if (!m_hovering && !m_finishedHover)
                 {
                     m_playerEntity.Velocity -= Vector3.up * m_playerEntity.Gravity * Time.fixedDeltaTime;
                 }
+                else
+                {
+                    m_playerEntity.Velocity -= Vector3.up * (m_playerEntity.Gravity * 0.01f) * Time.fixedDeltaTime;
+                }
 
             }
-            else if (m_finishedHover)
+            else if (!m_waitingForAnim)
             {
+                m_waitingForAnim = true;
+                //hitting ground
+                FMODUnity.RuntimeManager.PlayOneShot(m_playerEntity.HitGroundAudioEvent, m_playerEntity.transform.position);    //@TODO: Fill with serialised event from player entity
                 m_playerEntity.Velocity = Vector3.zero;
                 m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.RECOVERING);
                 m_playerEntity.StartCoroutine(WaitForAnimFinish());
@@ -70,6 +74,12 @@ namespace Player
             {
                 yield return null;
             }
+
+            m_playerEntity.RemoveEntityProperty(PlayerEntityProperties.DYING);
+            m_playerEntity.transform.GetChild(0).GetChild(0).transform.localEulerAngles = Vector3.zero;
+            m_playerEntity.SetState(new Default_PlayerState(m_playerEntity));
+            m_camera.SetState(new GameCore.Camera.Default_CameraState(m_camera));
+
             m_animFinished = true;
             yield break;
         }

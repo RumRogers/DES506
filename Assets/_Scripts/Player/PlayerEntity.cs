@@ -70,6 +70,10 @@ namespace Player
         [SerializeField] int m_numGroundedRays = 3;
         [SerializeField] float m_skinWidth = 0.2f; // the distance from the outside of the object the rays start
         [SerializeField] [Range(0.0f, 1.0f)] float m_groundRayStartHeight = 0.25f; //percentage of the player colider height where ground check rays will start
+        [Header("Audio")]
+        [SerializeField] string m_fallingEvent;
+        [SerializeField] string m_hoveringEvent;
+        [SerializeField] string m_hittingGroundEvent;
         [Header("Properties")]
         [SerializeField] PlayerEntityProperties m_playerEntityProperties;
         [SerializeField] public RFX4_EffectEvent m_spellSfx;
@@ -150,6 +154,10 @@ namespace Player
         public PlayerAnimator Animator { get => m_animator; }
         public Projectile.ProjectileHandler Projectile { get => m_projectileHandler; }
         public GameUI.SpellWheel SpellWheel { get => m_spellWheel; }
+        //Audio stats for respawning
+        public string FallingAudioEvent { get => m_fallingEvent; }
+        public string HoveringAudioEvent { get => m_hoveringEvent; }
+        public string HitGroundAudioEvent { get => m_hittingGroundEvent; }
         //Get and Settable
         public PlayerGroundStates PreviousGroundState { get => m_previousGroundState; set => m_previousGroundState = value; }
         public Transform ClosestInteractable { get => m_closestInteractable; set => m_closestInteractable = value; }
