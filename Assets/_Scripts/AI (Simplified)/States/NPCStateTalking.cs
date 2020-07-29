@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCStateDefault : NPCState
+public class NPCStateTalking : NPCState
 {
 
     /// <summary>
     /// This is the constructor just for start up, not for switching states
     /// </summary>
-    public NPCStateDefault(Animator animator, string anim, LetterBox letterBox) : base(animator, anim)
+    public NPCStateTalking(Animator animator, string anim, LetterBox letterBox) : base(animator, anim)
     {
-        letterBox.TurnOff();
-        animator.SetBool("isTalking", false);
-        m_endOfConvo = false;
+        animator.SetBool("isTalking", true);
+        letterBox.TurnOn();
     }
 
     /// <summary>
@@ -21,5 +20,6 @@ public class NPCStateDefault : NPCState
     public override void StateUpdate()
     {
         base.StateUpdate();
+
     }
 }

@@ -14,8 +14,7 @@ public class LetterBox : MonoBehaviour
     private IEnumerator m_boxOn;
     private IEnumerator m_boxOff;
 
-    bool shrinking = true;
-    bool growing = false;
+    bool m_visible = false;
 
     // Start is called before the first frame update
     void Start()
@@ -38,32 +37,33 @@ public class LetterBox : MonoBehaviour
             m_bottomBar.anchorMax = new Vector2(1, 0);
             m_bottomBar.sizeDelta = new Vector2(0, 0);
 
-        m_boxOn = translateBoxes(new Vector2(0, 120));
-        m_boxOff = translateBoxes(new Vector2(0, 0));
+    }
+
+    private void FixedUpdate()
+    {
+        if(m_visible)
+        {
+            //m_topBar.sizeDelta = Vector2.Lerp(m_topBar.sizeDelta, new Vector2(0, 120), Time.deltaTime);
+            m_bottomBar.sizeDelta = Vector2.Lerp(m_topBar.sizeDelta, new Vector2(0, 120), Time.deltaTime);
+
+            m_topBar.sizeDelta = new Vector2(0, 200);
+        }
+        else if(!m_visible)
+        {
+            m_topBar.sizeDelta = Vector2.Lerp(m_topBar.sizeDelta, new Vector2(0, 0), Time.deltaTime * 12);
+            m_bottomBar.sizeDelta = Vector2.Lerp(m_topBar.sizeDelta, new Vector2(0, 0), Time.deltaTime * 12);
+        }
     }
 
     public void TurnOn()
     {
-        if(shrinking == true)
-        {
-            StopCoroutine(m_boxOff);
-            StartCoroutine(m_boxOn);
-        }
-
-        growing = true;
-        shrinking = false;
+        m_visible = true;
     }
 
     public void TurnOff()
     {
-        if (growing == true)
-        {
-            StopCoroutine(m_boxOn);
-            StartCoroutine(m_boxOff);
-        }
 
-        growing = false;
-        shrinking = true;
+        m_visible = false;
     }
 
 
@@ -81,32 +81,32 @@ public class LetterBox : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
-    {
-        StartCoroutine(m_boxOn);
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    StopCoroutine(m_boxOff);
-        //    StartCoroutine(m_boxOn);
-        //}
+    //void FixedUpdate()
+    //{
+    //    StartCoroutine(m_boxOn);
+    //    //if (Input.GetKeyDown(KeyCode.Space))
+    //    //{
+    //    //    StopCoroutine(m_boxOff);
+    //    //    StartCoroutine(m_boxOn);
+    //    //}
 
-        //if (Input.GetKeyDown(KeyCode.Y))
-        //{
-        //    StopCoroutine(m_boxOn);
-        //    StartCoroutine(m_boxOff);
-        //}
-        //StartCoroutine(translateBoxes(new Vector2(0, 0)));
+    //    //if (Input.GetKeyDown(KeyCode.Y))
+    //    //{
+    //    //    StopCoroutine(m_boxOn);
+    //    //    StartCoroutine(m_boxOff);
+    //    //}
+    //    //StartCoroutine(translateBoxes(new Vector2(0, 0)));
 
-        if (pressed)
-        {
-            counter += Time.deltaTime;
+    //    if (pressed)
+    //    {
+    //        counter += Time.deltaTime;
 
-            if(counter < 2)
-            {
-                m_topBar.sizeDelta = new Vector2(0, counter * 50);
+    //        if(counter < 2)
+    //        {
+    //            m_topBar.sizeDelta = new Vector2(0, counter * 50);
 
-                m_bottomBar.sizeDelta = new Vector2(0, counter * 50);
-            }
-        }
-    }
+    //            m_bottomBar.sizeDelta = new Vector2(0, counter * 50);
+    //        }
+    //    }
+    //}
 }

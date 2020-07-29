@@ -79,7 +79,10 @@ namespace Player
         [SerializeField] string m_hittingGroundEvent;
         [Header("Properties")]
         [SerializeField] PlayerEntityProperties m_playerEntityProperties;
+        [Header("Spell VFX")]
         [SerializeField] public RFX4_EffectEvent m_spellSfx;
+    
+        public bool m_interact = false;
 
         //For Dialogue states to access
         [Header("UI Elements to Hide in Dialogue")]
@@ -226,17 +229,23 @@ namespace Player
                     ((Aiming_PlayerState)m_state).ResetAimedAt();
                 }
                 SetState(new Jumping_PlayerState(this));
+                m_interact = true;
             }
 
             if (IsAbleToAim() && (Input.GetButtonDown("Aim") || Input.GetAxisRaw("Aim") == 1))
             {
                 SetState(new Aiming_PlayerState(this, m_spellSfx));
+               
             }
 
             //Dialogue trigger
             if (Input.GetButtonDown("Interact") && m_speakersInRange.Count > 0 && m_state.GetType() != typeof(Dialogue_PlayerState))
             {
                 SetState(new Dialogue_PlayerState(this));
+
+                //NPC CODE
+                m_interact = true;
+                
             }
 
             //Here we lerp from the position at the start of fixed update to the position after we update phyiscs by a step based on the time till the next fixed update

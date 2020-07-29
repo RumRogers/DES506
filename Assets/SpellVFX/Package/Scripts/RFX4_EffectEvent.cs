@@ -33,7 +33,7 @@ public class RFX4_EffectEvent : MonoBehaviour
     [SerializeField]
     private float m_eraserDestroyTime;
 
-
+    GameObject m_instance;
 
 
     //private GameObject MainEffect;
@@ -49,10 +49,8 @@ public class RFX4_EffectEvent : MonoBehaviour
 
     public void CastSpellEffect()
     {
-        if (!m_spellEffect)
+        if (!m_spellEffect || m_instance)
             return;
-
-        GameObject m_instance;
 
         m_instance = Instantiate(m_spellEffect, m_spellCastPoint.position, m_spellCastPoint.rotation);
 
@@ -64,10 +62,10 @@ public class RFX4_EffectEvent : MonoBehaviour
 
     public void CastEraserEffect(Vector3 targetPos)
     {
-        if (!m_eraserEffect)
+        if (!m_eraserEffect || m_instance)
             return;
 
-        GameObject m_instance;
+       // GameObject m_instance;
 
         m_distance = Vector3.Distance(m_eraserCastPoint.transform.position, targetPos);
 

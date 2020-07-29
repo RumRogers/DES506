@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class NPCState : MonoBehaviour
+public abstract class NPCState
 {
     private Animation m_stateAnimation;
     protected Animator m_animator;
@@ -18,19 +18,21 @@ public abstract class NPCState : MonoBehaviour
 
     protected Vector3 m_targetVec = Vector3.zero;
 
-    public int testingInt = 0;
+    protected bool m_endOfConvo = false;
 
     /// <summary>
     /// Constructor for the NPC base state 
     /// </summary>
     /// <param name="animation">Provide state animation</param>
-    public NPCState(Animator animation)
+    public NPCState(Animator animation, string animationName)
     {
-        animation.Play("Default");
+        animation.Play(animationName);
     }
 
     /// <summary>
     /// Call each frame to update and perform NPC related operations
     /// </summary>
     public virtual void StateUpdate() { }
+
+    public bool EndOfConversation() { return m_endOfConvo; }
 }
