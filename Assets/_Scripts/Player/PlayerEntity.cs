@@ -239,7 +239,7 @@ namespace Player
             }
 
             //Dialogue trigger
-            if (Input.GetButtonDown("Interact") && m_speakersInRange.Count > 0 && m_state.GetType() != typeof(Dialogue_PlayerState))
+            if (Input.GetButtonDown("Interact") && IsAbleToTalk())
             {
                 SetState(new Dialogue_PlayerState(this));
 
@@ -485,16 +485,21 @@ namespace Player
 
         public bool IsAbleToJump()
         {
+            if (m_hasJumped || m_state.GetType() == typeof(Dialogue_PlayerState))
+                return false;
             if (m_grounded && !HasProperty(PlayerEntityProperties.DYING))
                 return true;
-            if (m_state.GetType() != typeof(Falling_PlayerState) || m_hasJumped)
-                return false;
 
             m_canJumpTimer += Time.deltaTime;
             if (m_canJumpTimer > m_canJumpTimerLimit)
                 return false;
             else
                 return true;
+        }
+
+        bool IsAbleToTalk()
+        {
+            return m_speakersInRange.Count > 0 && m_state.GetType() != typeof(Dialogue_PlayerState) && m_state.GetType() != typeof(Jumping_PlayerState) && m_state.GetType() != typeof(Falling_PlayerState);
         }
 
         bool IsAbleToAim()
@@ -504,7 +509,7 @@ namespace Player
 
         bool IsFalling()
         {
-            return !m_ground && (m_state.GetType() != typeof(Falling_PlayerState) && m_state.GetType() != typeof(Jumping_PlayerState)) && !HasProperty(PlayerEntityProperties.DYING);
+            return !m_ground && (m_state.GetType() != typeof(Falling_PlayerState) && m_state.GetType() != typeof(Jumping_PlayerState)) && m_state.GetType() != typeof(Dialogue_PlayerState) && !HasProperty(PlayerEntityProperties.DYING);
         }
 
         #region MUTABLE ENTITY IMPLEMENTATION

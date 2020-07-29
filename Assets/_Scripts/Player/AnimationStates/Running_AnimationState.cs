@@ -42,6 +42,12 @@ namespace Player
                 case PlayerAnimationProperties.AIMING:
                     m_owner.SetState(new Aiming_AnimationState(m_owner));
                     break;
+                case PlayerAnimationProperties.LEFT_TURN:
+                    m_playerAnimator.SetState(new TurnLeft_AnimationState(m_playerAnimator));
+                    break;
+                case PlayerAnimationProperties.RIGHT_TURN:
+                    m_playerAnimator.SetState(new TurnRight_AnimationState(m_playerAnimator));
+                    break;
                 default:
                     m_owner.SetState(new Idle_AnimationState(m_owner));    //if no state, return to idle
                     break;
@@ -52,7 +58,7 @@ namespace Player
         {
             try
             {
-                m_playerAnimator.Animation.CrossFade("running", 0.2f, PlayMode.StopAll);
+                m_playerAnimator.Animation.CrossFade("running", 0.1f, PlayMode.StopAll);
                 //m_playerAnimator.Animation.PlayQueued("running");
             }
             catch

@@ -21,7 +21,9 @@ namespace Player
         DYING,
         FREE_FALLING,
         RECOVERING,
-        SLIDING
+        SLIDING,
+        LEFT_TURN,
+        RIGHT_TURN
     }
 
     public class PlayerAnimator : GameCore.System.Automaton
@@ -44,6 +46,8 @@ namespace Player
         [SerializeField] AnimationClip m_slidingStartAnim;
         [SerializeField] AnimationClip m_slidingMidAnim;
         [SerializeField] AnimationClip m_slidingEndAnim;
+        [SerializeField] AnimationClip m_turnLeftAnim;
+        [SerializeField] AnimationClip m_turnRightAnim;
         [SerializeField] Animation m_animation;
         [Header("Playback Speeds")]
         [SerializeField] float m_idleAnimSpeed = 2;
@@ -60,6 +64,8 @@ namespace Player
         [SerializeField] float m_slidingStartAnimSpeed = 2;
         [SerializeField] float m_slidingMidAnimSpeed = 2;
         [SerializeField] float m_slidingEndAnimSpeed = 2;
+        [SerializeField] float m_turnLeftAnimSpeed = 2;
+        [SerializeField] float m_turnRightAnimSpeed = 2;
         [Header("Properties")]
         [SerializeField] float m_timeOnGroundBeforeRecovering = 1;
 
@@ -79,6 +85,13 @@ namespace Player
         AnimationState m_slidingStartState;
         AnimationState m_slidingMidState;
         AnimationState m_slidingEndState;
+        AnimationState m_turnLeftState;
+        AnimationState m_turnRightState;
+
+
+        //is anim playing bools
+        bool m_turningAnimPlaying = false;
+
 
         #region PUBLIC ACCESSORS
         public AnimationClip Idle { get => m_idleAnim; }
@@ -95,6 +108,8 @@ namespace Player
         public AnimationClip SlidingStart { get => m_slidingStartAnim; }
         public AnimationClip SlidingMid { get => m_slidingMidAnim; }
         public AnimationClip SlidingEnd { get => m_slidingEndAnim; }
+        public AnimationClip TurnLeft { get => m_turnLeftAnim; }
+        public AnimationClip TurnRight { get => m_turnRightAnim; }
 
         public AnimationState IdleState { get => m_idleState; }
         public AnimationState WalkingState { get => m_walkingState; }
@@ -110,10 +125,14 @@ namespace Player
         public AnimationState SlidingStartState { get => m_slidingStartState; }
         public AnimationState SlidingMidState { get => m_slidingMidState; }
         public AnimationState SlidingEndState { get => m_slidingEndState; }
+        public AnimationState TurnLeftState { get => m_turnLeftState; }
+        public AnimationState TurnRightState { get => m_turnRightState; }
 
         public float RunningAnimSpeed { get => m_runningAnimSpeed; }
         public float RecoverAnimSpeed { get => m_recoveringAnimSpeed; }
         public float TimeOnGroundBeforeRecover { get => m_timeOnGroundBeforeRecovering; }
+
+        public bool TurningPlaying { get => m_turningAnimPlaying; set => m_turningAnimPlaying = value; }
 
         public Animation Animation { get => m_animation; }
         public PlayerAnimationProperties PlayerAnimProperties { get => m_playerAnimProperties; }
@@ -139,6 +158,8 @@ namespace Player
                 m_animation.AddClip(m_slidingStartAnim, "slidingStart");
                 m_animation.AddClip(m_slidingMidAnim, "slidingMid");
                 m_animation.AddClip(m_slidingEndAnim, "slidingEnd");
+                m_animation.AddClip(m_turnLeftAnim, "turnLeft");
+                m_animation.AddClip(m_turnRightAnim, "turnRight");
             }
             catch
             {
@@ -203,6 +224,14 @@ namespace Player
                     case "slidingEnd":
                         state.speed = m_slidingEndAnimSpeed;
                         m_slidingStartState = state;
+                        break;
+                    case "turnLeft":
+                        state.speed = m_turnLeftAnimSpeed;
+                        m_turnLeftState = state;
+                        break;
+                    case "turnRight":
+                        state.speed = m_turnRightAnimSpeed;
+                        m_turnRightState = state;
                         break;
                 }
             }

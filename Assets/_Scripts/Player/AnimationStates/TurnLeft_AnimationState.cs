@@ -4,22 +4,38 @@ using UnityEngine;
 
 namespace Player
 {
-    public class Walking_AnimationState : GameCore.System.State
+    public class TurnLeft_AnimationState : GameCore.System.State
     {
         PlayerAnimator m_playerAnimator;
 
-        public Walking_AnimationState(PlayerAnimator owner) : base(owner)
+        public TurnLeft_AnimationState(PlayerAnimator owner) : base(owner)
         {
             m_playerAnimator = owner;
-            m_playerAnimator.Animation.wrapMode = WrapMode.Loop;
+            m_playerAnimator.Animation.wrapMode = WrapMode.Once;
             m_playerAnimator.StopAllCoroutines();
             m_playerAnimator.StartCoroutine(Transition());
         }
 
         public override void Manage()
         {
+
+        }
+
+        IEnumerator Transition()
+        {
+            m_playerAnimator.Animation.CrossFade("turnLeft", 0.2f, PlayMode.StopAll);
+            m_playerAnimator.TurningPlaying = true;
+            while (m_playerAnimator.Animation.isPlaying)
+            {
+                yield return null;
+            }
+            m_playerAnimator.TurningPlaying = false;
+
             switch (m_playerAnimator.PlayerAnimProperties)
             {
+                case PlayerAnimationProperties.WALKING:
+                    m_playerAnimator.SetState(new Walking_AnimationState(m_playerAnimator));
+                    break;
                 case PlayerAnimationProperties.RUNNING:
                     m_playerAnimator.SetState(new Running_AnimationState(m_playerAnimator));
                     break;
@@ -41,20 +57,7 @@ namespace Player
                 case PlayerAnimationProperties.AIMING:
                     m_playerAnimator.SetState(new Aiming_AnimationState(m_playerAnimator));
                     break;
-                case PlayerAnimationProperties.LEFT_TURN:
-                    m_playerAnimator.SetState(new TurnLeft_AnimationState(m_playerAnimator));
-                    break;
-                case PlayerAnimationProperties.RIGHT_TURN:
-                    m_playerAnimator.SetState(new TurnRight_AnimationState(m_playerAnimator));
-                    break;
             }
-            
-        }
-
-        IEnumerator Transition()
-        {
-            m_playerAnimator.Animation.CrossFade("walking", 0.2f, PlayMode.StopAll);
-            yield return null;
         }
     }
 }

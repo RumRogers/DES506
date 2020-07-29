@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 995098098}
   - component: {fileID: 6184463447167038816}
   - component: {fileID: 776103237348484782}
+  - component: {fileID: 2315805175262044975}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -111,7 +112,8 @@ MonoBehaviour:
   m_hoveringEvent: 
   m_hittingGroundEvent: 
   m_playerEntityProperties: 26
-  m_spellSfx: {fileID: 776103237348484782}
+  m_spellSfx: {fileID: 2315805175262044975}
+  m_interact: 0
   UIsToHideInDialogue:
   - {fileID: 0}
   - {fileID: 0}
@@ -144,6 +146,8 @@ MonoBehaviour:
   m_slidingStartAnim: {fileID: 7400000, guid: b38396f4a11f3ae4ba0fbbbcf1bf556a, type: 2}
   m_slidingMidAnim: {fileID: 7400000, guid: 3df5b9709b529eb41bab36bf741a83cf, type: 2}
   m_slidingEndAnim: {fileID: 7400000, guid: d63f199583ea1924f9177e0c8e95f9c5, type: 2}
+  m_turnLeftAnim: {fileID: 0}
+  m_turnRightAnim: {fileID: 0}
   m_animation: {fileID: 116125339}
   m_idleAnimSpeed: 2
   m_walkingAnimSpeed: 2
@@ -159,6 +163,8 @@ MonoBehaviour:
   m_slidingStartAnimSpeed: 2
   m_slidingMidAnimSpeed: 2
   m_slidingEndAnimSpeed: 2
+  m_turnLeftAnimSpeed: 2
+  m_turnRightAnimSpeed: 2
   m_timeOnGroundBeforeRecovering: 1
 --- !u!114 &4580232385870872158
 MonoBehaviour:
@@ -248,6 +254,26 @@ MonoBehaviour:
   m_eraserCastPoint: {fileID: 4580232385870872155}
   m_eraserDestroyTime: 6
 --- !u!114 &776103237348484782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4580232385870872150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f3a75ebaaa03d94180c577cee7363ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_spellEffect: {fileID: 1748139164946814, guid: 4f14e37b24a0f9c41a81220f59ae87f6,
+    type: 3}
+  m_spellCastPoint: {fileID: 4580232385870872155}
+  m_spellDestroyTime: 2
+  m_forwardOffset: 2
+  m_eraserEffect: {fileID: 153592, guid: bad71c8494ab9bf4bb53b31fb52b45c6, type: 3}
+  m_eraserCastPoint: {fileID: 4580232385870872155}
+  m_eraserDestroyTime: 6
+--- !u!114 &2315805175262044975
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

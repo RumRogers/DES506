@@ -44,7 +44,11 @@ namespace Player
                 case PlayerAnimationProperties.AIMING:
                     m_owner.SetState(new Aiming_AnimationState(m_owner));
                     break;
-                default:
+                case PlayerAnimationProperties.LEFT_TURN:
+                    m_playerAnimator.SetState(new TurnLeft_AnimationState(m_playerAnimator));
+                    break;
+                case PlayerAnimationProperties.RIGHT_TURN:
+                    m_playerAnimator.SetState(new TurnRight_AnimationState(m_playerAnimator));
                     break;
             }
         }
