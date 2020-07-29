@@ -3,7 +3,17 @@ guid: ad546cb728914974faae76f0b19bdbec
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ink_Bottle
+    second: {fileID: 2100000, guid: ae5b0fa1fccc1d84998677470de6001f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ink_Lid
+    second: {fileID: 2100000, guid: 5367698f557f0964f858d5224dbd366b, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f81c0575d2fdf764abd9a7a1a11b16cc
+guid: ebc950ddc3d22d34580ff7499919c13d
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Debris_Texture
-    second: {fileID: 2100000, guid: 43374559b87c56142b2f1af0d081fcd9, type: 2}
+      name: Rock
+    second: {fileID: 2100000, guid: d4c1d2927a84c724d9ac798a6a154985, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -41,7 +41,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importVisibility: 1
