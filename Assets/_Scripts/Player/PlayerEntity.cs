@@ -299,38 +299,45 @@ namespace Player
 
                     if (Physics.Raycast(rayStart, rayDirection, out m_collisionHitInfo, m_playerRadius + m_additionalRayLength))
                     {
-                        // if hit, modify movement to use the perpendicular vector (-up because we want the players right, not the walls right)
-                        Vector3 wallCross = Vector3.Cross(m_collisionHitInfo.normal, -Vector3.up).normalized;
-
-                        Vector3 horizontalWallRaySpacing = -m_collisionHitInfo.normal;
-                        horizontalWallRaySpacing = (horizontalWallRaySpacing * (m_playerRadius * 2)) / m_numHorizontalRays;
-
-                        Vector3 wallRayStart = transform.position - ((horizontalWallRaySpacing * (m_numHorizontalRays / 2)) + (verticalRaySpacing * (m_numVerticalRays / 2)));
-
-                        if (Vector3.Angle(wallCross, m_velocity.normalized) > 90)
-                            wallCross *= -1;
-
-                        for (int j = 0; j < m_numHorizontalRays; ++j)
+                        //only count the ray as hit if it is above the max climable incline
+                        //if it's an acceptable angle it'll be handled by the movement state
+                        if (Vector3.Angle(m_collisionHitInfo.normal, Vector3.up) > m_maxClimbableIncline)
                         {
-                            for (int k = 0; k < m_numVerticalRays; ++k)
+                            Debug.Log(Vector3.Angle(m_collisionHitInfo.normal, Vector3.up));
+                            Debug.DrawRay(m_collisionHitInfo.point, m_collisionHitInfo.normal * 10, Color.cyan);
+                            // if hit, modify movement to use the perpendicular vector (-up because we want the players right, not the walls right)
+                            Vector3 wallCross = Vector3.Cross(m_collisionHitInfo.normal, -Vector3.up).normalized;
+
+                            Vector3 horizontalWallRaySpacing = -m_collisionHitInfo.normal;
+                            horizontalWallRaySpacing = (horizontalWallRaySpacing * (m_playerRadius * 2)) / m_numHorizontalRays;
+
+                            Vector3 wallRayStart = transform.position - ((horizontalWallRaySpacing * (m_numHorizontalRays / 2)) + (verticalRaySpacing * (m_numVerticalRays / 2)));
+
+                            if (Vector3.Angle(wallCross, m_velocity.normalized) > 90)
+                                wallCross *= -1;
+
+                            for (int j = 0; j < m_numHorizontalRays; ++j)
                             {
-                                Debug.DrawRay(wallRayStart, wallCross * (m_playerRadius + m_additionalRayLength), Color.red);
-                                //if we come to a corner, stop completely
-                                if (Physics.Raycast(wallRayStart, wallCross, m_playerRadius + m_additionalRayLength))
+                                for (int k = 0; k < m_numVerticalRays; ++k)
                                 {
-                                    m_velocity = new Vector3(0, m_velocity.y, 0);
-                                    return;
+                                    Debug.DrawRay(wallRayStart, wallCross * (m_playerRadius + m_additionalRayLength), Color.red);
+                                    //if we come to a corner, stop completely
+                                    if (Physics.Raycast(wallRayStart, wallCross, m_playerRadius + m_additionalRayLength))
+                                    {
+                                        m_velocity = new Vector3(0, m_velocity.y, 0);
+                                        return;
+                                    }
+                                    wallRayStart += verticalRaySpacing;
                                 }
-                                wallRayStart += verticalRaySpacing;
+                                wallRayStart += horizontalWallRaySpacing;
+                                wallRayStart.y = (transform.position.y - verticalRaySpacing.y);
                             }
-                            wallRayStart += horizontalWallRaySpacing;
-                            wallRayStart.y = (transform.position.y - verticalRaySpacing.y);
+
+                            m_velocity.x = wallCross.x * (m_velocity.magnitude * (Vector3.Angle(-m_collisionHitInfo.normal, transform.forward) / 90));  //should be a faster movement if the angle is lower
+                            m_velocity.z = wallCross.z * (m_velocity.magnitude * (Vector3.Angle(-m_collisionHitInfo.normal, transform.forward) / 90));  //dividing by 90 as if we're at 90 or greater it should be parallel and therefore moving at max speed
+
+                            return;
                         }
-
-                        m_velocity.x = wallCross.x * (m_velocity.magnitude * (Vector3.Angle(-m_collisionHitInfo.normal, transform.forward) / 90));  //should be a faster movement if the angle is lower
-                        m_velocity.z = wallCross.z * (m_velocity.magnitude * (Vector3.Angle(-m_collisionHitInfo.normal, transform.forward) / 90));  //dividing by 90 as if we're at 90 or greater it should be parallel and therefore moving at max speed
-
-                        return;
                     }
                     rayStart += verticalRaySpacing;
                 }
