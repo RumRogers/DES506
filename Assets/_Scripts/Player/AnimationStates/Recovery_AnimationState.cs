@@ -32,7 +32,7 @@ namespace Player
         {
             try
             {
-                m_playerAnimator.Animation.Play("recovering", PlayMode.StopAll);
+                m_playerAnimator.Animation.CrossFade("recovering", 0.2f, PlayMode.StopAll);
                 //setting the speed to 0 on the first frame, waiting for the animation to start playing
                 m_playerAnimator.RecoveringState.speed = 0;
                 m_playerAnimator.StartCoroutine(WaitForRecoverToStart());

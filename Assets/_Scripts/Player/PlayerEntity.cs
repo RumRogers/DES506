@@ -94,8 +94,6 @@ namespace Player
         Vector3 m_position;
         Vector3 m_positionLastFrame;
         float m_time;
-        CapsuleCollider m_playerCollider;
-        //GameCore.System.State m_previousGroundState;
         PlayerGroundStates m_previousGroundState;
         PlayerEquipableItems m_equipedItem;
         GameUI.SpellWheel m_spellWheel;
@@ -151,7 +149,6 @@ namespace Player
         public float HighJumpVelocity { get => m_highJumpVelocity; }
         public float MaxClimableAngle { get => m_maxClimbableIncline; }
         public float GroundOverlapPadding { get => m_groundOverlapPadding; }
-        public Collider PlayerCollider { get => m_playerCollider; }
         public RaycastHit GroundHitInfo { get => m_groundedHitInfo; }
         public Vector3 PlayerStartPosition { get => m_playerStartPosition; }
         public PlayerAnimator Animator { get => m_animator; }
@@ -184,10 +181,6 @@ namespace Player
 
             m_reticle = reticle.transform;
 
-            if (!TryGetComponent<CapsuleCollider>(out m_playerCollider))
-            {
-                Debug.LogError("No capsule collider attached to the player!");
-            }
             m_spellWheel = GameObject.FindGameObjectWithTag(s_spellWheelTag).GetComponentInChildren<GameUI.SpellWheel>();
             m_animator = GetComponent<PlayerAnimator>(); //requried component, should be safe
             m_projectileHandler = GetComponent<Projectile.ProjectileHandler>(); //requried component, should be safe

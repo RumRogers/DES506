@@ -42,7 +42,7 @@ namespace Player
             try
             {
                 m_playerAnimator.Animation.CrossFadeQueued("slidingMid", 0.2f);
-                m_playerAnimator.Animation.PlayQueued("slidingMid");
+                //m_playerAnimator.Animation.PlayQueued("slidingMid");
             }
             catch
             {

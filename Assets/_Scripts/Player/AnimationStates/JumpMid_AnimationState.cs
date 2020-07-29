@@ -32,8 +32,8 @@ namespace Player
         {
             try
             {
-                //m_playerAnimator.Animation.Blend("jumpMid", 0.5f);
-                m_playerAnimator.Animation.Play("jumpMid");
+                m_playerAnimator.Animation.CrossFade("jumpMid", 0.2f);
+                //m_playerAnimator.Animation.Play("jumpMid");
             }
             catch
             {

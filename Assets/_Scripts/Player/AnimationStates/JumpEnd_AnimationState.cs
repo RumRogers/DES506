@@ -35,7 +35,7 @@ namespace Player
         {
             try
             {
-                m_playerAnimator.Animation.Play("jumpLand", PlayMode.StopAll);
+                m_playerAnimator.Animation.CrossFade("jumpLand", 0.2f, PlayMode.StopAll);
             }
             catch
             {

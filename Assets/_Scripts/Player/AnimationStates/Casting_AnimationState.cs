@@ -43,8 +43,8 @@ namespace Player
         {
             try
             {
-                m_playerAnimator.Animation.CrossFade("casting");
-                m_playerAnimator.Animation.PlayQueued("casting");
+                m_playerAnimator.Animation.CrossFade("casting", 0.2f, PlayMode.StopAll);
+                //m_playerAnimator.Animation.PlayQueued("casting");
             }
             catch
             {
