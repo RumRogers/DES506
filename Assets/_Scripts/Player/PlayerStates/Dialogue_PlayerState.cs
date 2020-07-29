@@ -23,7 +23,7 @@ namespace Player
                 m_playerEntity.SetState(new Default_PlayerState(m_playerEntity));
             }
 
-            m_dialogue.SetDialogueHasStarted(false);
+            m_dialogue.ResetDialogue();
 
             if (!m_speaker)
             {
@@ -83,7 +83,7 @@ namespace Player
 
             }
            // else if (Input.GetButtonDown("Cancel"))
-            else if (Input.GetKeyUp(KeyCode.E))
+            else if (Input.GetKeyUp(KeyCode.Q))
             {
                 m_dialogue.DisableUI();
                 m_owner.SetState(new Default_PlayerState(m_owner));

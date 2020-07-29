@@ -40,11 +40,13 @@ namespace GameUI.Dialogue
 
         private void Awake()
         {
-            m_lines = JsonUtility.FromJson<Lines>(m_convoJSON.text);
+           // m_lines = JsonUtility.FromJson<Lines>(m_convoJSON.text);
         }
 
         public void StartDialogue()
         {
+            m_lines = JsonUtility.FromJson<Lines>(m_convoJSON.text);
+
             m_lineIndex = 0;
             m_TextUI.SetActive(true);
             StartFillingLine(m_lineIndex);
@@ -86,14 +88,16 @@ namespace GameUI.Dialogue
             return m_dialogueHasStarted;
         }
 
-        public void SetDialogueHasStarted(bool val)
-        {
-            m_dialogueHasStarted = val;
-        }
-
         public bool GetLastLineReached()
         {
             return m_lastLineReached;
+        }
+
+        public void ResetDialogue()
+        {
+            m_dialogueHasStarted = false;
+            m_lastLineReached = false;
+            //m_lineIndex = 0;
         }
 
         void StartFillingLine(int index)
