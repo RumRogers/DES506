@@ -81,6 +81,11 @@ namespace Player
         [SerializeField] PlayerEntityProperties m_playerEntityProperties;
         [SerializeField] public RFX4_EffectEvent m_spellSfx;
 
+        //For Dialogue states to access
+        [Header("UI Elements to Hide in Dialogue")]
+        [SerializeField]
+        GameObject[] UIsToHideInDialogue;
+
         //player stats (not editor accessible)
         bool m_grounded = true;
         bool m_canJump = true;
@@ -453,6 +458,15 @@ namespace Player
             m_position = position;
             m_positionLastFrame = position;
             transform.position = position;
+        }
+
+        //for Dialogue state to access
+        public void ShowOtherUIsInDialogue(bool val)
+        {
+            foreach(GameObject g in UIsToHideInDialogue)
+            {
+                g.SetActive(val);
+            }
         }
 
         public bool IsAbleToJump()

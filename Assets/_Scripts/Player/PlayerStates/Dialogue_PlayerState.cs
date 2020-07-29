@@ -64,6 +64,7 @@ namespace Player
             if (!m_dialogue.GetDialogueHasStarted())
             {
                 m_dialogue.StartDialogue();
+                m_playerEntity.ShowOtherUIsInDialogue(false);
             }
 
            // if (Input.GetButtonDown("Submit"))
@@ -77,6 +78,7 @@ namespace Player
                 else
                 {
                     m_dialogue.DisableUI();
+                    //m_playerEntity.ShowOtherUIsInDialogue(true);
                     m_owner.SetState(new Default_PlayerState(m_owner));
                     m_playerMoveCamera.SetState(new GameCore.Camera.Default_CameraState(m_playerMoveCamera));
                 }
@@ -86,6 +88,7 @@ namespace Player
             else if (Input.GetKeyUp(KeyCode.Q))
             {
                 m_dialogue.DisableUI();
+                //m_playerEntity.ShowOtherUIsInDialogue(true);
                 m_owner.SetState(new Default_PlayerState(m_owner));
                 m_playerMoveCamera.SetState(new GameCore.Camera.Default_CameraState(m_playerMoveCamera));
             }

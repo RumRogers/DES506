@@ -10813,6 +10813,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4580232385870872151, guid: 3ead565c55b9919448a7c71d26aae209,
         type: 3}
+      propertyPath: UIsToHideInDialogue.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4580232385870872151, guid: 3ead565c55b9919448a7c71d26aae209,
+        type: 3}
       propertyPath: m_spellWheel
       value: 
       objectReference: {fileID: 0}
@@ -10842,6 +10847,26 @@ PrefabInstance:
       propertyPath: m_spellSfx
       value: 
       objectReference: {fileID: 995098098}
+    - target: {fileID: 4580232385870872151, guid: 3ead565c55b9919448a7c71d26aae209,
+        type: 3}
+      propertyPath: UIsToHideInDialogue.Array.data[0]
+      value: 
+      objectReference: {fileID: 1024920321}
+    - target: {fileID: 4580232385870872151, guid: 3ead565c55b9919448a7c71d26aae209,
+        type: 3}
+      propertyPath: UIsToHideInDialogue.Array.data[1]
+      value: 
+      objectReference: {fileID: 1017257270}
+    - target: {fileID: 4580232385870872151, guid: 3ead565c55b9919448a7c71d26aae209,
+        type: 3}
+      propertyPath: UIsToHideInDialogue.Array.data[2]
+      value: 
+      objectReference: {fileID: 989259821}
+    - target: {fileID: 4580232385870872151, guid: 3ead565c55b9919448a7c71d26aae209,
+        type: 3}
+      propertyPath: UIsToHideInDialogue.Array.data[3]
+      value: 
+      objectReference: {fileID: 1770322280}
     - target: {fileID: 4580232385870872158, guid: 3ead565c55b9919448a7c71d26aae209,
         type: 3}
       propertyPath: m_projectileContainer
