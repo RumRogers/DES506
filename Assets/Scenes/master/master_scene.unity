@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -6953,6 +6953,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 9b048d8bd0dadae4fb9c0e1cb9654c0d,
     type: 3}
   m_PrefabInstance: {fileID: 1316073266}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &156177971 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3551069136422215315, guid: a9f0cac09b7f1944ba7638bd11e7f57c,
+    type: 3}
+  m_PrefabInstance: {fileID: 3551069135894111983}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &157011213
 PrefabInstance:
@@ -56110,6 +56116,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1322821041 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3551069137532391927, guid: a9f0cac09b7f1944ba7638bd11e7f57c,
+    type: 3}
+  m_PrefabInstance: {fileID: 3551069135894111983}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1325381049 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 095fa7e55810dcb42a8a6a6015edcf1c,
@@ -91374,9 +91392,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eca15a7e45193a4c935d754da198f5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TextUI: {fileID: 0}
-  m_DialogueText: {fileID: 0}
-  m_convoJSON: {fileID: 0}
+  m_TextUI: {fileID: 156177971}
+  m_DialogueText: {fileID: 1322821041}
+  m_convoJSON: {fileID: 4900000, guid: 6dc50c4c65ab8f9409a0a16bf8ec50d1, type: 3}
   m_scrollSpeed: 0.05
 --- !u!114 &2119299200
 MonoBehaviour:
@@ -91390,6 +91408,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ea1554bee3fd044b911cc62fdbb67ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &2119299201
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2119299198}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 5, z: 10}
+  m_Center: {x: 0, y: 2.22, z: 0}
 --- !u!1 &2122860571
 GameObject:
   m_ObjectHideFlags: 0
@@ -92368,6 +92399,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Dialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 3551069136422215315, guid: a9f0cac09b7f1944ba7638bd11e7f57c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3551069136422215314, guid: a9f0cac09b7f1944ba7638bd11e7f57c,
         type: 3}
