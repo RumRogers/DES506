@@ -10,7 +10,8 @@ namespace Player
 
     public enum PlayerAnimationProperties
     {
-        IDLE,     
+        IDLE                = 0,   
+        WALKING,
         RUNNING,     
         JUMPING,
         FALLING,
@@ -30,6 +31,7 @@ namespace Player
         PlayerAnimationProperties m_playerAnimProperties;
 
         [SerializeField] AnimationClip m_idleAnim;
+        [SerializeField] AnimationClip m_walkingAnim;
         [SerializeField] AnimationClip m_runnningAnim;
         [SerializeField] AnimationClip m_jumpStartAnim;
         [SerializeField] AnimationClip m_jumpMidAnim;
@@ -45,6 +47,7 @@ namespace Player
         [SerializeField] Animation m_animation;
         [Header("Playback Speeds")]
         [SerializeField] float m_idleAnimSpeed = 2;
+        [SerializeField] float m_walkingAnimSpeed = 2;
         [SerializeField] float m_runningAnimSpeed = 2;
         [SerializeField] float m_jumpStartAnimSpeed = 2;
         [SerializeField] float m_jumpMidAnimSpeed = 2;
@@ -63,6 +66,7 @@ namespace Player
         //in hindsight we don't actually need all of these things, however doesn't hurt to have them if we need them
         //non serialized fields
         AnimationState m_idleState;
+        AnimationState m_walkingState;
         AnimationState m_runningState;
         AnimationState m_jumpStartState;
         AnimationState m_jumpMidState;
@@ -78,6 +82,7 @@ namespace Player
 
         #region PUBLIC ACCESSORS
         public AnimationClip Idle { get => m_idleAnim; }
+        public AnimationClip Walking { get => m_walkingAnim; }
         public AnimationClip Running { get => m_runnningAnim; }
         public AnimationClip JumpingStart { get => m_jumpStartAnim; }
         public AnimationClip JumpingMid { get => m_jumpMidAnim; }
@@ -92,6 +97,7 @@ namespace Player
         public AnimationClip SlidingEnd { get => m_slidingEndAnim; }
 
         public AnimationState IdleState { get => m_idleState; }
+        public AnimationState WalkingState { get => m_walkingState; }
         public AnimationState RunningState { get => m_runningState; }
         public AnimationState JumpingStartState { get => m_jumpStartState; }
         public AnimationState JumpingMidState { get => m_jumpMidState; }
@@ -120,6 +126,7 @@ namespace Player
             {
                 SetProperty(PlayerAnimationProperties.IDLE);
                 m_animation.AddClip(m_idleAnim, "idle");
+                m_animation.AddClip(m_walkingAnim, "walking");
                 m_animation.AddClip(m_runnningAnim, "running");
                 m_animation.AddClip(m_jumpStartAnim, "jumpStart");
                 m_animation.AddClip(m_jumpMidAnim, "jumpMid");
@@ -144,6 +151,10 @@ namespace Player
                     case "idle":
                         state.speed = m_idleAnimSpeed;
                         m_idleState = state;
+                        break;
+                    case "walking":
+                        state.speed = m_walkingAnimSpeed;
+                        m_walkingState = state;
                         break;
                     case "running":
                         state.speed = m_runningAnimSpeed;

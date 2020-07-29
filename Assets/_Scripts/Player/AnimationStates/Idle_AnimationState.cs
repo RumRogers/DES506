@@ -23,6 +23,9 @@ namespace Player
         {
             switch (m_playerAnimator.PlayerAnimProperties)
             {
+                case PlayerAnimationProperties.WALKING:
+                    m_playerAnimator.SetState(new Walking_AnimationState(m_playerAnimator));
+                    break;
                 case PlayerAnimationProperties.RUNNING:
                     m_owner.SetState(new Running_AnimationState(m_owner));
                     break;

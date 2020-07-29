@@ -67,21 +67,34 @@ namespace Player
                     //If there is input, add velocity in that direction, but clamp the movement speed, Y velocity should always equal zero in this state, so no need to preserve down / up velocity
                     if (m_playerEntity.Direction != Vector3.zero)
                     {
+                        float maxSpeed = 0;
+
                         //rotate the player to face the direction they are traveling in
                         m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Direction.normalized.x, 0, m_playerEntity.Direction.z));
                         if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING))
                         {
+                            maxSpeed = m_playerEntity.IceMaxSpeed;
                             m_velocity += (m_playerEntity.Direction * m_playerEntity.IceAcceleration) * Time.fixedDeltaTime;
                             m_velocity = Vector3.ClampMagnitude(m_velocity, m_playerEntity.IceMaxSpeed);
                         }
                         else
                         {
+                            maxSpeed = m_playerEntity.MaxSpeed;
                             m_velocity = m_velocity.magnitude * m_playerEntity.Direction;
-                            m_velocity += (m_playerEntity.Direction * m_playerEntity.WalkingAcceleration) * Time.fixedDeltaTime;
-                            m_velocity = Vector3.ClampMagnitude(m_velocity, m_playerEntity.MaxSpeed);
-                            //m_playerEntity.Animator.RunningState.speed = (m_velocity.magnitude / m_playerEntity.MaxSpeed) * m_playerEntity.Animator.RunningAnimSpeed;
+                            m_velocity += (m_playerEntity.Direction * m_playerEntity.WalkingAcceleration) * Time.fixedDeltaTime;      
                         }
-                        m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.RUNNING);
+
+                        m_velocity = Vector3.ClampMagnitude(m_velocity, maxSpeed);
+
+                        //setting animation state based on velocity
+                        if (m_velocity.magnitude < maxSpeed)
+                        {
+                            m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.WALKING);
+                        }
+                        else
+                        {
+                            m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.RUNNING);
+                        }
                     }
                     else if (Mathf.Abs(m_velocity.x - m_playerEntity.GroundAddedVelocity.x) > 0.1 || Mathf.Abs(m_velocity.z - m_playerEntity.GroundAddedVelocity.z) > 0.1)
                     {
