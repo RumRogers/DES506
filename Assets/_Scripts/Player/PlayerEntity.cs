@@ -299,11 +299,15 @@ namespace Player
 
                     if (Physics.Raycast(rayStart, rayDirection, out m_collisionHitInfo, m_playerRadius + m_additionalRayLength))
                     {
+
+                        //if (!m_grounded)
+                        //{
+                        //    m_velocity = new Vector3(0, m_velocity.y, 0);
+                        //}
                         //only count the ray as hit if it is above the max climable incline
                         //if it's an acceptable angle it'll be handled by the movement state
                         if (Vector3.Angle(m_collisionHitInfo.normal, Vector3.up) > m_maxClimbableIncline)
                         {
-                            Debug.Log(Vector3.Angle(m_collisionHitInfo.normal, Vector3.up));
                             Debug.DrawRay(m_collisionHitInfo.point, m_collisionHitInfo.normal * 10, Color.cyan);
                             // if hit, modify movement to use the perpendicular vector (-up because we want the players right, not the walls right)
                             Vector3 wallCross = Vector3.Cross(m_collisionHitInfo.normal, -Vector3.up).normalized;
@@ -332,9 +336,10 @@ namespace Player
                                 wallRayStart += horizontalWallRaySpacing;
                                 wallRayStart.y = (transform.position.y - verticalRaySpacing.y);
                             }
-
-                            m_velocity.x = wallCross.x * (m_velocity.magnitude * (Vector3.Angle(-m_collisionHitInfo.normal, transform.forward) / 90));  //should be a faster movement if the angle is lower
-                            m_velocity.z = wallCross.z * (m_velocity.magnitude * (Vector3.Angle(-m_collisionHitInfo.normal, transform.forward) / 90));  //dividing by 90 as if we're at 90 or greater it should be parallel and therefore moving at max speed
+                            //don't want to take the y velocity into account in these calculations
+                            Vector3 nonVerticalMovement = new Vector3(m_velocity.x, 0, m_velocity.y);
+                            m_velocity.x = wallCross.x * (nonVerticalMovement.magnitude * (Vector3.Angle(-m_collisionHitInfo.normal, transform.forward) / 90));  //should be a faster movement if the angle is lower
+                            m_velocity.z = wallCross.z * (nonVerticalMovement.magnitude * (Vector3.Angle(-m_collisionHitInfo.normal, transform.forward) / 90));  //dividing by 90 as if we're at 90 or greater it should be parallel and therefore moving at max speed
 
                             return;
                         }
@@ -595,17 +600,6 @@ namespace Player
                     }
                 }
             }
-        }
-
-        public void OnCollisionEnter(Collision collision)
-        {
-            Position += (transform.position - collision.transform.position) * Time.deltaTime;
-            
-        }
-
-        public void OnCollisionStay(Collision collision)
-        {
-            Position += (transform.position - collision.transform.position) * Time.deltaTime;
         }
         #endregion
     }
