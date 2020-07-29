@@ -17,12 +17,27 @@ namespace GameCore.Spells
         private MagicProfile m_magicProfile;
         private Enchantable_FMODAdapter m_fmodAdapter;
 
+        [SerializeField]
+        private bool m_hasParticles = true;
+        /*[SerializeField]
+        private Vector3 m_enchantableLocalPosition = Vector3.zero;
+        [SerializeField]
+        private Vector3 m_enchantableLocalRotation = Vector3.zero;
+        [SerializeField]
+        private Vector3 m_enchantableLocalScale = Vector3.one;*/
+        private GameObject m_particles;
+
         // NOT overridable. DO NOT redeclare this method in child classes. Use Start() or something else. Thank you.
         protected void Awake()
         {
             gameObject.tag = s_EnchantableTag;
             m_magicProfile = GetComponent<MagicProfile>();
             m_fmodAdapter = GetComponent<Enchantable_FMODAdapter>();
+            if(m_hasParticles)
+            {
+                var enchantableParticlesPrefab = Resources.Load<GameObject>("Prefabs/Particles/EnchantableParticles");                
+                m_particles = Instantiate(enchantableParticlesPrefab, transform, false);
+            }
         }
 
         public void CastSpell(Spell spell)
@@ -156,14 +171,6 @@ namespace GameCore.Spells
         {
             m_magicProfile.ResetMagicState();
         }
-
-        /////// Remove this once Josh's controller is complete and can interact with Enchantable instances //////
-        /*private void OnMouseDown()
-        {
-            print(this);
-            DebugTestSpell.SetHighlighted(gameObject);
-            DebugTestSpell.RegisterEnchantable(this);
-        }*/
     }
 }
 
