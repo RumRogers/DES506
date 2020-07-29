@@ -472,6 +472,7 @@ namespace Player
             m_position = position;
             m_positionLastFrame = position;
             transform.position = position;
+            m_hasJumped = false;
         }
 
         //for Dialogue state to access
