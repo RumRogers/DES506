@@ -128,6 +128,9 @@ namespace Player
         //Dialogue
         List<Transform> m_speakersInRange = new List<Transform>();
 
+        //other gameobjects / transforms for checking if certain UI elements are active or not
+        GameObject m_spellbookGameObject;
+
         #region PUBLIC ACCESSORS
         //player stats, Mutable
         public Vector3 Velocity { get => m_velocity; set => m_velocity = value; }
@@ -179,6 +182,7 @@ namespace Player
         #endregion
 
         static string s_spellWheelTag = "UI_SpellWheel";
+        static string s_spellBookTag = "SpellBook";
         const string CROSSHAIR_FILEPATH = "Prefabs/UI/SpellWheel/UI_Reticle";
 
         private void Awake()
@@ -190,6 +194,7 @@ namespace Player
             m_reticle = reticle.transform;
 
             m_spellWheel = GameObject.FindGameObjectWithTag(s_spellWheelTag).GetComponentInChildren<GameUI.SpellWheel>();
+            m_spellbookGameObject = GameObject.FindGameObjectWithTag(s_spellBookTag).transform.GetChild(0).gameObject;
             m_animator = GetComponent<PlayerAnimator>(); //requried component, should be safe
             m_projectileHandler = GetComponent<Projectile.ProjectileHandler>(); //requried component, should be safe
 
@@ -486,7 +491,7 @@ namespace Player
 
         public bool IsAbleToJump()
         {
-            if (m_hasJumped || m_state.GetType() == typeof(Dialogue_PlayerState))
+            if (m_hasJumped || m_state.GetType() == typeof(Dialogue_PlayerState) || m_spellbookGameObject.activeInHierarchy)
                 return false;
             if (m_grounded && !HasProperty(PlayerEntityProperties.DYING))
                 return true;
@@ -500,12 +505,13 @@ namespace Player
 
         bool IsAbleToTalk()
         {
-            return m_speakersInRange.Count > 0 && m_state.GetType() != typeof(Dialogue_PlayerState) && m_state.GetType() != typeof(Jumping_PlayerState) && m_state.GetType() != typeof(Falling_PlayerState);
+            return m_speakersInRange.Count > 0 && m_state.GetType() != typeof(Dialogue_PlayerState) && m_state.GetType() != typeof(Jumping_PlayerState) && m_state.GetType() != typeof(Falling_PlayerState)
+                && !m_spellbookGameObject.activeInHierarchy;
         }
 
         bool IsAbleToAim()
         {
-            return m_state.GetType() == typeof(Default_PlayerState);
+            return m_state.GetType() == typeof(Default_PlayerState) && !m_spellbookGameObject.activeInHierarchy;
         }
 
         bool IsFalling()
