@@ -22,6 +22,11 @@ namespace Player
 
         public override void Manage()
         {
+            
+        }
+
+        public override void FixedManage()
+        {
             m_velocity += (Vector3.down * m_playerEntity.Gravity * 2) * Time.deltaTime;
 
             //if grounded transition to previous grounded state, or if there wasn't one, transition to the default state
