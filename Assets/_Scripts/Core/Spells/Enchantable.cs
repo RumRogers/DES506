@@ -7,6 +7,11 @@ using GameAudio;
 
 namespace GameCore.Spells
 {
+    enum EnchantableParticlesType
+    {
+        FIREFLY, ALPHABETIC
+    };
+
     [RequireComponent(typeof(MagicProfile))]
     [RequireComponent(typeof(Enchantable_FMODAdapter))]
     public abstract class Enchantable : Automaton
@@ -19,6 +24,8 @@ namespace GameCore.Spells
 
         [SerializeField]
         private bool m_hasParticles = true;
+        [SerializeField]
+        private EnchantableParticlesType m_particlesType = EnchantableParticlesType.FIREFLY;
         /*[SerializeField]
         private Vector3 m_enchantableLocalPosition = Vector3.zero;
         [SerializeField]
@@ -35,7 +42,7 @@ namespace GameCore.Spells
             m_fmodAdapter = GetComponent<Enchantable_FMODAdapter>();
             if(m_hasParticles)
             {
-                var enchantableParticlesPrefab = Resources.Load<GameObject>("Prefabs/Particles/EnchantableParticles");                
+                var enchantableParticlesPrefab = m_particlesType == EnchantableParticlesType.FIREFLY ? Resources.Load<GameObject>("Prefabs/Particles/EnchantableParticles") : Resources.Load<GameObject>("Prefabs/Particles/EnchantableParticles_Alphabet");
                 m_particles = Instantiate(enchantableParticlesPrefab, transform, false);
             }
         }
