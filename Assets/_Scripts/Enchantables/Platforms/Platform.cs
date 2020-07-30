@@ -134,6 +134,7 @@ public class Platform : Enchantable
         if (!m_isMoving)
         {
             StartCoroutine(m_translateFunction);
+            m_isMoving = true;
         }
     }
 
@@ -142,6 +143,7 @@ public class Platform : Enchantable
         if (!m_isMoving)
         {
             StartCoroutine(m_translateFunction);
+            m_isMoving = true;
         }
             
         StartCoroutine(ScaleObject(Vector3.one));
