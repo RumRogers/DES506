@@ -1,0 +1,19 @@
+{
+  "lines": [
+    {
+      "text": "Ah...so you're ready to talk to me now? Sure you aren't still dazed?"
+    },
+    {
+      "text": "Well, we're trapped right now and it's your fault!"
+    },
+    {
+      "text": "...Oh well, I suppose you didn't choose to crash into the house"
+    },
+    {
+      "text": "Tell you what, pick up that scroll on the table. It should help you"
+    },
+    {
+      "text": "Once you're out, go towards the bridge. It's a straight road, can't miss it!"
+    }
+  ]
+}
