@@ -26,6 +26,8 @@ namespace Projectile
         public float TimeBetweenShots { get => m_timeBetweenShots; }
         public float Range { get => m_range; }
         public float Speed { get => m_speed; }
+        public float SpellRange { get => m_spellRange; set { m_spellRange = value; } }
+        public float MeleeRange { get => m_meleeRange; set { m_meleeRange = value; } }
 
         // Start is called before the first frame update
         void Start()
