@@ -1,4 +1,5 @@
-﻿using GameCore.Spells;
+﻿using GameCore.Camera;
+using GameCore.Spells;
 using GameCore.System;
 using Player;
 using System.Collections;
@@ -33,7 +34,9 @@ namespace GameUI.SpellBook
         Color m_unselectedTextColor;
 
         PlayerEntity m_playerEntity;
+        PlayerMoveCamera m_playerMoveCamera;
         State m_previousPlayerState = null;
+        State m_previousCameraState = null;
 
         public KeyCode p_keyShowSpellBook { get => m_keyShowSpellBook; }
 
@@ -43,6 +46,7 @@ namespace GameUI.SpellBook
         private void Start()
         {
             m_playerEntity = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerEntity>();
+            m_playerMoveCamera = Camera.main.GetComponent<PlayerMoveCamera>();
 
             for(int i = (int)SpellType.TRANSFORM_SIZE_BIG; i <= (int)SpellType.TRANSFORM_RESET; ++i)
             {
@@ -59,7 +63,9 @@ namespace GameUI.SpellBook
         public void Display()
         {
             m_previousPlayerState = m_playerEntity.GetState();
+            m_previousCameraState = m_playerMoveCamera.GetState();
             m_playerEntity.SetState(new Idle_PlayerState(m_playerEntity));
+            m_playerMoveCamera.SetState(new Idle_CameraState(m_playerMoveCamera));
             m_mainContainer.gameObject.SetActive(true);
             if(LevelManager.IsSpellUnlocked(SpellType.TRANSFORM_SIZE_BIG))
             {
@@ -73,6 +79,10 @@ namespace GameUI.SpellBook
             if(m_previousPlayerState != null)
             {
                 m_playerEntity.SetState(m_previousPlayerState);
+            }
+            if (m_previousCameraState != null)
+            {
+                m_playerMoveCamera.SetState(m_previousCameraState);
             }
         }
         
