@@ -37,6 +37,11 @@ namespace Player
 
         public override void Manage()
         {
+            
+        }
+
+        public override void FixedManage()
+        {
             if (!m_playerEntity.Grounded)
             {
                 //Checking to see if they should start hovering

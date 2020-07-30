@@ -232,6 +232,7 @@ namespace Player
         // Override of automaton update function for extended functionality
         override protected void Update()
         {
+            base.Update();
             //Directional input
             Vector3 forwardMovement = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z) * Input.GetAxis("Vertical"); // removing the y component from the camera's forward vector
             Vector3 rightMovement = Camera.main.transform.right * Input.GetAxis("Horizontal");
@@ -280,9 +281,9 @@ namespace Player
             transform.position = Vector3.Lerp(m_positionLastFrame, m_position, m_time / Time.fixedDeltaTime);
         }
 
-        private void FixedUpdate()
+        protected override void FixedUpdate()
         {
-            base.Update();
+            base.FixedUpdate();
 
             m_grounded = IsGrounded();
             CheckCollisions();

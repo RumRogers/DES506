@@ -79,7 +79,10 @@ namespace Player
                 m_owner.SetState(new Default_PlayerState(m_owner));
                 return;
             }
+        }
 
+        public override void FixedManage()
+        {
             //if we change items in this state, we should activate / deactivate the radial UI (probably not worth keeping as I think we change items through
             //kinda temporary code 
             if (m_itemEquipped != m_playerEntity.EquipedItem)

@@ -34,6 +34,11 @@ namespace Player
 
         public override void Manage()
         {
+            
+        }
+
+        public override void FixedManage()
+        {
             if (m_landingAnimationFinished)
             {
                 if (m_playerEntity.HasProperty(PlayerEntityProperties.PLAYABLE))
