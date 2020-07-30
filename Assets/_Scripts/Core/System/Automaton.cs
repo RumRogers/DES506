@@ -33,6 +33,14 @@ namespace GameCore.System
                 m_state.Manage();
             }
         }
+
+        protected virtual void FixedUpdate()
+        {
+            if (m_state != null)
+            {
+                m_state.FixedManage();
+            }
+        }
     }
 }
 

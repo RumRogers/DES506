@@ -24,5 +24,10 @@ namespace GameCore.System
         /// Each concrete State needs to implement this method with ad-hoc behavior
         /// </summary>
         public abstract void Manage();
+
+        /// <summary>
+        /// Each concrete State CAN implement this method with ad-hoc behavior
+        /// </summary>
+        public virtual void FixedManage() { }
     }
 }
