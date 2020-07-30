@@ -96,6 +96,7 @@ namespace GameCore.Camera
 
             m_cameraFadeObject = Instantiate(Resources.Load<GameObject>(FADEIMAGE_PATH));
             m_cameraFadeImage = m_cameraFadeObject.GetComponentInChildren<Image>();
+            m_cameraFadeImage.raycastTarget = false;
             m_cameraFadeImage.color = new Color(0, 0, 0, 0);
 
         }
