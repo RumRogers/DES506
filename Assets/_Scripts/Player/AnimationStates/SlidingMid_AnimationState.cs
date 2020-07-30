@@ -31,8 +31,15 @@ namespace Player
                 case PlayerAnimationProperties.RUNNING:
                     m_playerAnimator.SetState(new Running_AnimationState(m_playerAnimator));
                     break;
+                    //intentionally set to sliding end when in property idle
                 case PlayerAnimationProperties.IDLE:
                     m_playerAnimator.SetState(new SlidingEnd_AnimationState(m_playerAnimator));
+                    break;
+                case PlayerAnimationProperties.FALLING:
+                    m_playerAnimator.SetState(new Falling_AnimationState(m_playerAnimator));
+                    break;
+                case PlayerAnimationProperties.FREE_FALLING:
+                    m_playerAnimator.SetState(new FreeFalling_AnimationState(m_playerAnimator));
                     break;
             }
         }
