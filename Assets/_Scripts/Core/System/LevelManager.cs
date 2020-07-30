@@ -39,7 +39,7 @@ namespace GameCore.System
             Init();
         }
 
-        public static void UnlockSpell(SpellType spellType)
+        public static void UnlockSpell(SpellType spellType, bool showSpellBook = true)
         {  
             if(s_spellBook == null)
             {
@@ -47,8 +47,12 @@ namespace GameCore.System
             }
             Utils.Bits.SetBit(ref s_playerSpells, (int)spellType);
             s_spellBook.UnlockSpell(spellType);
-            s_spellBook.SetState(new Active_SpellBookState(s_spellBook)); 
-            s_spellBook.SetSelectedSpell(spellType);
+
+            if(showSpellBook)
+            {
+                s_spellBook.SetState(new Active_SpellBookState(s_spellBook));
+                s_spellBook.SetSelectedSpell(spellType);
+            }
         }
 
         public static bool IsSpellUnlocked(SpellType spellType)

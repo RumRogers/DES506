@@ -1,6 +1,10 @@
-﻿using System.Collections;
+﻿#define DEBUG_GOD_MODE
+
+using System.Collections;
 using System.Collections.Generic;
 using GameCore.Rules;
+using GameCore.Spells;
+using GameCore.System;
 using UnityEngine;
 
 namespace Player
@@ -33,8 +37,13 @@ namespace Player
 
     [RequireComponent(typeof(PlayerAnimator))]
     [RequireComponent(typeof(Projectile.ProjectileHandler))]
-    public class PlayerEntity : GameCore.Rules.MutableEntity
+    public class PlayerEntity : Automaton
     {
+#if DEBUG_GOD_MODE
+        //Manually unlock spells in the editor
+        [Header("God Mode Cheat")]
+        [SerializeField] bool m_isPowerfulWizard = false;
+#endif
         //Player stats (editor variables)
         [Header("Pushing")]
         [SerializeField] AnimationCurve m_pushMovementCurve = new AnimationCurve();
@@ -206,6 +215,19 @@ namespace Player
             m_position = transform.position;
             m_positionLastFrame = transform.position;
         }
+
+#if DEBUG_GOD_MODE
+        private void Start()
+        {
+            if(m_isPowerfulWizard)
+            {
+                for(int i = 0; i < (int)SpellType.TRANSFORM_RESET; ++i)
+                {
+                    LevelManager.UnlockSpell((SpellType)i, false);
+                }
+            }
+        }
+#endif
 
         // Override of automaton update function for extended functionality
         override protected void Update()
@@ -519,39 +541,6 @@ namespace Player
         {
             return !m_ground && (m_state.GetType() != typeof(Falling_PlayerState) && m_state.GetType() != typeof(Jumping_PlayerState)) && m_state.GetType() != typeof(Dialogue_PlayerState) && !HasProperty(PlayerEntityProperties.DYING);
         }
-
-        #region MUTABLE ENTITY IMPLEMENTATION
-
-        public override void Can(string ruleObject)
-        {
-            Debug.LogError("IMPLEMENT PLAYER CAN (Josh hasn't impmented this yet)");
-        }
-
-        public override void Has(string ruleObject)
-        {
-            Debug.LogError("IMPLEMENT PLAYER HAS (Josh hasn't impmented this yet)");
-        }
-
-        public override void Is(string ruleObject)
-        {
-            Debug.LogError("IMPLEMENT PLAYER IS (Josh hasn't impmented this yet)");
-        }
-
-        public override void UndoCan(string lexeme)
-        {
-            base.UndoCan(lexeme);
-        }
-
-        public override void UndoHas(string lexeme)
-        {
-            base.UndoHas(lexeme);
-        }
-
-        public override void UndoIs(string lexeme)
-        {
-            base.UndoIs(lexeme);
-        }
-        #endregion
 
         #region PLAYER ENTITY PROPERTIES
         //CHANGING / CHECKING PROPERTIES
