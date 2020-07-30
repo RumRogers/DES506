@@ -35,7 +35,7 @@ namespace GameUI.Dialogue
         [SerializeField]
         float m_scrollSpeed = 0.05f;
 
-        bool m_lastLineReached = false;
+        public bool m_lastLineReached = false;
         bool m_dialogueHasStarted = false;
 
         private void Awake()
