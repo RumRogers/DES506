@@ -68,7 +68,7 @@ namespace Player
             }
 
            // if (Input.GetButtonDown("Submit"))
-            if (Input.GetKeyUp(KeyCode.Return))
+            if (Input.GetKeyUp(KeyCode.E))
             {
                 if (!m_dialogue.GetLastLineReached())
                 {
@@ -85,7 +85,7 @@ namespace Player
 
             }
            // else if (Input.GetButtonDown("Cancel"))
-            else if (Input.GetKeyUp(KeyCode.Q))
+            else if (Input.GetKeyUp(KeyCode.Return))
             {
                 m_dialogue.DisableUI();
                 //m_playerEntity.ShowOtherUIsInDialogue(true);
