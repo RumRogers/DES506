@@ -910,8 +910,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ee258b6e1919b746bfcbb1ef6b394a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_direction: {x: 1, y: 1.6}
-  m_speed: 0.3
+  m_direction: {x: 1, y: 1}
+  m_speed: 0.2
   m_material: {fileID: 2100000, guid: bc5fed1e6548ae64a840530a8980b543, type: 2}
 --- !u!1001 &25383316
 PrefabInstance:
@@ -7408,6 +7408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_hasParticles: 0
+  m_particlesType: 0
   m_motionWidth: 0.4
   m_platformSpeed: 0.15
   m_platType: 1
@@ -11979,6 +11980,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_hasParticles: 0
+  m_particlesType: 0
   m_motionWidth: 0.5
   m_platformSpeed: 0.15
   m_platType: 1
@@ -25612,6 +25614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_hasParticles: 1
+  m_particlesType: 0
   m_scaleBigMultiplier: 1.25
   m_scaleSmallMultiplier: 0.6
   m_changeSizeSpeed: 1
@@ -25792,6 +25795,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_hasParticles: 1
+  m_particlesType: 0
   m_motionWidth: 20
   m_platformSpeed: 4
   m_platType: 0
@@ -27015,6 +27019,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_hasParticles: 1
+  m_particlesType: 0
   m_scaleBigMultiplier: 4
   m_scaleSmallMultiplier: 0.5
   m_changeSizeSpeed: 1
@@ -30784,6 +30789,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_hasParticles: 1
+  m_particlesType: 0
 --- !u!64 &654157927
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -32858,6 +32864,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_hasParticles: 1
+  m_particlesType: 0
   m_normalTimeTillFall: 2
   m_shakeScale: 0.1
   m_shakeSpeed: 100
@@ -35184,6 +35191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_hasParticles: 0
+  m_particlesType: 0
   m_motionWidth: 3
   m_platformSpeed: 0.5
   m_platType: 1
@@ -48013,6 +48021,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_hasParticles: 1
+  m_particlesType: 0
   m_scaleBigMultiplier: 4
   m_scaleSmallMultiplier: 0.5
   m_changeSizeSpeed: 1
@@ -52921,6 +52930,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_hasParticles: 1
+  m_particlesType: 0
 --- !u!64 &1117237538
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -60810,6 +60820,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_hasParticles: 0
+  m_particlesType: 0
   m_motionWidth: 2
   m_platformSpeed: 0.2
   m_platType: 1
@@ -66973,6 +66984,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_hasParticles: 0
+  m_particlesType: 0
   m_motionWidth: 0.5
   m_platformSpeed: 0.13
   m_platType: 1
@@ -76193,6 +76205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_hasParticles: 1
+  m_particlesType: 0
   m_scaleBigMultiplier: 1.05
   m_scaleSmallMultiplier: 0.4
   m_changeSizeSpeed: 1
@@ -83258,6 +83271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_hasParticles: 1
+  m_particlesType: 0
   m_scaleBigMultiplier: 1.25
   m_scaleSmallMultiplier: 0.6
   m_changeSizeSpeed: 1
@@ -85071,6 +85085,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_hasParticles: 1
+  m_particlesType: 0
   m_motionWidth: 20
   m_platformSpeed: 5
   m_platType: 0
@@ -85199,6 +85214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_hasParticles: 1
+  m_particlesType: 0
   m_scaleBigMultiplier: 4
   m_scaleSmallMultiplier: 0.5
   m_changeSizeSpeed: 1
@@ -85865,6 +85881,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_hasParticles: 1
+  m_particlesType: 0
   m_motionWidth: 20
   m_platformSpeed: 6
   m_platType: 0
@@ -90285,6 +90302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_hasParticles: 1
+  m_particlesType: 0
   m_scaleBigMultiplier: 3
   m_scaleSmallMultiplier: 0.5
   m_changeSizeSpeed: 1
@@ -93071,6 +93089,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_hasParticles: 0
+  m_particlesType: 0
   m_motionWidth: 0.5
   m_platformSpeed: 0.15
   m_platType: 1

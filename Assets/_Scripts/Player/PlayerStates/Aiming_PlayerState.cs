@@ -177,7 +177,7 @@ namespace Player
                         direction = (Camera.main.transform.position + (Camera.main.transform.forward * m_playerEntity.Projectile.Range)) - m_playerEntity.transform.position;
                     }
 
-                    m_vfxHandler.CastSpellEffect();
+                    m_vfxHandler.CastSpellEffect(m_rayHitInfo.transform.position);
 
                    // m_vfxHandler.CastSpellEffect();
                 }

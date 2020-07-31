@@ -47,13 +47,13 @@ public class RFX4_EffectEvent : MonoBehaviour
 
     private float m_distance;
 
-    public void CastSpellEffect()
+    public void CastSpellEffect(Vector3 targetPos)
     {
         if (!m_spellEffect || m_instance)
             return;
 
-        m_instance = Instantiate(m_spellEffect, m_spellCastPoint.position, m_spellCastPoint.rotation);
-
+        m_instance = Instantiate(m_spellEffect, m_spellCastPoint.position, m_spellCastPoint.rotation * Quaternion.FromToRotation(m_spellCastPoint.position, targetPos));
+        m_instance.transform.LookAt(targetPos);
         m_instance.transform.position = m_spellCastPoint.position + m_spellCastPoint.forward * m_forwardOffset;
 
         if (m_spellDestroyTime > 0.01f)
