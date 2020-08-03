@@ -61,6 +61,7 @@ namespace Player
 
         public override void Manage()
         {
+
             if (!m_dialogue.GetDialogueHasStarted())
             {
                 m_dialogue.StartDialogue();
@@ -70,6 +71,7 @@ namespace Player
            // if (Input.GetButtonDown("Submit"))
             if (Input.GetKeyUp(KeyCode.Return))
             {
+                Debug.Log("is it");
                 if (!m_dialogue.GetLastLineReached())
                 {
                     //advance dialogue here

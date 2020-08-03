@@ -32,7 +32,7 @@ public class ScrollingTexture : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //Update and set position
         m_offset += new Vector2((0.033f/10 * m_speed) * m_direction.x, (0.033f / 10 * m_speed) * m_direction.y);
