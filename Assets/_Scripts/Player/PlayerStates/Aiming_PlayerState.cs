@@ -60,6 +60,8 @@ namespace Player
             m_itemEquipped = m_playerEntity.EquipedItem;
             //temp
             m_playerEntity.Reticle.gameObject.SetActive(true);
+
+            LevelManager.Instance.ShowEnchantableParticles(true);
         }
 
         public override void Manage()

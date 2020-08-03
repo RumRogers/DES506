@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using GameCore.System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,6 +34,7 @@ namespace Player
 
             m_landingAnimationFinished = true;
             m_turnAnimationFinished = true;
+            LevelManager.Instance.ShowEnchantableParticles(false);
         }
 
         public override void Manage()

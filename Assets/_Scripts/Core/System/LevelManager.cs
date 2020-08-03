@@ -14,6 +14,7 @@ namespace GameCore.System
         static int s_playerSpells = 0;
         static Dictionary<Transform, Enchantable> m_transformToEnchantableMap;
         static Dictionary<Enchantable, Renderer> m_enchantableToRendererMap;
+        static List<GameObject> s_enchantableParticles;
         static LevelManager s_instance = null;
         const string SPELLBOOK_TAG = "SpellBook";
         const string ENCHANTABLE_TAG = "Enchantable";
@@ -104,6 +105,7 @@ namespace GameCore.System
         {
             m_transformToEnchantableMap = new Dictionary<Transform, Enchantable>();
             m_enchantableToRendererMap = new Dictionary<Enchantable, Renderer>();
+            s_enchantableParticles = new List<GameObject>();
 
             var enchantables = GameObject.FindGameObjectsWithTag(ENCHANTABLE_TAG);
 
@@ -123,6 +125,18 @@ namespace GameCore.System
             }
         }
 
+        public void AddEnchantableParticles(GameObject particles)
+        {
+            s_enchantableParticles.Add(particles);
+        }
+
+        public void ShowEnchantableParticles(bool show)
+        {
+            foreach(var particle in s_enchantableParticles)
+            {
+                particle.SetActive(show);
+            }
+        }
         // All of this became obsolete when we changed core mechanic
         /*
         public static Dictionary<string, List<MutableEntity>> s_mapSubjectToMutable = new Dictionary<string, List<MutableEntity>>();
