@@ -12158,7 +12158,7 @@ PrefabInstance:
     - target: {fileID: 4580232385870872155, guid: 3ead565c55b9919448a7c71d26aae209,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -232.19
+      value: -52.4
       objectReference: {fileID: 0}
     - target: {fileID: 4580232385870872155, guid: 3ead565c55b9919448a7c71d26aae209,
         type: 3}
@@ -12168,7 +12168,7 @@ PrefabInstance:
     - target: {fileID: 4580232385870872155, guid: 3ead565c55b9919448a7c71d26aae209,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -248.74
+      value: -385.4
       objectReference: {fileID: 0}
     - target: {fileID: 4580232385870872155, guid: 3ead565c55b9919448a7c71d26aae209,
         type: 3}
@@ -12274,6 +12274,11 @@ PrefabInstance:
     - target: {fileID: 4580232385870872151, guid: 3ead565c55b9919448a7c71d26aae209,
         type: 3}
       propertyPath: m_iceDeceleration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4580232385870872151, guid: 3ead565c55b9919448a7c71d26aae209,
+        type: 3}
+      propertyPath: m_isPowerfulWizard
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4580232385870872158, guid: 3ead565c55b9919448a7c71d26aae209,
@@ -25797,7 +25802,7 @@ MonoBehaviour:
   m_hasParticles: 1
   m_particlesType: 0
   m_motionWidth: 20
-  m_platformSpeed: 4
+  m_platformSpeed: 5
   m_platType: 0
   m_smallScaleFactor: 0.2
   m_largeScaleFactor: 2
@@ -85883,7 +85888,7 @@ MonoBehaviour:
   m_hasParticles: 1
   m_particlesType: 0
   m_motionWidth: 20
-  m_platformSpeed: 6
+  m_platformSpeed: 5
   m_platType: 0
   m_smallScaleFactor: 0.2
   m_largeScaleFactor: 2

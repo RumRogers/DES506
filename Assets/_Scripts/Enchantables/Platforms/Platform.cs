@@ -33,7 +33,7 @@ public class Platform : Enchantable
     private float m_counter = 0;
 
     private const float c_scaleTime = 2.0f;
-    private const float c_distanceFactor = 0.1f;
+    private const float c_distanceFactor = 0.8f;
 
     private bool m_isMoving = true;
 
@@ -68,11 +68,11 @@ public class Platform : Enchantable
             switch (m_platType)
             {
                 case PlatformType.HORIZONTAL:
-                    TranslatePosition(transform.right);
+                    SmoothTranslatePosition(transform.right);
                     break;
 
                 case PlatformType.VERTICAL:
-                    TranslatePosition(transform.up);
+                    SmoothTranslatePosition(transform.up);
                     break;
 
                 case PlatformType.ROTATION:
@@ -182,5 +182,31 @@ public class Platform : Enchantable
         }
 
         transform.position += direction * m_direction * (Time.deltaTime * m_platformSpeed);
+    }
+
+    private void SmoothTranslatePosition(Vector3 axis)
+    {
+        //1. Update frame destination 
+        //2. Check if frame destination overshoots
+        //3. If it does, reverse direction, and reupdated frame destination
+        //4. Lerp to new location 
+        m_destination = m_defaultPosition + axis * m_motionWidth;
+
+        Vector3 m_frameDestination = transform.position + (m_direction * (axis * m_platformSpeed)); //Reduce offset size
+
+        if (Vector3.Distance(m_frameDestination, m_defaultPosition) <= c_distanceFactor)
+        {
+            m_direction = 1;
+            m_frameDestination = transform.position + (m_direction * (axis * m_platformSpeed));
+        }
+
+        else if (Vector3.Distance(m_frameDestination, m_destination) <= c_distanceFactor)
+        {
+            m_direction = -1;
+            m_frameDestination = transform.position + (m_direction * (axis * m_platformSpeed));
+        }
+
+        transform.position = Vector3.Lerp(transform.position, m_frameDestination, Time.deltaTime);
+
     }
 }
