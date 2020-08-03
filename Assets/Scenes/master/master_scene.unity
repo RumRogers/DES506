@@ -12306,6 +12306,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 40d4b25e2765c534fae6350c69398ec4, type: 2}
+    - target: {fileID: 995098098, guid: 3ead565c55b9919448a7c71d26aae209, type: 3}
+      propertyPath: m_rotationOffset
+      value: 0.0001
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2315805175262044975, guid: 3ead565c55b9919448a7c71d26aae209, type: 3}
     - {fileID: 776103237348484782, guid: 3ead565c55b9919448a7c71d26aae209, type: 3}
