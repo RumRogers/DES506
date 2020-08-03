@@ -106,7 +106,7 @@ MonoBehaviour:
   m_defaultMovementSpeed: 3
   m_defaultLerpSpeed: 2
   m_defaultFOV: 45
-  m_aimingDistance: 7
+  m_aimingDistance: 18
   m_aimingMinAngle: -90
   m_aimingMaxAngle: 90
   m_aimingOffset: {x: 2, y: 2}
