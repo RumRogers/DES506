@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01d15bf284ad57a4cadb87e654c84338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_reactsToSubject: 
+  m_isPowerfulWizard: 0
   m_pushMovementCurve:
     serializedVersion: 2
     m_Curve:
@@ -143,8 +143,8 @@ MonoBehaviour:
   m_slidingStartAnim: {fileID: 7400000, guid: b38396f4a11f3ae4ba0fbbbcf1bf556a, type: 2}
   m_slidingMidAnim: {fileID: 7400000, guid: 3df5b9709b529eb41bab36bf741a83cf, type: 2}
   m_slidingEndAnim: {fileID: 7400000, guid: d63f199583ea1924f9177e0c8e95f9c5, type: 2}
-  m_turnLeftAnim: {fileID: 7400000, guid: fee127daf0fd6dd4b9436c1ed6110d33, type: 2}
-  m_turnRightAnim: {fileID: 7400000, guid: cb86488310e002c4e9552415775740e6, type: 2}
+  m_turnLeftAnim: {fileID: 7400000, guid: c9a37c292e869ba4c92587eb8d33e326, type: 2}
+  m_turnRightAnim: {fileID: 7400000, guid: c9a37c292e869ba4c92587eb8d33e326, type: 2}
   m_animation: {fileID: 116125339}
   m_idleAnimSpeed: 2
   m_walkingAnimSpeed: 2
@@ -160,8 +160,7 @@ MonoBehaviour:
   m_slidingStartAnimSpeed: 2
   m_slidingMidAnimSpeed: 2
   m_slidingEndAnimSpeed: 2
-  m_turnLeftAnimSpeed: 2
-  m_turnRightAnimSpeed: 2
+  m_turnAnimSpeed: 2
   m_timeOnGroundBeforeRecovering: 1
 --- !u!114 &4580232385870872158
 MonoBehaviour:
@@ -230,6 +229,7 @@ MonoBehaviour:
   m_eraserEffect: {fileID: 153592, guid: bad71c8494ab9bf4bb53b31fb52b45c6, type: 3}
   m_eraserCastPoint: {fileID: 4580232385870872155}
   m_eraserDestroyTime: 6
+  m_rotationOffset: 0
 --- !u!111 &116125339
 Animation:
   m_ObjectHideFlags: 0
@@ -329,7 +329,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 3f3fef0ef52e41041bc3e36fb105e286, type: 2}
+      objectReference: {fileID: 2100000, guid: 40d4b25e2765c534fae6350c69398ec4, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb113ec78b6575a41b5b64810ed112bb, type: 3}
 --- !u!1 &5526387334731793071 stripped

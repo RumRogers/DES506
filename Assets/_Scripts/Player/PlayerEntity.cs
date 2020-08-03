@@ -108,6 +108,7 @@ namespace Player
         Vector3 m_velocity = Vector3.zero;
         Vector3 m_groundAddedVelocity = Vector3.zero;
         Vector3 m_direction;
+        Vector3 m_lastDirection;
         Vector3 m_position;
         Vector3 m_positionLastFrame;
         float m_time;
@@ -146,6 +147,7 @@ namespace Player
         public Vector3 Direction { get => m_direction; set => m_direction = value; }
         public Vector3 Position { get => transform.position; set { m_position = value; m_positionLastFrame = value; transform.position = value; } }
         //player stats, getters only
+        public Vector3 LastDirection { get => m_lastDirection; }
         public bool Grounded { get => m_grounded; }
         public bool CanJump { get => m_canJump; }
         public bool HasJumped { get => m_hasJumped; set => m_hasJumped = value; }
@@ -232,11 +234,12 @@ namespace Player
         // Override of automaton update function for extended functionality
         override protected void Update()
         {
-            base.Update();
             //Directional input
             Vector3 forwardMovement = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z) * Input.GetAxis("Vertical"); // removing the y component from the camera's forward vector
             Vector3 rightMovement = Camera.main.transform.right * Input.GetAxis("Horizontal");
             m_direction = (forwardMovement + rightMovement).normalized;
+
+            base.Update();
 
             //First check if death state is triggered to save time / ensure the player cannot do something if they are alread dead
             if (HasProperty(PlayerEntityProperties.DYING) && m_state.GetType() != typeof(Death_PlayerState))
@@ -279,14 +282,16 @@ namespace Player
             //Here we lerp from the position at the start of fixed update to the position after we update phyiscs by a step based on the time till the next fixed update
             m_time += Time.deltaTime;
             transform.position = Vector3.Lerp(m_positionLastFrame, m_position, m_time / Time.fixedDeltaTime);
+            if (m_direction != Vector3.zero)
+                m_lastDirection = m_velocity;   //setting last direction to velocity seems to work best. Not sure why but just setting it to velocity seems to be more consistant.
         }
 
         protected override void FixedUpdate()
         {
-            base.FixedUpdate();
-
             m_grounded = IsGrounded();
             CheckCollisions();
+
+            base.FixedUpdate();
 
             if (m_ground != null && m_grounded)
             {
@@ -300,7 +305,7 @@ namespace Player
                     m_groundAddedVelocity = m_newGroundPosition - m_oldGroundPosition;
                     if (m_groundAddedVelocity.magnitude < 20)
                     {
-                        m_velocity += (m_newGroundPosition - m_oldGroundPosition);
+                        m_position += (m_newGroundPosition - m_oldGroundPosition);
                     }
                 }
                 m_oldGroundPosition = m_newGroundPosition;

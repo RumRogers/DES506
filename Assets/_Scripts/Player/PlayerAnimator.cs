@@ -64,8 +64,7 @@ namespace Player
         [SerializeField] float m_slidingStartAnimSpeed = 2;
         [SerializeField] float m_slidingMidAnimSpeed = 2;
         [SerializeField] float m_slidingEndAnimSpeed = 2;
-        [SerializeField] float m_turnLeftAnimSpeed = 2;
-        [SerializeField] float m_turnRightAnimSpeed = 2;
+        [SerializeField] float m_turnAnimSpeed = 2;
         [Header("Properties")]
         [SerializeField] float m_timeOnGroundBeforeRecovering = 1;
 
@@ -129,6 +128,7 @@ namespace Player
         public AnimationState TurnRightState { get => m_turnRightState; }
 
         public float RunningAnimSpeed { get => m_runningAnimSpeed; }
+        public float TurningAnimSpeed { get => m_turnAnimSpeed; }
         public float RecoverAnimSpeed { get => m_recoveringAnimSpeed; }
         public float TimeOnGroundBeforeRecover { get => m_timeOnGroundBeforeRecovering; }
 
@@ -226,11 +226,11 @@ namespace Player
                         m_slidingStartState = state;
                         break;
                     case "turnLeft":
-                        state.speed = m_turnLeftAnimSpeed;
+                        state.speed = m_turnAnimSpeed;
                         m_turnLeftState = state;
                         break;
                     case "turnRight":
-                        state.speed = m_turnRightAnimSpeed;
+                        state.speed = m_turnAnimSpeed;
                         m_turnRightState = state;
                         break;
                 }

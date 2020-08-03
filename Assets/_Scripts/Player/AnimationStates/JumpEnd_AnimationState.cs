@@ -48,6 +48,9 @@ namespace Player
             }
             switch (m_playerAnimator.PlayerAnimProperties)
             {
+                case PlayerAnimationProperties.WALKING:
+                    m_playerAnimator.SetState(new Walking_AnimationState(m_playerAnimator));
+                    break;
                 case PlayerAnimationProperties.RUNNING:
                     m_playerAnimator.SetState(new Running_AnimationState(m_playerAnimator));
                     break;
@@ -57,7 +60,13 @@ namespace Player
                 case PlayerAnimationProperties.AIMING:
                     m_playerAnimator.SetState(new Aiming_AnimationState(m_playerAnimator));
                     break;
-                default:
+                case PlayerAnimationProperties.LEFT_TURN:
+                    m_playerAnimator.SetState(new TurnLeft_AnimationState(m_playerAnimator));
+                    break;
+                case PlayerAnimationProperties.RIGHT_TURN:
+                    m_playerAnimator.SetState(new TurnRight_AnimationState(m_playerAnimator));
+                    break;
+                case PlayerAnimationProperties.IDLE:
                     m_playerAnimator.SetState(new Idle_AnimationState(m_playerAnimator));
                     break;
             }
