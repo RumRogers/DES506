@@ -27,7 +27,6 @@ public class SpeechBubbleChanger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print(Vector3.Distance(transform.position, m_playerTransform.position));
         if(Vector3.Distance(transform.position, m_playerTransform.position) <= m_distanceThreshold)
         {
             m_spriteRenderer.sprite = m_closeSprite;

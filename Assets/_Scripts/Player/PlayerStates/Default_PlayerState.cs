@@ -34,7 +34,7 @@ namespace Player
 
             m_landingAnimationFinished = true;
             m_turnAnimationFinished = true;
-            LevelManager.Instance.ShowEnchantableParticles(false);
+            LevelManager.ShowEnchantableParticles(false);
         }
 
         public override void Manage()

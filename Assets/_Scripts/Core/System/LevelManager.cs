@@ -14,7 +14,7 @@ namespace GameCore.System
         static int s_playerSpells = 0;
         static Dictionary<Transform, Enchantable> m_transformToEnchantableMap;
         static Dictionary<Enchantable, Renderer> m_enchantableToRendererMap;
-        static List<GameObject> s_enchantableParticles;
+        static List<GameObject> s_enchantableParticles = new List<GameObject>();
         static LevelManager s_instance = null;
         const string SPELLBOOK_TAG = "SpellBook";
         const string ENCHANTABLE_TAG = "Enchantable";
@@ -105,7 +105,6 @@ namespace GameCore.System
         {
             m_transformToEnchantableMap = new Dictionary<Transform, Enchantable>();
             m_enchantableToRendererMap = new Dictionary<Enchantable, Renderer>();
-            s_enchantableParticles = new List<GameObject>();
 
             var enchantables = GameObject.FindGameObjectsWithTag(ENCHANTABLE_TAG);
 
@@ -125,12 +124,13 @@ namespace GameCore.System
             }
         }
 
-        public void AddEnchantableParticles(GameObject particles)
+        public static void AddEnchantableParticles(GameObject particles)
         {
+
             s_enchantableParticles.Add(particles);
         }
 
-        public void ShowEnchantableParticles(bool show)
+        public static void ShowEnchantableParticles(bool show)
         {
             foreach(var particle in s_enchantableParticles)
             {

@@ -61,7 +61,7 @@ namespace Player
             //temp
             m_playerEntity.Reticle.gameObject.SetActive(true);
 
-            LevelManager.Instance.ShowEnchantableParticles(true);
+            LevelManager.ShowEnchantableParticles(true);
         }
 
         public override void Manage()

@@ -44,7 +44,7 @@ namespace GameCore.Spells
             {
                 var enchantableParticlesPrefab = m_particlesType == EnchantableParticlesType.FIREFLY ? Resources.Load<GameObject>("Prefabs/Particles/EnchantableParticles") : Resources.Load<GameObject>("Prefabs/Particles/EnchantableParticles_Alphabet");
                 m_particles = Instantiate(enchantableParticlesPrefab, transform, false);
-                LevelManager.Instance.AddEnchantableParticles(m_particles);
+                LevelManager.AddEnchantableParticles(m_particles);
             }
         }
 
