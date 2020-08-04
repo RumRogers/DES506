@@ -100856,7 +100856,7 @@ MonoBehaviour:
   m_convoJSON: {fileID: 4900000, guid: dc2ea0cc4a243524a80c841fd1fe8db8, type: 3}
   m_scrollSpeed: 0
   m_lastLineReached: 0
-  fmodDialogueEvent: 
+  fmodDialogueEvent: event:/DIALOGUE/OWL/Owl1
 --- !u!114 &2119299200
 MonoBehaviour:
   m_ObjectHideFlags: 0
