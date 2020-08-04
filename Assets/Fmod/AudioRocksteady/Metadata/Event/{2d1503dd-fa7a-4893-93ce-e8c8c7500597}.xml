@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="Event" id="{2d1503dd-fa7a-4893-93ce-e8c8c7500597}">
+		<property name="color">
+			<value>Yellow Light 2</value>
+		</property>
 		<property name="name">
 			<value>TurtleVO1</value>
 		</property>
@@ -113,6 +116,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{8325762b-93cc-47ca-822d-71db7ed0af64}">
+		<property name="volume">
+			<value>-2.5</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{c90733f1-258c-4894-a433-4ab3bc5d4c3e}</destination>
 		</relationship>
@@ -130,6 +136,9 @@
 	</object>
 	<object class="MixerBusPanner" id="{a3b6d2c3-20b7-4462-91c0-efef69e80169}" />
 	<object class="SingleSound" id="{43693cbf-4753-465d-ab73-fd18851f109f}">
+		<property name="color">
+			<value>Yellow Light 2</value>
+		</property>
 		<property name="length">
 			<value>7.2000000000000002</value>
 		</property>
@@ -138,6 +147,9 @@
 		</relationship>
 	</object>
 	<object class="SingleSound" id="{3190171a-196d-435c-ba95-71dfd38d54f9}">
+		<property name="color">
+			<value>Yellow Light 2</value>
+		</property>
 		<property name="start">
 			<value>10</value>
 		</property>
@@ -149,6 +161,9 @@
 		</relationship>
 	</object>
 	<object class="SingleSound" id="{5db535f4-9324-4198-9161-be912a79701f}">
+		<property name="color">
+			<value>Yellow Light 2</value>
+		</property>
 		<property name="start">
 			<value>14</value>
 		</property>
@@ -160,6 +175,9 @@
 		</relationship>
 	</object>
 	<object class="SingleSound" id="{815e176c-56d7-4b4b-b9c2-ed24d36bae69}">
+		<property name="color">
+			<value>Yellow Light 2</value>
+		</property>
 		<property name="start">
 			<value>20</value>
 		</property>
@@ -171,6 +189,9 @@
 		</relationship>
 	</object>
 	<object class="SingleSound" id="{c0906ce1-ff06-4892-97d3-fe8b4c94aa65}">
+		<property name="color">
+			<value>Yellow Light 2</value>
+		</property>
 		<property name="start">
 			<value>28</value>
 		</property>
@@ -182,6 +203,9 @@
 		</relationship>
 	</object>
 	<object class="SingleSound" id="{7d33237d-1dbf-4332-9c79-bc68faf0e171}">
+		<property name="color">
+			<value>Yellow Light 2</value>
+		</property>
 		<property name="start">
 			<value>38</value>
 		</property>
@@ -193,6 +217,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{c82e0255-5bd2-422e-b12f-94f5562d2126}">
+		<property name="color">
+			<value>Yellow Light 2</value>
+		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
@@ -577,7 +604,7 @@
 			<value>56</value>
 		</property>
 		<property name="wetLevel">
-			<value>-21</value>
+			<value>-30</value>
 		</property>
 	</object>
 </objects>

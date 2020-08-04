@@ -43,6 +43,8 @@ namespace GameUI.Dialogue
         public string fmodDialogueEvent;
         FMOD.Studio.EventInstance fmodDialogue;
         FMOD.Studio.PARAMETER_ID dialogueBoxNumber;
+        FMOD.Studio.PARAMETER_ID snapshotIntensity;
+        FMOD.Studio.EventInstance dialogueMix;
 
         private void Awake()
         {
@@ -59,7 +61,10 @@ namespace GameUI.Dialogue
             StartFillingLine(m_lineIndex);
 
             fmodDialogue = FMODUnity.RuntimeManager.CreateInstance(fmodDialogueEvent);
+            //dialogueMix = FMODUnity.RuntimeManager.CreateInstance("snapshot:/DialogueMix");
             fmodDialogue.start();
+            //dialogueMix.start();
+            //dialogueMix.setParameterByName("snapshotIntensity", 100);
 
             if (m_lineIndex < m_lines.lines.Length - 1)
             {
