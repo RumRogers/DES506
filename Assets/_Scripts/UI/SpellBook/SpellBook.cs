@@ -67,7 +67,8 @@ namespace GameUI.SpellBook
             m_playerEntity.SetState(new Idle_PlayerState(m_playerEntity));
             m_playerMoveCamera.SetState(new Idle_CameraState(m_playerMoveCamera));
             m_mainContainer.gameObject.SetActive(true);
-            if(LevelManager.IsSpellUnlocked(SpellType.TRANSFORM_SIZE_BIG))
+            FMODUnity.RuntimeManager.PlayOneShot("event:/UI/SpellbookOpen");
+            if (LevelManager.IsSpellUnlocked(SpellType.TRANSFORM_SIZE_BIG))
             {
                 SetSelectedSpell(SpellType.TRANSFORM_SIZE_BIG);
             }
@@ -76,7 +77,8 @@ namespace GameUI.SpellBook
         public void Hide()
         {
             m_mainContainer.gameObject.SetActive(false);
-            if(m_previousPlayerState != null)
+            FMODUnity.RuntimeManager.PlayOneShot("event:/UI/SpellbookClose");
+            if (m_previousPlayerState != null)
             {
                 m_playerEntity.SetState(m_previousPlayerState);
             }
