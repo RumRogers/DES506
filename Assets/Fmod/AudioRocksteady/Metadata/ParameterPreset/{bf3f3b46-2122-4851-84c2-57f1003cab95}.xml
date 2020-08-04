@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="ParameterPreset" id="{bf3f3b46-2122-4851-84c2-57f1003cab95}">
+		<property name="name">
+			<value>dialogueBoxNumber</value>
+		</property>
+		<relationship name="folder">
+			<destination>{aa375782-3cb4-4e64-9e35-67783ac79736}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{91094fd5-1f77-48bf-b4c4-44c96443a0be}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{91094fd5-1f77-48bf-b4c4-44c96443a0be}">
+		<property name="parameterType">
+			<value>1</value>
+		</property>
+		<property name="minimum">
+			<value>-1</value>
+		</property>
+		<property name="maximum">
+			<value>11</value>
+		</property>
+		<property name="initialValue">
+			<value>-1</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>

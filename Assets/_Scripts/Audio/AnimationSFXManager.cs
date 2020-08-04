@@ -37,7 +37,13 @@ public class AnimationSFXManager : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot("event:/PLAYER/MOVEMENT/Respawn/Respawn_GetUp");
     }
 
+    public void playIceSlip()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/PLAYER/MOVEMENT/Player_IceSlip");
+    }
+
     //Player Spellcasting
+
     public void spellcastSFX()
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/SPELLS/Spell_Cast");
