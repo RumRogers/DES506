@@ -19,6 +19,7 @@ TagManager:
   - SpellBook
   - UI_SpellWheel
   - SpellVFX
+  - UI_ItemSelector
   layers:
   - Default
   - TransparentFX

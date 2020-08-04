@@ -18,6 +18,7 @@ namespace GameCore.System
         static LevelManager s_instance = null;
         const string SPELLBOOK_TAG = "SpellBook";
         const string ENCHANTABLE_TAG = "Enchantable";
+        const string UI_ITEM_SELECTOR_TAG = "UI_ItemSelector";
 
         public static int p_PlayerSpells { get => s_playerSpells; }
         public static Transform p_LastCheckpoint { get; set; }
@@ -48,6 +49,10 @@ namespace GameCore.System
             }
             Utils.Bits.SetBit(ref s_playerSpells, (int)spellType);
             s_spellBook.UnlockSpell(spellType);
+            if(spellType == SpellType.TRANSFORM_RESET)
+            {
+                GameObject.FindGameObjectWithTag(UI_ITEM_SELECTOR_TAG).transform.GetChild(0).GetChild(0).GetChild(1).gameObject.SetActive(true);
+            }
 
             if(showSpellBook)
             {

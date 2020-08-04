@@ -223,7 +223,7 @@ namespace Player
         {
             if(m_isPowerfulWizard)
             {
-                for(int i = 0; i < (int)SpellType.TRANSFORM_RESET; ++i)
+                for(int i = 0; i <= (int)SpellType.TRANSFORM_RESET; ++i)
                 {
                     LevelManager.UnlockSpell((SpellType)i, false);
                 }

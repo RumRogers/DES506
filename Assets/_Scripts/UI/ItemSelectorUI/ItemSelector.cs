@@ -1,4 +1,5 @@
-﻿using Player;
+﻿using GameCore.System;
+using Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -49,7 +50,7 @@ namespace GameUI
             {
                 SelectItem(m_keyToItemMap[m_keySelectQuill]);
             }
-            else if (Input.GetKeyDown(m_keySelectEraser))
+            else if (LevelManager.IsSpellUnlocked(GameCore.Spells.SpellType.TRANSFORM_RESET) && Input.GetKeyDown(m_keySelectEraser))
             {
                 SelectItem(m_keyToItemMap[m_keySelectEraser]);
             }            
