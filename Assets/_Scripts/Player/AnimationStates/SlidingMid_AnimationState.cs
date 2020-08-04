@@ -27,13 +27,16 @@ namespace Player
             {
                 case PlayerAnimationProperties.JUMPING:
                     m_playerAnimator.SetState(new Jumping_AnimationState(m_playerAnimator));
+                    m_playerAnimator.SetExpression(PlayerFacialExpression.NATURAL);
                     break;
                 case PlayerAnimationProperties.RUNNING:
                     m_playerAnimator.SetState(new Running_AnimationState(m_playerAnimator));
+                    m_playerAnimator.SetExpression(PlayerFacialExpression.NATURAL);
                     break;
                     //intentionally set to sliding end when in property idle
                 case PlayerAnimationProperties.IDLE:
                     m_playerAnimator.SetState(new SlidingEnd_AnimationState(m_playerAnimator));
+                    m_playerAnimator.SetExpression(PlayerFacialExpression.NATURAL);
                     break;
                 case PlayerAnimationProperties.FALLING:
                     m_playerAnimator.SetState(new Falling_AnimationState(m_playerAnimator));

@@ -77,8 +77,6 @@ namespace Player
                 if (m_playerEntity.Direction != Vector3.zero)
                 {
                     float maxSpeed = 0;
-
-
                     if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING))
                     {
                         maxSpeed = m_playerEntity.IceMaxSpeed;
@@ -88,7 +86,7 @@ namespace Player
                     else
                     {
                         //if rotation is more than 90 degrees play the turn around animation
-                        if (Vector3.Angle(m_playerEntity.Direction, m_playerEntity.LastDirection) > 90)
+                        if (Vector3.Angle(m_playerEntity.Direction, m_playerEntity.transform.forward) > 170)
                         {
                             //if cross of x1y2 is less than x2y1 then the rotation was counter clockwise, therefore play the left turn animation
                             if (m_playerEntity.Direction.x * m_playerEntity.LastDirection.z < m_playerEntity.Direction.z * m_playerEntity.LastDirection.x)
@@ -99,7 +97,7 @@ namespace Player
                             {
                                 m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.RIGHT_TURN);
                             }
-                            m_playerEntity.Velocity = Vector3.zero;
+                            //m_playerEntity.Velocity /= 4;
                             m_playerEntity.StartCoroutine(WaitForTurnAnimation());
                             return;
                         }
@@ -175,6 +173,7 @@ namespace Player
             m_turnAnimationFinished = false;
             Vector3 rotation = m_playerEntity.transform.rotation.eulerAngles;
             Vector3 endRotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Direction.normalized.x, 0, m_playerEntity.Direction.z)).eulerAngles;
+            Vector3 endVelocity = m_playerEntity.Velocity / 4;
 
             while (true)
             {
@@ -182,6 +181,8 @@ namespace Player
 
                 float percomp = time / (m_playerEntity.Animator.TurnRightState.length / m_playerEntity.Animator.TurningAnimSpeed);
                 rotation.y = Mathf.Lerp(rotation.y, endRotation.y, percomp);
+                m_playerEntity.Velocity = Vector3.Lerp(m_playerEntity.Velocity, endVelocity, percomp);
+
 
                 m_playerEntity.transform.eulerAngles = rotation;
 
@@ -190,8 +191,6 @@ namespace Player
                     m_turnAnimationFinished = true;
                     yield break;
                 }
-
-                //do some lerp of rotation or something here
                 yield return null;
             }
 

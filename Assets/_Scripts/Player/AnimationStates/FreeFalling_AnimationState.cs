@@ -15,6 +15,7 @@ namespace Player
             m_playerAnimator.Animation.wrapMode = WrapMode.Loop;
             m_playerAnimator.StopAllCoroutines();
             m_playerAnimator.StartCoroutine(Transition());
+            m_playerAnimator.SetExpression(PlayerFacialExpression.SCARED);
         }
 
         public override void Manage()

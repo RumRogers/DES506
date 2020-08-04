@@ -16,6 +16,8 @@ namespace Player
             m_playerAnimator.StopAllCoroutines();
             m_playerAnimator.StartCoroutine(Transition());
 
+            m_playerAnimator.SetExpression(PlayerFacialExpression.SCARED);
+
             //Debug.Log("Sliding");
         }
         //You might be thinking "why use a switch statement here? surely it's better and more efficent to just change the state from within the player entity class!" 

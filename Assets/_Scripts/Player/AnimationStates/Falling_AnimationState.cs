@@ -16,6 +16,8 @@ namespace Player
             m_playerAnimator.StopAllCoroutines();
             m_playerAnimator.StartCoroutine(Transition());
 
+            m_playerAnimator.SetExpression(PlayerFacialExpression.SCARED);
+
             //Debug.Log("Falling");
         }
         //You might be thinking "why use a switch statement here? surely it's better and more efficent to just change the state from within the player entity class!" 
@@ -27,12 +29,14 @@ namespace Player
                 case PlayerAnimationProperties.JUMPING:
                     //can actually transition to the jump start state if the player has jumped within the grace period
                     m_playerAnimator.SetState(new Jumping_AnimationState(m_playerAnimator));
+                    m_playerAnimator.SetExpression(PlayerFacialExpression.NATURAL);
                     break;
                 case PlayerAnimationProperties.FREE_FALLING:
                     m_playerAnimator.SetState(new FreeFalling_AnimationState(m_playerAnimator));
                     break;
                 default:
                     m_playerAnimator.SetState(new JumpEnd_AnimationState(m_playerAnimator));
+                    m_playerAnimator.SetExpression(PlayerFacialExpression.NATURAL);
                     break;
             }
         }

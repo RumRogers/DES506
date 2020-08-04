@@ -32,7 +32,7 @@ namespace Player
             m_camera.SetState(new GameCore.Camera.Respawn_CameraState(m_camera, m_respawnPoint));
 
             //start falling
-            FMODUnity.RuntimeManager.PlayOneShot(m_playerEntity.FallingAudioEvent, m_playerEntity.transform.position);    //@TODO: Fill with serialised event from player entity
+            FMODUnity.RuntimeManager.PlayOneShot(m_playerEntity.FallingAudioEvent, m_playerEntity.transform.position);
         }
 
         public override void Manage()
@@ -48,7 +48,7 @@ namespace Player
                 if (Vector3.Distance(m_playerEntity.transform.position + m_playerEntity.Velocity, m_respawnPoint) < m_distanceFromGroundBeforeHover && !m_finishedHover && !m_hovering)
                 {
                     // start hover coroutine
-                    FMODUnity.RuntimeManager.PlayOneShot(m_playerEntity.HoveringAudioEvent, m_playerEntity.transform.position);    //@TODO: Fill with serialised event from player entity
+                    FMODUnity.RuntimeManager.PlayOneShot(m_playerEntity.HoveringAudioEvent, m_playerEntity.transform.position);
                     m_playerEntity.Position = m_respawnPoint + Vector3.up * m_distanceFromGroundBeforeHover;
                     m_playerEntity.StartCoroutine(Hover(1.0f, 0.5f , 6.0f));                    
                 }
@@ -67,9 +67,10 @@ namespace Player
             {
                 m_waitingForAnim = true;
                 //hitting ground
-                FMODUnity.RuntimeManager.PlayOneShot(m_playerEntity.HitGroundAudioEvent, m_playerEntity.transform.position);    //@TODO: Fill with serialised event from player entity
+                FMODUnity.RuntimeManager.PlayOneShot(m_playerEntity.HitGroundAudioEvent, m_playerEntity.transform.position);
                 m_playerEntity.Velocity = Vector3.zero;
                 m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.RECOVERING);
+                m_playerEntity.Animator.SetExpression(PlayerFacialExpression.NATURAL);
                 m_playerEntity.StartCoroutine(WaitForAnimFinish());
             }
         }
