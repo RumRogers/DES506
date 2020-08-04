@@ -26,12 +26,27 @@ namespace Player
         RIGHT_TURN
     }
 
+    public enum PlayerFacialExpression
+    {
+        NATURAL                 = 0,
+        SCARED,
+        TALKING
+    }
+
     public class PlayerAnimator : GameCore.System.Automaton
     {
-        Animator m_playerAnimator;
+        Renderer m_playerRenderer;
+        PlayerFacialExpression m_playerFacialExpression;
 
+        [Header("Expression")]
+        [SerializeField] Texture m_naturalExpression;
+        [SerializeField] Texture m_scaredExpression;
+        [SerializeField] Texture m_talkingExpression;
+
+        Animator m_playerAnimator;
         PlayerAnimationProperties m_playerAnimProperties;
 
+        [Header("Animation")]
         [SerializeField] AnimationClip m_idleAnim;
         [SerializeField] AnimationClip m_walkingAnim;
         [SerializeField] AnimationClip m_runnningAnim;
@@ -88,9 +103,6 @@ namespace Player
         AnimationState m_turnRightState;
 
 
-        //is anim playing bools
-        bool m_turningAnimPlaying = false;
-
 
         #region PUBLIC ACCESSORS
         public AnimationClip Idle { get => m_idleAnim; }
@@ -132,8 +144,6 @@ namespace Player
         public float RecoverAnimSpeed { get => m_recoveringAnimSpeed; }
         public float TimeOnGroundBeforeRecover { get => m_timeOnGroundBeforeRecovering; }
 
-        public bool TurningPlaying { get => m_turningAnimPlaying; set => m_turningAnimPlaying = value; }
-
         public Animation Animation { get => m_animation; }
         public PlayerAnimationProperties PlayerAnimProperties { get => m_playerAnimProperties; }
         #endregion
@@ -141,9 +151,9 @@ namespace Player
         // Start is called before the first frame update
         void Start()
         {
+            m_playerRenderer = transform.GetChild(0).Find("Main_Character").GetComponent<Renderer>();
             try
             {
-                SetProperty(PlayerAnimationProperties.IDLE);
                 m_animation.AddClip(m_idleAnim, "idle");
                 m_animation.AddClip(m_walkingAnim, "walking");
                 m_animation.AddClip(m_runnningAnim, "running");
@@ -236,6 +246,8 @@ namespace Player
                 }
             }
 
+            SetExpression(PlayerFacialExpression.NATURAL);
+            m_playerAnimProperties = PlayerAnimationProperties.IDLE;
             SetState(new Idle_AnimationState(this));
         }
 
@@ -243,6 +255,23 @@ namespace Player
         protected override void Update()
         {
             //base.Update(); //Does not call manage on update as we only want to manage when a state changes
+        }
+
+        public void SetExpression(PlayerFacialExpression expression)
+        {
+            m_playerFacialExpression = expression;
+            switch (expression)
+            {
+                case PlayerFacialExpression.NATURAL:
+                    m_playerRenderer.material.SetTexture("_BaseMap", m_naturalExpression);
+                    break;
+                case PlayerFacialExpression.SCARED:
+                    m_playerRenderer.material.SetTexture("_BaseMap", m_scaredExpression);
+                    break;
+                case PlayerFacialExpression.TALKING:
+                    m_playerRenderer.material.SetTexture("_BaseMap", m_talkingExpression);
+                    break;
+            }
         }
 
         public void SetProperty(PlayerAnimationProperties property)

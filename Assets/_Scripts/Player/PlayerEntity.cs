@@ -288,10 +288,10 @@ namespace Player
 
         protected override void FixedUpdate()
         {
+            base.FixedUpdate();
+
             m_grounded = IsGrounded();
             CheckCollisions();
-
-            base.FixedUpdate();
 
             if (m_ground != null && m_grounded)
             {

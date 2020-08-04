@@ -24,12 +24,10 @@ namespace Player
         IEnumerator Transition()
         {
             m_playerAnimator.Animation.CrossFade("turnRight", 0.2f, PlayMode.StopAll);
-            m_playerAnimator.TurningPlaying = true;
             while (m_playerAnimator.Animation.isPlaying)
             {
                 yield return null;
             }
-            m_playerAnimator.TurningPlaying = false;
             switch (m_playerAnimator.PlayerAnimProperties)
             {
                 case PlayerAnimationProperties.WALKING:
