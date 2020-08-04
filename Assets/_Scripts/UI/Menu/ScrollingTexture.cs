@@ -31,11 +31,9 @@ public class ScrollingTexture : MonoBehaviour
         m_direction = m_direction.normalized;
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    private void Update()
     {
-        //Update and set position
-        m_offset += new Vector2((0.033f/10 * m_speed) * m_direction.x, (0.033f / 10 * m_speed) * m_direction.y);
+        m_offset += new Vector2((0.033f / 10 * m_speed) * m_direction.x, (0.033f / 10 * m_speed) * m_direction.y);
 
         m_material.mainTextureOffset = m_offset;
     }
