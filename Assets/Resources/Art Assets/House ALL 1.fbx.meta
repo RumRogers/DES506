@@ -28,7 +28,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Tutorial_Model_House_Interior1
-    second: {fileID: 2100000, guid: e401b8a5399ddee48b123eab62b793b0, type: 2}
+    second: {fileID: 2100000, guid: 4a2d981f445aa4641b59e18ca850ef6c, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

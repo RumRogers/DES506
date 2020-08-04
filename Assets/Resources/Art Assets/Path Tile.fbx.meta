@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6fd8498551638cb41a4700e964190366
+guid: 1a0f5fc5f61ecf94fb008f1184e18e52
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
@@ -7,13 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Bookcase
-    second: {fileID: 2100000, guid: 73ff6ce77f08f6c4fa64f18dfa933f2b, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Books_on_Shelves
-    second: {fileID: 2100000, guid: 7b4bf58689f49824c9bf4b8608fd74a1, type: 2}
+      name: Path
+    second: {fileID: 2100000, guid: 44f789bb65f0c724e84f6a5803971cce, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -46,7 +41,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importVisibility: 1

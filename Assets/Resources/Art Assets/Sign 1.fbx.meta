@@ -8,17 +8,17 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Sign_Paper1
-    second: {fileID: 2100000, guid: 00738e6145771264d9160d9fba0ee69c, type: 2}
+    second: {fileID: 2100000, guid: 819038fcd39d28e4c8e406c2b6d7db22, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Sign_Pole1
-    second: {fileID: 2100010, guid: 47616bd0cda748d4cbedcfc908506b9d, type: 3}
+    second: {fileID: 2100000, guid: 97d1e9ef70cb94d4d849b29e013c9077, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Sign_Wood_Planks1
-    second: {fileID: 2100010, guid: 47616bd0cda748d4cbedcfc908506b9d, type: 3}
+    second: {fileID: 2100000, guid: 9b8a63cdf19cf4945ae0f1a2485e309d, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
