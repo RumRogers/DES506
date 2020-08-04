@@ -142,6 +142,12 @@ namespace GameCore.System
                 particle.SetActive(show);
             }
         }
+
+        public static bool HasPlayerUnlockedAtLeastASpell()
+        {
+            return s_playerSpells != 0;
+        }
+
         // All of this became obsolete when we changed core mechanic
         /*
         public static Dictionary<string, List<MutableEntity>> s_mapSubjectToMutable = new Dictionary<string, List<MutableEntity>>();

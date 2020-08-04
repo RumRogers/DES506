@@ -540,7 +540,7 @@ namespace Player
 
         bool IsAbleToAim()
         {
-            return m_state.GetType() == typeof(Default_PlayerState) && !m_spellbookGameObject.activeInHierarchy;
+            return LevelManager.HasPlayerUnlockedAtLeastASpell() && m_state.GetType() == typeof(Default_PlayerState) && !m_spellbookGameObject.activeInHierarchy;
         }
 
         bool IsFalling()
