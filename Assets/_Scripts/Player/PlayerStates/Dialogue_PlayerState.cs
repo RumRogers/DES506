@@ -55,6 +55,7 @@ namespace Player
             m_playerEntity.transform.rotation = Quaternion.LookRotation(lookDir);
             m_playerEntity.Velocity = Vector3.zero;
 
+            m_playerEntity.Animator.SetExpression(PlayerFacialExpression.TALKING);
             m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.IDLE);
             Debug.Log("In Dialogue");
         }
@@ -81,6 +82,7 @@ namespace Player
                 {
                     m_dialogue.DisableUI();
                     //m_playerEntity.ShowOtherUIsInDialogue(true);
+                    m_playerEntity.Animator.SetExpression(PlayerFacialExpression.NATURAL);
                     m_owner.SetState(new Default_PlayerState(m_owner));
                     m_playerMoveCamera.SetState(new GameCore.Camera.Default_CameraState(m_playerMoveCamera));
                 }
@@ -91,6 +93,7 @@ namespace Player
             {
                 m_dialogue.DisableUI();
                 //m_playerEntity.ShowOtherUIsInDialogue(true);
+                m_playerEntity.Animator.SetExpression(PlayerFacialExpression.NATURAL);
                 m_owner.SetState(new Default_PlayerState(m_owner));
                 m_playerMoveCamera.SetState(new GameCore.Camera.Default_CameraState(m_playerMoveCamera));
             }

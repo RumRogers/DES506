@@ -128,9 +128,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47de62c4b9adcc94e84146d5c1743d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_naturalExpression: {fileID: 2800000, guid: e8dce97c1d42e614aa58fc0d2b10b18f, type: 3}
-  m_scaredExpression: {fileID: 2800000, guid: 6b890ed43fc999a4eacf1ccc914688ec, type: 3}
-  m_talkingExpression: {fileID: 0}
+  m_naturalExpression: {fileID: 2800000, guid: 129b1706deb188147b49dc7f9a9acdee, type: 3}
+  m_scaredExpression: {fileID: 2800000, guid: c01a88917e8558d4c8ff958fdff655ec, type: 3}
+  m_talkingExpression: {fileID: 2800000, guid: 3bfebbffa42fba94085e353273ee6b6d, type: 3}
   m_idleAnim: {fileID: 7400000, guid: e9382c04f5b45964793b8e214ae47561, type: 2}
   m_walkingAnim: {fileID: 7400000, guid: c37d7e8c649cefc4397815bddd4e6c78, type: 2}
   m_runnningAnim: {fileID: 7400000, guid: 774eb888745328c47b5b7163d2a00647, type: 2}
@@ -163,7 +163,7 @@ MonoBehaviour:
   m_slidingStartAnimSpeed: 2
   m_slidingMidAnimSpeed: 2
   m_slidingEndAnimSpeed: 2
-  m_turnAnimSpeed: 2
+  m_turnAnimSpeed: 4
   m_timeOnGroundBeforeRecovering: 1
 --- !u!114 &4580232385870872158
 MonoBehaviour:
