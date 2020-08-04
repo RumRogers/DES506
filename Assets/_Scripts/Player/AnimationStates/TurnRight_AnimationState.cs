@@ -18,7 +18,8 @@ namespace Player
 
         public override void Manage()
         {
-
+            if (m_playerAnimator.PlayerAnimProperties == PlayerAnimationProperties.JUMPING)
+                m_playerAnimator.SetState(new Jumping_AnimationState(m_playerAnimator));
         }
 
         IEnumerator Transition()

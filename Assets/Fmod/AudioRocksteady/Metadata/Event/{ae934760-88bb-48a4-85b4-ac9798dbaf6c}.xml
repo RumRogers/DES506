@@ -163,7 +163,7 @@
 			<value>Red</value>
 		</property>
 		<property name="volume">
-			<value>-6</value>
+			<value>-4</value>
 		</property>
 		<property name="name">
 			<value>Initial</value>
@@ -447,6 +447,8 @@
 		<relationship name="effects">
 			<destination>{07421157-6eef-4ef3-8bfb-56554ad5bfde}</destination>
 			<destination>{e32be796-c6d8-484e-8ded-40920a63e64d}</destination>
+			<destination>{b247770a-a829-4403-a765-167bcf646ffb}</destination>
+			<destination>{a653b75b-f5cc-44a5-9179-5ebd4af1493f}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{1e888c94-0b26-4604-af01-7f9840c4969c}" />
@@ -610,6 +612,31 @@
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{e32be796-c6d8-484e-8ded-40920a63e64d}" />
+	<object class="MultibandEqEffect" id="{b247770a-a829-4403-a765-167bcf646ffb}">
+		<property name="filterTypeA">
+			<value>9</value>
+		</property>
+		<property name="frequencyA">
+			<value>3400</value>
+		</property>
+		<property name="qualityA">
+			<value>1.10000002</value>
+		</property>
+		<property name="gainA">
+			<value>-6</value>
+		</property>
+	</object>
+	<object class="CompressorEffect" id="{a653b75b-f5cc-44a5-9179-5ebd4af1493f}">
+		<property name="threshold">
+			<value>-15</value>
+		</property>
+		<property name="ratio">
+			<value>10</value>
+		</property>
+		<property name="releaseTime">
+			<value>300</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{5088d146-022d-43d2-992f-b9c6b1ab3bdd}" />
 	<object class="AutomationPoint" id="{c1d50b91-7757-4b6a-aac9-db9952b911d8}">
 		<property name="position">

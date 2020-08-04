@@ -145,7 +145,7 @@ MonoBehaviour:
   - {fileID: -8241374944785403607}
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
-  - {fileID: -6582023039856053708}
+  - {fileID: 7015948454629163611}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -192,7 +192,7 @@ MonoBehaviour:
   - {fileID: -8241374944785403607}
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
-  - {fileID: -6582023039856053708}
+  - {fileID: 7015948454629163611}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -278,6 +278,30 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &-8286996791549445676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/DIALOGUE/OWL/Owl1
+  m_EditorClassIdentifier: 
+  Path: event:/DIALOGUE/OWL/Owl1
+  guid: 01c43dedf9e9314386f438898b980eac
+  Banks:
+  - {fileID: 7015948454629163611}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -8036471230773287476}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 11500
 --- !u!114 &-8241374944785403607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,6 +319,58 @@ MonoBehaviour:
   lastModified: 637315439176902649
   LoadResult: 0
   FileSizes: []
+  Exists: 1
+--- !u!114 &-8145153896303609594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Owl1/dialogueBoxNumber
+  m_EditorClassIdentifier: 
+  Name: dialogueBoxNumber
+  Min: -1
+  Max: 11
+  Default: -1
+  Exists: 0
+--- !u!114 &-8093388040730984043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637321365494477735
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-8036471230773287476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Owl1/dialogueBoxNumber
+  m_EditorClassIdentifier: 
+  Name: dialogueBoxNumber
+  Min: -1
+  Max: 11
+  Default: -1
   Exists: 1
 --- !u!114 &-8003109462678514849
 MonoBehaviour:
@@ -365,6 +441,23 @@ MonoBehaviour:
   lastModified: 637315351647862181
   LoadResult: 0
   FileSizes: []
+  Exists: 0
+--- !u!114 &-7849482947321788229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/TriggerBoxMusic
+  m_EditorClassIdentifier: 
+  Name: TriggerBoxMusic
+  Min: 0
+  Max: 3
+  Default: 0
   Exists: 0
 --- !u!114 &-7848639749855019017
 MonoBehaviour:
@@ -454,6 +547,57 @@ MonoBehaviour:
   Max: 3
   Default: 0
   Exists: 0
+--- !u!114 &-7482869493395549724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/TriggerBoxMusic
+  m_EditorClassIdentifier: 
+  Name: TriggerBoxMusic
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 0
+--- !u!114 &-7406752858246385677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/TriggerBoxMusic
+  m_EditorClassIdentifier: 
+  Name: TriggerBoxMusic
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 1
+--- !u!114 &-7335623530797244446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Owl1/dialogueBoxNumber
+  m_EditorClassIdentifier: 
+  Name: dialogueBoxNumber
+  Min: -1
+  Max: 11
+  Default: -1
+  Exists: 1
 --- !u!114 &-7131964349630188624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -510,7 +654,7 @@ MonoBehaviour:
   - {fileID: -8241374944785403607}
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
-  - {fileID: -6582023039856053708}
+  - {fileID: 7015948454629163611}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -536,6 +680,24 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &-6611850392409337767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637317931358104384
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
 --- !u!114 &-6582023039856053708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -554,6 +716,23 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &-6525907844355324468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Owl1/Parameter 1
+  m_EditorClassIdentifier: 
+  Name: Parameter 1
+  Min: -1
+  Max: 11
+  Default: -1
+  Exists: 0
 --- !u!114 &-6486618357564056167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -609,7 +788,7 @@ MonoBehaviour:
   - {fileID: -8241374944785403607}
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
-  - {fileID: -6582023039856053708}
+  - {fileID: 7015948454629163611}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -635,7 +814,7 @@ MonoBehaviour:
   - {fileID: -8241374944785403607}
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
-  - {fileID: -6582023039856053708}
+  - {fileID: 7015948454629163611}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -643,6 +822,23 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 1000
+--- !u!114 &-6356755900256299884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/TriggerBoxMusic
+  m_EditorClassIdentifier: 
+  Name: TriggerBoxMusic
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 0
 --- !u!114 &-6200289382764947249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -679,6 +875,24 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &-6077032837515489155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637317926708360117
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
 --- !u!114 &-5999835731386380919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -696,6 +910,23 @@ MonoBehaviour:
   lastModified: 637304297900000000
   LoadResult: 0
   FileSizes: []
+  Exists: 0
+--- !u!114 &-5841265352244950985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/TriggerBoxMusic
+  m_EditorClassIdentifier: 
+  Name: TriggerBoxMusic
+  Min: 0
+  Max: 3
+  Default: 0
   Exists: 0
 --- !u!114 &-5799853173506156228
 MonoBehaviour:
@@ -715,7 +946,7 @@ MonoBehaviour:
   - {fileID: -8241374944785403607}
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
-  - {fileID: -6582023039856053708}
+  - {fileID: 7015948454629163611}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -828,6 +1059,23 @@ MonoBehaviour:
   Max: 3
   Default: 0
   Exists: 0
+--- !u!114 &-5506773444595457259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/TriggerBoxMusic
+  m_EditorClassIdentifier: 
+  Name: TriggerBoxMusic
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 0
 --- !u!114 &-5500732056089662668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -880,6 +1128,23 @@ MonoBehaviour:
   Max: 3
   Default: 0
   Exists: 1
+--- !u!114 &-5406721966947007432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/TriggerBoxMusic
+  m_EditorClassIdentifier: 
+  Name: TriggerBoxMusic
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 0
 --- !u!114 &-5383046975335073424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -919,7 +1184,7 @@ MonoBehaviour:
   - {fileID: -8241374944785403607}
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
-  - {fileID: -6582023039856053708}
+  - {fileID: 7015948454629163611}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -927,6 +1192,24 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 0
+--- !u!114 &-5274363951153241534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637321375505900357
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-5076264282734012166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1057,7 +1340,7 @@ MonoBehaviour:
   - {fileID: -8241374944785403607}
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
-  - {fileID: -6582023039856053708}
+  - {fileID: 7015948454629163611}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1138,7 +1421,7 @@ MonoBehaviour:
   - {fileID: -8241374944785403607}
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
-  - {fileID: -6582023039856053708}
+  - {fileID: 7015948454629163611}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1197,6 +1480,42 @@ MonoBehaviour:
   Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
   SubDir: 
   lastModified: 637315357914697448
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-4007981555843680018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637321370279379717
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-3993808810581430218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637321375889905865
   LoadResult: 0
   FileSizes: []
   Exists: 0
@@ -1273,12 +1592,12 @@ MonoBehaviour:
   - {fileID: -8241374944785403607}
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
-  - {fileID: -6582023039856053708}
+  - {fileID: 7015948454629163611}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 5596893182213812923}
+  - {fileID: -7406752858246385677}
   MinDistance: 0
   MaxDistance: 0
   Length: 276661
@@ -1298,6 +1617,24 @@ MonoBehaviour:
   Min: 0
   Max: 3
   Default: 0
+  Exists: 0
+--- !u!114 &-3627464287825328480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637317895428649328
+  LoadResult: 0
+  FileSizes: []
   Exists: 0
 --- !u!114 &-3596635066827436753
 MonoBehaviour:
@@ -1498,6 +1835,47 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &-2717773727395864496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637321378134320113
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-2595218888473457978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/PLAYER/MOVEMENT/Player_IceSlip
+  m_EditorClassIdentifier: 
+  Path: event:/PLAYER/MOVEMENT/Player_IceSlip
+  guid: 68636470c86e8c4d9dc0fa54a306ed9a
+  Banks:
+  - {fileID: 7015948454629163611}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 531
 --- !u!114 &-2488033456736598308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1534,6 +1912,23 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &-2442577584276140356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/TriggerBoxMusic
+  m_EditorClassIdentifier: 
+  Name: TriggerBoxMusic
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 0
 --- !u!114 &-2092995722326257889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1569,7 +1964,7 @@ MonoBehaviour:
   - {fileID: -8241374944785403607}
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
-  - {fileID: -6582023039856053708}
+  - {fileID: 7015948454629163611}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1620,7 +2015,7 @@ MonoBehaviour:
   - {fileID: -8241374944785403607}
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
-  - {fileID: -6582023039856053708}
+  - {fileID: 7015948454629163611}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1773,6 +2168,40 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &-1150886746284160880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/TriggerBoxMusic
+  m_EditorClassIdentifier: 
+  Name: TriggerBoxMusic
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 0
+--- !u!114 &-1134667827792845381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/TriggerBoxMusic
+  m_EditorClassIdentifier: 
+  Name: TriggerBoxMusic
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 0
 --- !u!114 &-1096364372247910037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1790,6 +2219,23 @@ MonoBehaviour:
   lastModified: 637315364671429107
   LoadResult: 0
   FileSizes: []
+  Exists: 0
+--- !u!114 &-1055222711276542595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Owl1/dialogueBoxNumber
+  m_EditorClassIdentifier: 
+  Name: dialogueBoxNumber
+  Min: -1
+  Max: 11
+  Default: -1
   Exists: 0
 --- !u!114 &-967541240514404149
 MonoBehaviour:
@@ -1830,7 +2276,7 @@ MonoBehaviour:
   - {fileID: -8241374944785403607}
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
-  - {fileID: -6582023039856053708}
+  - {fileID: 7015948454629163611}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2021,7 +2467,7 @@ MonoBehaviour:
   - {fileID: -8241374944785403607}
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
-  - {fileID: -6582023039856053708}
+  - {fileID: 7015948454629163611}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2043,7 +2489,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 1549267405382922713}
-  - {fileID: -6582023039856053708}
+  - {fileID: 7015948454629163611}
   EditorEvents:
   - {fileID: -8415032040721163499}
   - {fileID: 998972529664228970}
@@ -2073,13 +2519,33 @@ MonoBehaviour:
   - {fileID: -2087409798968500167}
   - {fileID: -6408244298545334174}
   - {fileID: -5799853173506156228}
+  - {fileID: -2595218888473457978}
+  - {fileID: -8286996791549445676}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -6582023039856053708}
+  - {fileID: 7015948454629163611}
   StringsBanks:
   - {fileID: 1549267405382922713}
-  stringsBankWriteTime: 637316434270000000
+  stringsBankWriteTime: 637321383081030331
   cacheVersion: 3
+--- !u!114 &9996047819067277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637317898578014186
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
 --- !u!114 &22063555192827828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2171,7 +2637,7 @@ MonoBehaviour:
   - {fileID: -8241374944785403607}
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
-  - {fileID: -6582023039856053708}
+  - {fileID: 7015948454629163611}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2306,7 +2772,7 @@ MonoBehaviour:
   - {fileID: -8241374944785403607}
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
-  - {fileID: -6582023039856053708}
+  - {fileID: 7015948454629163611}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -2348,6 +2814,23 @@ MonoBehaviour:
   lastModified: 637303258000000000
   LoadResult: 0
   FileSizes: []
+  Exists: 0
+--- !u!114 &695795472848542681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/TriggerBoxMusic
+  m_EditorClassIdentifier: 
+  Name: TriggerBoxMusic
+  Min: 0
+  Max: 3
+  Default: 0
   Exists: 0
 --- !u!114 &731643993000001724
 MonoBehaviour:
@@ -2515,6 +2998,24 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &1222421105568563807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637317925977394874
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
 --- !u!114 &1305966907371855975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2565,11 +3066,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637316434270000000
+  lastModified: 637321383081030331
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 2030
+    Value: 2176
   Exists: 1
 --- !u!114 &1562862740281822406
 MonoBehaviour:
@@ -2588,6 +3089,23 @@ MonoBehaviour:
   lastModified: 637315343080307677
   LoadResult: 0
   FileSizes: []
+  Exists: 0
+--- !u!114 &1665810537126872934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/TriggerBoxMusic
+  m_EditorClassIdentifier: 
+  Name: TriggerBoxMusic
+  Min: 0
+  Max: 3
+  Default: 0
   Exists: 0
 --- !u!114 &1731828152472921183
 MonoBehaviour:
@@ -2645,7 +3163,7 @@ MonoBehaviour:
   - {fileID: -8241374944785403607}
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
-  - {fileID: -6582023039856053708}
+  - {fileID: 7015948454629163611}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2708,7 +3226,7 @@ MonoBehaviour:
   - {fileID: -8241374944785403607}
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
-  - {fileID: -6582023039856053708}
+  - {fileID: 7015948454629163611}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2771,7 +3289,7 @@ MonoBehaviour:
   - {fileID: -8241374944785403607}
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
-  - {fileID: -6582023039856053708}
+  - {fileID: 7015948454629163611}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2836,6 +3354,23 @@ MonoBehaviour:
   Max: 3
   Default: 0
   Exists: 0
+--- !u!114 &2625229569260753349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/TriggerBoxMusic
+  m_EditorClassIdentifier: 
+  Name: TriggerBoxMusic
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 0
 --- !u!114 &2670659825365727335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2857,7 +3392,7 @@ MonoBehaviour:
   - {fileID: -8241374944785403607}
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
-  - {fileID: -6582023039856053708}
+  - {fileID: 7015948454629163611}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2865,6 +3400,23 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 0
+--- !u!114 &2778042064150759930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Owl1/Parameter 1
+  m_EditorClassIdentifier: 
+  Name: Parameter 1
+  Min: -1
+  Max: 11
+  Default: -1
+  Exists: 0
 --- !u!114 &2811406251550669415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2940,7 +3492,7 @@ MonoBehaviour:
   - {fileID: -8241374944785403607}
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
-  - {fileID: -6582023039856053708}
+  - {fileID: 7015948454629163611}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3059,6 +3611,23 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 1875
+--- !u!114 &3259280845725997833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/TriggerBoxMusic
+  m_EditorClassIdentifier: 
+  Name: TriggerBoxMusic
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 0
 --- !u!114 &3311095998858529806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3076,6 +3645,41 @@ MonoBehaviour:
   Max: 3
   Default: 0
   Exists: 1
+--- !u!114 &3370309523240162990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/TriggerBoxMusic
+  m_EditorClassIdentifier: 
+  Name: TriggerBoxMusic
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 0
+--- !u!114 &3391466828338979136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637317902717347506
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
 --- !u!114 &3413979098771456498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3094,6 +3698,23 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &3417634300885201118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/TriggerBoxMusic
+  m_EditorClassIdentifier: 
+  Name: TriggerBoxMusic
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 1
 --- !u!114 &3440671922027357243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3186,7 +3807,7 @@ MonoBehaviour:
   - {fileID: -8241374944785403607}
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
-  - {fileID: -6582023039856053708}
+  - {fileID: 7015948454629163611}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3267,7 +3888,7 @@ MonoBehaviour:
   - {fileID: -8241374944785403607}
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
-  - {fileID: -6582023039856053708}
+  - {fileID: 7015948454629163611}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3293,7 +3914,7 @@ MonoBehaviour:
   - {fileID: -8241374944785403607}
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
-  - {fileID: -6582023039856053708}
+  - {fileID: 7015948454629163611}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3335,6 +3956,24 @@ MonoBehaviour:
   Min: 0
   Max: 3
   Default: 0
+  Exists: 0
+--- !u!114 &3859514723263057063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637321377316044198
+  LoadResult: 0
+  FileSizes: []
   Exists: 0
 --- !u!114 &3906200186965525536
 MonoBehaviour:
@@ -3447,6 +4086,24 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &4163171941046680763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637316488794845381
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
 --- !u!114 &4473904759900597903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3482,6 +4139,59 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &4587401296210538430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637321371980806378
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &4633393323643776878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Owl1/dialogueBoxNumber
+  m_EditorClassIdentifier: 
+  Name: dialogueBoxNumber
+  Min: -1
+  Max: 11
+  Default: -1
+  Exists: 0
+--- !u!114 &4697714503850865477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637317931215915995
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
 --- !u!114 &4884013073174077056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3503,7 +4213,7 @@ MonoBehaviour:
   - {fileID: -8241374944785403607}
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
-  - {fileID: -6582023039856053708}
+  - {fileID: 7015948454629163611}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -3511,6 +4221,24 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 103879
+--- !u!114 &4979212136529168268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637317901829963830
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
 --- !u!114 &5006485658537962931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3582,6 +4310,41 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &5223411199796249283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637321382829684931
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &5245176906067200448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/TriggerBoxMusic
+  m_EditorClassIdentifier: 
+  Name: TriggerBoxMusic
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 0
 --- !u!114 &5390603276414359111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3595,6 +4358,23 @@ MonoBehaviour:
   m_Name: parameter:/Music/TriggerBoxMusicTutorial
   m_EditorClassIdentifier: 
   Name: TriggerBoxMusicTutorial
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 0
+--- !u!114 &5437545056063461481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/TriggerBoxMusic
+  m_EditorClassIdentifier: 
+  Name: TriggerBoxMusic
   Min: 0
   Max: 3
   Default: 0
@@ -3670,6 +4450,40 @@ MonoBehaviour:
   Max: 3
   Default: 0
   Exists: 1
+--- !u!114 &5752921711664786740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: dialogueBoxNumber
+  m_EditorClassIdentifier: 
+  Name: dialogueBoxNumber
+  Min: -1
+  Max: 11
+  Default: -1
+  Exists: 0
+--- !u!114 &5796713269409671304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/TriggerBoxMusic
+  m_EditorClassIdentifier: 
+  Name: TriggerBoxMusic
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 0
 --- !u!114 &5882439683198739534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3706,6 +4520,23 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &6119617460206858572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/TriggerBoxMusic
+  m_EditorClassIdentifier: 
+  Name: TriggerBoxMusic
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 0
 --- !u!114 &6132109807142913989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3722,6 +4553,24 @@ MonoBehaviour:
   Min: 0
   Max: 3
   Default: 0
+  Exists: 0
+--- !u!114 &6300996174494195305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637317930408924502
+  LoadResult: 0
+  FileSizes: []
   Exists: 0
 --- !u!114 &6475697156320030678
 MonoBehaviour:
@@ -3761,7 +4610,7 @@ MonoBehaviour:
   - {fileID: -8241374944785403607}
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
-  - {fileID: -6582023039856053708}
+  - {fileID: 7015948454629163611}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -3875,6 +4724,24 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &7015948454629163611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637321383080910651
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &7117019601324589561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3965,6 +4832,24 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &7478578138961110893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637317931482881379
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
 --- !u!114 &7483241889642028259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4070,6 +4955,23 @@ MonoBehaviour:
   lastModified: 637315350364681509
   LoadResult: 0
   FileSizes: []
+  Exists: 0
+--- !u!114 &7915875477727543792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Owl1/DialogueBox
+  m_EditorClassIdentifier: 
+  Name: DialogueBox
+  Min: -1
+  Max: 11
+  Default: -1
   Exists: 0
 --- !u!114 &7930185762384925448
 MonoBehaviour:

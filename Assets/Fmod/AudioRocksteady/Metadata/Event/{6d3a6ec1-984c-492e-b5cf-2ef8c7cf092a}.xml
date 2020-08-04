@@ -114,7 +114,7 @@
 			<value>Red</value>
 		</property>
 		<property name="volume">
-			<value>-6</value>
+			<value>-9</value>
 		</property>
 		<property name="name">
 			<value>Recover</value>
@@ -140,7 +140,7 @@
 	</object>
 	<object class="EventMixerGroup" id="{9e75773b-9476-418f-8de9-401a7288e43b}">
 		<property name="volume">
-			<value>-9</value>
+			<value>-12</value>
 		</property>
 		<property name="name">
 			<value>Clothes</value>

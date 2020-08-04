@@ -38,9 +38,16 @@ namespace GameUI.Dialogue
         public bool m_lastLineReached = false;
         bool m_dialogueHasStarted = false;
 
+        //FMOD stuff for dialogue audio
+        [FMODUnity.EventRef]
+        public string fmodDialogueEvent;
+        FMOD.Studio.EventInstance fmodDialogue;
+        FMOD.Studio.PARAMETER_ID dialogueBoxNumber;
+
         private void Awake()
         {
-           // m_lines = JsonUtility.FromJson<Lines>(m_convoJSON.text);
+            // m_lines = JsonUtility.FromJson<Lines>(m_convoJSON.text);
+
         }
 
         public void StartDialogue()
@@ -50,6 +57,9 @@ namespace GameUI.Dialogue
             m_lineIndex = 0;
             m_TextUI.SetActive(true);
             StartFillingLine(m_lineIndex);
+
+            fmodDialogue = FMODUnity.RuntimeManager.CreateInstance(fmodDialogueEvent);
+            fmodDialogue.start();
 
             if (m_lineIndex < m_lines.lines.Length - 1)
             {
@@ -62,6 +72,11 @@ namespace GameUI.Dialogue
             }
 
             m_dialogueHasStarted = true;
+        }
+
+        private void Update()
+        {
+            fmodDialogue.setParameterByName("dialogueBoxNumber", m_lineIndex);
         }
 
         public void FillNextLine()
