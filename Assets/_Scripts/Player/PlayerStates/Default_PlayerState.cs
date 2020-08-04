@@ -78,25 +78,6 @@ namespace Player
                 {
                     float maxSpeed = 0;
 
-                    //if rotation is more than 90 degrees play the turn around animation
-                    if (Vector3.Angle(m_playerEntity.Direction, m_playerEntity.LastDirection) > 90)
-                    {
-                        //if cross of x1y2 is less than x2y1 then the rotation was counter clockwise, therefore play the left turn animation
-                        if (m_playerEntity.Direction.x * m_playerEntity.LastDirection.z < m_playerEntity.Direction.z * m_playerEntity.LastDirection.x)
-                        {
-                            m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.LEFT_TURN);
-                        }
-                        else
-                        {
-                            m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.RIGHT_TURN);
-                        }
-                        m_playerEntity.Velocity = Vector3.zero;
-                        m_playerEntity.StartCoroutine(WaitForTurnAnimation());
-                        return;
-                    }
-
-                    //rotate the player to face the direction they are traveling in
-                    m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Direction.normalized.x, 0, m_playerEntity.Direction.z));
 
                     if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING))
                     {
@@ -106,10 +87,30 @@ namespace Player
                     }
                     else
                     {
+                        //if rotation is more than 90 degrees play the turn around animation
+                        if (Vector3.Angle(m_playerEntity.Direction, m_playerEntity.LastDirection) > 90)
+                        {
+                            //if cross of x1y2 is less than x2y1 then the rotation was counter clockwise, therefore play the left turn animation
+                            if (m_playerEntity.Direction.x * m_playerEntity.LastDirection.z < m_playerEntity.Direction.z * m_playerEntity.LastDirection.x)
+                            {
+                                m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.LEFT_TURN);
+                            }
+                            else
+                            {
+                                m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.RIGHT_TURN);
+                            }
+                            m_playerEntity.Velocity = Vector3.zero;
+                            m_playerEntity.StartCoroutine(WaitForTurnAnimation());
+                            return;
+                        }
+
                         maxSpeed = m_playerEntity.MaxSpeed;
                         m_velocity = m_velocity.magnitude * m_playerEntity.Direction;
                         m_velocity += (m_playerEntity.Direction * m_playerEntity.WalkingAcceleration) * Time.fixedDeltaTime;
                     }
+                    
+                    //rotate the player to face the direction they are traveling in
+                    m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Direction.normalized.x, 0, m_playerEntity.Direction.z));
 
                     m_velocity = Vector3.ClampMagnitude(m_velocity, maxSpeed);
 
