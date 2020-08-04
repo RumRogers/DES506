@@ -56,9 +56,14 @@ public class Platform : Enchantable
         m_smallScale = transform.localScale * m_smallScaleFactor;
         m_largeScale = transform.localScale * m_largeScaleFactor;
 
-        m_translateFunction = Translate();
+        //m_translateFunction = Translate();
 
-        StartCoroutine(m_translateFunction);
+        //StartCoroutine(m_translateFunction);
+
+        if(GetMagicState(SpellType.TRANSFORM_TEMPERATURE_COLD) == SpellState.COUNTERSPELLED)
+        {
+            m_isMoving = false;
+        }
     }
 
     private void FixedUpdate()
@@ -84,16 +89,16 @@ public class Platform : Enchantable
 
     #region Enumerators
     //Remove
-    IEnumerator Translate()
-    {
-        m_isMoving = true;
+    //IEnumerator Translate()
+    //{
+    //    m_isMoving = true;
 
-        while (true)
-        {
+    //    while (true)
+    //    {
            
-            yield return new WaitForSeconds(Time.deltaTime);
-        }
-    }
+    //        yield return new WaitForSeconds(Time.deltaTime);
+    //    }
+    //}
 
     IEnumerator ScaleObject(Vector3 scale)
     {
@@ -114,7 +119,7 @@ public class Platform : Enchantable
     {
         if(m_isMoving)
         {
-            StopCoroutine(m_translateFunction);
+            //StopCoroutine(m_translateFunction);
             m_isMoving = false;
         }
     }
@@ -133,7 +138,7 @@ public class Platform : Enchantable
     {
         if (!m_isMoving)
         {
-            StartCoroutine(m_translateFunction);
+           // StartCoroutine(m_translateFunction);
             m_isMoving = true;
         }
     }
@@ -142,7 +147,7 @@ public class Platform : Enchantable
     {
         if (!m_isMoving)
         {
-            StartCoroutine(m_translateFunction);
+           // StartCoroutine(m_translateFunction);
             m_isMoving = true;
         }
             
@@ -186,13 +191,9 @@ public class Platform : Enchantable
 
     private void SmoothTranslatePosition(Vector3 axis)
     {
-        //1. Update frame destination 
-        //2. Check if frame destination overshoots
-        //3. If it does, reverse direction, and reupdated frame destination
-        //4. Lerp to new location 
         m_destination = m_defaultPosition + axis * m_motionWidth;
 
-        Vector3 m_frameDestination = transform.position + (m_direction * (axis * m_platformSpeed)); //Reduce offset size
+        Vector3 m_frameDestination = transform.position + (m_direction * (axis * m_platformSpeed));
 
         if (Vector3.Distance(m_frameDestination, m_defaultPosition) <= c_distanceFactor)
         {
@@ -207,6 +208,5 @@ public class Platform : Enchantable
         }
 
         transform.position = Vector3.Lerp(transform.position, m_frameDestination, 0.01666666666f);
-
     }
 }
