@@ -46,6 +46,10 @@ namespace GameUI
                 if(Input.GetMouseButtonDown(0))
                 {
                     m_spellWheel.CastSelectedSpell();
+
+                    // Force to re-focus the current enchantable if still aiming at it, causing the SpellWheel to be properly re-populated.
+                    OnTargetEnchantedChanged();
+                    
                     return;
                 }
             }
