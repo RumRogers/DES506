@@ -17,7 +17,8 @@ namespace GameCore.System
         static Dictionary<Enchantable, Renderer> m_enchantableToRendererMap;
         static List<GameObject> s_enchantableParticles = new List<GameObject>();
         static LevelManager s_instance = null;
-        public static ItemSelector s_itemSelector;
+        public static SpellWheel s_spellWheel = null;
+        public static ItemSelector s_itemSelector = null;
 
         const string SPELLBOOK_TAG = "SpellBook";
         const string ENCHANTABLE_TAG = "Enchantable";
@@ -155,6 +156,10 @@ namespace GameCore.System
             return s_playerSpells != 0;
         }
 
+        public static void ForceSpellWheelClose()
+        {
+            s_spellWheel.SetState(new Idle_SpellWheelState(s_spellWheel));
+        }
         // All of this became obsolete when we changed core mechanic
         /*
         public static Dictionary<string, List<MutableEntity>> s_mapSubjectToMutable = new Dictionary<string, List<MutableEntity>>();

@@ -80,6 +80,7 @@ namespace GameUI
             InitCircle();
             p_Aiming = false;
             p_Active = false;
+            LevelManager.s_spellWheel = this;
 
             SetState(new Idle_SpellWheelState(this));
         }

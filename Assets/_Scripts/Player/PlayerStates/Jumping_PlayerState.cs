@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using GameCore.System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,6 +36,7 @@ namespace Player
 
             m_playerEntity.StopAllCoroutines();
             m_playerEntity.StartCoroutine(WaitForJumpAnimation());
+            LevelManager.ForceSpellWheelClose();
         }
 
         public override void Manage()

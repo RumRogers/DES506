@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using GameCore.System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,6 +19,7 @@ namespace Player
             m_velocity = m_playerEntity.Velocity;
 
             m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.FALLING);
+            LevelManager.ForceSpellWheelClose();
         }
 
         public override void Manage()

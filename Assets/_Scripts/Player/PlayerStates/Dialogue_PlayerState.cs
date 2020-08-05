@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using GameCore.System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -58,6 +59,8 @@ namespace Player
             m_playerEntity.Animator.SetExpression(PlayerFacialExpression.TALKING);
             m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.IDLE);
             Debug.Log("In Dialogue");
+
+            LevelManager.ForceSpellWheelClose();
         }
 
         public override void Manage()
