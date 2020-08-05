@@ -819,6 +819,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1297201435}
     m_Modifications:
+    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
+        type: 3}
+      propertyPath: m_Name
+      value: InkBolt (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 1424418927591661895, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -873,11 +878,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
-        type: 3}
-      propertyPath: m_Name
-      value: InkBolt (2)
       objectReference: {fileID: 0}
     - target: {fileID: 1424418927486112099, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
@@ -29744,6 +29744,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1297201435}
     m_Modifications:
+    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
+        type: 3}
+      propertyPath: m_Name
+      value: InkBolt (4)
+      objectReference: {fileID: 0}
     - target: {fileID: 1424418927591661895, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -29798,11 +29803,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
-        type: 3}
-      propertyPath: m_Name
-      value: InkBolt (4)
       objectReference: {fileID: 0}
     - target: {fileID: 1424418927486112099, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
@@ -57047,7 +57047,7 @@ PrefabInstance:
     - target: {fileID: 2166381962610705797, guid: 43745d68f9b7f3644b86b4609c6d0dd0,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2166381962610705797, guid: 43745d68f9b7f3644b86b4609c6d0dd0,
         type: 3}
@@ -59029,6 +59029,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1297201435}
     m_Modifications:
+    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
+        type: 3}
+      propertyPath: m_Name
+      value: InkBolt (3)
+      objectReference: {fileID: 0}
     - target: {fileID: 1424418927591661895, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -59083,11 +59088,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
-        type: 3}
-      propertyPath: m_Name
-      value: InkBolt (3)
       objectReference: {fileID: 0}
     - target: {fileID: 1424418927486112099, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
@@ -66914,6 +66914,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1297201435}
     m_Modifications:
+    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
+        type: 3}
+      propertyPath: m_Name
+      value: InkBolt (7)
+      objectReference: {fileID: 0}
     - target: {fileID: 1424418927591661895, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -66968,11 +66973,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
-        type: 3}
-      propertyPath: m_Name
-      value: InkBolt (7)
       objectReference: {fileID: 0}
     - target: {fileID: 1424418927486112099, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
@@ -72910,6 +72910,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1297201435}
     m_Modifications:
+    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
+        type: 3}
+      propertyPath: m_Name
+      value: InkBolt (6)
+      objectReference: {fileID: 0}
     - target: {fileID: 1424418927591661895, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -72964,11 +72969,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
-        type: 3}
-      propertyPath: m_Name
-      value: InkBolt (6)
       objectReference: {fileID: 0}
     - target: {fileID: 1424418927486112099, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
@@ -75802,6 +75802,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_selectedTextColor.a
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8148080584757746196, guid: 56de03b2459cb91438e45be580274375,
+        type: 3}
+      propertyPath: m_TagString
+      value: UI_ItemSelector
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56de03b2459cb91438e45be580274375, type: 3}
@@ -85422,6 +85427,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1297201435}
     m_Modifications:
+    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
+        type: 3}
+      propertyPath: m_Name
+      value: InkBolt (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 1424418927591661895, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -85476,11 +85486,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
-        type: 3}
-      propertyPath: m_Name
-      value: InkBolt (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ece4949563f9f54685d142252628d0b, type: 3}
@@ -90833,7 +90838,7 @@ Transform:
   - {fileID: 51499709}
   - {fileID: 1585435581}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1931046922 stripped
 Transform:
@@ -93018,6 +93023,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1297201435}
     m_Modifications:
+    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
+        type: 3}
+      propertyPath: m_Name
+      value: InkBolt
+      objectReference: {fileID: 0}
     - target: {fileID: 1424418927591661895, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -93072,11 +93082,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
-        type: 3}
-      propertyPath: m_Name
-      value: InkBolt
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ece4949563f9f54685d142252628d0b, type: 3}
@@ -94044,6 +94049,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1297201435}
     m_Modifications:
+    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
+        type: 3}
+      propertyPath: m_Name
+      value: InkBolt (5)
+      objectReference: {fileID: 0}
     - target: {fileID: 1424418927591661895, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -94098,11 +94108,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1424418927591661892, guid: 8ece4949563f9f54685d142252628d0b,
-        type: 3}
-      propertyPath: m_Name
-      value: InkBolt (5)
       objectReference: {fileID: 0}
     - target: {fileID: 1424418927486112099, guid: 8ece4949563f9f54685d142252628d0b,
         type: 3}
