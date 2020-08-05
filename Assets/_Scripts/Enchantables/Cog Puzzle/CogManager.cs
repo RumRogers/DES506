@@ -32,7 +32,7 @@ public class CogManager : MonoBehaviour
     private bool m_complete = false;
     private bool m_doorClosed = true;
     private float m_counter = 0.0f;
-    private float m_finalY = 0.0f;
+    private float m_finalX = 0.0f;
     private Quaternion m_globRotation;
     private IEnumerator m_openFunc;
 
@@ -52,7 +52,7 @@ public class CogManager : MonoBehaviour
             m_directionCheck = !m_directionCheck;
         }
 
-        m_finalY = m_door.transform.position.y + 7.5f;
+        m_finalX = m_door.transform.position.x + 40f;
     }
 
     // Update is called once per frame
@@ -89,9 +89,9 @@ public class CogManager : MonoBehaviour
         {
             m_counter += Time.deltaTime * m_doorSpeed;
 
-            m_door.transform.position += new Vector3(0, Time.deltaTime * m_doorSpeed, 0);
+            m_door.transform.position += new Vector3(Time.deltaTime * -m_doorSpeed, 0, 0);
 
-            if (m_door.transform.position.y >= m_finalY)
+            if (m_door.transform.position.x >= m_finalX)
                 m_doorClosed = false;
 
             yield return new WaitForSeconds(Time.deltaTime);
