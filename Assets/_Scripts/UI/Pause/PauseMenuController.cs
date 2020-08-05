@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 #region tips classes
@@ -101,6 +102,11 @@ public class PauseMenuController : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void QuitToMenu(string scene)
+    {
+        SceneManager.LoadScene(scene);
     }
 
     #region Sub-Menu Handling
