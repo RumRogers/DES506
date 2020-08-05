@@ -161,12 +161,18 @@ namespace Player
             //Setting the cameras aimed at transfrom for the aiming camera state. Not sure if we could move the functionality for the shader changing there? or if it makes sense to be here?
             m_camera.p_AimedAtTransform = m_aimedAt;
 
-            if (!m_locked && (Input.GetButtonDown("Fire") || Input.GetAxisRaw("Fire") != 0))
-            {
+            if (!m_locked && (Input.GetButtonDown("Fire") || Input.GetAxisRaw("Fire") != 0))            {
+                
                 if(m_playerEntity.EquipedItem == PlayerEquipableItems.SPELL_QUILL && (!SpellWheel.p_Active || SpellWheel.p_Aiming))
                 {
                     return;
                 }
+                if(m_playerEntity.EquipedItem == PlayerEquipableItems.ERASER && !m_aimedAt)
+                {
+                    return;
+                }
+
+                m_locked = true;
                 //TEMP (kinda): Currently only fires if the equipped item is the quill, in future it should fire regardless but shoot a different projectile based on the equiped item passed to the projectile handler when
                 //the equipped item is changed on the player 
                 m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.CASTING);
@@ -200,8 +206,12 @@ namespace Player
                 }
             }
 
-            //rotate the player to face the direction they are aiming in
-            m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z));
+            else if (!((Input.GetButtonDown("Fire") || Input.GetAxisRaw("Fire") != 0)))
+            {
+                m_locked = false;
+            }
+                //rotate the player to face the direction they are aiming in
+                m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z));
 
             //Slope detection 
             //if the slope is climable, modify the direction the player is traveling in 
