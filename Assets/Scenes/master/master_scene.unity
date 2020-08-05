@@ -56876,7 +56876,7 @@ PrefabInstance:
     - target: {fileID: 2166381962610705797, guid: 43745d68f9b7f3644b86b4609c6d0dd0,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2166381962610705797, guid: 43745d68f9b7f3644b86b4609c6d0dd0,
         type: 3}
@@ -75482,6 +75482,11 @@ PrefabInstance:
       propertyPath: m_selectedTextColor.a
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8148080584757746196, guid: 56de03b2459cb91438e45be580274375,
+        type: 3}
+      propertyPath: m_TagString
+      value: UI_ItemSelector
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56de03b2459cb91438e45be580274375, type: 3}
 --- !u!4 &1613086245 stripped
@@ -90511,7 +90516,7 @@ Transform:
   - {fileID: 282695953}
   - {fileID: 51499709}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1931046922 stripped
 Transform:
