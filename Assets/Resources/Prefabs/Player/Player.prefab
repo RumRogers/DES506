@@ -181,8 +181,8 @@ MonoBehaviour:
     type: 3}
   m_timeBetweenShots: 1
   m_speed: 5
-  m_spellRange: 40
-  m_meleeRange: 40
+  m_spellRange: 25
+  m_meleeRange: 25
 --- !u!54 &995098094
 Rigidbody:
   m_ObjectHideFlags: 0
