@@ -33,9 +33,15 @@ public class NPCSimple : MonoBehaviour
     [SerializeField]
     private KeyCode m_dialogueInput;
 
+    [Header("Additional Dialogue")]
+    [SerializeField]
+    private TextAsset m_secondDialogue;
+
     Dialogue m_dialogue;
 
     bool m_talking = false;
+
+    bool m_firstTimeTalking = true;
 
     private Animator m_animator;
     private NPCState m_state;
@@ -69,6 +75,12 @@ public class NPCSimple : MonoBehaviour
             m_state = new NPCStateDefault(m_animator, m_defaultAnimation, m_letterBox);
             Debug.Log("I have stopped talking");
             m_talking = false;
+
+            if(m_firstTimeTalking && m_secondDialogue)
+            {
+                m_dialogue.SetNewDialogue(m_secondDialogue);
+                m_firstTimeTalking = false;
+            }
         }
 
 

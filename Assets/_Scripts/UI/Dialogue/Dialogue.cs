@@ -89,6 +89,11 @@ namespace GameUI.Dialogue
             }
         }
 
+        public void SetNewDialogue(TextAsset dialogue)
+        {
+            m_convoJSON = dialogue;
+        }
+
         private void Update()
         {
             fmodDialogue.setParameterByName("dialogueBoxNumber", m_lineIndex);
