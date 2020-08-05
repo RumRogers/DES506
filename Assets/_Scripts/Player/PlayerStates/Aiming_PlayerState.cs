@@ -208,8 +208,8 @@ namespace Player
             {
                 m_locked = false;
             }
-                //rotate the player to face the direction they are aiming in
-                m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z));
+            //rotate the player to face the direction they are aiming in
+            m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z));
 
             //Slope detection 
             //if the slope is climable, modify the direction the player is traveling in 
@@ -253,6 +253,44 @@ namespace Player
                     m_velocity += (m_playerEntity.Direction * m_playerEntity.AimingAcceleration) * Time.deltaTime;
                     m_velocity = Vector3.ClampMagnitude(m_velocity, m_playerEntity.AimingMaxSpeed);
                 }
+
+                //ANIMATIONS
+                //Based on movementInput, play animation, this is a monstrosity... can't use a switch statement here ;w;
+                //could work out the angle from forward but that might actually be worse performance wise
+                //forward
+                if (m_playerEntity.MovementInput.x == 0 && m_playerEntity.MovementInput.y > 0)
+                {
+                    m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.AIM_RUN_FORWARD);
+                }
+                //back
+                else if (m_playerEntity.MovementInput.x == 0 && m_playerEntity.MovementInput.y < 0)
+                {
+                    m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.AIM_RUN_BACK);
+                }
+                //left
+                else if (m_playerEntity.MovementInput.x < 0 && m_playerEntity.MovementInput.y == 0)
+                {
+                    m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.AIM_RUN_LEFT);
+                }
+                //right
+                else if (m_playerEntity.MovementInput.x > 0 && m_playerEntity.MovementInput.y == 0)
+                {
+                    m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.AIM_RUN_RIGHT);
+                }
+                //Top diagonals
+                else if (m_playerEntity.MovementInput.x != 0 && m_playerEntity.MovementInput.y > 0)
+                {
+                    //diagonals face the way they are moving
+                    m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Direction.x, 0, m_playerEntity.Direction.z));
+                    m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.AIM_RUN_FORWARD);
+                }
+                //bottom diagonals
+                else if (m_playerEntity.MovementInput.x != 0 && m_playerEntity.MovementInput.y < 0)
+                {
+                    //back diagonals face the oposite way of movement
+                    m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(-m_playerEntity.Direction.x, 0, -m_playerEntity.Direction.z));
+                    m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.AIM_RUN_BACK);
+                }
             }
             else if (Mathf.Abs(m_velocity.x - m_playerEntity.GroundAddedVelocity.x) > 0.1 || Mathf.Abs(m_velocity.z - m_playerEntity.GroundAddedVelocity.z) > 0.1)
             {
@@ -267,6 +305,7 @@ namespace Player
             }
             else
             {
+                m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.AIMING);
                 m_velocity.x = 0.0f;
                 m_velocity.z = 0.0f;
             }

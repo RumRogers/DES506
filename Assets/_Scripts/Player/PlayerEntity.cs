@@ -103,7 +103,8 @@ namespace Player
         bool m_canJump = true;
         bool m_hasJumped = false;
         float m_canJumpTimer = 0;
-        
+
+        Vector2 m_movementInput;
         Vector3 m_playerStartPosition;
         Vector3 m_velocity = Vector3.zero;
         Vector3 m_groundAddedVelocity = Vector3.zero;
@@ -147,6 +148,7 @@ namespace Player
         public Vector3 Direction { get => m_direction; set => m_direction = value; }
         public Vector3 Position { get => transform.position; set { m_position = value; m_positionLastFrame = value; transform.position = value; } }
         //player stats, getters only
+        public Vector2 MovementInput { get => m_movementInput; }
         public Vector3 LastDirection { get => m_lastDirection; }
         public bool Grounded { get => m_grounded; }
         public bool CanJump { get => m_canJump; }
@@ -235,8 +237,10 @@ namespace Player
         override protected void Update()
         {
             //Directional input
-            Vector3 forwardMovement = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z) * Input.GetAxis("Vertical"); // removing the y component from the camera's forward vector
-            Vector3 rightMovement = Camera.main.transform.right * Input.GetAxis("Horizontal");
+            m_movementInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+            Vector3 forwardMovement = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z) * m_movementInput.y; // removing the y component from the camera's forward vector
+            Vector3 rightMovement = Camera.main.transform.right * m_movementInput.x;
             m_direction = (forwardMovement + rightMovement).normalized;
 
             base.Update();

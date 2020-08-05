@@ -16,6 +16,10 @@ namespace Player
         JUMPING,
         FALLING,
         AIMING,
+        AIM_RUN_FORWARD,
+        AIM_RUN_BACK,
+        AIM_RUN_RIGHT,
+        AIM_RUN_LEFT,
         CASTING,
         PUSHING,
         DYING,
@@ -55,6 +59,10 @@ namespace Player
         [SerializeField] AnimationClip m_jumpLandAnim;
         [SerializeField] AnimationClip m_fallingAnim;
         [SerializeField] AnimationClip m_aimingAnim;
+        [SerializeField] AnimationClip m_aimRunForwardAnim;
+        [SerializeField] AnimationClip m_aimRunBackAnim;
+        [SerializeField] AnimationClip m_aimRunLeftAnim;
+        [SerializeField] AnimationClip m_aimRunRightAnim;
         [SerializeField] AnimationClip m_castingAnim;
         [SerializeField] AnimationClip m_freeFallingAnim;
         [SerializeField] AnimationClip m_recoveringAmim;
@@ -73,6 +81,7 @@ namespace Player
         [SerializeField] float m_jumpLandAnimSpeed = 2;
         [SerializeField] float m_fallingAnimSpeed = 2;
         [SerializeField] float m_aimingAnimSpeed = 2;
+        [SerializeField] float m_aimRunAnimSpeed = 2;
         [SerializeField] float m_castingAnimSpeed = 2;
         [SerializeField] float m_freeFallingAnimSpeed = 2;
         [SerializeField] float m_recoveringAnimSpeed = 2;
@@ -93,6 +102,10 @@ namespace Player
         AnimationState m_jumpEndState;
         AnimationState m_fallingState;
         AnimationState m_aimingState;
+        AnimationState m_aimRunForwardState;
+        AnimationState m_aimRunBackState;
+        AnimationState m_aimRunLeftState;
+        AnimationState m_aimRunRightState;
         AnimationState m_castingState;
         AnimationState m_freeFallingState;
         AnimationState m_recoveringState;
@@ -113,6 +126,10 @@ namespace Player
         public AnimationClip JumpingLand { get => m_jumpLandAnim; }
         public AnimationClip Falling { get => m_fallingAnim; }
         public AnimationClip Aiming { get => m_aimingAnim; }
+        public AnimationClip AimRunForward { get => m_aimRunForwardAnim; }
+        public AnimationClip AimRunBack { get => m_aimRunBackAnim; }
+        public AnimationClip AimRunLeft { get => m_aimRunLeftAnim; }
+        public AnimationClip AimRunRight { get => m_aimRunRightAnim; }
         public AnimationClip Casting { get => m_castingAnim; }
         public AnimationClip FreeFalling { get => m_freeFallingAnim; }
         public AnimationClip Recovering { get => m_recoveringAmim; }
@@ -130,6 +147,10 @@ namespace Player
         public AnimationState JumpingEndState { get => m_jumpEndState; }
         public AnimationState FallingState { get => m_fallingState; }
         public AnimationState AimingState { get => m_aimingState; }
+        public AnimationState AimRunForwardState { get => m_aimRunForwardState; }
+        public AnimationState AimRunBackState { get => m_aimRunBackState; }
+        public AnimationState AimRunLeftState { get => m_aimRunLeftState; }
+        public AnimationState AimRunRightState { get => m_aimRunRightState; }
         public AnimationState CastingState { get => m_castingState; }
         public AnimationState FreeFallingState { get => m_freeFallingState; }
         public AnimationState RecoveringState { get => m_recoveringState; }
@@ -162,6 +183,10 @@ namespace Player
                 m_animation.AddClip(m_jumpLandAnim, "jumpLand");
                 m_animation.AddClip(m_fallingAnim, "falling");
                 m_animation.AddClip(m_aimingAnim, "aiming");
+                m_animation.AddClip(m_aimRunForwardAnim, "aimRunForward");
+                m_animation.AddClip(m_aimRunBackAnim, "aimRunBack");
+                m_animation.AddClip(m_aimRunLeftAnim, "aimRunLeft");
+                m_animation.AddClip(m_aimRunRightAnim, "aimRunRight");
                 m_animation.AddClip(m_castingAnim, "casting");
                 m_animation.AddClip(m_freeFallingAnim, "freeFalling");
                 m_animation.AddClip(m_recoveringAmim, "recovering");
@@ -210,6 +235,22 @@ namespace Player
                     case "aiming":
                         state.speed = m_aimingAnimSpeed;
                         m_aimingState = state;
+                        break;
+                    case "aimRunForward":
+                        state.speed = m_aimRunAnimSpeed;
+                        m_aimRunForwardState = state;
+                        break;
+                    case "aimRunBack":
+                        state.speed = m_aimRunAnimSpeed;
+                        m_aimRunBackState = state;
+                        break;
+                    case "aimRunLeft":
+                        state.speed = m_aimRunAnimSpeed;
+                        m_aimRunLeftState = state;
+                        break;
+                    case "aimRunRight":
+                        state.speed = m_aimRunAnimSpeed;
+                        m_aimRunRightState = state;
                         break;
                     case "casting":
                         state.speed = m_castingAnimSpeed;

@@ -36,8 +36,17 @@ namespace Player
                 case PlayerAnimationProperties.CASTING:
                     m_owner.SetState(new Casting_AnimationState(m_owner));
                     break;
-                default:
-                    m_owner.SetState(new Idle_AnimationState(m_owner));
+                case PlayerAnimationProperties.AIM_RUN_FORWARD:
+                    m_playerAnimator.SetState(new AimRunForward_AnimationState(m_playerAnimator));
+                    break;
+                case PlayerAnimationProperties.AIM_RUN_BACK:
+                    m_playerAnimator.SetState(new AimRunBack_AnimationState(m_playerAnimator));
+                    break;
+                case PlayerAnimationProperties.AIM_RUN_LEFT:
+                    m_playerAnimator.SetState(new AimRunLeft_AnimationState(m_playerAnimator));
+                    break;
+                case PlayerAnimationProperties.AIM_RUN_RIGHT:
+                    m_playerAnimator.SetState(new AimRunRight_AnimationState(m_playerAnimator));
                     break;
             }
         }
