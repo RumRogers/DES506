@@ -75,7 +75,11 @@ namespace GameUI
 
         public void SetSlotsVisible(bool visible)
         {
+            // Extra care here
             transform.GetChild(0).gameObject.SetActive(visible);
+            transform.GetChild(0).GetChild(0).gameObject.SetActive(visible);
+            transform.GetChild(0).GetChild(0).GetChild(0).gameObject.SetActive(visible);
+            transform.GetChild(0).GetChild(0).GetChild(1).gameObject.SetActive(visible);
         }
     }
 }
