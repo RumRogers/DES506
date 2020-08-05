@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Player;
 using GameCore.System;
+using GameCore.Camera;
 
 namespace GameCore.GameState
 {
@@ -11,7 +12,10 @@ namespace GameCore.GameState
     { 
         GameStateController controller;
         PlayerEntity m_playerEntity;
+        PlayerMoveCamera m_playerMoveCamera;
+
         State m_previousState;
+        State m_playerMoveCameraPreviousState;
 
         public Paused_State(GameStateController owner) : base(owner)
         {
@@ -22,12 +26,15 @@ namespace GameCore.GameState
             controller = owner;
 
             m_playerEntity = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerEntity>();
+            m_playerMoveCamera = UnityEngine.Camera.main.GetComponent<PlayerMoveCamera>();
 
             m_previousState = m_playerEntity.GetState();
+            m_playerMoveCameraPreviousState = m_playerMoveCamera.GetState();
 
             m_playerEntity.SetState(new Idle_PlayerState(m_playerEntity));
+            m_playerMoveCamera.SetState(new Idle_CameraState(m_playerMoveCamera));
 
-            controller.SetPrevState(m_previousState);
+            controller.SetPrevState(m_previousState, m_playerMoveCameraPreviousState);
             controller.GetPauseMenu().SetActive(true);
 
             controller.SetIngameUIActive(false);

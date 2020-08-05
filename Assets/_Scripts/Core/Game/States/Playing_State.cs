@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Player;
 using GameCore.System;
+using GameCore.Camera;
 
 namespace GameCore.GameState
 {
@@ -15,6 +16,7 @@ namespace GameCore.GameState
 
         GameStateController controller;
         PlayerEntity m_playerEntity;
+        PlayerMoveCamera m_playerMoveCamera;
         //State m_prevoiusState = null;
 
         public Playing_State(GameCore.GameState.GameStateController owner) : base(owner)
@@ -42,6 +44,13 @@ namespace GameCore.GameState
             Debug.Log("Game is unpaused");
 
             controller.SetIngameUIActive(true);
+        }
+
+        // Constructor chaining so I don't break anything that Jordan wrote
+        public Playing_State(GameCore.GameState.GameStateController owner, State prevState, State prevCameraState) : this(owner, prevState)
+        {
+            m_playerMoveCamera = UnityEngine.Camera.main.GetComponent<PlayerMoveCamera>();
+            m_playerMoveCamera.SetState(prevCameraState);
         }
 
         public override void Manage()

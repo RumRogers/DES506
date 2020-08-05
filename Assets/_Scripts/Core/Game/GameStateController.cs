@@ -18,6 +18,7 @@ namespace GameCore.GameState
 
 
         GameCore.System.State m_prevState = null;
+        GameCore.System.State m_prevCameraState = null;
 
         void Awake()
         {
@@ -44,7 +45,7 @@ namespace GameCore.GameState
         //to deal with this ugliness.
         public void ResumeButtonPress() 
         {
-            SetState(new Playing_State(this, m_prevState));
+            SetState(new Playing_State(this, m_prevState, m_prevCameraState));
         }
 
         public bool IsPaused()
@@ -52,9 +53,10 @@ namespace GameCore.GameState
             return typeof(Paused_State).IsInstanceOfType(m_state);
         }
 
-        public void SetPrevState(GameCore.System.State state)
+        public void SetPrevState(GameCore.System.State playerState, GameCore.System.State cameraState) 
         {
-            m_prevState = state;
+            m_prevState = playerState;
+            m_prevCameraState = cameraState;            
         }
 
         public void SetIngameUIActive(bool active) //temp, disabling everything will probably break stuff!
