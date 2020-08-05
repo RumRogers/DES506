@@ -66,6 +66,7 @@ public class Cog : Enchantable
         m_isTicking = tick;
         m_smallScale = transform.localScale * smallScaleFactor;
         m_largeScale = transform.localScale * largeScaleFactor;
+        m_cogSpeed = speed;
 
         #region Starting Size
         switch (m_size)
@@ -157,9 +158,9 @@ public class Cog : Enchantable
             else
             {
                 if (m_isClockwise)
-                    transform.RotateAround(transform.position, transform.right, Time.deltaTime * 10);
+                    transform.RotateAround(transform.position, transform.right, Time.deltaTime * m_cogSpeed);
                 else
-                    transform.RotateAround(transform.position, transform.right, Time.deltaTime * -10);
+                    transform.RotateAround(transform.position, transform.right, Time.deltaTime * -m_cogSpeed);
             }
 
             yield return new WaitForSeconds(Time.deltaTime);
