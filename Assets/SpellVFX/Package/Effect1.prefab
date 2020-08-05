@@ -9212,7 +9212,7 @@ MonoBehaviour:
   UseCollisionDetection: 1
   LimitMaxDistance: 0
   MaxDistnace: -1
-  Mass: 1
-  Speed: 177.52
+  Mass: 0.00001
+  Speed: 12
   AirDrag: 0
   UseGravity: 0

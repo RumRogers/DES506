@@ -65,9 +65,9 @@ public class CounterWeight : Enchantable
         Vector3 m_size = m_renderer.bounds.size;
 
         //Check if object is falling, ensures added speed without messing with weight
-        if (!Physics.Raycast(transform.position, -transform.up, m_size.y/2))
+        if (!Physics.Raycast(transform.position, Vector3.down, m_size.y + 0.07f))
         {
-            m_rigidBody.AddForceAtPosition(Vector3.down * m_dropForce, transform.position);
+           m_rigidBody.AddForceAtPosition(Vector3.down * m_dropForce, transform.position);
         }
     }
 
@@ -78,7 +78,7 @@ public class CounterWeight : Enchantable
 
         while (m_counter < c_scaleTime)
         {
-            transform.localScale = Vector3.Lerp(originalScale, scale, m_counter);
+            transform.localScale = Vector3.Lerp(originalScale, scale, m_counter/2);
             m_counter += Time.deltaTime;
             yield return new WaitForSeconds(Time.deltaTime);
         }
@@ -88,6 +88,7 @@ public class CounterWeight : Enchantable
 
     protected override void SpellSizeBig(Spell spell)
     {
+        StopAllCoroutines();
         StartCoroutine(ScaleObject(m_largeScale));
 
         m_rigidBody.mass = m_largeMass;
@@ -95,6 +96,7 @@ public class CounterWeight : Enchantable
 
     protected override void SpellSizeSmall(Spell spell)
     {
+        StopAllCoroutines();
         StartCoroutine(ScaleObject(m_smallScale));
 
         m_rigidBody.mass = m_smallMass;
@@ -102,6 +104,7 @@ public class CounterWeight : Enchantable
 
     protected override void SpellReset(Spell spell)
     {
+        StopAllCoroutines();
         StartCoroutine(ScaleObject(Vector3.one));
 
         m_rigidBody.mass = m_defaultMass;

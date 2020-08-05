@@ -153,7 +153,7 @@ public class Cog : Enchantable
         {
             if(m_isTicking)
             {
-
+                //Tick version probably not needed
             }
             else
             {

@@ -8,6 +8,7 @@ namespace VisualEffects
     {
         MaterialPropertyBlock m_matBlock;
         Renderer m_renderer;
+        [SerializeField] Renderer m_fallPlatRenderer;
         Shader m_originalShader;
         Shader m_blendShader;
         //might want a different texture per object based on how the model is UV wrapped
@@ -27,8 +28,11 @@ namespace VisualEffects
         void Start()
         {
             m_matBlock = new MaterialPropertyBlock();
+
             if (!TryGetComponent<Renderer>(out m_renderer))
             {
+                if (m_fallPlatRenderer)
+                    m_renderer = m_fallPlatRenderer;
                 Debug.LogError("No renderer component attached to object with Frozen visual effect");
             }
             if(!TryGetComponent<GameCore.Spells.MagicProfile>(out m_magicProfile))
@@ -40,6 +44,7 @@ namespace VisualEffects
             m_matBlock.SetTexture("_BlendTex", m_iceTexture);
             m_renderer.SetPropertyBlock(m_matBlock);
             m_originalShader = m_renderer.material.shader;
+
             m_blendShader = Resources.Load<Shader>(BLEND_SHADER_PATH);
             m_renderer.material.shader = m_blendShader;
 
@@ -62,6 +67,7 @@ namespace VisualEffects
             if (m_magicProfile.GetMagicFingerprint().magicState.temperature == GameCore.Spells.SpellState.COUNTERSPELLED && !m_lerped)
             {
                 m_renderer.material.shader = m_blendShader;
+
                 m_lerped = true;
                 StopAllCoroutines();
                 StartCoroutine(TransitionBetweenStates(FROZEN_LERP_VALUE, LERP_TIME));
@@ -88,6 +94,7 @@ namespace VisualEffects
                 m_matLerpValue = Mathf.Lerp(startLerpValue, lerpTowards, perComp);
 
                 m_matBlock.SetFloat("_LerpValue", m_matLerpValue);
+
                 m_renderer.SetPropertyBlock(m_matBlock);
 
                 if (perComp > 0.99)

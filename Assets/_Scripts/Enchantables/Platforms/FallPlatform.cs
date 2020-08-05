@@ -7,7 +7,10 @@ public class FallPlatform : Enchantable
 {
     [Header("Time Attributes")]
     [SerializeField]
-    private int m_normalTimeTillFall = 1;
+    private float m_normalTimeTillFall = 1;
+
+    [SerializeField]
+    private float m_timeTillFallFrozen;
 
     [Header("Shake Attributes")]
     [SerializeField]
@@ -96,8 +99,8 @@ public class FallPlatform : Enchantable
         m_fallTriggerStart = true;
         m_counter = 0;
 
-        if(!m_isFrozen)
-        {
+        //if(!m_isFrozen)
+        //{
             while (m_rigBod.isKinematic)
             {
                 m_counter += Time.deltaTime;
@@ -117,7 +120,7 @@ public class FallPlatform : Enchantable
 
                 yield return new WaitForSeconds(Time.deltaTime);
             }
-        }
+        //}
         
         yield return StartCoroutine(Respawn());
     }
@@ -131,13 +134,23 @@ public class FallPlatform : Enchantable
 
             if (m_counter >= c_respawnTime)
             {
-                m_counter = 0;
-                m_rigBod.isKinematic = true;
-                m_platform.GetComponent<Rigidbody>().isKinematic = true;
-                m_platform.transform.position = m_platBasePosition;
-                transform.position = m_position;
-                m_fallTriggerStart = false;
+                //m_counter = 0;
+                if(m_rigBod.isKinematic == false)
+                {
+                    m_rigBod.isKinematic = true;
+                    //m_platform.GetComponent<Rigidbody>().isKinematic = true;
+                    m_platform.transform.position = m_platBasePosition + Vector3.up * 5;
+                    transform.position = m_position;
+                    m_fallTriggerStart = false;
+                }
+                else if(Vector3.Distance(m_platform.transform.position, m_platBasePosition) <= 1.3f)
+                {
+                    m_counter = 0;
+                    m_platform.GetComponent<Rigidbody>().isKinematic = true;
+                }
             }
+
+            
 
             yield return new WaitForSeconds(Time.deltaTime);
         }
@@ -149,6 +162,7 @@ public class FallPlatform : Enchantable
     protected override void SpellTemperatureCold(Spell spell)
     {
         m_isFrozen = true;
+        m_timeTillFall = m_timeTillFallFrozen;
     }
 
     protected override void SpellSizeBig(Spell spell)

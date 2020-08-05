@@ -1134,6 +1134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fb4034cecba9414188bf88fe093cea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_fallPlatRenderer: {fileID: 0}
   m_iceTexture: {fileID: 2800000, guid: 933b37c533eed6e4ca6166872026586f, type: 3}
   m_mainTexture: {fileID: 2800000, guid: d8328f013b682d94b92058be86f29d07, type: 3}
 --- !u!114 &28845308
@@ -13571,17 +13572,17 @@ PrefabInstance:
     - target: {fileID: 4580232385870872155, guid: 3ead565c55b9919448a7c71d26aae209,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -235.68
+      value: -44.8
       objectReference: {fileID: 0}
     - target: {fileID: 4580232385870872155, guid: 3ead565c55b9919448a7c71d26aae209,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 142.48
+      value: 154.4
       objectReference: {fileID: 0}
     - target: {fileID: 4580232385870872155, guid: 3ead565c55b9919448a7c71d26aae209,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -249.04
+      value: -381.2
       objectReference: {fileID: 0}
     - target: {fileID: 4580232385870872155, guid: 3ead565c55b9919448a7c71d26aae209,
         type: 3}
@@ -13692,7 +13693,7 @@ PrefabInstance:
     - target: {fileID: 4580232385870872151, guid: 3ead565c55b9919448a7c71d26aae209,
         type: 3}
       propertyPath: m_isPowerfulWizard
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4580232385870872158, guid: 3ead565c55b9919448a7c71d26aae209,
         type: 3}
@@ -17684,6 +17685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fb4034cecba9414188bf88fe093cea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_fallPlatRenderer: {fileID: 0}
   m_iceTexture: {fileID: 2800000, guid: 933b37c533eed6e4ca6166872026586f, type: 3}
   m_mainTexture: {fileID: 2800000, guid: d8328f013b682d94b92058be86f29d07, type: 3}
 --- !u!114 &293049494
@@ -29283,6 +29285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fb4034cecba9414188bf88fe093cea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_fallPlatRenderer: {fileID: 0}
   m_iceTexture: {fileID: 2800000, guid: 933b37c533eed6e4ca6166872026586f, type: 3}
   m_mainTexture: {fileID: 2800000, guid: d8328f013b682d94b92058be86f29d07, type: 3}
 --- !u!1001 &543623199
@@ -30502,6 +30505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fb4034cecba9414188bf88fe093cea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_fallPlatRenderer: {fileID: 0}
   m_iceTexture: {fileID: 2800000, guid: 933b37c533eed6e4ca6166872026586f, type: 3}
   m_mainTexture: {fileID: 2800000, guid: d8328f013b682d94b92058be86f29d07, type: 3}
 --- !u!114 &559553649
@@ -37233,7 +37237,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_hasParticles: 1
   m_particlesType: 0
-  m_normalTimeTillFall: 2
+  m_normalTimeTillFall: 1
+  m_timeTillFallFrozen: 3
   m_shakeScale: 0.1
   m_shakeSpeed: 100
   m_platform: {fileID: 1987586512}
@@ -37299,6 +37304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fb4034cecba9414188bf88fe093cea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_fallPlatRenderer: {fileID: 1987586517}
   m_iceTexture: {fileID: 2800000, guid: 933b37c533eed6e4ca6166872026586f, type: 3}
   m_mainTexture: {fileID: 2800000, guid: d8328f013b682d94b92058be86f29d07, type: 3}
 --- !u!1001 &684761085
@@ -53792,6 +53798,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fb4034cecba9414188bf88fe093cea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_fallPlatRenderer: {fileID: 0}
   m_iceTexture: {fileID: 2800000, guid: 933b37c533eed6e4ca6166872026586f, type: 3}
   m_mainTexture: {fileID: 2800000, guid: d8328f013b682d94b92058be86f29d07, type: 3}
 --- !u!114 &1000886673
@@ -71627,6 +71634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fb4034cecba9414188bf88fe093cea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_fallPlatRenderer: {fileID: 0}
   m_iceTexture: {fileID: 2800000, guid: 933b37c533eed6e4ca6166872026586f, type: 3}
   m_mainTexture: {fileID: 2800000, guid: d8328f013b682d94b92058be86f29d07, type: 3}
 --- !u!114 &1377175969
@@ -77209,7 +77217,7 @@ PrefabInstance:
     - target: {fileID: 6532633757742999314, guid: 2787d0c0d005f644e8f1b9bf8dcacb8c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6532633757742999314, guid: 2787d0c0d005f644e8f1b9bf8dcacb8c,
         type: 3}
@@ -83536,7 +83544,7 @@ PrefabInstance:
     - target: {fileID: 4559170202534178683, guid: b8d2b300227e3f649b79b1c08500c160,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4559170202534178683, guid: b8d2b300227e3f649b79b1c08500c160,
         type: 3}
@@ -83568,20 +83576,25 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.8182
       objectReference: {fileID: 0}
-    - target: {fileID: 4185999165462263931, guid: b8d2b300227e3f649b79b1c08500c160,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.x
-      value: 4.703001
-      objectReference: {fileID: 0}
-    - target: {fileID: 4185999165462263931, guid: b8d2b300227e3f649b79b1c08500c160,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.y
-      value: 3.3008757
-      objectReference: {fileID: 0}
     - target: {fileID: 4185999167246572390, guid: b8d2b300227e3f649b79b1c08500c160,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 11.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185999165462263931, guid: b8d2b300227e3f649b79b1c08500c160,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: 217.54657
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185999165462263931, guid: b8d2b300227e3f649b79b1c08500c160,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 120.64026
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185999165462263931, guid: b8d2b300227e3f649b79b1c08500c160,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.z
+      value: -381.65082
       objectReference: {fileID: 0}
     - target: {fileID: 4185999167246572394, guid: b8d2b300227e3f649b79b1c08500c160,
         type: 3}
@@ -97024,6 +97037,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fb4034cecba9414188bf88fe093cea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_fallPlatRenderer: {fileID: 0}
   m_iceTexture: {fileID: 2800000, guid: 933b37c533eed6e4ca6166872026586f, type: 3}
   m_mainTexture: {fileID: 2800000, guid: d8328f013b682d94b92058be86f29d07, type: 3}
 --- !u!1001 &1836156488
@@ -97185,6 +97199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fb4034cecba9414188bf88fe093cea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_fallPlatRenderer: {fileID: 0}
   m_iceTexture: {fileID: 2800000, guid: 933b37c533eed6e4ca6166872026586f, type: 3}
   m_mainTexture: {fileID: 2800000, guid: d8328f013b682d94b92058be86f29d07, type: 3}
 --- !u!1001 &1837059465
@@ -97836,6 +97851,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fb4034cecba9414188bf88fe093cea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_fallPlatRenderer: {fileID: 0}
   m_iceTexture: {fileID: 2800000, guid: 933b37c533eed6e4ca6166872026586f, type: 3}
   m_mainTexture: {fileID: 2800000, guid: d8328f013b682d94b92058be86f29d07, type: 3}
 --- !u!4 &1849520458 stripped
@@ -102638,6 +102654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fb4034cecba9414188bf88fe093cea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_fallPlatRenderer: {fileID: 0}
   m_iceTexture: {fileID: 2800000, guid: 933b37c533eed6e4ca6166872026586f, type: 3}
   m_mainTexture: {fileID: 2800000, guid: d8328f013b682d94b92058be86f29d07, type: 3}
 --- !u!114 &1945435110
@@ -104978,7 +104995,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: e90bba630dde43a478d9385da48a137f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -19.84
+      value: -19.881
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: e90bba630dde43a478d9385da48a137f,
         type: 3}
@@ -104988,7 +105005,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: e90bba630dde43a478d9385da48a137f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -38.3
+      value: -38.038
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: e90bba630dde43a478d9385da48a137f,
         type: 3}
@@ -105080,20 +105097,12 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1987586515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+--- !u!23 &1987586517 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7152829177598033546, guid: e90bba630dde43a478d9385da48a137f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1987586510}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1987586512}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fb4034cecba9414188bf88fe093cea4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_iceTexture: {fileID: 2800000, guid: 933b37c533eed6e4ca6166872026586f, type: 3}
-  m_mainTexture: {fileID: 2800000, guid: d8328f013b682d94b92058be86f29d07, type: 3}
 --- !u!65 &1987586523
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -105103,7 +105112,7 @@ BoxCollider:
   m_GameObject: {fileID: 1987586512}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 10.125488, y: 2.8462791, z: 10.125494}
   m_Center: {x: 0, y: 4.217367, z: 0}
@@ -113652,7 +113661,7 @@ PrefabInstance:
     - target: {fileID: 4559170202534178683, guid: b8d2b300227e3f649b79b1c08500c160,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4559170202534178683, guid: b8d2b300227e3f649b79b1c08500c160,
         type: 3}
@@ -113684,25 +113693,25 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.818201
       objectReference: {fileID: 0}
-    - target: {fileID: 4185999165462263931, guid: b8d2b300227e3f649b79b1c08500c160,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.x
-      value: 217.54657
-      objectReference: {fileID: 0}
-    - target: {fileID: 4185999165462263931, guid: b8d2b300227e3f649b79b1c08500c160,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.y
-      value: 120.64031
-      objectReference: {fileID: 0}
-    - target: {fileID: 4185999165462263931, guid: b8d2b300227e3f649b79b1c08500c160,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.z
-      value: -381.65082
-      objectReference: {fileID: 0}
     - target: {fileID: 4185999167246572390, guid: b8d2b300227e3f649b79b1c08500c160,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 11.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185999165462263931, guid: b8d2b300227e3f649b79b1c08500c160,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: 255.62915
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185999165462263931, guid: b8d2b300227e3f649b79b1c08500c160,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 141.48029
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185999165462263931, guid: b8d2b300227e3f649b79b1c08500c160,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.z
+      value: -398.7966
       objectReference: {fileID: 0}
     - target: {fileID: 4185999167246572394, guid: b8d2b300227e3f649b79b1c08500c160,
         type: 3}
