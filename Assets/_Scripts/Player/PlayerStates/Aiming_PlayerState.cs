@@ -263,7 +263,11 @@ namespace Player
 
         public void ResetAimedAt()
         {
-            m_aimedAtRenderer.material.shader = m_highlightedOldShader;
+            if(m_aimedAtRenderer != null)
+            {
+                m_aimedAtRenderer.material.shader = m_highlightedOldShader;
+            }
+
             m_highlightedOldShader = null;
             m_aimedAtRenderer = null;
             m_aimedAt = null;
