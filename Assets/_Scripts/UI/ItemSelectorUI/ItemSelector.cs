@@ -36,6 +36,8 @@ namespace GameUI
         {
             m_playerEntity = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerEntity>();
             SelectItem(PlayerEquipableItems.SPELL_QUILL);
+            SetSlotsVisible(false);
+            LevelManager.s_itemSelector = this;
         }
 
         // Update is called once per frame
@@ -69,6 +71,11 @@ namespace GameUI
                 m_unselectedIcons[i].gameObject.SetActive(!active);
                 m_numberPanels[i].color = m_numberText[i].color = color;
             }
+        }
+
+        public void SetSlotsVisible(bool visible)
+        {
+            transform.GetChild(0).gameObject.SetActive(visible);
         }
     }
 }

@@ -5,6 +5,7 @@ using GameCore.Rules;
 using GameCore.Spells;
 using GameUI.SpellBook;
 using GameCore.Utils;
+using GameUI;
 
 namespace GameCore.System
 {
@@ -16,9 +17,12 @@ namespace GameCore.System
         static Dictionary<Enchantable, Renderer> m_enchantableToRendererMap;
         static List<GameObject> s_enchantableParticles = new List<GameObject>();
         static LevelManager s_instance = null;
+        public static ItemSelector s_itemSelector;
+
         const string SPELLBOOK_TAG = "SpellBook";
         const string ENCHANTABLE_TAG = "Enchantable";
         const string UI_ITEM_SELECTOR_TAG = "UI_ItemSelector";
+        
 
         public static int p_PlayerSpells { get => s_playerSpells; }
         public static Transform p_LastCheckpoint { get; set; }
@@ -51,7 +55,7 @@ namespace GameCore.System
             s_spellBook.UnlockSpell(spellType);
             if(spellType == SpellType.TRANSFORM_RESET)
             {
-                GameObject.FindGameObjectWithTag(UI_ITEM_SELECTOR_TAG).transform.GetChild(0).GetChild(0).GetChild(1).gameObject.SetActive(true);
+                s_itemSelector.SetSlotsVisible(true);
             }
 
             if(showSpellBook)
@@ -108,6 +112,9 @@ namespace GameCore.System
         //public Enchantable 
         private void Init()
         {
+
+            s_itemSelector = GameObject.FindGameObjectWithTag(UI_ITEM_SELECTOR_TAG).GetComponent<ItemSelector>();
+
             m_transformToEnchantableMap = new Dictionary<Transform, Enchantable>();
             m_enchantableToRendererMap = new Dictionary<Enchantable, Renderer>();
 
