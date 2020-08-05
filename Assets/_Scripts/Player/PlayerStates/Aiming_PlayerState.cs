@@ -5,6 +5,8 @@ using GameUI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 
 namespace Player
 {
@@ -21,6 +23,7 @@ namespace Player
         Shader m_highlightedOldShader = null;
         Texture m_baseTexture = null;
         Color m_baseColor;
+        bool m_locked = false;
 
         PlayerEquipableItems m_itemEquipped;
 
@@ -81,6 +84,8 @@ namespace Player
                 m_owner.SetState(new Default_PlayerState(m_owner));
                 return;
             }
+
+            m_locked = Input.GetMouseButton(0);
         }
 
         public override void FixedManage()
@@ -156,7 +161,7 @@ namespace Player
             //Setting the cameras aimed at transfrom for the aiming camera state. Not sure if we could move the functionality for the shader changing there? or if it makes sense to be here?
             m_camera.p_AimedAtTransform = m_aimedAt;
 
-            if ((Input.GetButtonDown("Fire") || Input.GetAxisRaw("Fire") != 0))
+            if (!m_locked && (Input.GetButtonDown("Fire") || Input.GetAxisRaw("Fire") != 0))
             {
                 if(m_playerEntity.EquipedItem == PlayerEquipableItems.SPELL_QUILL && (!SpellWheel.p_Active || SpellWheel.p_Aiming))
                 {
