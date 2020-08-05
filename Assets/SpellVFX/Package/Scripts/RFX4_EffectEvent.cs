@@ -39,8 +39,11 @@ public class RFX4_EffectEvent : MonoBehaviour
 
     public void CastSpellEffect(Vector3 targetPos)
     {
-        if (!m_spellEffect || m_instance)
+        if (!m_spellEffect)
             return;
+
+        if (m_instance)
+            m_instance = null;
         
         m_instance = Instantiate(m_spellEffect, m_spellCastPoint.position, m_spellCastPoint.rotation * Quaternion.FromToRotation(m_spellCastPoint.position, targetPos));
         m_instance.transform.LookAt(targetPos);
