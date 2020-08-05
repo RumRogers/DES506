@@ -83,9 +83,7 @@ namespace Player
                 //TEMP REMOVE LATER
                 m_owner.SetState(new Default_PlayerState(m_owner));
                 return;
-            }
-
-            m_locked = Input.GetMouseButton(0);
+            }            
         }
 
         public override void FixedManage()
