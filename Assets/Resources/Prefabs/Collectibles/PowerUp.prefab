@@ -76,8 +76,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_rotationSpeed: 0.5
-  m_targetSpellRange: 40
-  m_targetMeleeRange: 40
+  m_targetSpellRange: 50
+  m_targetMeleeRange: 50
 --- !u!1001 &463156989
 PrefabInstance:
   m_ObjectHideFlags: 0
