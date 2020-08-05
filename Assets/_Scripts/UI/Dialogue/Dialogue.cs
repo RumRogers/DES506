@@ -60,23 +60,33 @@ namespace GameUI.Dialogue
             m_TextUI.SetActive(true);
             StartFillingLine(m_lineIndex);
 
-            fmodDialogue = FMODUnity.RuntimeManager.CreateInstance(fmodDialogueEvent);
-            //dialogueMix = FMODUnity.RuntimeManager.CreateInstance("snapshot:/DialogueMix");
-            fmodDialogue.start();
-            //dialogueMix.start();
-            //dialogueMix.setParameterByName("snapshotIntensity", 100);
-
-            if (m_lineIndex < m_lines.lines.Length - 1)
+            try
             {
-                ++m_lineIndex;
+                fmodDialogue = FMODUnity.RuntimeManager.CreateInstance(fmodDialogueEvent);
+                //dialogueMix = FMODUnity.RuntimeManager.CreateInstance("snapshot:/DialogueMix");
+                fmodDialogue.start();
+                //dialogueMix.start();
+                //dialogueMix.setParameterByName("snapshotIntensity", 100);
             }
-            else
+            catch(FMODUnity.EventNotFoundException)
             {
-                m_lastLineReached = true;
-                m_lineIndex = 0;
+                Debug.LogError("Invalid FMOD event for this dialogue! Check it out.");
             }
 
-            m_dialogueHasStarted = true;
+            finally
+            {
+                if (m_lineIndex < m_lines.lines.Length - 1)
+                {
+                    ++m_lineIndex;
+                }
+                else
+                {
+                    m_lastLineReached = true;
+                    m_lineIndex = 0;
+                }
+
+                m_dialogueHasStarted = true;
+            }
         }
 
         private void Update()
