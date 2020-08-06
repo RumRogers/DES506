@@ -151,6 +151,10 @@ namespace GameCore.System
             }
         }
 
+        public static void ClearEnchantableParticles()
+        {
+            s_enchantableParticles.Clear();
+        }
         public static bool HasPlayerUnlockedAtLeastASpell()
         {
             return s_playerSpells != 0;
@@ -160,6 +164,7 @@ namespace GameCore.System
         {
             s_spellWheel.SetState(new Idle_SpellWheelState(s_spellWheel));
         }
+
         // All of this became obsolete when we changed core mechanic
         /*
         public static Dictionary<string, List<MutableEntity>> s_mapSubjectToMutable = new Dictionary<string, List<MutableEntity>>();

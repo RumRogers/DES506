@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using GameCore.System;
 
 /// <summary>
 /// Class which handles navigating the menu, 
@@ -84,6 +85,9 @@ public class MenuButtonScript : MonoBehaviour
 
     public void LoadScene(string scene)
     {
+        // If game scene was loaded already, destroyed particles will still be referenced. Cleaning. 
+        LevelManager.ClearEnchantableParticles();
+
         SceneManager.LoadScene(scene);
     }
 }
