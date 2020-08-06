@@ -30,7 +30,6 @@ namespace Player
                 yield return null;
             }
 
-
             switch (m_playerAnimator.PlayerAnimProperties)
             {
                 case PlayerAnimationProperties.WALKING:

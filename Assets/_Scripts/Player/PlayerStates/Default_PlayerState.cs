@@ -85,21 +85,24 @@ namespace Player
                     }
                     else
                     {
-                        //if rotation is more than 90 degrees play the turn around animation
-                        if (Vector3.Angle(m_playerEntity.Direction, m_playerEntity.transform.forward) > 170)
+                        if (m_playerEntity.EnableTurnAnimations)
                         {
-                            //if cross of x1y2 is less than x2y1 then the rotation was counter clockwise, therefore play the left turn animation
-                            if (m_playerEntity.Direction.x * m_playerEntity.LastDirection.z < m_playerEntity.Direction.z * m_playerEntity.LastDirection.x)
+                            //if rotation is more than 90 degrees play the turn around animation
+                            if (Vector3.Angle(m_playerEntity.Direction, m_playerEntity.transform.forward) > 170)
                             {
-                                m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.LEFT_TURN);
+                                //if cross of x1y2 is less than x2y1 then the rotation was counter clockwise, therefore play the left turn animation
+                                if (m_playerEntity.Direction.x * m_playerEntity.LastDirection.z < m_playerEntity.Direction.z * m_playerEntity.LastDirection.x)
+                                {
+                                    m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.LEFT_TURN);
+                                }
+                                else
+                                {
+                                    m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.RIGHT_TURN);
+                                }
+                                //m_playerEntity.Velocity /= 4;
+                                m_playerEntity.StartCoroutine(WaitForTurnAnimation());
+                                return;
                             }
-                            else
-                            {
-                                m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.RIGHT_TURN);
-                            }
-                            //m_playerEntity.Velocity /= 4;
-                            m_playerEntity.StartCoroutine(WaitForTurnAnimation());
-                            return;
                         }
 
                         maxSpeed = m_playerEntity.MaxSpeed;
@@ -113,7 +116,7 @@ namespace Player
                     m_velocity = Vector3.ClampMagnitude(m_velocity, maxSpeed);
 
                     //setting animation state based on velocity
-                    if (m_velocity.magnitude < maxSpeed)
+                    if (m_velocity.magnitude / maxSpeed < m_playerEntity.RunningAnimationSpeedThreshold)
                     {
                         m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.WALKING);
                     }
@@ -128,20 +131,15 @@ namespace Player
                     if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING))
                     {
                         m_velocity += (m_velocity * -1) * m_playerEntity.IceDeceleration * Time.fixedDeltaTime;
-                    }
-                    else
-                    {
-                        m_velocity += (m_velocity * -1) * m_playerEntity.WalkingDeceleration * Time.fixedDeltaTime;
-                    }
-                    if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING))
-                    {
-                        if (m_playerEntity.Velocity.magnitude / m_playerEntity.IceMaxSpeed < m_playerEntity.SlidingAnimationSpeedThreshold)
+
+                        if (m_velocity.magnitude / m_playerEntity.IceMaxSpeed < m_playerEntity.SlidingAnimationSpeedThreshold)
                         {
                             m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.SLIDING);
                         }
                     }
                     else
                     {
+                        m_velocity += (m_velocity * -1) * m_playerEntity.WalkingDeceleration * Time.fixedDeltaTime;
                         m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.IDLE);
                     }
                 }

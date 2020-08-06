@@ -10,7 +10,7 @@ namespace Player
         PlayerEntity m_playerEntity;
         bool m_animFinished = false;
         bool m_waitingForAnim = false;
-        float m_distanceFromGroundBeforeHover = 2;
+        float m_distanceFromGroundBeforeHover = 1.5f;
         bool m_finishedHover = false;
         bool m_hovering = false;
         Vector3 m_respawnPoint;
@@ -44,8 +44,8 @@ namespace Player
         {
             if (!m_playerEntity.Grounded)
             {
-                //Checking to see if they should start hovering
-                if (Vector3.Distance(m_playerEntity.transform.position + m_playerEntity.Velocity, m_respawnPoint) < m_distanceFromGroundBeforeHover && !m_finishedHover && !m_hovering)
+                //Checking to see if they should start hovering, if the distance would be negative next update, start the hover
+                if ((m_playerEntity.Position.y + m_playerEntity.Velocity.y) - m_respawnPoint.y < 0 && !m_finishedHover && !m_hovering)
                 {
                     // start hover coroutine
                     FMODUnity.RuntimeManager.PlayOneShot(m_playerEntity.HoveringAudioEvent, m_playerEntity.transform.position);
