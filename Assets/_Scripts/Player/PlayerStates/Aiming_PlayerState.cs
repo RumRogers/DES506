@@ -281,14 +281,14 @@ namespace Player
                 else if (m_playerEntity.MovementInput.x != 0 && m_playerEntity.MovementInput.y > 0)
                 {
                     //diagonals face the way they are moving
-                    m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Direction.x, 0, m_playerEntity.Direction.z));
+                    //m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Direction.x, 0, m_playerEntity.Direction.z));
                     m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.AIM_RUN_FORWARD);
                 }
                 //bottom diagonals
                 else if (m_playerEntity.MovementInput.x != 0 && m_playerEntity.MovementInput.y < 0)
                 {
                     //back diagonals face the oposite way of movement
-                    m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(-m_playerEntity.Direction.x, 0, -m_playerEntity.Direction.z));
+                    //m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(-m_playerEntity.Direction.x, 0, -m_playerEntity.Direction.z));
                     m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.AIM_RUN_BACK);
                 }
             }

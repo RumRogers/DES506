@@ -82,6 +82,7 @@ namespace Player
         [SerializeField] float m_fallingAnimSpeed = 2;
         [SerializeField] float m_aimingAnimSpeed = 2;
         [SerializeField] float m_aimRunAnimSpeed = 2;
+        [SerializeField] float m_aimStrafeAnimSpeed = 2;
         [SerializeField] float m_castingAnimSpeed = 2;
         [SerializeField] float m_freeFallingAnimSpeed = 2;
         [SerializeField] float m_recoveringAnimSpeed = 2;
@@ -245,11 +246,11 @@ namespace Player
                         m_aimRunBackState = state;
                         break;
                     case "aimRunLeft":
-                        state.speed = m_aimRunAnimSpeed;
+                        state.speed = m_aimStrafeAnimSpeed;
                         m_aimRunLeftState = state;
                         break;
                     case "aimRunRight":
-                        state.speed = m_aimRunAnimSpeed;
+                        state.speed = m_aimStrafeAnimSpeed;
                         m_aimRunRightState = state;
                         break;
                     case "casting":

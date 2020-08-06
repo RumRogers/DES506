@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01d15bf284ad57a4cadb87e654c84338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_isPowerfulWizard: 1
+  m_isPowerfulWizard: 0
   m_pushMovementCurve:
     serializedVersion: 2
     m_Curve:
@@ -78,6 +78,7 @@ MonoBehaviour:
   m_maxSpeed: 0.4
   m_walkingAcceleration: 1
   m_walkingDeceleration: 20
+  m_runningAnimationSpeedThreshold: 0.7
   m_aimingMaxSpeed: 0.1
   m_aimingAcceleration: 1
   m_aimingDeceleration: 20
@@ -110,6 +111,7 @@ MonoBehaviour:
   m_hittingGroundEvent: 
   m_playerEntityProperties: 26
   m_spellSfx: {fileID: 995098098}
+  m_enableTurningAnims: 0
   m_interact: 0
   UIsToHideInDialogue:
   - {fileID: 0}
@@ -142,8 +144,8 @@ MonoBehaviour:
   m_aimingAnim: {fileID: 7400000, guid: 4952ab0e4f9dc7b4182930cb72f8f717, type: 2}
   m_aimRunForwardAnim: {fileID: 7400000, guid: 4fa9eed2371884c4989086278b0d2a1e, type: 2}
   m_aimRunBackAnim: {fileID: 7400000, guid: 4fa9eed2371884c4989086278b0d2a1e, type: 2}
-  m_aimRunLeftAnim: {fileID: 7400000, guid: 4fa9eed2371884c4989086278b0d2a1e, type: 2}
-  m_aimRunRightAnim: {fileID: 7400000, guid: 4fa9eed2371884c4989086278b0d2a1e, type: 2}
+  m_aimRunLeftAnim: {fileID: 7400000, guid: 656fb708932c48c4d969431d4744623d, type: 2}
+  m_aimRunRightAnim: {fileID: 7400000, guid: e31a2184a08e28e4cb332431901cb59e, type: 2}
   m_castingAnim: {fileID: 7400000, guid: c73f8f878cae7f04ea23b848ad58b89a, type: 2}
   m_freeFallingAnim: {fileID: 7400000, guid: e67b733f5bbb3a24b832a97fbd8dfc05, type: 2}
   m_recoveringAmim: {fileID: 7400000, guid: 009c069e1c559064ea09b3580b9775a0, type: 2}
@@ -162,6 +164,7 @@ MonoBehaviour:
   m_fallingAnimSpeed: 2
   m_aimingAnimSpeed: 2
   m_aimRunAnimSpeed: 2
+  m_aimStrafeAnimSpeed: 1
   m_castingAnimSpeed: 2
   m_freeFallingAnimSpeed: 2
   m_recoveringAnimSpeed: 2
