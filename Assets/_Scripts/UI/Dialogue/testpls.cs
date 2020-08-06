@@ -7,6 +7,7 @@ public class testpls : MonoBehaviour
     Player.PlayerEntity m_player = null;
 
     bool canTalk = false;
+    public bool p_isTalking { get; set; }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -31,10 +32,11 @@ public class testpls : MonoBehaviour
 
     private void Update()
     {
-        if (canTalk)
+        if (canTalk && !p_isTalking)
         {
             if (Input.GetKeyUp(KeyCode.E))
             {
+                p_isTalking = true;
                 m_player.SetState(new Player.Dialogue_PlayerState(m_player, this.gameObject));
             }
         }

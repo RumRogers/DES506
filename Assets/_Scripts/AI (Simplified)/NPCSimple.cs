@@ -46,6 +46,7 @@ public class NPCSimple : MonoBehaviour
     private Animator m_animator;
     private NPCState m_state;
 
+    testpls m_testpls;
     #endregion
 
     void Start()
@@ -53,6 +54,7 @@ public class NPCSimple : MonoBehaviour
         m_dialogue = GetComponent<Dialogue>();
         m_animator = GetComponent<Animator>();
         m_state = new NPCStateDefault(m_animator, m_defaultAnimation, m_letterBox);
+        m_testpls = GetComponent<testpls>();
     }
 
     void Update()
@@ -75,6 +77,7 @@ public class NPCSimple : MonoBehaviour
             m_state = new NPCStateDefault(m_animator, m_defaultAnimation, m_letterBox);
             Debug.Log("I have stopped talking");
             m_talking = false;
+            m_testpls.p_isTalking = false;
 
             if(m_firstTimeTalking && m_secondDialogue)
             {
