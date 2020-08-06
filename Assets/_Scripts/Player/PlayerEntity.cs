@@ -52,6 +52,7 @@ namespace Player
         [SerializeField] float m_maxSpeed = 2.0f;
         [SerializeField] float m_walkingAcceleration = 15.0f;
         [SerializeField] float m_walkingDeceleration = 15.0f;
+        [SerializeField] [Range(0.0f, 1.0f)] float m_runningAnimationSpeedThreshold = 0.7f;
         [Header("Aiming")]
         [SerializeField] float m_aimingMaxSpeed = 2.0f;
         [SerializeField] float m_aimingAcceleration = 15.0f;
@@ -90,7 +91,10 @@ namespace Player
         [SerializeField] PlayerEntityProperties m_playerEntityProperties;
         [Header("Spell VFX")]
         [SerializeField] public RFX4_EffectEvent m_spellSfx;
-    
+        [Header("Debug")]
+        [SerializeField] bool m_enableTurningAnims = true;
+
+        [Header("Dialogue")]
         public bool m_interact = false;
 
         //For Dialogue states to access
@@ -153,9 +157,11 @@ namespace Player
         public bool Grounded { get => m_grounded; }
         public bool CanJump { get => m_canJump; }
         public bool HasJumped { get => m_hasJumped; set => m_hasJumped = value; }
+        public bool EnableTurnAnimations { get => m_enableTurningAnims; }
         public float MaxSpeed { get => m_maxSpeed; }
         public float WalkingAcceleration { get => m_walkingAcceleration; }
         public float WalkingDeceleration { get => m_walkingDeceleration; }
+        public float RunningAnimationSpeedThreshold { get => m_runningAnimationSpeedThreshold; }
         public float AimingMaxSpeed { get => m_aimingMaxSpeed; }
         public float AimingAcceleration { get => m_aimingAcceleration; }
         public float AimingDeceleration { get => m_aimingDeceleration; }

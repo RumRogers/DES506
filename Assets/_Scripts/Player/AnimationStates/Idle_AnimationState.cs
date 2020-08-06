@@ -38,6 +38,9 @@ namespace Player
                 case PlayerAnimationProperties.FALLING:
                     m_owner.SetState(new Falling_AnimationState(m_owner));
                     break;
+                case PlayerAnimationProperties.FREE_FALLING:
+                    m_owner.SetState(new FreeFalling_AnimationState(m_playerAnimator));
+                    break;
                 case PlayerAnimationProperties.PUSHING:
                     m_owner.SetState(new Pushing_AnimationState(m_owner));
                     break;
