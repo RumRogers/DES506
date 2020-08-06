@@ -99,35 +99,33 @@ public class FallPlatform : Enchantable
         m_fallTriggerStart = true;
         m_counter = 0;
 
-        //if(!m_isFrozen)
-        //{
-            while (m_rigBod.isKinematic)
+
+        while (m_rigBod.isKinematic)
+        {
+            m_counter += Time.deltaTime;
+
+            //If timer is up, fall. Otherwise, shake using call in else statement
+            if (m_counter >= m_timeTillFall)
             {
-                m_counter += Time.deltaTime;
+                m_rigBod.isKinematic = false;
+                m_platform.GetComponent<Rigidbody>().isKinematic = false;
+                m_platform.GetComponent<Rigidbody>().AddForce(Vector3.down * 302050);
+            }
 
-                //If timer is up, fall. Otherwise, shake using call in else statement
-                if (m_counter >= m_timeTillFall)
-                {
-                    m_rigBod.isKinematic = false;
-                    m_platform.GetComponent<Rigidbody>().isKinematic = false;
-                }
-
-                else //Until it falls, it will shake  
-                {
-                    m_platform.transform.position = m_platBasePosition + (transform.right * (Mathf.Sin(m_counter * m_shakeSpeed)) * m_shakeScale);
-                }
+            else //Until it falls, it will shake  
+            {
+                m_platform.transform.position = m_platBasePosition + (transform.right * (Mathf.Sin(m_counter * m_shakeSpeed)) * m_shakeScale);
+            }
                     
 
-                yield return new WaitForSeconds(Time.deltaTime);
-            }
-        //}
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
         
         yield return StartCoroutine(Respawn());
     }
 
     IEnumerator Respawn()
     {
-        Debug.Log("Respawn called");
         while(true)
         {
             m_counter += Time.deltaTime;
@@ -142,6 +140,7 @@ public class FallPlatform : Enchantable
                     m_platform.transform.position = m_platBasePosition + Vector3.up * 5;
                     transform.position = m_position;
                     m_fallTriggerStart = false;
+                    m_platform.GetComponent<Rigidbody>().velocity = Vector3.zero;
                 }
                 else if(Vector3.Distance(m_platform.transform.position, m_platBasePosition) <= 1.3f)
                 {
@@ -149,8 +148,6 @@ public class FallPlatform : Enchantable
                     m_platform.GetComponent<Rigidbody>().isKinematic = true;
                 }
             }
-
-            
 
             yield return new WaitForSeconds(Time.deltaTime);
         }

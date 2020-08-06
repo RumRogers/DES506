@@ -52,6 +52,9 @@ public class Cog : Enchantable
 
     public Quaternion GlobalRotation { get { return m_globalRotation; } set { m_globalRotation = value; } }
 
+    private IEnumerator m_scaleLargeReference;
+    private IEnumerator m_scaleSmallReference;
+    private IEnumerator m_scaleDefaultReference;
     /// <summary>
     /// The initialiser function for the cog, to allow for shared information
     /// </summary>
@@ -67,6 +70,10 @@ public class Cog : Enchantable
         m_smallScale = transform.localScale * smallScaleFactor;
         m_largeScale = transform.localScale * largeScaleFactor;
         m_cogSpeed = speed;
+
+        m_scaleLargeReference = ScaleObject(m_largeScale);
+        m_scaleSmallReference = ScaleObject(m_smallScale);
+        m_scaleDefaultReference = ScaleObject(Vector3.one);
 
         #region Starting Size
         switch (m_size)
@@ -112,13 +119,13 @@ public class Cog : Enchantable
         if (m_leftNeighbour != null)
         {
             //Check if current cog is no longer being acted upon
-            if (!m_leftNeighbour.IsRotating || m_leftNeighbour.IsSmall)
+            if (!m_leftNeighbour.IsRotating || m_leftNeighbour.IsSmall || !IsCorrect())
             {
                 StopCoroutine(m_rotationReference);
                 m_isRotating = false;
             }
             //If the cog is stationary, check if a change has now allowed it to move
-            else if(m_leftNeighbour.IsRotating && !m_leftNeighbour.IsSmall && !m_leftNeighbour.IsLarge && m_size == SizeState.DEFAULT && !m_isRotating)
+            else if(m_leftNeighbour.IsRotating && m_leftNeighbour.IsCorrect() && IsCorrect() && !m_isRotating)
             {
                 StartCoroutine(m_rotationReference);
                 m_isRotating = true;
@@ -175,36 +182,27 @@ public class Cog : Enchantable
 
     protected override void SpellSizeBig(Spell spell)
     {
-        //Prevent overlap by checking available neighbours sizes
-        if(m_rightNeighbour == null)
-        {
-            if (m_leftNeighbour.IsSmall)
-            {
-                StartCoroutine(ScaleObject(m_largeScale));
-                m_size = SizeState.LARGE;
-            }
-        }
-        else if(m_leftNeighbour == null)
-        {
-            if (m_rightNeighbour.IsSmall)
-            {
-                StartCoroutine(ScaleObject(m_largeScale));
-                m_size = SizeState.LARGE;
-            }
-        }
-        else
-        {
-            if (m_leftNeighbour.IsSmall && m_rightNeighbour.IsSmall)
-            {
-                StartCoroutine(ScaleObject(m_largeScale));
-                m_size = SizeState.LARGE;
-            }
-        }
+        if(m_scaleDefaultReference != null)
+            StopCoroutine(m_scaleDefaultReference);
+
+        if(m_scaleSmallReference != null)
+            StopCoroutine(m_scaleSmallReference);
+
+        StartCoroutine(m_scaleLargeReference);
+
+        m_size = SizeState.LARGE;
     }
 
     protected override void SpellSizeSmall(Spell spell)
     {
-        StartCoroutine(ScaleObject(m_smallScale));
+        if (m_scaleDefaultReference != null)
+            StopCoroutine(m_scaleDefaultReference);
+
+        if (m_scaleLargeReference != null)
+            StopCoroutine(m_scaleLargeReference);
+
+        StartCoroutine(m_scaleSmallReference);
+
         m_size = SizeState.SMALL;
     }
 
@@ -218,38 +216,25 @@ public class Cog : Enchantable
     {
         m_isFrozen = false;
 
-        Debug.Log("Reset is called");
+        if (m_scaleSmallReference != null)
+            StopCoroutine(m_scaleSmallReference);
 
-        if (m_rightNeighbour == null)
-        {
-            if (!m_leftNeighbour.IsLarge)
-            {
-                StartCoroutine(ScaleObject(Vector3.one));
-                m_size = SizeState.DEFAULT;
-            }
-        }
-        else if (m_leftNeighbour == null)
-        {
-            if (!m_rightNeighbour.IsLarge)
-            {
-                StartCoroutine(ScaleObject(Vector3.one));
-                m_size = SizeState.DEFAULT;
-            }
-        }
-        else
-        {
-            if (!m_leftNeighbour.IsLarge && !m_rightNeighbour.IsLarge)
-            {
-                StartCoroutine(ScaleObject(Vector3.one));
-                m_size = SizeState.DEFAULT;
-            }
-        }
+        if (m_scaleLargeReference != null)
+            StopCoroutine(m_scaleLargeReference);
+
+        StartCoroutine(m_scaleDefaultReference);
+
+        m_size = SizeState.DEFAULT;
     }
     #endregion
 
     public bool IsCorrect()
     {
-        return m_size == m_solutionSize;
+        if (Vector3.Distance(transform.localScale, Vector3.one) < 0.2f && m_size == m_solutionSize)
+            return true;
+
+        return false;
+        //return m_size == m_solutionSize;
     }
 
 }

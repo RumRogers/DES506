@@ -65,7 +65,7 @@ public class CounterWeight : Enchantable
         Vector3 m_size = m_renderer.bounds.size;
 
         //Check if object is falling, ensures added speed without messing with weight
-        if (!Physics.Raycast(transform.position, Vector3.down, m_size.y + 0.07f))
+        if (!Physics.Raycast(transform.position, Vector3.down, m_size.y + 0.03f))
         {
            m_rigidBody.AddForceAtPosition(Vector3.down * m_dropForce, transform.position);
         }
