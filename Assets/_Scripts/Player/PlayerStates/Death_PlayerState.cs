@@ -22,8 +22,6 @@ namespace Player
             m_playerEntity = (PlayerEntity)owner;
             m_playerEntity.Velocity = Vector3.zero; //making sure we're actually at 0 velocity for some reason it's not enough to do it in the respawn function
 
-            m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.FREE_FALLING);
-
             if (!Camera.main.transform.TryGetComponent(out m_camera))
             {
                 Debug.LogError("Cannot get PlayerMoveCamera Component on Main Camera!");
@@ -44,6 +42,9 @@ namespace Player
         {
             if (!m_playerEntity.Grounded)
             {
+                //bandaid fix for animations not being triggered correctly, sometimes changes to regular falling anim if only set is contructor
+                m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.FREE_FALLING);
+
                 //Checking to see if they should start hovering, if the distance would be negative next update, start the hover
                 if ((m_playerEntity.Position.y + m_playerEntity.Velocity.y) - m_respawnPoint.y < 0 && !m_finishedHover && !m_hovering)
                 {
