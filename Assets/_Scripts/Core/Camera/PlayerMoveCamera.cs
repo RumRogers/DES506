@@ -37,6 +37,7 @@ namespace GameCore.Camera
         [Header("General")]
         [SerializeField] AnimationCurve m_lerpCurve;
         [SerializeField] float m_smoothFactor = 0.8f;
+        [SerializeField] float m_collisionHitCameraOffsetDistance = 0.1f;
         [Header("Collision")]
         [SerializeField] float m_minDistanceFromPlayer = 0.3f;
 
@@ -122,6 +123,7 @@ namespace GameCore.Camera
             Vector3 targetToCamera = transform.position - m_cameraTarget.position;
             float distance = targetToCamera.magnitude;
             Vector3 direction = targetToCamera.normalized;
+            Vector3 offset = transform.forward * m_collisionHitCameraOffsetDistance;
             RaycastHit hit;
 
             LayerMask layer = LayerMask.GetMask("IgnoreCamera");
@@ -141,7 +143,8 @@ namespace GameCore.Camera
                 //multiply normalised vector by distance
                 targetToWall *= distanceToWall;
                 //set transform to that point
-                transform.position = m_cameraTarget.position + targetToWall;
+                transform.position = m_cameraTarget.position + (targetToWall + offset);
+                
             }
         }
 
