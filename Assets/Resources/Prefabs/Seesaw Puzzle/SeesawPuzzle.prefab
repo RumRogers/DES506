@@ -548,7 +548,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 5
   m_Drag: 5
-  m_AngularDrag: 5
+  m_AngularDrag: 100
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -603,9 +603,9 @@ MonoBehaviour:
   m_hasParticles: 1
   m_particlesType: 0
   m_largeScaleFactor: 2
-  m_largeMass: 14
+  m_largeMass: 100
   m_smallScaleFactor: 0.5
   m_smallMass: 5
-  m_dropForce: 1500
+  m_dropForce: 5000
   m_seesaw: {fileID: 4185999165462263934}
   m_dimensions: {x: 0, y: 0, z: 0}
