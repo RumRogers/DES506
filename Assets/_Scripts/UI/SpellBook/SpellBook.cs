@@ -106,5 +106,10 @@ namespace GameUI.SpellBook
                 m_spellCaptions[i].color = active ? m_selectedTextColor : m_unselectedTextColor;
             }
         }
+
+        public bool CanBeOpened()
+        {
+            return m_playerEntity.IsGrounded();
+        }
     }
 }
