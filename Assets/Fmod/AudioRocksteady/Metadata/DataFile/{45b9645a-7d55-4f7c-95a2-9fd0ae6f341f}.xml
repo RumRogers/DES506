@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="DataFile" id="{45b9645a-7d55-4f7c-95a2-9fd0ae6f341f}">
+		<property name="assetPath">
+			<value>MUSIC/Tutorial Music/Part 1/Tuto Part 01 -  CLARINET 01.ogg.reapeaks</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{9937f860-8fbb-46f5-bf06-8a9c030d1b0c}</destination>
+		</relationship>
+	</object>
+</objects>
