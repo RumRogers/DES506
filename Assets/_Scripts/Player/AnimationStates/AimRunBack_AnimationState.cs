@@ -54,7 +54,14 @@ namespace Player
 
         IEnumerator Transition()
         {
-            m_playerAnimator.Animation.CrossFade("aimRunBack", 0.2f, PlayMode.StopAll);
+            if (m_playerAnimator.Player.EquipedItem == PlayerEquipableItems.SPELL_QUILL)
+            {
+                m_playerAnimator.Animation.CrossFade("aimRunBack", 0.2f, PlayMode.StopAll);
+            }
+            else
+            {
+                m_playerAnimator.Animation.CrossFade("aimEraserRunBack", 0.2f, PlayMode.StopAll);
+            }
             yield return null;
         }
     }

@@ -21,6 +21,9 @@ namespace Player
         {
             switch (m_playerAnimator.PlayerAnimProperties)
             {
+                case PlayerAnimationProperties.AIMING:
+                    m_owner.SetState(new Aiming_AnimationState(m_owner));
+                    break;
                 case PlayerAnimationProperties.RUNNING:
                     m_owner.SetState(new Running_AnimationState(m_owner));
                     break;
@@ -55,7 +58,14 @@ namespace Player
         {
             try
             {
-                m_playerAnimator.Animation.CrossFade("aiming", 0.2f, PlayMode.StopAll);
+                if (m_playerAnimator.Player.EquipedItem == PlayerEquipableItems.SPELL_QUILL)
+                {
+                    m_playerAnimator.Animation.CrossFade("aiming", 0.2f, PlayMode.StopAll);
+                }
+                else
+                {
+                    m_playerAnimator.Animation.CrossFade("aimingEraser", 0.2f, PlayMode.StopAll);
+                }
                 //m_playerAnimator.Animation.PlayQueued("aiming");
             }
             catch

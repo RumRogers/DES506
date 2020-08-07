@@ -39,6 +39,9 @@ namespace Player
 
     public class PlayerAnimator : GameCore.System.Automaton
     {
+        PlayerEntity m_playerEntity;
+        PlayerEquipableItems m_previousEquipped;
+
         Renderer m_playerRenderer;
         PlayerFacialExpression m_playerFacialExpression;
 
@@ -59,10 +62,15 @@ namespace Player
         [SerializeField] AnimationClip m_jumpLandAnim;
         [SerializeField] AnimationClip m_fallingAnim;
         [SerializeField] AnimationClip m_aimingAnim;
+        [SerializeField] AnimationClip m_aimingEraserAnim;
         [SerializeField] AnimationClip m_aimRunForwardAnim;
         [SerializeField] AnimationClip m_aimRunBackAnim;
         [SerializeField] AnimationClip m_aimRunLeftAnim;
         [SerializeField] AnimationClip m_aimRunRightAnim;
+        [SerializeField] AnimationClip m_aimEraserRunForwardAnim;
+        [SerializeField] AnimationClip m_aimEraserRunBackAnim;
+        [SerializeField] AnimationClip m_aimEraserRunLeftAnim;
+        [SerializeField] AnimationClip m_aimEraserRunRightAnim;
         [SerializeField] AnimationClip m_castingAnim;
         [SerializeField] AnimationClip m_freeFallingAnim;
         [SerializeField] AnimationClip m_recoveringAmim;
@@ -81,7 +89,9 @@ namespace Player
         [SerializeField] float m_jumpLandAnimSpeed = 2;
         [SerializeField] float m_fallingAnimSpeed = 2;
         [SerializeField] float m_aimingAnimSpeed = 2;
+        [SerializeField] float m_aimingEraserAnimSpeed = 1;
         [SerializeField] float m_aimRunAnimSpeed = 2;
+        [SerializeField] float m_aimRunEraserAnimSpeed = 1;
         [SerializeField] float m_aimStrafeAnimSpeed = 2;
         [SerializeField] float m_castingAnimSpeed = 2;
         [SerializeField] float m_freeFallingAnimSpeed = 2;
@@ -90,6 +100,9 @@ namespace Player
         [SerializeField] float m_slidingMidAnimSpeed = 2;
         [SerializeField] float m_slidingEndAnimSpeed = 2;
         [SerializeField] float m_turnAnimSpeed = 2;
+        [Header("Weapon Equip")]
+        [SerializeField] Transform m_quill;
+        [SerializeField] Transform m_eraser;
         [Header("Properties")]
         [SerializeField] float m_timeOnGroundBeforeRecovering = 1;
 
@@ -168,11 +181,16 @@ namespace Player
 
         public Animation Animation { get => m_animation; }
         public PlayerAnimationProperties PlayerAnimProperties { get => m_playerAnimProperties; }
+        public PlayerEntity Player { get => m_playerEntity; }
         #endregion
 
         // Start is called before the first frame update
         void Start()
         {
+            if (!TryGetComponent(out m_playerEntity))
+            {
+                Debug.LogError($"PlayerEntity.cs not found on {transform.name} object with PlayerAnimator script attached");
+            }
             m_playerRenderer = transform.GetChild(0).Find("Main_Character").GetComponent<Renderer>();
             try
             {
@@ -184,10 +202,15 @@ namespace Player
                 m_animation.AddClip(m_jumpLandAnim, "jumpLand");
                 m_animation.AddClip(m_fallingAnim, "falling");
                 m_animation.AddClip(m_aimingAnim, "aiming");
+                m_animation.AddClip(m_aimingEraserAnim, "aimingEraser");
                 m_animation.AddClip(m_aimRunForwardAnim, "aimRunForward");
                 m_animation.AddClip(m_aimRunBackAnim, "aimRunBack");
                 m_animation.AddClip(m_aimRunLeftAnim, "aimRunLeft");
                 m_animation.AddClip(m_aimRunRightAnim, "aimRunRight");
+                m_animation.AddClip(m_aimEraserRunForwardAnim, "aimEraserRunForward");
+                m_animation.AddClip(m_aimEraserRunBackAnim, "aimEraserRunBack");
+                m_animation.AddClip(m_aimEraserRunLeftAnim, "aimEraserRunLeft");
+                m_animation.AddClip(m_aimEraserRunRightAnim, "aimEraserRunRight");
                 m_animation.AddClip(m_castingAnim, "casting");
                 m_animation.AddClip(m_freeFallingAnim, "freeFalling");
                 m_animation.AddClip(m_recoveringAmim, "recovering");
@@ -237,6 +260,9 @@ namespace Player
                         state.speed = m_aimingAnimSpeed;
                         m_aimingState = state;
                         break;
+                    case "aimingEraser":
+                        state.speed = m_aimingEraserAnimSpeed;
+                        break;
                     case "aimRunForward":
                         state.speed = m_aimRunAnimSpeed;
                         m_aimRunForwardState = state;
@@ -253,6 +279,18 @@ namespace Player
                         state.speed = m_aimStrafeAnimSpeed;
                         m_aimRunRightState = state;
                         break;
+                    case "aimEraserRunForward":
+                        state.speed = m_aimRunEraserAnimSpeed;
+                        break;
+                    case "aimEraserRunBack":
+                        state.speed = m_aimRunEraserAnimSpeed;
+                        break;
+                    case "aimEraserRunLeft":
+                        state.speed = m_aimStrafeAnimSpeed;
+                        break;
+                    case "aimEraserRunRight":
+                        state.speed = m_aimStrafeAnimSpeed;
+                        break;
                     case "casting":
                         state.speed = m_castingAnimSpeed;
                         m_castingState = state;
@@ -266,16 +304,16 @@ namespace Player
                         m_recoveringState = state;
                         break;
                     case "slidingStart":
-                        state.speed = m_slidingMidAnimSpeed;
+                        state.speed = m_slidingStartAnimSpeed;
                         m_slidingStartState = state;
                         break;
                     case "slidingMid":
                         state.speed = m_slidingMidAnimSpeed;
-                        m_slidingStartState = state;
+                        m_slidingMidState = state;
                         break;
                     case "slidingEnd":
                         state.speed = m_slidingEndAnimSpeed;
-                        m_slidingStartState = state;
+                        m_slidingEndState = state;
                         break;
                     case "turnLeft":
                         state.speed = m_turnAnimSpeed;
@@ -296,6 +334,37 @@ namespace Player
         // Update is called once per frame
         protected override void Update()
         {
+            
+
+
+            if ((m_playerAnimProperties == PlayerAnimationProperties.AIMING 
+                || m_playerAnimProperties == PlayerAnimationProperties.AIM_RUN_FORWARD || m_playerAnimProperties == PlayerAnimationProperties.AIM_RUN_BACK) 
+                || m_playerAnimProperties == PlayerAnimationProperties.AIM_RUN_LEFT || m_playerAnimProperties == PlayerAnimationProperties.AIM_RUN_RIGHT)
+            {
+                //if the weapon changes in idle mode, set the property to aiming again to change the anim
+                if (m_playerAnimProperties == PlayerAnimationProperties.AIMING && m_playerEntity.EquipedItem != m_previousEquipped)
+                {
+                    SetProperty(PlayerAnimationProperties.AIMING);
+                }
+                //activate the equipped item
+                if (m_playerEntity.EquipedItem == PlayerEquipableItems.SPELL_QUILL)
+                {
+                    m_quill.gameObject.SetActive(true);
+                    m_eraser.gameObject.SetActive(false);
+                }
+                else
+                {
+                    m_quill.gameObject.SetActive(false);
+                    m_eraser.gameObject.SetActive(true);
+                }
+
+                m_previousEquipped = m_playerEntity.EquipedItem;
+            }
+            else
+            {
+                m_quill.gameObject.SetActive(false);
+                m_eraser.gameObject.SetActive(false);
+            }
             //base.Update(); //Does not call manage on update as we only want to manage when a state changes
         }
 
