@@ -46,7 +46,7 @@ namespace GameCore.GameState
         {
             if (Input.GetKeyUp(KeyCode.Escape))
             {
-                m_owner.SetState(new Playing_State(controller, m_previousState));
+                m_owner.SetState(new Playing_State(controller, m_previousState, m_playerMoveCameraPreviousState));
             }
             //oof
             Cursor.lockState = CursorLockMode.Confined;
