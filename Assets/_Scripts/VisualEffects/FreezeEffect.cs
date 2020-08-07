@@ -75,6 +75,8 @@ namespace VisualEffects
             //if not frozen and not already lerped to default
             else if (m_magicProfile.GetMagicFingerprint().magicState.temperature != GameCore.Spells.SpellState.COUNTERSPELLED && m_lerped)
             {
+                m_renderer.material.shader = m_blendShader;
+
                 m_lerped = false;
                 StopAllCoroutines();
                 StartCoroutine(TransitionBetweenStates(DEFAULT_LERP_VALUE, LERP_TIME));

@@ -315,7 +315,8 @@ namespace Player
 
         public void ResetAimedAt()
         {
-            if(m_aimedAtRenderer != null)
+            //only change if the shader hasn't already changed
+            if(m_aimedAtRenderer != null && m_aimedAtRenderer.material.shader == m_playerEntity.HighlightShader)
             {
                 m_aimedAtRenderer.material.shader = m_highlightedOldShader;
             }
