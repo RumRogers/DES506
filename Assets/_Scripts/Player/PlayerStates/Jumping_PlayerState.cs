@@ -67,7 +67,7 @@ namespace Player
                 {
                     Vector3 nonVerticalMovement = new Vector3(m_velocity.x, 0, m_velocity.z) + (m_playerEntity.Direction * m_playerEntity.AerialAcceleration) * Time.fixedDeltaTime;
                     
-                    m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Direction.normalized.x, 0, m_playerEntity.Direction.normalized.z));
+                    m_playerEntity.Rotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Direction.normalized.x, 0, m_playerEntity.Direction.normalized.z));
                     if (m_playerEntity.HasProperty(PlayerEntityProperties.SLIDING))
                     {
                         m_velocity = m_velocity.y * Vector3.up + Vector3.ClampMagnitude(nonVerticalMovement, m_playerEntity.IceMaxSpeed); //clamped at a higher value as we want to be able to jump further while sliding

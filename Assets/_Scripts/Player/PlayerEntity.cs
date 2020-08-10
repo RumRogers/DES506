@@ -116,6 +116,8 @@ namespace Player
         Vector3 m_lastDirection;
         Vector3 m_position;
         Vector3 m_positionLastFrame;
+        Quaternion m_rotationLastFrame;
+        Quaternion m_rotation;
         float m_time;
         PlayerGroundStates m_previousGroundState;
         PlayerEquipableItems m_equipedItem;
@@ -151,6 +153,7 @@ namespace Player
         public Vector3 Velocity { get => m_velocity; set => m_velocity = value; }
         public Vector3 Direction { get => m_direction; set => m_direction = value; }
         public Vector3 Position { get => transform.position; set { m_position = value; m_positionLastFrame = value; transform.position = value; } }
+        public Quaternion Rotation { get => m_rotation; set => m_rotation = value; }
         //player stats, getters only
         public Vector2 MovementInput { get => m_movementInput; }
         public Vector3 LastDirection { get => m_lastDirection; }
@@ -224,6 +227,9 @@ namespace Player
             m_playerStartPosition = transform.position;
             m_position = transform.position;
             m_positionLastFrame = transform.position;
+
+            m_rotation = transform.rotation;
+            m_rotationLastFrame = m_rotation;
         }
 
 #if DEBUG_GOD_MODE
@@ -292,6 +298,12 @@ namespace Player
             //Here we lerp from the position at the start of fixed update to the position after we update phyiscs by a step based on the time till the next fixed update
             m_time += Time.deltaTime;
             transform.position = Vector3.Lerp(m_positionLastFrame, m_position, m_time / Time.fixedDeltaTime);
+            transform.rotation = Quaternion.Lerp(m_rotationLastFrame, m_rotation, m_time / Time.fixedDeltaTime);
+
+            if(m_time / Time.fixedDeltaTime > 0.99)
+                m_rotationLastFrame = m_rotation;
+
+
             if (m_direction != Vector3.zero)
                 m_lastDirection = m_velocity;   //setting last direction to velocity seems to work best. Not sure why but just setting it to velocity seems to be more consistant.
         }

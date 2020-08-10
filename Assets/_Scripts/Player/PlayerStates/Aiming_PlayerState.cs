@@ -209,7 +209,7 @@ namespace Player
                 m_locked = false;
             }
             //rotate the player to face the direction they are aiming in
-            m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z));
+            m_playerEntity.Rotation = Quaternion.LookRotation(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z));
 
             //Slope detection 
             //if the slope is climable, modify the direction the player is traveling in 

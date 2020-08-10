@@ -53,7 +53,7 @@ namespace Player
 
             Vector3 lookDir = m_speaker.transform.position - m_playerEntity.transform.position;
             lookDir.y = 0;
-            m_playerEntity.transform.rotation = Quaternion.LookRotation(lookDir);
+            m_playerEntity.Rotation = Quaternion.LookRotation(lookDir);
             m_playerEntity.Velocity = Vector3.zero;
 
             m_playerEntity.Animator.SetExpression(PlayerFacialExpression.TALKING);

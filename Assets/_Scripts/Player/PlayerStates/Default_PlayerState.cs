@@ -111,7 +111,7 @@ namespace Player
                     }
                     
                     //rotate the player to face the direction they are traveling in
-                    m_playerEntity.transform.rotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Direction.normalized.x, 0, m_playerEntity.Direction.z));
+                    m_playerEntity.Rotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Direction.normalized.x, 0, m_playerEntity.Direction.z));
 
                     m_velocity = Vector3.ClampMagnitude(m_velocity, maxSpeed);
 
