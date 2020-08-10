@@ -102,6 +102,9 @@
 	</object>
 	<object class="MixerBusPanner" id="{113a9cf4-1200-4045-9335-451a3dc435e3}" />
 	<object class="MultiSound" id="{97cfbd43-970b-489d-869e-6e765c9612d8}">
+		<property name="color">
+			<value>Red Light 1</value>
+		</property>
 		<relationship name="sounds">
 			<destination>{ab527f04-f3bc-4256-9f1b-f543788a0cac}</destination>
 			<destination>{8aeefd38-2273-4b88-8f07-4b63ac2d8f53}</destination>
@@ -130,6 +133,9 @@
 		</relationship>
 	</object>
 	<object class="MultiSound" id="{10d1ee07-063d-4496-87f5-892e8586f805}">
+		<property name="color">
+			<value>Red Light 1</value>
+		</property>
 		<property name="length">
 			<value>1.0553333333333332</value>
 		</property>

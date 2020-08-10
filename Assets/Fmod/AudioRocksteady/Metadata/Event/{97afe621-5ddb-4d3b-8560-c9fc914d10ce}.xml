@@ -95,6 +95,9 @@
 	</object>
 	<object class="MixerBusPanner" id="{bcb72a0c-c93e-4f0c-a809-75d04bbd65c2}" />
 	<object class="MultiSound" id="{6b79765a-4617-4cfc-bc9e-d7abacad6e6c}">
+		<property name="color">
+			<value>Red Light 1</value>
+		</property>
 		<property name="pitch">
 			<value>9</value>
 		</property>

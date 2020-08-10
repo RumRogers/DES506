@@ -41,9 +41,11 @@ namespace GameUI.Dialogue
         //FMOD stuff for dialogue audio
         [FMODUnity.EventRef]
         public string fmodDialogueEvent;
+        [FMODUnity.EventRef]
+        public string fmodSecondDialogueEvent;
         FMOD.Studio.EventInstance fmodDialogue;
         FMOD.Studio.PARAMETER_ID dialogueBoxNumber;
-        FMOD.Studio.PARAMETER_ID snapshotIntensity;
+        FMOD.Studio.PARAMETER_ID snapshotIntensity; 
         FMOD.Studio.EventInstance dialogueMix;
 
         private void Awake()
@@ -92,6 +94,7 @@ namespace GameUI.Dialogue
         public void SetNewDialogue(TextAsset dialogue)
         {
             m_convoJSON = dialogue;
+            fmodDialogueEvent = fmodSecondDialogueEvent;
         }
 
         private void Update()
@@ -116,6 +119,7 @@ namespace GameUI.Dialogue
         public void DisableUI()
         {
             m_TextUI.SetActive(false);
+            fmodDialogue.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         }
 
         public bool GetDialogueHasStarted()
