@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.01.00">
 	<object class="AudioFile" id="{b8aeedb2-7ac3-44c3-91fd-535d36489fdb}">
 		<property name="assetPath">
-			<value>MUSIC/Rocksteady - First Level theme.ogg</value>
+			<value>MUSIC/First Level theme.ogg</value>
 		</property>
 		<property name="isStreaming">
 			<value>true</value>
