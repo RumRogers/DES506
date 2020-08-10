@@ -16,9 +16,6 @@ public class Cog : Enchantable
     [SerializeField]
     private SizeState m_size = SizeState.DEFAULT;
 
-    [SerializeField]
-    private SizeState m_solutionSize = SizeState.DEFAULT;
-
     //Rotation controls
     private bool m_isRotating; 
     private bool m_iStopIt = false;
@@ -30,8 +27,6 @@ public class Cog : Enchantable
 
     //Spell Components
     private bool m_isFrozen;
-    private bool m_isLarge = false;
-    private bool m_isSmall = false;
 
     private float m_counter = 0;
 
@@ -46,8 +41,6 @@ public class Cog : Enchantable
     //Public accessors 
     //Should be removed, unless frozen is explicitly needed
     public bool IsFrozen { get { return m_isFrozen; } }
-    public bool IsLarge { get { return m_size == SizeState.LARGE; } }
-    public bool IsSmall { get { return m_size == SizeState.SMALL; } }
     public bool IsRotating { get { return m_isRotating; } }
 
     public Quaternion GlobalRotation { get { return m_globalRotation; } set { m_globalRotation = value; } }
@@ -75,30 +68,17 @@ public class Cog : Enchantable
         m_scaleSmallReference = ScaleObject(m_smallScale);
         m_scaleDefaultReference = ScaleObject(Vector3.one);
 
-        #region Starting Size
-        switch (m_size)
+        if (GetMagicState(SpellType.TRANSFORM_TEMPERATURE_COLD) == SpellState.COUNTERSPELLED)
         {
-            case SizeState.DEFAULT:
-                break;
-
-            case SizeState.LARGE:
-                transform.localScale = m_largeScale;
-                m_size = SizeState.LARGE;
-                break;
-
-            case SizeState.SMALL:
-                transform.localScale = m_smallScale;
-                m_size = SizeState.SMALL;
-                break;
+            m_isFrozen = true;
         }
-        #endregion
 
         m_rotationReference = Rotate();
 
         #region Check for starting rotation
         if (m_leftNeighbour != null)
         {
-            if (m_leftNeighbour.IsRotating == true && !m_leftNeighbour.IsSmall)
+            if (m_leftNeighbour.IsRotating == true && !m_leftNeighbour.IsFrozen)
             {
                 StartCoroutine(m_rotationReference);
                 m_isRotating = true;
@@ -106,7 +86,7 @@ public class Cog : Enchantable
         }
         else if (m_leftNeighbour == null)
         {
-            StartCoroutine(m_rotationReference);
+            StartCoroutine(StutterRotate());
             m_isRotating = true;
         }
         #endregion
@@ -119,20 +99,28 @@ public class Cog : Enchantable
         if (m_leftNeighbour != null)
         {
             //Check if current cog is no longer being acted upon
-            if (!m_leftNeighbour.IsRotating || m_leftNeighbour.IsSmall || !IsCorrect())
+            if (!m_leftNeighbour.IsRotating || m_leftNeighbour.IsFrozen || !IsCorrect())
             {
                 StopCoroutine(m_rotationReference);
                 m_isRotating = false;
             }
             //If the cog is stationary, check if a change has now allowed it to move
-            else if(m_leftNeighbour.IsRotating && m_leftNeighbour.IsCorrect() && IsCorrect() && !m_isRotating)
+            else if (m_leftNeighbour.IsRotating && m_leftNeighbour.IsCorrect() && IsCorrect() && !m_isRotating)
             {
                 StartCoroutine(m_rotationReference);
                 m_isRotating = true;
             }
         }
+        else if (m_leftNeighbour == null)
+        {
+            if(!m_rightNeighbour.IsFrozen)
+            {
+                StopAllCoroutines();
+                StartCoroutine(m_rotationReference);
+            }
+        }
 
-        if(m_isRotating && m_iStopIt) //Temp solution for testing
+            if (m_isRotating && m_iStopIt) //Temp solution for testing
         {
             StopCoroutine(m_rotationReference);
             m_isRotating = false;
@@ -170,6 +158,31 @@ public class Cog : Enchantable
                     transform.RotateAround(transform.position, transform.right, Time.deltaTime * -m_cogSpeed);
             }
 
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+    }
+
+    IEnumerator StutterRotate()
+    {
+        transform.rotation = m_globalRotation;
+        Quaternion tempRot = transform.rotation;
+        float tempCounter = 0;
+
+        while (true)
+        {
+            if (m_isClockwise)
+                transform.RotateAround(transform.position, transform.right, Time.deltaTime * m_cogSpeed);
+            else
+                transform.RotateAround(transform.position, transform.right, Time.deltaTime * -m_cogSpeed);
+
+            tempCounter += Time.deltaTime;
+            
+            if(tempCounter >= 0.1f)
+            {
+                transform.rotation = tempRot;
+                tempCounter = 0;
+            }
+            
             yield return new WaitForSeconds(Time.deltaTime);
         }
     }
@@ -223,18 +236,12 @@ public class Cog : Enchantable
             StopCoroutine(m_scaleLargeReference);
 
         StartCoroutine(m_scaleDefaultReference);
-
-        m_size = SizeState.DEFAULT;
     }
     #endregion
 
     public bool IsCorrect()
     {
-        if (Vector3.Distance(transform.localScale, Vector3.one) < 0.2f && m_size == m_solutionSize)
-            return true;
-
-        return false;
-        //return m_size == m_solutionSize;
+        return !m_isFrozen;
     }
 
 }
