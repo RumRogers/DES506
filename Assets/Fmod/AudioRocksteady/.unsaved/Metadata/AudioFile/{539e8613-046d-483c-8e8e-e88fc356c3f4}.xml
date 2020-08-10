@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{539e8613-046d-483c-8e8e-e88fc356c3f4}">
+		<property name="assetPath">
+			<value>Spells/DES506_SFX_Spells_Sparkle.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>11.247854166666666</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{9937f860-8fbb-46f5-bf06-8a9c030d1b0c}</destination>
+		</relationship>
+	</object>
+</objects>
