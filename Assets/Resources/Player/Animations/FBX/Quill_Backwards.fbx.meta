@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cc56b41c96834fe4dbc9bfec2141d957
+guid: 704641915e567af4e8b0275cc9eea7ba
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable:
@@ -38,8 +38,8 @@ ModelImporter:
       name: Take 001
       takeName: Take 001
       internalID: 1827226128182048838
-      firstFrame: 75
-      lastFrame: 115
+      firstFrame: 10
+      lastFrame: 60
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -116,10 +116,10 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 1
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
