@@ -207,6 +207,6 @@ public class Platform : Enchantable
             m_frameDestination = transform.position + (m_direction * (axis * m_platformSpeed));
         }
 
-        transform.position = Vector3.Lerp(transform.position, m_frameDestination, 0.01666666666f);
+        transform.position = Vector3.Lerp(transform.position, m_frameDestination, Time.deltaTime);
     }
 }
