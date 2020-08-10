@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="AudioFile" id="{0f68e871-bd2c-46ca-8327-c411b0dc145f}">
-		<property name="assetPath">
-			<value>MUSIC/Rocksteady - Tutorial theme.wav</value>
-		</property>
+		<property name="assetPath" />
 		<property name="isStreaming">
 			<value>true</value>
 		</property>
