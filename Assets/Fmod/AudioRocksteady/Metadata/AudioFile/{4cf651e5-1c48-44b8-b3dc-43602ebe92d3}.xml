@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="AudioFile" id="{4cf651e5-1c48-44b8-b3dc-43602ebe92d3}">
-		<property name="assetPath">
-			<value>MUSIC/Tutorial Music/Part 4/Tuto part 4 VIOLIN PIZZICATO.ogg</value>
-		</property>
+		<property name="assetPath" />
 		<property name="isStreaming">
 			<value>true</value>
 		</property>

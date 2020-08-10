@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="AudioFile" id="{db7c744e-2e41-4ac9-8def-61ba134c2eb4}">
-		<property name="assetPath">
-			<value>MUSIC/Tutorial Music/Part 1/Tuto Part 01 -  CLARINET M01.ogg</value>
-		</property>
+		<property name="assetPath" />
 		<property name="isStreaming">
 			<value>true</value>
 		</property>

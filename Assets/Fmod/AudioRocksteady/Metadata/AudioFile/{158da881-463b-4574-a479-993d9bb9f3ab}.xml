@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="AudioFile" id="{158da881-463b-4574-a479-993d9bb9f3ab}">
-		<property name="assetPath">
-			<value>MUSIC/1st Level Theme/Part 2/1st Level Theme - Part 2  XYLOPHONE.ogg</value>
-		</property>
+		<property name="assetPath" />
 		<property name="frequencyInKHz">
 			<value>44.0999985</value>
 		</property>

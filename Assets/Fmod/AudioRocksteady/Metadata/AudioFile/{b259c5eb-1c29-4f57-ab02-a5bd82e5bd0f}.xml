@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="AudioFile" id="{b259c5eb-1c29-4f57-ab02-a5bd82e5bd0f}">
-		<property name="assetPath">
-			<value>MUSIC/1st Level Theme/Part 1/1st Level Theme - Part 1  CELLO 01.ogg</value>
-		</property>
+		<property name="assetPath" />
 		<property name="isStreaming">
 			<value>true</value>
 		</property>

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="AudioFile" id="{d9cd8655-8b00-4db3-8d16-d3fe741e3440}">
-		<property name="assetPath">
-			<value>MUSIC/Tutorial Music/Part 3/Tuto part 3 TUBA.ogg</value>
-		</property>
+		<property name="assetPath" />
 		<property name="isStreaming">
 			<value>true</value>
 		</property>

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="AudioFile" id="{818eef45-6c34-422f-8ad9-d63138a53fc2}">
-		<property name="assetPath">
-			<value>MUSIC/Tutorial Music/Part 5/Tuto part 5 CONTREBASSE-1.ogg</value>
-		</property>
+		<property name="assetPath" />
 		<property name="isStreaming">
 			<value>true</value>
 		</property>

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="AudioFile" id="{f555491f-c27c-4084-b726-e025aea2b743}">
-		<property name="assetPath">
-			<value>MUSIC/1st Level Theme/Part 5/1st Level Theme - Part 5 CONTREBASSE-1.ogg</value>
-		</property>
+		<property name="assetPath" />
 		<property name="isStreaming">
 			<value>true</value>
 		</property>

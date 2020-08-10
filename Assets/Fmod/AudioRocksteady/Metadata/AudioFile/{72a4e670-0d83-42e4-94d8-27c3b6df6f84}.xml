@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="AudioFile" id="{72a4e670-0d83-42e4-94d8-27c3b6df6f84}">
-		<property name="assetPath">
-			<value>MUSIC/1st Level Theme/Part 4/1st Level Theme - Part 4 XYLOPHONE.ogg</value>
-		</property>
+		<property name="assetPath" />
 		<property name="isStreaming">
 			<value>true</value>
 		</property>

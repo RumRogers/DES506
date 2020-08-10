@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="AudioFile" id="{9c80bd97-3591-42ee-b6ae-bc0890c807ac}">
-		<property name="assetPath">
-			<value>MUSIC/2nd Level Theme/part 4/2nd Level theme - part 4 GLOCkENSPIEL.ogg</value>
-		</property>
+		<property name="assetPath" />
 		<property name="isStreaming">
 			<value>true</value>
 		</property>
