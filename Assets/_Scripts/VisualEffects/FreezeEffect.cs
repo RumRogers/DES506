@@ -13,7 +13,9 @@ namespace VisualEffects
         Shader m_blendShader;
         //might want a different texture per object based on how the model is UV wrapped
         [SerializeField] Texture m_iceTexture;
+        [SerializeField] Texture m_iceUV;
         [SerializeField] Texture m_mainTexture;
+        [SerializeField] Texture m_mainUV;
         float m_matLerpValue = 0;
         GameCore.Spells.MagicProfile m_magicProfile;
         bool m_lerped = false;
@@ -42,6 +44,16 @@ namespace VisualEffects
             //m_iceTexture = (Texture)Resources.Load(ICE_TEXTURE_PATH);
             m_matBlock.SetTexture("_MainTex", m_mainTexture);
             m_matBlock.SetTexture("_BlendTex", m_iceTexture);
+            try
+            {
+                m_matBlock.SetTexture("_MainUV", m_mainUV);
+                m_matBlock.SetTexture("_BlendUV", m_iceUV);
+            }
+            catch
+            {
+                Debug.LogWarning($"No UVs attached to Frozen object {transform.name}");
+            }
+
             m_renderer.SetPropertyBlock(m_matBlock);
             m_originalShader = m_renderer.material.shader;
 
