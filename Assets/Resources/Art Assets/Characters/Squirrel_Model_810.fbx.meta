@@ -3,7 +3,37 @@ guid: d64bbec8584e2ef4f8ef48be1a1bae73
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Book01
+    second: {fileID: 2100000, guid: 12fa5d4557403754c93185cdc1c42786, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Book02
+    second: {fileID: 2100000, guid: 868355e236878c342a083812ce382246, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Book03
+    second: {fileID: 2100000, guid: 48434aecc12c2684f9df1dae94f10838, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Book04
+    second: {fileID: 2100000, guid: 5993bf5f853098f449f775c9b08101f3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Book05
+    second: {fileID: 2100000, guid: 853e294c1727bbf4b8e8cf1aa075a4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Squirrel2
+    second: {fileID: 2100000, guid: 1c66c361e9e114c46b9922b63b1956ba, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
