@@ -69,10 +69,6 @@ namespace GameEnchantables
         }
         protected override void SpellReset(Spell spell)
         {
-            // The game's ending scene should start right here.
-            // Probably need to take disable player controls.
-            // Probably need to take control of the camera.
-
             TakeFullControl();
             StartCoroutine(EndingSequence());
         }
@@ -80,13 +76,9 @@ namespace GameEnchantables
         protected override void Update()
         {
             base.Update();
-            if(m_gameOver && Input.anyKeyDown)
+            if(m_gameOver && Input.GetKeyDown(KeyCode.Escape))
             {
-                // Ain't working for some reason
-                Cursor.lockState = CursorLockMode.Confined;
-                Cursor.visible = true;
-
-                SceneManager.LoadScene("MainMenuScreen");
+                SceneManager.LoadScene(0);
             }
         }
 
