@@ -1,0 +1,19 @@
+{
+  "lines": [
+    {
+      "text": "Oh, hi there! It’s a bit cold in these parts here"
+    },
+    {
+      "text": "I need to get back home but this bridge… it isn’t working properly"
+    },
+    {
+      "text": "Honestly, who makes a contraption this complicated?! If only we could undo it, you know, the way it used to be before…"
+    },
+    {
+      "text": "By the way, I think I saw something like that Quill you’re carrying around with you, right up above me!"
+    },
+    {
+      "text": "I… wasn’t sure if I should touch it, so I left it up there… you think that could be useful?"
+    }
+  ]
+}

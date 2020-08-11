@@ -1,0 +1,7 @@
+{
+  "lines": [
+    {
+      "text": "I know, I’ll miss you too. Now go on, this is your way back home… I think?"
+    }
+  ]
+}

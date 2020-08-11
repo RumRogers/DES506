@@ -1,0 +1,8 @@
+{
+  "lines": [
+    
+    {
+      "text": "Huh? What? Still here? Go on, get out, on your way! Aren’t you bored?"
+    }
+  ]
+}

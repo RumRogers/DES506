@@ -1,0 +1,22 @@
+{
+  "lines": [
+    {
+      "text": "Ah! It’s you! I’ve been waiting for you. I’m the town librarian!"
+    },
+    {
+      "text": "Owl sent me here, he said you might need me, he forgot to mention something quite important!"
+    },
+    {
+      "text": "This book here, he asked me to look at it… it seems to have some magical properties. I’ve never seen anything like it!"
+    },
+    {
+      "text": "He said maybe you should try using your “correction pen” … something about “Returning to your world”"
+    },
+    {
+      "text": "…What does that even mean? Oh, that silly old coot with his magic mumbo jumbo!"
+    },
+    {
+      "text": "Oh well, he said you would probably know what to do. I saved the book here for you, have a go at it!"
+    }
+  ]
+}
