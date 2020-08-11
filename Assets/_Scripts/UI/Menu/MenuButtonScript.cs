@@ -50,6 +50,11 @@ public class MenuButtonScript : MonoBehaviour
         m_menus[index].SetActive(true);
     }
 
+    private void Update()
+    {
+        Cursor.lockState = CursorLockMode.Confined;
+    }
+
     void HideAllMenus()
     {
         foreach(GameObject g in m_menus)
