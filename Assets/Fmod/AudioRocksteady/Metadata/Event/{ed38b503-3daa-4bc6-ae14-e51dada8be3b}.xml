@@ -39,6 +39,9 @@
 		<relationship name="parameters">
 			<destination>{acc12c7e-208d-4a0b-a7ef-760ae8cd5f03}</destination>
 		</relationship>
+		<relationship name="banks">
+			<destination>{1933e6df-eee8-4ae3-905c-2634778428f6}</destination>
+		</relationship>
 	</object>
 	<object class="EventMixer" id="{14183235-6d6c-431a-bf6c-6c079d10b796}">
 		<relationship name="masterBus">
@@ -135,6 +138,9 @@
 	</object>
 	<object class="MixerBusPanner" id="{6f687f0f-3f63-4c3a-b2a3-e680c0598c10}" />
 	<object class="SingleSound" id="{c613ea7b-f329-4616-8498-7d4e722e1ef5}">
+		<property name="color">
+			<value>Yellow Light 2</value>
+		</property>
 		<property name="length">
 			<value>6</value>
 		</property>
@@ -143,6 +149,9 @@
 		</relationship>
 	</object>
 	<object class="SingleSound" id="{82b08149-21c0-4b16-8762-e1e1ca4c3b56}">
+		<property name="color">
+			<value>Yellow Light 2</value>
+		</property>
 		<property name="start">
 			<value>8</value>
 		</property>
@@ -154,6 +163,9 @@
 		</relationship>
 	</object>
 	<object class="SingleSound" id="{8fa85107-a62b-4402-b989-efa96ffa37fc}">
+		<property name="color">
+			<value>Yellow Light 2</value>
+		</property>
 		<property name="start">
 			<value>16</value>
 		</property>
@@ -165,6 +177,9 @@
 		</relationship>
 	</object>
 	<object class="SingleSound" id="{ebf29975-ff72-4986-bd5f-dadb773ab3a8}">
+		<property name="color">
+			<value>Yellow Light 2</value>
+		</property>
 		<property name="start">
 			<value>27.92424292987635</value>
 		</property>
@@ -176,6 +191,9 @@
 		</relationship>
 	</object>
 	<object class="SingleSound" id="{22118788-e207-4755-ba58-66b1f44c61c7}">
+		<property name="color">
+			<value>Yellow Light 2</value>
+		</property>
 		<property name="start">
 			<value>36.5</value>
 		</property>
@@ -187,6 +205,9 @@
 		</relationship>
 	</object>
 	<object class="SingleSound" id="{ebfb4d10-7fcd-4a47-8dcf-ec857d7f126b}">
+		<property name="color">
+			<value>Yellow Light 2</value>
+		</property>
 		<property name="start">
 			<value>45</value>
 		</property>
