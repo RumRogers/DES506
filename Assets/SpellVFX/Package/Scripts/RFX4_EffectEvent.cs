@@ -55,20 +55,19 @@ public class RFX4_EffectEvent : MonoBehaviour
 
     public void CastEraserEffect(Vector3 targetPos)
     {
-        if (!m_eraserEffect || m_instance)
+        if (!m_eraserEffect)
             return;
 
-       // GameObject m_instance;
+        if (m_instance)
+            m_instance = null;
 
         m_distance = Vector3.Distance(m_eraserCastPoint.transform.position, targetPos);
-        float angle = Vector3.Angle(m_eraserCastPoint.position, targetPos);
+
         m_instance = Instantiate(m_eraserEffect, m_eraserCastPoint.position, m_eraserCastPoint.rotation);
 
-        m_instance.transform.position = m_eraserCastPoint.position + m_eraserCastPoint.forward * m_forwardOffset;
+        m_instance.transform.LookAt(targetPos);
 
-        //m_instance.transform.RotateAround(m_instance.transform.right, -m_distance * Mathf.Deg2Rad * m_rotationOffset);
-        //m_instance.transform.Rotate(m_instance.transform.right, -m_distance * Mathf.Deg2Rad * m_rotationOffset);
-        m_instance.transform.Rotate(m_instance.transform.right, angle * Mathf.Deg2Rad);
+        m_instance.transform.position = m_eraserCastPoint.position + m_eraserCastPoint.forward * m_forwardOffset;
 
         if (m_spellDestroyTime > 0.01f)
             Destroy(m_instance, m_spellDestroyTime);
