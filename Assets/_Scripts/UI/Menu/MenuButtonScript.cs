@@ -76,6 +76,8 @@ public class MenuButtonScript : MonoBehaviour
         //{
         //    Cursor.SetCursor(m_mouseCursor, new Vector2(10, 0), CursorMode.Auto);
         //}
+
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     public void CloseGame()
