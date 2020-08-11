@@ -73,11 +73,11 @@ public class Platform : Enchantable
             switch (m_platType)
             {
                 case PlatformType.HORIZONTAL:
-                    SmoothTranslatePosition(transform.right);
+                    TranslatePosition(transform.right);
                     break;
 
                 case PlatformType.VERTICAL:
-                    SmoothTranslatePosition(transform.up);
+                    TranslatePosition(transform.up);
                     break;
 
                 case PlatformType.ROTATION:
@@ -88,18 +88,6 @@ public class Platform : Enchantable
     }
 
     #region Enumerators
-    //Remove
-    //IEnumerator Translate()
-    //{
-    //    m_isMoving = true;
-
-    //    while (true)
-    //    {
-           
-    //        yield return new WaitForSeconds(Time.deltaTime);
-    //    }
-    //}
-
     IEnumerator ScaleObject(Vector3 scale)
     {
         Vector3 originalScale = transform.localScale;
@@ -186,7 +174,7 @@ public class Platform : Enchantable
             m_direction = -m_direction;
         }
 
-        transform.position += direction * m_direction * (Time.deltaTime * m_platformSpeed);
+        transform.position += direction * m_direction * (Time.fixedDeltaTime * m_platformSpeed);
     }
 
     private void SmoothTranslatePosition(Vector3 axis)
@@ -207,6 +195,6 @@ public class Platform : Enchantable
             m_frameDestination = transform.position + (m_direction * (axis * m_platformSpeed));
         }
 
-        transform.position = Vector3.Lerp(transform.position, m_frameDestination, Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, m_frameDestination, Time.fixedDeltaTime);
     }
 }

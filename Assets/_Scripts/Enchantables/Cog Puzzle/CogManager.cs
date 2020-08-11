@@ -67,7 +67,7 @@ public class CogManager : MonoBehaviour
         {
             c.GlobalRotation = m_cogs[0].transform.rotation;
 
-            if (!c.IsCorrect())
+            if (!c.IsCorrect() || !c.IsCorrectSize())
                 m_complete = false;
         }
 

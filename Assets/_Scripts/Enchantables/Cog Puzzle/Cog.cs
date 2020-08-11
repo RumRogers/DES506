@@ -239,6 +239,18 @@ public class Cog : Enchantable
     }
     #endregion
 
+    public bool IsCorrectSize()
+    {
+        if (GetMagicState(SpellType.TRANSFORM_SIZE_BIG) != SpellState.SPELLED 
+         && GetMagicState(SpellType.TRANSFORM_SIZE_SMALL) != SpellState.COUNTERSPELLED
+         && Vector3.Distance(transform.localScale, Vector3.one) <= 0.1f)
+        {
+            return true;
+        }
+        else
+            return false;
+    }
+
     public bool IsCorrect()
     {
         return !m_isFrozen;
