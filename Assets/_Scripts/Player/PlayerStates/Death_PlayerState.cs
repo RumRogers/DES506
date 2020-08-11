@@ -78,7 +78,8 @@ namespace Player
 
         IEnumerator WaitForAnimFinish()
         {
-            while (m_playerEntity.Animator.Animation.isPlaying)
+            while (m_playerEntity.Animator.GetState().GetType() == typeof(Recovery_AnimationState) 
+                && m_playerEntity.Animator.Animation.isPlaying)
             {
                 yield return null;
             }
