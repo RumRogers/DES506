@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 681920651190146641}
   - component: {fileID: 681920651190146646}
   m_Layer: 0
-  m_Name: Main_Book
+  m_Name: Magic Book
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -109,7 +109,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_hasParticles: 1
   m_particlesType: 0
-  m_timeToFadeOutInSeconds: 3
+  m_timeToWaitBeforeStartingCutscene: 0
+  m_timeToBlendTexturesInSeconds: 2
+  m_timeToFadeToBlackInSeconds: 1
+  m_blackScreenImage: {fileID: 0}
+  m_finalImage: {fileID: 0}
+  m_gameObjectsToDisable:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &681920651190146641
 MonoBehaviour:
   m_ObjectHideFlags: 0
