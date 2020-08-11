@@ -41,6 +41,16 @@ namespace GameCore.System
             }
         }
 
+        public static void Reset()
+        {
+            s_instance = null;
+            
+            // If game scene was loaded already, destroyed particles will still be referenced. Cleaning. 
+            ClearEnchantableParticles();
+            // Forget all previously learned spells for a new game.
+            LockAllSpells();            
+        }
+
         private LevelManager()
         {
             Init();
@@ -163,6 +173,11 @@ namespace GameCore.System
         public static void ForceSpellWheelClose()
         {
             s_spellWheel.SetState(new Idle_SpellWheelState(s_spellWheel));
+        }
+
+        public static void LockAllSpells()
+        {
+            s_playerSpells = 0;
         }
 
         // All of this became obsolete when we changed core mechanic

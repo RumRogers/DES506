@@ -92,8 +92,7 @@ public class MenuButtonScript : MonoBehaviour
 
     public void LoadScene(string scene)
     {
-        // If game scene was loaded already, destroyed particles will still be referenced. Cleaning. 
-        LevelManager.ClearEnchantableParticles();
+        LevelManager.Reset();
 
         SceneManager.LoadScene(scene);
     }
