@@ -257,6 +257,8 @@ namespace Player
 
             base.Update();
 
+            CheckCollisions();
+
             //First check if death state is triggered to save time / ensure the player cannot do something if they are alread dead
             if (HasProperty(PlayerEntityProperties.DYING) && m_state.GetType() != typeof(Death_PlayerState))
             {
@@ -369,11 +371,7 @@ namespace Player
                     if (Physics.Raycast(rayStart, rayDirection, out m_collisionHitInfo, m_playerRadius + m_additionalRayLength))
                     {
                         Vector3 nonVerticalMovement = new Vector3(m_velocity.x, 0, m_velocity.y);
-                        if (!m_grounded)
-                        {
-                            m_velocity = m_velocity - (-m_collisionHitInfo.normal  * nonVerticalMovement.magnitude);
-                            return;
-                        }
+
                         //only count the ray as hit if it is above the max climable incline
                         //if it's an acceptable angle it'll be handled by the movement state
                         if (Vector3.Angle(m_collisionHitInfo.normal, Vector3.up) > m_maxClimbableIncline)
