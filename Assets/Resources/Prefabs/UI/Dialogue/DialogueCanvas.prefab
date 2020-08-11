@@ -27,7 +27,7 @@ RectTransform:
   m_GameObject: {fileID: 2628606095672534176}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 2628606096191754198}
   m_RootOrder: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 97a64d31ab30ab14da5e099c1fdb1f3b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7ffb0c33071a8564a920d9e47553cad5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -98,9 +98,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 681ef513fbb52f14488a46c4372c7130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_farSprite: {fileID: 21300000, guid: c049956bc5a2432428d0a47c7e5846d0, type: 3}
-  m_closeSprite: {fileID: 21300000, guid: 97a64d31ab30ab14da5e099c1fdb1f3b, type: 3}
-  m_distanceThreshold: 9
+  m_farSprite: {fileID: 21300000, guid: 6a705cd1ebac51343adc656085949376, type: 3}
+  m_closeSprite: {fileID: 21300000, guid: 7ffb0c33071a8564a920d9e47553cad5, type: 3}
+  m_distanceThreshold: 13
 --- !u!1 &2628606096191754199
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,7 +138,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1.85, y: 7.26}
+  m_AnchoredPosition: {x: 1.8500061, y: 7.26001}
   m_SizeDelta: {x: 5, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &2628606096191754202

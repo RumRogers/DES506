@@ -68,6 +68,7 @@ namespace Player
 
             if (!m_dialogue.GetDialogueHasStarted())
             {
+                LevelManager.SetSpeechBubblesActive(false);
                 m_dialogue.StartDialogue();
                 m_playerEntity.ShowOtherUIsInDialogue(false);
             }
@@ -83,6 +84,7 @@ namespace Player
                 }
                 else
                 {
+                    LevelManager.SetSpeechBubblesActive(true);
                     m_dialogue.DisableUI();
                     //m_playerEntity.ShowOtherUIsInDialogue(true);
                     m_playerEntity.Animator.SetExpression(PlayerFacialExpression.NATURAL);

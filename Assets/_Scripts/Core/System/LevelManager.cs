@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GameCore.Rules;
 using GameCore.Spells;
 using GameUI.SpellBook;
 using GameCore.Utils;
@@ -16,9 +15,12 @@ namespace GameCore.System
         static Dictionary<Transform, Enchantable> m_transformToEnchantableMap;
         static Dictionary<Enchantable, Renderer> m_enchantableToRendererMap;
         static List<GameObject> s_enchantableParticles = new List<GameObject>();
+        static List<GameObject> s_speechBubbles = new List<GameObject>();
+
         static LevelManager s_instance = null;
         public static SpellWheel s_spellWheel = null;
         public static ItemSelector s_itemSelector = null;
+
 
         const string SPELLBOOK_TAG = "SpellBook";
         const string ENCHANTABLE_TAG = "Enchantable";
@@ -45,9 +47,8 @@ namespace GameCore.System
         {
             s_instance = null;
             
-            // If game scene was loaded already, destroyed particles will still be referenced. Cleaning. 
             ClearEnchantableParticles();
-            // Forget all previously learned spells for a new game.
+            ClearSpeechBubbles();
             LockAllSpells();            
         }
 
@@ -161,10 +162,29 @@ namespace GameCore.System
             }
         }
 
-        public static void ClearEnchantableParticles()
+        private static void ClearEnchantableParticles()
         {
             s_enchantableParticles.Clear();
         }
+
+        private static void ClearSpeechBubbles()
+        {
+            s_speechBubbles.Clear();
+        }
+
+        public static void AddSpeechBubble(GameObject speechBubble)
+        {
+            s_speechBubbles.Add(speechBubble);
+        }
+
+        public static void SetSpeechBubblesActive(bool active)
+        {
+            foreach(var bubble in s_speechBubbles)
+            {
+                bubble.SetActive(active);
+            }
+        }
+
         public static bool HasPlayerUnlockedAtLeastASpell()
         {
             return s_playerSpells != 0;

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using GameCore.System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,7 +22,8 @@ public class SpeechBubbleChanger : MonoBehaviour
     void Start()
     {
         m_spriteRenderer = GetComponent<SpriteRenderer>();
-        m_playerTransform = GameObject.FindGameObjectWithTag("Player").transform;   
+        m_playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        LevelManager.AddSpeechBubble(gameObject);
     }
 
     // Update is called once per frame
