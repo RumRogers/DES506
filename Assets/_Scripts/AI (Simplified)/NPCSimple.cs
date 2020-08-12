@@ -91,7 +91,7 @@ public class NPCSimple : MonoBehaviour
                 m_secondTimeTalking = true;
             }
 
-            if (m_secondTimeTalking && m_secondDialogue)
+            if (m_secondTimeTalking && m_thirdDialogue)
             {
                 m_dialogue.SetNewDialogue(m_thirdDialogue);
                 m_secondTimeTalking = false;
