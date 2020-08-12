@@ -1,0 +1,640 @@
+fileFormatVersion: 2
+guid: 3ca87c869af465b4bbf61b4cd1d30c23
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -51357793283142161
+    second: IMenuSelectPointerSpriteSheet_0
+  - first:
+      213: 2071605630741901784
+    second: IMenuSelectPointerSpriteSheet_1
+  - first:
+      213: 6094000952955015298
+    second: IMenuSelectPointerSpriteSheet_2
+  - first:
+      213: 3086533947320679947
+    second: IMenuSelectPointerSpriteSheet_3
+  - first:
+      213: -1839394829697631995
+    second: IMenuSelectPointerSpriteSheet_4
+  - first:
+      213: -5528814058059727321
+    second: IMenuSelectPointerSpriteSheet_5
+  - first:
+      213: -5167345038647805004
+    second: IMenuSelectPointerSpriteSheet_6
+  - first:
+      213: 1693253329208221268
+    second: IMenuSelectPointerSpriteSheet_7
+  - first:
+      213: 3273790109509339571
+    second: IMenuSelectPointerSpriteSheet_8
+  - first:
+      213: -7078296624353746615
+    second: IMenuSelectPointerSpriteSheet_9
+  - first:
+      213: 1095888624908831785
+    second: IMenuSelectPointerSpriteSheet_10
+  - first:
+      213: -7820321368456392988
+    second: IMenuSelectPointerSpriteSheet_11
+  - first:
+      213: -4680572495802503315
+    second: IMenuSelectPointerSpriteSheet_12
+  - first:
+      213: -3195235263301096302
+    second: IMenuSelectPointerSpriteSheet_13
+  - first:
+      213: 6766469057307777861
+    second: IMenuSelectPointerSpriteSheet_14
+  - first:
+      213: -2968051090173926001
+    second: IMenuSelectPointerSpriteSheet_15
+  - first:
+      213: -1150325678427140321
+    second: IMenuSelectPointerSpriteSheet_16
+  - first:
+      213: -5043543449895480471
+    second: IMenuSelectPointerSpriteSheet_17
+  - first:
+      213: -2165173421633421562
+    second: IMenuSelectPointerSpriteSheet_18
+  - first:
+      213: 7198687416540799877
+    second: IMenuSelectPointerSpriteSheet_19
+  - first:
+      213: 2458847682765137243
+    second: IMenuSelectPointerSpriteSheet_20
+  - first:
+      213: 4326957607527303111
+    second: IMenuSelectPointerSpriteSheet_21
+  - first:
+      213: -8695529544980661484
+    second: IMenuSelectPointerSpriteSheet_22
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: 2
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: IMenuSelectPointerSpriteSheet_0
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 0
+        width: 62
+        height: 210
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97f1e5627eeee5146b8d41721500b688
+      internalID: -51357793283142161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMenuSelectPointerSpriteSheet_1
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 0
+        width: 63
+        height: 210
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8029a11cc02ef6408214829af2fc489
+      internalID: 2071605630741901784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMenuSelectPointerSpriteSheet_2
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 0
+        width: 63
+        height: 210
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af5b4800da09995459f1854acbef9556
+      internalID: 6094000952955015298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMenuSelectPointerSpriteSheet_3
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 0
+        width: 62
+        height: 210
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 716add0e008f6a541a3eaeae8802683f
+      internalID: 3086533947320679947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMenuSelectPointerSpriteSheet_4
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 0
+        width: 62
+        height: 210
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5656f20ba45fdde488ad286aa9738610
+      internalID: -1839394829697631995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMenuSelectPointerSpriteSheet_5
+      rect:
+        serializedVersion: 2
+        x: 514
+        y: 0
+        width: 61
+        height: 210
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e431f20990a49074088a7130c2731101
+      internalID: -5528814058059727321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMenuSelectPointerSpriteSheet_6
+      rect:
+        serializedVersion: 2
+        x: 614
+        y: 0
+        width: 61
+        height: 210
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25276a7e615c00c4ebb71817764f5349
+      internalID: -5167345038647805004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMenuSelectPointerSpriteSheet_7
+      rect:
+        serializedVersion: 2
+        x: 714
+        y: 0
+        width: 60
+        height: 210
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1680c2b5f5748d43bbd53e643542223
+      internalID: 1693253329208221268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMenuSelectPointerSpriteSheet_8
+      rect:
+        serializedVersion: 2
+        x: 817
+        y: 0
+        width: 59
+        height: 210
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 441bedc993dced34e8490be8cfda4caa
+      internalID: 3273790109509339571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMenuSelectPointerSpriteSheet_9
+      rect:
+        serializedVersion: 2
+        x: 921
+        y: 0
+        width: 56
+        height: 210
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31cc5964857196d4e979360fa0cf11c4
+      internalID: -7078296624353746615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMenuSelectPointerSpriteSheet_10
+      rect:
+        serializedVersion: 2
+        x: 1021
+        y: 0
+        width: 54
+        height: 210
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b56c5924a074774fa820222f33a4e09
+      internalID: 1095888624908831785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMenuSelectPointerSpriteSheet_11
+      rect:
+        serializedVersion: 2
+        x: 1121
+        y: 0
+        width: 55
+        height: 210
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6069f1c5ce49bcf4293695bb0e8e0d26
+      internalID: -7820321368456392988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMenuSelectPointerSpriteSheet_12
+      rect:
+        serializedVersion: 2
+        x: 1220
+        y: 0
+        width: 53
+        height: 210
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a43008c9e829be14cbcfd6e36ca99e85
+      internalID: -4680572495802503315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMenuSelectPointerSpriteSheet_13
+      rect:
+        serializedVersion: 2
+        x: 1319
+        y: 0
+        width: 57
+        height: 210
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6c92a8e19760d84295fd5a3fd1c9e15
+      internalID: -3195235263301096302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMenuSelectPointerSpriteSheet_14
+      rect:
+        serializedVersion: 2
+        x: 1419
+        y: 0
+        width: 59
+        height: 210
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e054a565fd3b78b4eb94ac9a3ebfc1f4
+      internalID: 6766469057307777861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMenuSelectPointerSpriteSheet_15
+      rect:
+        serializedVersion: 2
+        x: 1518
+        y: 0
+        width: 62
+        height: 210
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7e5c380cea8b394ea3afa2af98f1f40
+      internalID: -2968051090173926001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMenuSelectPointerSpriteSheet_16
+      rect:
+        serializedVersion: 2
+        x: 1618
+        y: 0
+        width: 62
+        height: 210
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 294498ed08e622742b329de5bbad04b2
+      internalID: -1150325678427140321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMenuSelectPointerSpriteSheet_17
+      rect:
+        serializedVersion: 2
+        x: 1718
+        y: 0
+        width: 62
+        height: 210
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08edc59462d60f64494613b2f6b4d728
+      internalID: -5043543449895480471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMenuSelectPointerSpriteSheet_18
+      rect:
+        serializedVersion: 2
+        x: 1818
+        y: 0
+        width: 62
+        height: 210
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd81d157acbbda94da90ed48a89d2fc5
+      internalID: -2165173421633421562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMenuSelectPointerSpriteSheet_19
+      rect:
+        serializedVersion: 2
+        x: 1918
+        y: 0
+        width: 62
+        height: 210
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4858d659065fa144862c69d2c4e806e
+      internalID: 7198687416540799877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: c203fb802e52add45910a7eef8e7941a
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

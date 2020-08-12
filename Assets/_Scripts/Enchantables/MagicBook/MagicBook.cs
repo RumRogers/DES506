@@ -100,9 +100,8 @@ namespace GameEnchantables
         {            
             yield return StartCoroutine(TimeBasedLerp(m_timeToBlendTexturesInSeconds, m_textureBlend));
             yield return StartCoroutine(TimeBasedLerp(m_timeToFadeToBlackInSeconds, m_fadeToBlack));
-            m_finalImage.enabled = true;
 
-            m_gameOver = true;
+            SceneManager.LoadScene("Outro");
         }
 
         IEnumerator TimeBasedLerp(float seconds, LerpDelegate lerpDelegate)

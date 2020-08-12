@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2063,7 +2063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_direction: {x: 0.75, y: 0.75}
-  m_speed: 0.01
+  m_speed: 0.15
   m_material: {fileID: 2100000, guid: bc5fed1e6548ae64a840530a8980b543, type: 2}
 --- !u!224 &1329916065 stripped
 RectTransform:
@@ -3402,6 +3402,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Colors.m_NormalColor.a
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218913796862973213, guid: b475df3622f5ccf41bc8fcc4a515272a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Intro
       objectReference: {fileID: 0}
     - target: {fileID: 8218913796581698117, guid: b475df3622f5ccf41bc8fcc4a515272a,
         type: 3}
