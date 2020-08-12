@@ -43,8 +43,6 @@ public class Platform : Enchantable
     private Vector3 m_largeScale = Vector3.zero;
 
     private int m_direction = 1;
-
-    private IEnumerator m_translateFunction;
     #endregion
 
     // Start is called before the first frame update
@@ -56,18 +54,15 @@ public class Platform : Enchantable
         m_smallScale = transform.localScale * m_smallScaleFactor;
         m_largeScale = transform.localScale * m_largeScaleFactor;
 
-        //m_translateFunction = Translate();
-
-        //StartCoroutine(m_translateFunction);
-
         if(GetMagicState(SpellType.TRANSFORM_TEMPERATURE_COLD) == SpellState.COUNTERSPELLED)
         {
             m_isMoving = false;
         }
     }
 
-    private void FixedUpdate()
+    protected override void FixedUpdate()
     {
+        base.FixedUpdate();
         if (m_isMoving)
         {
             switch (m_platType)

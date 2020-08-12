@@ -6,6 +6,8 @@ using UnityEngine;
 //[RequireComponent(typeof(HingeJoint),typeof(Rigidbody))]
 public class SeeSaw : Enchantable
 {
+    enum DegreeType { ZERO, NINTEY, ONE_EIGHTY, TWO_SEVENTY};
+
     [SerializeField]
     private bool m_startFrozen;
 
@@ -21,6 +23,9 @@ public class SeeSaw : Enchantable
 
     [SerializeField]
     private CounterWeight m_counterW;
+
+    [SerializeField]
+    DegreeType m_currentAngleType;
     //Scale
     private Vector3 m_smallScale;// = new Vector3(0.2f, 0.2f, 0.2f);
     private Vector3 m_largeScale;// = new Vector3(2.0f, 2.0f, 2.0f);
@@ -43,22 +48,82 @@ public class SeeSaw : Enchantable
     {
         base.Update();
 
+        switch(m_currentAngleType)
+        {
+            case DegreeType.ZERO:
+                if (transform.rotation.x <= (Mathf.Deg2Rad * 11.81f) / 2)
+                {
+                    if (m_leftSensor.IsTriggered() && !m_counterW.IsCorrectSize())
+                    {
+                        transform.Rotate(transform.right, (Mathf.Deg2Rad * Time.deltaTime) * m_speed);
+                    }
+                }
 
-        if(transform.rotation.x <= (Mathf.Deg2Rad * 11.81f)/2)
-        {
-            if (m_leftSensor.IsTriggered() && !m_counterW.IsCorrectSize())
-            {
-                transform.Rotate(transform.right, (Mathf.Deg2Rad * Time.deltaTime) * m_speed);
-            }
+                if (transform.rotation.x >= -(Mathf.Deg2Rad * 11.81f) / 2)
+                {
+                    if (m_rightSensor.IsTriggered() || m_counterW.IsCorrectSize())
+                    {
+                        transform.Rotate(transform.right, (Mathf.Deg2Rad * Time.deltaTime) * -m_speed);
+                    }
+                }
+                break;
+
+            case DegreeType.NINTEY:
+                if (transform.rotation.x <= (Mathf.Deg2Rad * 11.81f) / 2)
+                {
+                    if (m_leftSensor.IsTriggered() && !m_counterW.IsCorrectSize())
+                    {
+                        transform.Rotate(Vector3.right, (Mathf.Deg2Rad * Time.deltaTime) * m_speed);
+                    }
+                }
+
+                if (transform.rotation.x >= -(Mathf.Deg2Rad * 11.81f) / 2)
+                {
+                    if (m_rightSensor.IsTriggered() || m_counterW.IsCorrectSize())
+                    {
+                        transform.Rotate(Vector3.right, (Mathf.Deg2Rad * Time.deltaTime) * -m_speed);
+                    }
+                }
+                break;
+
+            case DegreeType.ONE_EIGHTY:
+                if (transform.rotation.z <= (Mathf.Deg2Rad * 11.81f) / 2)
+                {
+                    if (m_rightSensor.IsTriggered() || m_counterW.IsCorrectSize())
+                    {
+                        transform.Rotate(transform.right, (Mathf.Deg2Rad * Time.deltaTime) * m_speed);
+                    }
+                }
+
+                if (transform.rotation.z >= -(Mathf.Deg2Rad * 11.81f) / 2)
+                {
+                    if (m_leftSensor.IsTriggered() && !m_counterW.IsCorrectSize())
+                    {
+                        transform.Rotate(transform.right, (Mathf.Deg2Rad * Time.deltaTime) * -m_speed);
+                    }
+
+                }
+                break;
+
+            case DegreeType.TWO_SEVENTY:
+                if (transform.rotation.z <= (Mathf.Deg2Rad * 11.81f) / 2)
+                {
+                    if (m_leftSensor.IsTriggered() && !m_counterW.IsCorrectSize())
+                    {
+                        transform.Rotate(Vector3.right, (Mathf.Deg2Rad * Time.deltaTime) * m_speed);
+                    }
+                }
+
+                if (transform.rotation.z >= -(Mathf.Deg2Rad * 11.81f) / 2)
+                {
+                    if (m_rightSensor.IsTriggered() || m_counterW.IsCorrectSize())
+                    {
+                        transform.Rotate(Vector3.right, (Mathf.Deg2Rad * Time.deltaTime) * -m_speed);
+                    }
+                }
+                break;
         }
-        
-        if(transform.rotation.x >= -(Mathf.Deg2Rad * 11.81f) / 2)
-        {
-            if (m_rightSensor.IsTriggered() || m_counterW.IsCorrectSize())
-            {
-                transform.Rotate(transform.right, (Mathf.Deg2Rad * Time.deltaTime) * -m_speed);
-            }
-        }
+
 
     }
 
