@@ -36,7 +36,17 @@ namespace Player
             {
                 m_playerEntity.CanJumpTimer = 0;    //resetting the can jump timer when we land for the next jump
                 m_playerEntity.HasJumped = false;
-                m_playerEntity.Velocity = new Vector3(m_playerEntity.Velocity.x, 0, m_playerEntity.Velocity.z);
+
+                //if the player is still holding a direction we can assume that they did intend to keep moving
+                if (m_playerEntity.MovementInput == Vector2.zero)
+                {
+                    m_playerEntity.Velocity = Vector3.zero;
+                }
+                else
+                {
+                    m_playerEntity.Velocity = new Vector3(m_playerEntity.Velocity.x, 0, m_playerEntity.Velocity.z);
+                }
+                
                 switch (m_playerEntity.PreviousGroundState)
                 {
                     case PlayerGroundStates.AIMING:
