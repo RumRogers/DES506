@@ -57,7 +57,7 @@ namespace GameCore.Camera
             }
             m_rotation.y = m_rotation.y + m_playerMoveCamera.p_Input.y * (m_playerMoveCamera.p_DefaultMovementSpeed);
 
-            m_playerMoveCamera.transform.rotation = Quaternion.Euler(m_rotation);
+            m_playerMoveCamera.transform.rotation = Quaternion.Lerp(m_playerMoveCamera.transform.rotation, Quaternion.Euler(m_rotation), m_playerMoveCamera.p_SmoothFactor);
 
             //needs clamping else the camera will move further and further away from the player when the button is pressed repeatedly due to the offset being addded
             Vector3 targetPosition = m_playerMoveCamera.p_CameraTarget.position - Vector3.ClampMagnitude((m_playerMoveCamera.transform.forward * m_distance) - m_offset, m_playerMoveCamera.p_DefaultDistance);
