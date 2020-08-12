@@ -52,6 +52,7 @@ namespace Player
         [SerializeField] float m_maxSpeed = 2.0f;
         [SerializeField] float m_walkingAcceleration = 15.0f;
         [SerializeField] float m_walkingDeceleration = 15.0f;
+        [SerializeField] float m_walkingTurnTime = 0.4f;
         [SerializeField] [Range(0.0f, 1.0f)] float m_runningAnimationSpeedThreshold = 0.7f;
         [Header("Aiming")]
         [SerializeField] float m_aimingMaxSpeed = 2.0f;
@@ -164,6 +165,7 @@ namespace Player
         public float MaxSpeed { get => m_maxSpeed; }
         public float WalkingAcceleration { get => m_walkingAcceleration; }
         public float WalkingDeceleration { get => m_walkingDeceleration; }
+        public float WalkingTurnTime { get => m_walkingTurnTime; }
         public float RunningAnimationSpeedThreshold { get => m_runningAnimationSpeedThreshold; }
         public float AimingMaxSpeed { get => m_aimingMaxSpeed; }
         public float AimingAcceleration { get => m_aimingAcceleration; }

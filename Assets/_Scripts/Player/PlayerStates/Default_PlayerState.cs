@@ -87,27 +87,33 @@ namespace Player
                     {
                         if (m_playerEntity.EnableTurnAnimations)
                         {
+                            maxSpeed = m_playerEntity.MaxSpeed;
+                            m_velocity = m_velocity.magnitude * m_playerEntity.Direction;
+                            m_velocity += (m_playerEntity.Direction * m_playerEntity.WalkingAcceleration) * Time.fixedDeltaTime;
+
                             //if rotation is more than 90 degrees play the turn around animation
                             if (Vector3.Angle(m_playerEntity.Direction, m_playerEntity.transform.forward) > 170)
                             {
-                                //if cross of x1y2 is less than x2y1 then the rotation was counter clockwise, therefore play the left turn animation
-                                if (m_playerEntity.Direction.x * m_playerEntity.LastDirection.z < m_playerEntity.Direction.z * m_playerEntity.LastDirection.x)
+                                if (m_velocity.magnitude >= maxSpeed)
                                 {
-                                    m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.LEFT_TURN);
+                                    //if cross of x1y2 is less than x2y1 then the rotation was counter clockwise, therefore play the left turn animation
+                                    if (m_playerEntity.Direction.x * m_playerEntity.LastDirection.z < m_playerEntity.Direction.z * m_playerEntity.LastDirection.x)
+                                    {
+                                        m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.LEFT_TURN);
+                                    }
+                                    else
+                                    {
+                                        m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.RIGHT_TURN);
+                                    }
+                                    m_playerEntity.StartCoroutine(WaitForTurnAnimation());
+                                    return;
                                 }
                                 else
                                 {
-                                    m_playerEntity.Animator.SetProperty(PlayerAnimationProperties.RIGHT_TURN);
+                                    m_playerEntity.StartCoroutine(TurnWithoutAnim(m_playerEntity.WalkingTurnTime));
                                 }
-                                //m_playerEntity.Velocity /= 4;
-                                m_playerEntity.StartCoroutine(WaitForTurnAnimation());
-                                return;
                             }
                         }
-
-                        maxSpeed = m_playerEntity.MaxSpeed;
-                        m_velocity = m_velocity.magnitude * m_playerEntity.Direction;
-                        m_velocity += (m_playerEntity.Direction * m_playerEntity.WalkingAcceleration) * Time.fixedDeltaTime;
                     }
                     
                     //rotate the player to face the direction they are traveling in
@@ -183,6 +189,7 @@ namespace Player
 
 
                 m_playerEntity.transform.eulerAngles = rotation;
+                m_playerEntity.Rotation = Quaternion.Euler(rotation);
 
                 if (percomp > 0.99)
                 {
@@ -192,6 +199,34 @@ namespace Player
                 yield return null;
             }
 
+        }
+
+        IEnumerator TurnWithoutAnim(float turnTimeLength)
+        {
+            float time = 0;
+
+            Vector3 rotation = m_playerEntity.transform.rotation.eulerAngles;
+            Vector3 endRotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Direction.normalized.x, 0, m_playerEntity.Direction.z)).eulerAngles;
+
+            while (true)
+            {
+                time += Time.deltaTime;
+
+                endRotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Direction.normalized.x, 0, m_playerEntity.Direction.z)).eulerAngles;
+
+                float percomp = time / turnTimeLength;
+                rotation.y = Mathf.Lerp(rotation.y, endRotation.y, percomp);
+
+                m_playerEntity.transform.eulerAngles = rotation;
+                m_playerEntity.Rotation = Quaternion.Euler(rotation);
+                
+                if (percomp > 0.99)
+                {
+                    yield break;
+                }
+
+                yield return null;
+            }
         }
     }
 }
