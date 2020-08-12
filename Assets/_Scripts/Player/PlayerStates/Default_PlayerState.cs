@@ -85,12 +85,11 @@ namespace Player
                     }
                     else
                     {
+                        maxSpeed = m_playerEntity.MaxSpeed;
+                        m_velocity = m_velocity.magnitude * m_playerEntity.Direction;
+                        m_velocity += (m_playerEntity.Direction * m_playerEntity.WalkingAcceleration) * Time.fixedDeltaTime;
                         if (m_playerEntity.EnableTurnAnimations)
                         {
-                            maxSpeed = m_playerEntity.MaxSpeed;
-                            m_velocity = m_velocity.magnitude * m_playerEntity.Direction;
-                            m_velocity += (m_playerEntity.Direction * m_playerEntity.WalkingAcceleration) * Time.fixedDeltaTime;
-
                             //if rotation is more than 90 degrees play the turn around animation
                             if (Vector3.Angle(m_playerEntity.Direction, m_playerEntity.transform.forward) > 170)
                             {
