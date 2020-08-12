@@ -48,83 +48,33 @@ public class SeeSaw : Enchantable
     {
         base.Update();
 
-        switch(m_currentAngleType)
+        if (WrapAngle(transform.eulerAngles.x) <= (/*Mathf.Deg2Rad * */11.81f))
         {
-            case DegreeType.ZERO:
-                if (transform.rotation.x <= (Mathf.Deg2Rad * 11.81f) / 2)
-                {
-                    if (m_leftSensor.IsTriggered() && !m_counterW.IsCorrectSize())
-                    {
-                        transform.Rotate(transform.right, (Mathf.Deg2Rad * Time.deltaTime) * m_speed);
-                    }
-                }
-
-                if (transform.rotation.x >= -(Mathf.Deg2Rad * 11.81f) / 2)
-                {
-                    if (m_rightSensor.IsTriggered() || m_counterW.IsCorrectSize())
-                    {
-                        transform.Rotate(transform.right, (Mathf.Deg2Rad * Time.deltaTime) * -m_speed);
-                    }
-                }
-                break;
-
-            case DegreeType.NINTEY:
-                if (transform.rotation.x <= (Mathf.Deg2Rad * 11.81f) / 2)
-                {
-                    if (m_leftSensor.IsTriggered() && !m_counterW.IsCorrectSize())
-                    {
-                        transform.Rotate(Vector3.right, (Mathf.Deg2Rad * Time.deltaTime) * m_speed);
-                    }
-                }
-
-                if (transform.rotation.x >= -(Mathf.Deg2Rad * 11.81f) / 2)
-                {
-                    if (m_rightSensor.IsTriggered() || m_counterW.IsCorrectSize())
-                    {
-                        transform.Rotate(Vector3.right, (Mathf.Deg2Rad * Time.deltaTime) * -m_speed);
-                    }
-                }
-                break;
-
-            case DegreeType.ONE_EIGHTY:
-                if (transform.rotation.z <= (Mathf.Deg2Rad * 11.81f) / 2)
-                {
-                    if (m_rightSensor.IsTriggered() || m_counterW.IsCorrectSize())
-                    {
-                        transform.Rotate(transform.right, (Mathf.Deg2Rad * Time.deltaTime) * m_speed);
-                    }
-                }
-
-                if (transform.rotation.z >= -(Mathf.Deg2Rad * 11.81f) / 2)
-                {
-                    if (m_leftSensor.IsTriggered() && !m_counterW.IsCorrectSize())
-                    {
-                        transform.Rotate(transform.right, (Mathf.Deg2Rad * Time.deltaTime) * -m_speed);
-                    }
-
-                }
-                break;
-
-            case DegreeType.TWO_SEVENTY:
-                if (transform.rotation.z <= (Mathf.Deg2Rad * 11.81f) / 2)
-                {
-                    if (m_leftSensor.IsTriggered() && !m_counterW.IsCorrectSize())
-                    {
-                        transform.Rotate(Vector3.right, (Mathf.Deg2Rad * Time.deltaTime) * m_speed);
-                    }
-                }
-
-                if (transform.rotation.z >= -(Mathf.Deg2Rad * 11.81f) / 2)
-                {
-                    if (m_rightSensor.IsTriggered() || m_counterW.IsCorrectSize())
-                    {
-                        transform.Rotate(Vector3.right, (Mathf.Deg2Rad * Time.deltaTime) * -m_speed);
-                    }
-                }
-                break;
+            if (m_leftSensor.IsTriggered() && !m_counterW.IsCorrectSize())
+            {
+                transform.Rotate(Vector3.right, (/*Mathf.Deg2Rad * */Time.deltaTime) * m_speed, Space.Self);
+              
+            }
         }
 
+        if (WrapAngle(transform.eulerAngles.x) >= -(/*Mathf.Deg2Rad * */11.81f))
+        {
+            if (m_rightSensor.IsTriggered() || m_counterW.IsCorrectSize())
+            {
+                transform.Rotate(Vector3.right, (/*Mathf.Deg2Rad * */Time.deltaTime) * -m_speed, Space.Self);
+            }
+        }
 
+    }
+
+    private float WrapAngle(float angle)
+    {
+        angle %= 360;
+
+        if (angle > 180)
+            return angle - 360;
+
+        return angle;
     }
 
     IEnumerator ScaleObject(Vector3 scale)

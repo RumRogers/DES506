@@ -37,11 +37,16 @@ public class NPCSimple : MonoBehaviour
     [SerializeField]
     private TextAsset m_secondDialogue;
 
+    [SerializeField]
+    private TextAsset m_thirdDialogue;
+
     Dialogue m_dialogue;
 
     bool m_talking = false;
 
     bool m_firstTimeTalking = true;
+
+    bool m_secondTimeTalking = false;
 
     private Animator m_animator;
     private NPCState m_state;
@@ -83,6 +88,13 @@ public class NPCSimple : MonoBehaviour
             {
                 m_dialogue.SetNewDialogue(m_secondDialogue);
                 m_firstTimeTalking = false;
+                m_secondTimeTalking = true;
+            }
+
+            if (m_secondTimeTalking && m_secondDialogue)
+            {
+                m_dialogue.SetNewDialogue(m_thirdDialogue);
+                m_secondTimeTalking = false;
             }
         }
 
