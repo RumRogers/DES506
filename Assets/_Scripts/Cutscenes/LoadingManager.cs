@@ -27,6 +27,8 @@ public class LoadingManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Cursor.visible = false;
+
         m_timeCounter -= Time.deltaTime;
 
         if(m_timeCounter <= 0f)

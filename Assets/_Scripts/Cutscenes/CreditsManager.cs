@@ -14,7 +14,9 @@ public class CreditsManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape) && !m_locked)
+        Cursor.visible = false;
+
+        if (Input.GetKeyDown(KeyCode.Escape) && !m_locked)
         {
             m_locked = true;
             SceneManager.LoadScene(0);

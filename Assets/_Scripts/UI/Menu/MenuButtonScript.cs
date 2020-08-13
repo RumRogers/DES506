@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using GameCore.System;
+using FMOD.Studio;
 
 /// <summary>
 /// Class which handles navigating the menu, 
@@ -82,6 +83,10 @@ public class MenuButtonScript : MonoBehaviour
         //    Cursor.SetCursor(m_mouseCursor, new Vector2(10, 0), CursorMode.Auto);
         //}
 
+        Bus masterBus = FMODUnity.RuntimeManager.GetBus("Bus:/");
+        masterBus.stopAllEvents(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
+        Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
     }
 

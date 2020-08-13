@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using FMOD.Studio;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,7 +14,9 @@ public class OutroCutsceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.visible = false;
+        Bus masterBus = FMODUnity.RuntimeManager.GetBus("Bus:/");
+        masterBus.stopAllEvents(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
         m_videoPlayer = GetComponent<VideoPlayer>();
         m_videoPlayer.loopPointReached += OnCutsceneEnd;
     }
@@ -37,6 +40,8 @@ public class OutroCutsceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Cursor.visible = false;
+
         if (m_videoWasPlayed && !m_coroutineStarted)
         {
             m_coroutineStarted = true;

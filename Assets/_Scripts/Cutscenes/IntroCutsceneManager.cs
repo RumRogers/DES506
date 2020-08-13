@@ -15,6 +15,7 @@ public class IntroCutsceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.visible = false;
         Time.timeScale = 1;
 
         m_loadingScreen.transform.position += m_offset;
