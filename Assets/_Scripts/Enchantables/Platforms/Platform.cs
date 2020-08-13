@@ -42,7 +42,9 @@ public class Platform : Enchantable
     private Vector3 m_smallScale = Vector3.zero;
     private Vector3 m_largeScale = Vector3.zero;
 
-    private Vector3 m_lerpPos;
+    private Vector3 m_position;
+    private Vector3 m_positionLastFixedUpdate;
+    private float m_time = 0;
 
     private int m_direction = 1;
     #endregion
@@ -52,26 +54,22 @@ public class Platform : Enchantable
     {
         //Retain original position
         m_defaultPosition = transform.position;
+        m_position = m_defaultPosition;
+        m_positionLastFixedUpdate = m_defaultPosition;
 
         m_smallScale = transform.localScale * m_smallScaleFactor;
         m_largeScale = transform.localScale * m_largeScaleFactor;
-
-        m_lerpPos = transform.position;
 
         if (GetMagicState(SpellType.TRANSFORM_TEMPERATURE_COLD) == SpellState.COUNTERSPELLED)
         {
             m_isMoving = false;
         }
     }
-    private void LateUpdate()
-    {
-        transform.position = Vector3.Slerp(transform.position, m_lerpPos, 0.1f);
-    }
     protected override void Update()
     {
+        m_time += Time.deltaTime;
         base.Update();
-
-        
+        transform.position = Vector3.Lerp(m_positionLastFixedUpdate, m_position, m_time / Time.fixedDeltaTime);
     }
     protected override void FixedUpdate()
     {
@@ -93,6 +91,9 @@ public class Platform : Enchantable
                     break;
             }
         }
+
+        m_time = 0;
+        m_positionLastFixedUpdate = transform.position;
     }
 
     #region Enumerators
@@ -182,7 +183,7 @@ public class Platform : Enchantable
             m_direction = -m_direction;
         }
 
-        m_lerpPos = transform.position + direction * m_direction * (Time.deltaTime * m_platformSpeed);
+        m_position = transform.position + direction * m_direction * (Time.deltaTime * m_platformSpeed);
     }
 
     private void SmoothTranslatePosition(Vector3 axis)
