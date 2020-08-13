@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //[RequireComponent(typeof(HingeJoint),typeof(Rigidbody))]
-public class SeeSaw : Enchantable
+public class SeeSaw : MonoBehaviour
 {
     [SerializeField]
     private bool m_startFrozen;
@@ -43,10 +43,8 @@ public class SeeSaw : Enchantable
         m_largeScale = transform.localScale * 2.0f;
     }
 
-    protected override void Update()
+    void Update()
     {
-        base.Update();
-
         if (WrapAngle(transform.eulerAngles.x) <= (m_angleLimiter))
         {
             if (m_leftSensor.IsTriggered() && !m_counterW.IsCorrectSize())
@@ -93,31 +91,4 @@ public class SeeSaw : Enchantable
         return m_renderer.bounds.size;
     }
 
-    #region Spell Functions
-    protected override void SpellTemperatureCold(Spell spell)
-    {
-        
-    }
-
-    protected override void SpellSizeBig(Spell spell)
-    {
-        StartCoroutine(ScaleObject(m_largeScale));
-    }
-
-    protected override void SpellSizeSmall(Spell spell)
-    {
-        StartCoroutine(ScaleObject(m_smallScale));
-    }
-
-    protected override void SpellTemperatureHot(Spell spell)
-    {
-        
-    }
-
-    protected override void SpellReset(Spell spell)
-    {
-        StartCoroutine(ScaleObject(Vector3.one));
-    }
-
-    #endregion
 }

@@ -101,7 +101,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1060086459476751766}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -5106092161509721741, guid: f646af362c589374a971d888afbce65a, type: 3}
 --- !u!23 &1060086459476986479
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -352,8 +352,6 @@ GameObject:
   - component: {fileID: 7325971339237500567}
   - component: {fileID: 1060086459042417503}
   - component: {fileID: 1060086459042417501}
-  - component: {fileID: 1060086459042417500}
-  - component: {fileID: 1060086459042417499}
   m_Layer: 0
   m_Name: Seesaw Plank
   m_TagString: Untagged
@@ -448,44 +446,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9e01b4a5c7047b4e8c9176b1f8ebf24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_hasParticles: 1
-  m_particlesType: 0
   m_startFrozen: 0
   m_leftSensor: {fileID: 1060086458936454418}
   m_rightSensor: {fileID: 1060086460022296603}
-  m_speed: 3250
+  m_speed: 60
   m_counterW: {fileID: 1060086459476751764}
---- !u!114 &1060086459042417500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9049915362956776011}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a4a153d9016fad409598d5c966557b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_shrinkSpellSFX: {fileID: 0}
-  m_enlargeSpellSFX: {fileID: 0}
-  m_infernoSpellSFX: {fileID: 0}
-  m_coldSpellSFX: {fileID: 0}
---- !u!114 &1060086459042417499
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9049915362956776011}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f927b4b2fa810bf4593a730b471e4a98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_castableSpells:
-    sizeSpell: 0
-    temperatureSpell: 0
-  m_magicState:
-    size: 0
-    temperature: 0
+  m_angleLimiter: 24
