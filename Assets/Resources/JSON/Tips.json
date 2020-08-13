@@ -2,16 +2,16 @@
 	"tips":
 	[
 		{
-			"text": "Tip number 1"
+			"text": "Yes hello this is a short sentence"
 		},
-		{
-			"text": "Tip number 2"
-		},
-		{
-			"text": "Tip number 3"
-		},
-		{
-			"text": "Tip number 4"
-		}
+    {
+      "text": "Yes hello this is a short sentence. This is another short sentence."
+    },
+    {
+      "text": "Yes hello this is a short sentence. This is another short sentence. And here's a slightly longer one."
+    },
+    {
+      "text": "Yes hello this is a short sentence. This is another short sentence. And here's a slightly longer one. Combined, all these sentences are quite long, actually."
+    }
 	]
 }
