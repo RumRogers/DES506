@@ -116,6 +116,7 @@ namespace Player
         Vector3 m_direction;
         Vector3 m_lastDirection;
         Vector3 m_position;
+        Vector3 m_localPosition;
         Vector3 m_positionLastFrame;
         Quaternion m_rotationLastFrame;
         Quaternion m_rotation;
@@ -260,7 +261,7 @@ namespace Player
 
             base.Update();
 
-            CheckCollisions();
+            m_grounded = IsGrounded();
 
             //First check if death state is triggered to save time / ensure the player cannot do something if they are alread dead
             if (HasProperty(PlayerEntityProperties.DYING) && m_state.GetType() != typeof(Death_PlayerState))
@@ -317,33 +318,40 @@ namespace Player
         {
             base.FixedUpdate();
 
-            m_grounded = IsGrounded();
             CheckCollisions();
 
-            if (m_ground != null && m_grounded)
-            {
-                m_newGroundPosition = m_ground.transform.position;
+            //if (m_ground != null && m_grounded)
+            //{
+            //    m_newGroundPosition = m_ground.transform.position;
 
-                //if the ground has moved since the last frame, add that movement to the player
-                if (m_newGroundPosition != m_oldGroundPosition)
-                {
-                    //some times objects moving will add a large amount of velocity to the player, if this is the case, the player likely wouldn't be able to stay on them anyway
-                    //also fixes a bug where the way this extra movment was calculated with the seesaw would shoot the player upwards
-                    m_groundAddedVelocity = m_newGroundPosition - m_oldGroundPosition;
-                    if (m_groundAddedVelocity.magnitude < 20)
-                    {
-                        m_position += (m_newGroundPosition - m_oldGroundPosition);
-                    }
-                }
-                m_oldGroundPosition = m_newGroundPosition;
+            //    //if the ground has moved since the last frame, add that movement to the player
+            //    if (m_newGroundPosition != m_oldGroundPosition)
+            //    {
+            //        //some times objects moving will add a large amount of velocity to the player, if this is the case, the player likely wouldn't be able to stay on them anyway
+            //        //also fixes a bug where the way this extra movment was calculated with the seesaw would shoot the player upwards
+            //        m_groundAddedVelocity = m_newGroundPosition - m_oldGroundPosition;
+            //        if (m_groundAddedVelocity.magnitude < 20)
+            //        {
+            //            m_position += (m_newGroundPosition - m_oldGroundPosition);
+            //        }
+            //    }
+            //    m_oldGroundPosition = m_newGroundPosition;
+            //}
+            //else
+            //{
+            //    m_newGroundPosition = Vector3.zero;
+            //    m_oldGroundPosition = Vector3.zero;
+            //}
+
+            m_localPosition += m_velocity;
+            if (m_ground)
+            {
+                m_position = new Vector3(m_ground.position.x + m_localPosition.x, m_position.y + m_velocity.y, m_ground.position.z + m_localPosition.z);
             }
             else
             {
-                m_newGroundPosition = Vector3.zero;
-                m_oldGroundPosition = Vector3.zero;
+                m_position += m_velocity;
             }
-
-            m_position += m_velocity;
             m_positionLastFrame = transform.position;
             m_time = 0;
         }
@@ -510,7 +518,9 @@ namespace Player
                 //if the ground has changed, change the ground and the old position
                 if (m_ground == null || m_ground != m_groundedHitInfo.transform)
                 {
+                    //setting local position to the position they have landed in if the ground has changed)
                     m_ground = m_groundedHitInfo.transform;
+                    m_localPosition = transform.position - m_ground.position;
                     m_oldGroundPosition = m_ground.position;
                     m_newGroundPosition = m_ground.position;
                 }
