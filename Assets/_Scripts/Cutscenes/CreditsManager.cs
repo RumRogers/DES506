@@ -6,6 +6,12 @@ using UnityEngine.SceneManagement;
 public class CreditsManager : MonoBehaviour
 {
     bool m_locked = false;
+
+    private void Start()
+    {
+        Time.timeScale = 1;
+    }
+
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape) && !m_locked)
