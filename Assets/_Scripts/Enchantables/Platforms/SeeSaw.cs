@@ -6,8 +6,6 @@ using UnityEngine;
 //[RequireComponent(typeof(HingeJoint),typeof(Rigidbody))]
 public class SeeSaw : Enchantable
 {
-    enum DegreeType { ZERO, NINTEY, ONE_EIGHTY, TWO_SEVENTY};
-
     [SerializeField]
     private bool m_startFrozen;
 
@@ -25,7 +23,8 @@ public class SeeSaw : Enchantable
     private CounterWeight m_counterW;
 
     [SerializeField]
-    DegreeType m_currentAngleType;
+    private float m_angleLimiter = 11.81f;
+
     //Scale
     private Vector3 m_smallScale;// = new Vector3(0.2f, 0.2f, 0.2f);
     private Vector3 m_largeScale;// = new Vector3(2.0f, 2.0f, 2.0f);
@@ -48,7 +47,7 @@ public class SeeSaw : Enchantable
     {
         base.Update();
 
-        if (WrapAngle(transform.eulerAngles.x) <= (11.81f))
+        if (WrapAngle(transform.eulerAngles.x) <= (m_angleLimiter))
         {
             if (m_leftSensor.IsTriggered() && !m_counterW.IsCorrectSize())
             {
@@ -57,7 +56,7 @@ public class SeeSaw : Enchantable
             }
         }
 
-        if (WrapAngle(transform.eulerAngles.x) >= -(11.81f))
+        if (WrapAngle(transform.eulerAngles.x) >= -(m_angleLimiter))
         {
             if (m_rightSensor.IsTriggered() || m_counterW.IsCorrectSize())
             {
