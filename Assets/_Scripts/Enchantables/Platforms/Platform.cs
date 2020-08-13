@@ -56,7 +56,9 @@ public class Platform : Enchantable
         m_smallScale = transform.localScale * m_smallScaleFactor;
         m_largeScale = transform.localScale * m_largeScaleFactor;
 
-        if(GetMagicState(SpellType.TRANSFORM_TEMPERATURE_COLD) == SpellState.COUNTERSPELLED)
+        m_lerpPos = transform.position;
+
+        if (GetMagicState(SpellType.TRANSFORM_TEMPERATURE_COLD) == SpellState.COUNTERSPELLED)
         {
             m_isMoving = false;
         }
