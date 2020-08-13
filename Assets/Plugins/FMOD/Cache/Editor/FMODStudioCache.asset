@@ -310,6 +310,23 @@ MonoBehaviour:
   Max: 3
   Default: 0
   Exists: 0
+--- !u!114 &-8669778857693170657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/RabbitVO1/dialogueBoxNumber
+  m_EditorClassIdentifier: 
+  Name: dialogueBoxNumber
+  Min: 0
+  Max: 11
+  Default: 0
+  Exists: 0
 --- !u!114 &-8666290685513672634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -463,12 +480,12 @@ MonoBehaviour:
   guid: dd03152d7afa934893cee8c8c7500597
   Banks:
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -2360118161327074413}
+  - {fileID: 4874954359466337308}
   MinDistance: 0
   MaxDistance: 0
   Length: 46000
@@ -487,6 +504,23 @@ MonoBehaviour:
   Name: TriggerBoxMusic
   Min: 0
   Max: 3
+  Default: 0
+  Exists: 0
+--- !u!114 &-8479960168503494886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/TurtleVO2/dialogueBoxNumber
+  m_EditorClassIdentifier: 
+  Name: dialogueBoxNumber
+  Min: 0
+  Max: 11
   Default: 0
   Exists: 0
 --- !u!114 &-8445682436754664930
@@ -563,7 +597,7 @@ MonoBehaviour:
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -742,6 +776,23 @@ MonoBehaviour:
   Max: 11
   Default: 0
   Exists: 0
+--- !u!114 &-8209177449062414421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/DialogueMix/snapshotIntensity
+  m_EditorClassIdentifier: 
+  Name: snapshotIntensity
+  Min: 0
+  Max: 100
+  Default: 0
+  Exists: 1
 --- !u!114 &-8208403657630354465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -822,6 +873,23 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/TurtleVO1/dialogueBoxNumber
+  m_EditorClassIdentifier: 
+  Name: dialogueBoxNumber
+  Min: 0
+  Max: 11
+  Default: 0
+  Exists: 0
+--- !u!114 &-8162494440199255705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/SquirrelVO1/dialogueBoxNumber
   m_EditorClassIdentifier: 
   Name: dialogueBoxNumber
   Min: 0
@@ -1544,7 +1612,7 @@ MonoBehaviour:
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1655,6 +1723,23 @@ MonoBehaviour:
   Max: 11
   Default: 0
   Exists: 0
+--- !u!114 &-6788356915061509752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/OwlVO2/dialogueBoxNumber
+  m_EditorClassIdentifier: 
+  Name: dialogueBoxNumber
+  Min: 0
+  Max: 11
+  Default: 0
+  Exists: 0
 --- !u!114 &-6768070381038007922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1706,7 +1791,7 @@ MonoBehaviour:
   guid: fcd0ee39c9e19745b3c57a69fa0e0d01
   Banks:
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1959,7 +2044,7 @@ MonoBehaviour:
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1986,7 +2071,7 @@ MonoBehaviour:
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2307,6 +2392,23 @@ MonoBehaviour:
   Max: 11
   Default: 0
   Exists: 0
+--- !u!114 &-5851736992405133224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/TurtleVO1/dialogueBoxNumber
+  m_EditorClassIdentifier: 
+  Name: dialogueBoxNumber
+  Min: 0
+  Max: 11
+  Default: 0
+  Exists: 0
 --- !u!114 &-5841265352244950985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2593,6 +2695,30 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &-5533034976218421713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/DIALOGUE/OWL/OwlVO2
+  m_EditorClassIdentifier: 
+  Path: event:/DIALOGUE/OWL/OwlVO2
+  guid: 73a699d15b06294d8df07dd5d23767d6
+  Banks:
+  - {fileID: 6972051314431433990}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 1098655542947079197}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 7500
 --- !u!114 &-5532213880954745282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2695,6 +2821,23 @@ MonoBehaviour:
   Name: TriggerBoxMusic
   Min: 0
   Max: 3
+  Default: 0
+  Exists: 0
+--- !u!114 &-5441179793982957031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/RabbitVO1/dialogueBoxNumber
+  m_EditorClassIdentifier: 
+  Name: dialogueBoxNumber
+  Min: 0
+  Max: 11
   Default: 0
   Exists: 0
 --- !u!114 &-5435246397285623431
@@ -2810,7 +2953,7 @@ MonoBehaviour:
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3241,7 +3384,7 @@ MonoBehaviour:
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3370,6 +3513,23 @@ MonoBehaviour:
   Max: 11
   Default: 0
   Exists: 0
+--- !u!114 &-4380712502005896863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/TriggerBoxMusic
+  m_EditorClassIdentifier: 
+  Name: TriggerBoxMusic
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 1
 --- !u!114 &-4376055654960756478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3444,7 +3604,7 @@ MonoBehaviour:
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3593,6 +3753,23 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &-4002489629611536804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/TurtleVO2/dialogueBoxNumber
+  m_EditorClassIdentifier: 
+  Name: dialogueBoxNumber
+  Min: 0
+  Max: 11
+  Default: 0
+  Exists: 0
 --- !u!114 &-3993808810581430218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3644,6 +3821,23 @@ MonoBehaviour:
   Name: TriggerBoxMusic
   Min: 0
   Max: 3
+  Default: 0
+  Exists: 0
+--- !u!114 &-3920150146272108443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/RabbitVO2/dialogueBoxNumber
+  m_EditorClassIdentifier: 
+  Name: dialogueBoxNumber
+  Min: 0
+  Max: 11
   Default: 0
   Exists: 0
 --- !u!114 &-3918606609163448539
@@ -3787,12 +3981,12 @@ MonoBehaviour:
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 2231298968797832823}
+  - {fileID: -4380712502005896863}
   MinDistance: 0
   MaxDistance: 0
   Length: 347488
@@ -3846,6 +4040,24 @@ MonoBehaviour:
   Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
   SubDir: 
   lastModified: 637317895428649328
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-3618044475741543674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637329216119539343
   LoadResult: 0
   FileSizes: []
   Exists: 0
@@ -3954,6 +4166,23 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &-3430172863911234347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/RabbitVO2/dialogueBoxNumber
+  m_EditorClassIdentifier: 
+  Name: dialogueBoxNumber
+  Min: 0
+  Max: 11
+  Default: 0
+  Exists: 1
 --- !u!114 &-3424729232438494835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4217,6 +4446,23 @@ MonoBehaviour:
   Max: 11
   Default: 0
   Exists: 0
+--- !u!114 &-3029138470862982664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/SquirrelVO2/dialogueBoxNumber
+  m_EditorClassIdentifier: 
+  Name: dialogueBoxNumber
+  Min: 0
+  Max: 11
+  Default: 0
+  Exists: 0
 --- !u!114 &-2991021947689809340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4250,7 +4496,7 @@ MonoBehaviour:
   guid: d90fa3912573f446806d067fde6d941a
   Banks:
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -4569,7 +4815,7 @@ MonoBehaviour:
   guid: 68636470c86e8c4d9dc0fa54a306ed9a
   Banks:
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -4822,7 +5068,7 @@ MonoBehaviour:
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -4830,6 +5076,23 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 1055
+--- !u!114 &-2082601217931425583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/SquirrelVO2/dialogueBoxNumber
+  m_EditorClassIdentifier: 
+  Name: dialogueBoxNumber
+  Min: 0
+  Max: 11
+  Default: 0
+  Exists: 1
 --- !u!114 &-2012721027697810303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4947,7 +5210,7 @@ MonoBehaviour:
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -5521,6 +5784,23 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &-957004465040778635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/TriggerBoxMusic
+  m_EditorClassIdentifier: 
+  Name: TriggerBoxMusic
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 0
 --- !u!114 &-835198313706082397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5543,7 +5823,7 @@ MonoBehaviour:
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -5600,12 +5880,12 @@ MonoBehaviour:
   Path: event:/DIALOGUE/OWL/OwlVO1
   guid: 8cc09050b4528b4c8d6a248bfd6a6217
   Banks:
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 4134401404374837556}
+  - {fileID: 1181454114003632001}
   MinDistance: 0
   MaxDistance: 0
   Length: 49500
@@ -6085,7 +6365,7 @@ MonoBehaviour:
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -6107,7 +6387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 1549267405382922713}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   EditorEvents:
   - {fileID: -8415032040721163499}
   - {fileID: 998972529664228970}
@@ -6156,12 +6436,13 @@ MonoBehaviour:
   - {fileID: 6027639300919048247}
   - {fileID: 2845580389700993005}
   - {fileID: 5575927009542349977}
+  - {fileID: -5533034976218421713}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   StringsBanks:
   - {fileID: 1549267405382922713}
-  stringsBankWriteTime: 637327582282971690
+  stringsBankWriteTime: 637329416745258329
   cacheVersion: 3
 --- !u!114 &9996047819067277
 MonoBehaviour:
@@ -6180,6 +6461,23 @@ MonoBehaviour:
   lastModified: 637317898578014186
   LoadResult: 0
   FileSizes: []
+  Exists: 0
+--- !u!114 &11542641794866206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/OwlVO2/dialogueBoxNumber
+  m_EditorClassIdentifier: 
+  Name: dialogueBoxNumber
+  Min: 0
+  Max: 11
+  Default: 0
   Exists: 0
 --- !u!114 &22063555192827828
 MonoBehaviour:
@@ -6336,7 +6634,7 @@ MonoBehaviour:
   guid: ce445ac141af50459cf23365fc6dfa4f
   Banks:
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
@@ -6401,7 +6699,7 @@ MonoBehaviour:
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -6477,6 +6775,23 @@ MonoBehaviour:
   Name: dialogueBoxNumber
   Min: 0
   Max: 11
+  Default: 0
+  Exists: 0
+--- !u!114 &319119784606129093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/DialogueMix/snapshotIntensity
+  m_EditorClassIdentifier: 
+  Name: snapshotIntensity
+  Min: 0
+  Max: 100
   Default: 0
   Exists: 0
 --- !u!114 &327005824212398520
@@ -6634,12 +6949,12 @@ MonoBehaviour:
   Path: event:/DIALOGUE/TURTLE/TurtleVO2
   guid: 37570113d964d547a16141b7fb7982af
   Banks:
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: 1170576952511579767}
+  - {fileID: 781645394589236290}
   MinDistance: 0
   MaxDistance: 0
   Length: 8000
@@ -6710,7 +7025,7 @@ MonoBehaviour:
   guid: 3d5b35539a0d5948bbeab63acd89d3a1
   Banks:
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
@@ -6875,6 +7190,23 @@ MonoBehaviour:
   Max: 3
   Default: 0
   Exists: 0
+--- !u!114 &781645394589236290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/TurtleVO2/dialogueBoxNumber
+  m_EditorClassIdentifier: 
+  Name: dialogueBoxNumber
+  Min: 0
+  Max: 11
+  Default: 0
+  Exists: 1
 --- !u!114 &808460605180712992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7020,6 +7352,23 @@ MonoBehaviour:
   Max: 3
   Default: 0
   Exists: 1
+--- !u!114 &1098655542947079197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/OwlVO2/dialogueBoxNumber
+  m_EditorClassIdentifier: 
+  Name: dialogueBoxNumber
+  Min: 0
+  Max: 11
+  Default: 0
+  Exists: 1
 --- !u!114 &1148262997699015600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7049,6 +7398,23 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/TurtleVO2/dialogueBoxNumber
+  m_EditorClassIdentifier: 
+  Name: dialogueBoxNumber
+  Min: 0
+  Max: 11
+  Default: 0
+  Exists: 1
+--- !u!114 &1181454114003632001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/OwlVO1/dialogueBoxNumber
   m_EditorClassIdentifier: 
   Name: dialogueBoxNumber
   Min: 0
@@ -7123,7 +7489,7 @@ MonoBehaviour:
   guid: 54347f5c3c6d6940aeac412517634849
   Banks:
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -7251,7 +7617,7 @@ MonoBehaviour:
   guid: e87c18a3b17c2240be39fef8b7135c96
   Banks:
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -7341,11 +7707,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637327582282971690
+  lastModified: 637329416745258329
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 2792
+    Value: 2836
   Exists: 1
 --- !u!114 &1562862740281822406
 MonoBehaviour:
@@ -7594,7 +7960,7 @@ MonoBehaviour:
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -7658,7 +8024,7 @@ MonoBehaviour:
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -7963,7 +8329,7 @@ MonoBehaviour:
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -8027,6 +8393,23 @@ MonoBehaviour:
   lastModified: 637302360371053385
   LoadResult: 0
   FileSizes: []
+  Exists: 0
+--- !u!114 &2563230028442664887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/DialogueMix/snapshotIntensity
+  m_EditorClassIdentifier: 
+  Name: snapshotIntensity
+  Min: 0
+  Max: 100
+  Default: 0
   Exists: 0
 --- !u!114 &2577237078692651678
 MonoBehaviour:
@@ -8101,7 +8484,7 @@ MonoBehaviour:
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -8211,12 +8594,12 @@ MonoBehaviour:
   Path: event:/DIALOGUE/SQUIRREL/SquirrelVO1
   guid: 03b538edaa3dc64bae14e51dada8be3b
   Banks:
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 7365092948337547578}
+  - {fileID: 4373935254315051549}
   MinDistance: 0
   MaxDistance: 0
   Length: 56000
@@ -8277,7 +8660,7 @@ MonoBehaviour:
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -8410,6 +8793,23 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &3117202287446553143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/RabbitVO2/dialogueBoxNumber
+  m_EditorClassIdentifier: 
+  Name: dialogueBoxNumber
+  Min: 0
+  Max: 11
+  Default: 0
+  Exists: 0
 --- !u!114 &3139342310570031600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8425,6 +8825,23 @@ MonoBehaviour:
   Name: TriggerBoxMusic
   Min: 0
   Max: 3
+  Default: 0
+  Exists: 0
+--- !u!114 &3145027415778806873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/OwlVO1/dialogueBoxNumber
+  m_EditorClassIdentifier: 
+  Name: dialogueBoxNumber
+  Min: 0
+  Max: 11
   Default: 0
   Exists: 0
 --- !u!114 &3153441281994704368
@@ -9042,7 +9459,7 @@ MonoBehaviour:
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -9160,7 +9577,7 @@ MonoBehaviour:
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -9187,7 +9604,7 @@ MonoBehaviour:
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -9638,6 +10055,23 @@ MonoBehaviour:
   Max: 11
   Default: 0
   Exists: 1
+--- !u!114 &4206281953413298904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/TurtleVO1/dialogueBoxNumber
+  m_EditorClassIdentifier: 
+  Name: dialogueBoxNumber
+  Min: 0
+  Max: 11
+  Default: 0
+  Exists: 0
 --- !u!114 &4270936236396894207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9690,6 +10124,23 @@ MonoBehaviour:
   Max: 3
   Default: 0
   Exists: 0
+--- !u!114 &4373935254315051549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/SquirrelVO1/dialogueBoxNumber
+  m_EditorClassIdentifier: 
+  Name: dialogueBoxNumber
+  Min: 0
+  Max: 11
+  Default: 0
+  Exists: 1
 --- !u!114 &4414649334743713061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9914,6 +10365,23 @@ MonoBehaviour:
   Max: 3
   Default: 0
   Exists: 0
+--- !u!114 &4874954359466337308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/TurtleVO1/dialogueBoxNumber
+  m_EditorClassIdentifier: 
+  Name: dialogueBoxNumber
+  Min: 0
+  Max: 11
+  Default: 0
+  Exists: 1
 --- !u!114 &4884013073174077056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10120,7 +10588,7 @@ MonoBehaviour:
   guid: f8f5ab1e1936f9479c95f5840a4a119e
   Banks:
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -10457,12 +10925,12 @@ MonoBehaviour:
   Path: event:/DIALOGUE/SQUIRREL/SquirrelVO2
   guid: 4fe62fe6117427489e4f3e3636d1cdf0
   Banks:
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: -6362025079310701887}
+  - {fileID: -2082601217931425583}
   MinDistance: 0
   MaxDistance: 0
   Length: 6000
@@ -10604,7 +11072,7 @@ MonoBehaviour:
   guid: cfc97bb16d26004885d6346cfb0a9b3a
   Banks:
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -10699,6 +11167,23 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &6019168537835999885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/TriggerBoxMusic
+  m_EditorClassIdentifier: 
+  Name: TriggerBoxMusic
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 0
 --- !u!114 &6023198012630471895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10731,12 +11216,12 @@ MonoBehaviour:
   Path: event:/DIALOGUE/RABBIT/RabbitVO2
   guid: 4bb515e6b5c2234190c6836d6a8023d0
   Banks:
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: 8596482753315761159}
+  - {fileID: -3430172863911234347}
   MinDistance: 0
   MaxDistance: 0
   Length: 1500
@@ -10757,6 +11242,23 @@ MonoBehaviour:
   lastModified: 637321428928192246
   LoadResult: 0
   FileSizes: []
+  Exists: 0
+--- !u!114 &6048484131710822119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/SquirrelVO1/dialogueBoxNumber
+  m_EditorClassIdentifier: 
+  Name: dialogueBoxNumber
+  Min: 0
+  Max: 11
+  Default: 0
   Exists: 0
 --- !u!114 &6051289573841148531
 MonoBehaviour:
@@ -10882,6 +11384,24 @@ MonoBehaviour:
   Min: 0
   Max: 100
   Default: 0
+  Exists: 0
+--- !u!114 &6196074740358198832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637329416455635212
+  LoadResult: 0
+  FileSizes: []
   Exists: 0
 --- !u!114 &6236836919989546008
 MonoBehaviour:
@@ -11025,7 +11545,7 @@ MonoBehaviour:
   - {fileID: -7036877891310044848}
   - {fileID: 6009482104513878751}
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -11260,6 +11780,41 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &6954347243681272108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/SquirrelVO2/dialogueBoxNumber
+  m_EditorClassIdentifier: 
+  Name: dialogueBoxNumber
+  Min: 0
+  Max: 11
+  Default: 0
+  Exists: 0
+--- !u!114 &6972051314431433990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod/AudioRocksteady/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637329416745168219
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &7015948454629163611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11450,7 +12005,7 @@ MonoBehaviour:
   guid: b8ef89c8e5b7d84fa0c8d51253db679a
   Banks:
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -11633,6 +12188,23 @@ MonoBehaviour:
   lastModified: 637321549522148280
   LoadResult: 0
   FileSizes: []
+  Exists: 0
+--- !u!114 &7510951500795942327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/OwlVO1/dialogueBoxNumber
+  m_EditorClassIdentifier: 
+  Name: dialogueBoxNumber
+  Min: 0
+  Max: 11
+  Default: 0
   Exists: 0
 --- !u!114 &7545990166769688879
 MonoBehaviour:
@@ -11840,12 +12412,12 @@ MonoBehaviour:
   Path: event:/DIALOGUE/RABBIT/RabbitVO1
   guid: 3b5d3843d31a8042b51631eeeb7eea42
   Banks:
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 2738117867293863257}
+  - {fileID: 8432317967300398313}
   MinDistance: 0
   MaxDistance: 0
   Length: 38000
@@ -12245,6 +12817,23 @@ MonoBehaviour:
   Name: snapshotIntensity
   Min: 0
   Max: 100
+  Default: 0
+  Exists: 1
+--- !u!114 &8432317967300398313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/RabbitVO1/dialogueBoxNumber
+  m_EditorClassIdentifier: 
+  Name: dialogueBoxNumber
+  Min: 0
+  Max: 11
   Default: 0
   Exists: 1
 --- !u!114 &8468820365167632804
@@ -12666,12 +13255,12 @@ MonoBehaviour:
   guid: f5527b520671a443b148c5ec6d3ca03b
   Banks:
   - {fileID: -1650020323095629896}
-  - {fileID: -2497235465938100189}
+  - {fileID: 6972051314431433990}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 2194081841740320355}
+  - {fileID: -8209177449062414421}
   MinDistance: 0
   MaxDistance: 0
   Length: 0

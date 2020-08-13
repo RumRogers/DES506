@@ -109,7 +109,6 @@
 			<destination>{0d735a14-cdce-44f2-b1a4-921f71fd933b}</destination>
 			<destination>{1d20765a-a041-427c-a642-cbf8239a7d2c}</destination>
 			<destination>{2c04432b-f5a9-4ea6-bea0-9fd0909bc194}</destination>
-			<destination>{7c3107ad-e8a6-46f2-bfbd-266d1dd9380e}</destination>
 		</relationship>
 	</object>
 	<object class="ParameterProxy" id="{acc12c7e-208d-4a0b-a7ef-760ae8cd5f03}">
@@ -517,26 +516,6 @@
 			<destination>{4062b3ce-fd09-424b-b9db-8d19512aa224}</destination>
 		</relationship>
 	</object>
-	<object class="TransitionRegion" id="{7c3107ad-e8a6-46f2-bfbd-266d1dd9380e}">
-		<property name="position">
-			<value>45</value>
-		</property>
-		<property name="length">
-			<value>7.5000000000000036</value>
-		</property>
-		<relationship name="timeline">
-			<destination>{c869f8bd-fcb6-4826-ab87-d32fe4392115}</destination>
-		</relationship>
-		<relationship name="markerTrack">
-			<destination>{0c598038-1060-4a39-8373-82dda013d519}</destination>
-		</relationship>
-		<relationship name="destination">
-			<destination>{2c04432b-f5a9-4ea6-bea0-9fd0909bc194}</destination>
-		</relationship>
-		<relationship name="triggerConditions">
-			<destination>{a1c22d03-de46-4137-b500-47087c65edce}</destination>
-		</relationship>
-	</object>
 	<object class="MixerBusEffectChain" id="{3d420c1b-315a-4610-99a1-75afa150c8ff}">
 		<relationship name="effects">
 			<destination>{7f228740-e711-4fce-bb84-2dc3faa6d046}</destination>
@@ -598,21 +577,10 @@
 	</object>
 	<object class="ParameterCondition" id="{d6011def-847a-46a6-9a81-6926e611983a}">
 		<property name="minimum">
-			<value>6</value>
+			<value>0</value>
 		</property>
 		<property name="maximum">
-			<value>6</value>
-		</property>
-		<relationship name="parameter">
-			<destination>{91094fd5-1f77-48bf-b4c4-44c96443a0be}</destination>
-		</relationship>
-	</object>
-	<object class="ParameterCondition" id="{a1c22d03-de46-4137-b500-47087c65edce}">
-		<property name="minimum">
-			<value>7</value>
-		</property>
-		<property name="maximum">
-			<value>7</value>
+			<value>0</value>
 		</property>
 		<relationship name="parameter">
 			<destination>{91094fd5-1f77-48bf-b4c4-44c96443a0be}</destination>

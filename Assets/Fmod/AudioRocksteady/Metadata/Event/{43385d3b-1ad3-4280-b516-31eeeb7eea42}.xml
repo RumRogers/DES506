@@ -102,7 +102,6 @@
 			<destination>{10d3df7a-489d-4c69-a41a-d2c0dd23e6ab}</destination>
 			<destination>{33431802-839e-48f6-92e9-950cd63cf910}</destination>
 			<destination>{ce3013a7-3332-4ddc-9f38-e0e20c3216fc}</destination>
-			<destination>{71bf23e6-885d-4329-8664-35331ef61104}</destination>
 			<destination>{a7871d95-7608-482e-b86e-01e641abd8e4}</destination>
 			<destination>{1ec26762-1990-405f-abb5-42a6acf27189}</destination>
 		</relationship>
@@ -404,26 +403,6 @@
 			<destination>{8fcac3bc-4d8f-4a15-83a2-3bd26e43c8d3}</destination>
 		</relationship>
 	</object>
-	<object class="TransitionRegion" id="{71bf23e6-885d-4329-8664-35331ef61104}">
-		<property name="position">
-			<value>30</value>
-		</property>
-		<property name="length">
-			<value>6.9999999999999964</value>
-		</property>
-		<relationship name="timeline">
-			<destination>{77afe9d8-a13f-40b9-b8a5-16b7faf3dfec}</destination>
-		</relationship>
-		<relationship name="markerTrack">
-			<destination>{fef39059-3e4a-493e-bc76-bb790dd38eb4}</destination>
-		</relationship>
-		<relationship name="destination">
-			<destination>{1ec26762-1990-405f-abb5-42a6acf27189}</destination>
-		</relationship>
-		<relationship name="triggerConditions">
-			<destination>{2fd74893-3ac1-4d77-9561-397e9fb2d72e}</destination>
-		</relationship>
-	</object>
 	<object class="LoopRegion" id="{a7871d95-7608-482e-b86e-01e641abd8e4}">
 		<property name="position">
 			<value>36</value>
@@ -502,21 +481,10 @@
 	</object>
 	<object class="ParameterCondition" id="{d964b54a-1eac-4629-b6b3-63c3fc089c52}">
 		<property name="minimum">
-			<value>5</value>
+			<value>0</value>
 		</property>
 		<property name="maximum">
-			<value>5</value>
-		</property>
-		<relationship name="parameter">
-			<destination>{91094fd5-1f77-48bf-b4c4-44c96443a0be}</destination>
-		</relationship>
-	</object>
-	<object class="ParameterCondition" id="{2fd74893-3ac1-4d77-9561-397e9fb2d72e}">
-		<property name="minimum">
-			<value>6</value>
-		</property>
-		<property name="maximum">
-			<value>6</value>
+			<value>0</value>
 		</property>
 		<relationship name="parameter">
 			<destination>{91094fd5-1f77-48bf-b4c4-44c96443a0be}</destination>
