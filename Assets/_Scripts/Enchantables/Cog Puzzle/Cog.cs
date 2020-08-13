@@ -45,9 +45,6 @@ public class Cog : Enchantable
 
     public Quaternion GlobalRotation { get { return m_globalRotation; } set { m_globalRotation = value; } }
 
-    private IEnumerator m_scaleLargeReference;
-    private IEnumerator m_scaleSmallReference;
-    private IEnumerator m_scaleDefaultReference;
     /// <summary>
     /// The initialiser function for the cog, to allow for shared information
     /// </summary>
@@ -64,9 +61,6 @@ public class Cog : Enchantable
         m_largeScale = transform.localScale * largeScaleFactor;
         m_cogSpeed = speed;
 
-        m_scaleLargeReference = ScaleObject(m_largeScale);
-        m_scaleSmallReference = ScaleObject(m_smallScale);
-        m_scaleDefaultReference = ScaleObject(Vector3.one);
 
         if (GetMagicState(SpellType.TRANSFORM_TEMPERATURE_COLD) == SpellState.COUNTERSPELLED)
         {
@@ -115,7 +109,7 @@ public class Cog : Enchantable
         {
             if(!m_rightNeighbour.IsFrozen)
             {
-                StopAllCoroutines();
+                StopCoroutine(m_rotationReference);
                 StartCoroutine(m_rotationReference);
             }
         }
@@ -195,26 +189,17 @@ public class Cog : Enchantable
 
     protected override void SpellSizeBig(Spell spell)
     {
-        if(m_scaleDefaultReference != null)
-            StopCoroutine(m_scaleDefaultReference);
+        StopAllCoroutines();
 
-        if(m_scaleSmallReference != null)
-            StopCoroutine(m_scaleSmallReference);
-
-        StartCoroutine(m_scaleLargeReference);
+        StartCoroutine(ScaleObject(m_largeScale));
 
         m_size = SizeState.LARGE;
     }
 
     protected override void SpellSizeSmall(Spell spell)
     {
-        if (m_scaleDefaultReference != null)
-            StopCoroutine(m_scaleDefaultReference);
-
-        if (m_scaleLargeReference != null)
-            StopCoroutine(m_scaleLargeReference);
-
-        StartCoroutine(m_scaleSmallReference);
+        StopAllCoroutines();
+        StartCoroutine(ScaleObject(m_smallScale));
 
         m_size = SizeState.SMALL;
     }
@@ -229,13 +214,11 @@ public class Cog : Enchantable
     {
         m_isFrozen = false;
 
-        if (m_scaleSmallReference != null)
-            StopCoroutine(m_scaleSmallReference);
+        StopAllCoroutines();
 
-        if (m_scaleLargeReference != null)
-            StopCoroutine(m_scaleLargeReference);
+        StartCoroutine(ScaleObject(Vector3.one));
 
-        StartCoroutine(m_scaleDefaultReference);
+        m_size = SizeState.DEFAULT;
     }
     #endregion
 

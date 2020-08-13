@@ -93,7 +93,10 @@ namespace Player
                             //if rotation is more than 90 degrees play the turn around animation
                             if (Vector3.Angle(m_playerEntity.Direction, m_playerEntity.transform.forward) > 170)
                             {
-                                if (m_velocity.magnitude >= maxSpeed)
+                                m_playerEntity.StopAllCoroutines();
+
+                                //only trigger if the player looks like they are running
+                                if (m_velocity.magnitude >= maxSpeed * m_playerEntity.RunningAnimationSpeedThreshold)
                                 {
                                     //if cross of x1y2 is less than x2y1 then the rotation was counter clockwise, therefore play the left turn animation
                                     if (m_playerEntity.Direction.x * m_playerEntity.LastDirection.z < m_playerEntity.Direction.z * m_playerEntity.LastDirection.x)
@@ -176,7 +179,7 @@ namespace Player
             m_turnAnimationFinished = false;
             Vector3 rotation = m_playerEntity.transform.rotation.eulerAngles;
             Vector3 endRotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Direction.normalized.x, 0, m_playerEntity.Direction.z)).eulerAngles;
-            Vector3 endVelocity = m_playerEntity.Velocity / 4;
+            Vector3 endVelocity = m_playerEntity.Velocity / m_playerEntity.TurnVelocityDevisor;
 
             while (true)
             {
@@ -211,7 +214,7 @@ namespace Player
             {
                 time += Time.deltaTime;
 
-                endRotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Direction.normalized.x, 0, m_playerEntity.Direction.z)).eulerAngles;
+                //endRotation = Quaternion.LookRotation(new Vector3(m_playerEntity.Direction.normalized.x, 0, m_playerEntity.Direction.z)).eulerAngles;
 
                 float percomp = time / turnTimeLength;
                 rotation.y = Mathf.Lerp(rotation.y, endRotation.y, percomp);
