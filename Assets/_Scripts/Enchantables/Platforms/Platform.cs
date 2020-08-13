@@ -42,6 +42,8 @@ public class Platform : Enchantable
     private Vector3 m_smallScale = Vector3.zero;
     private Vector3 m_largeScale = Vector3.zero;
 
+    private Vector3 m_lerpPos;
+
     private int m_direction = 1;
     #endregion
 
@@ -59,7 +61,16 @@ public class Platform : Enchantable
             m_isMoving = false;
         }
     }
+    private void LateUpdate()
+    {
+        transform.position = Vector3.Slerp(transform.position, m_lerpPos, 0.1f);
+    }
+    protected override void Update()
+    {
+        base.Update();
 
+        
+    }
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
@@ -169,7 +180,7 @@ public class Platform : Enchantable
             m_direction = -m_direction;
         }
 
-        transform.position += direction * m_direction * (Time.fixedDeltaTime * m_platformSpeed);
+        m_lerpPos = transform.position + direction * m_direction * (Time.deltaTime * m_platformSpeed);
     }
 
     private void SmoothTranslatePosition(Vector3 axis)
