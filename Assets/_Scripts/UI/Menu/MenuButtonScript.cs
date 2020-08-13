@@ -86,6 +86,8 @@ public class MenuButtonScript : MonoBehaviour
         Bus masterBus = FMODUnity.RuntimeManager.GetBus("Bus:/");
         masterBus.stopAllEvents(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
+        Time.timeScale = 1.0f;
+
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
     }

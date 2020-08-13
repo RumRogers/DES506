@@ -74,9 +74,8 @@ namespace Player
             }
 
            // if (Input.GetButtonDown("Submit"))
-            if (Input.GetKeyUp(KeyCode.Return))
+            if (Input.GetKeyUp(KeyCode.Space))
             {
-                Debug.Log("is it");
                 if (!m_dialogue.GetLastLineReached())
                 {
                     //advance dialogue here
