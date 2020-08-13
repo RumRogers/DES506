@@ -218,6 +218,7 @@ namespace Player
             m_reticle = reticle.transform;
 
             m_spellWheel = GameObject.FindGameObjectWithTag(s_spellWheelTag).GetComponentInChildren<GameUI.SpellWheel>();
+            m_spellWheel.p_spellVFXHandler = m_spellSfx;
             m_spellbookGameObject = GameObject.FindGameObjectWithTag(s_spellBookTag).transform.GetChild(0).gameObject;
             m_animator = GetComponent<PlayerAnimator>(); //requried component, should be safe
             m_projectileHandler = GetComponent<Projectile.ProjectileHandler>(); //requried component, should be safe

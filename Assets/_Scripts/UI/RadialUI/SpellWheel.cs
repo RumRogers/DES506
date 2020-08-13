@@ -49,6 +49,7 @@ namespace GameUI
         List<Transform> m_spellSlots = new List<Transform>();
         Dictionary<Transform, SpellType> m_spellSlotToSpellType = new Dictionary<Transform, SpellType>();
         //Dictionary<Transform, Transform> m_spellActiveObj = new Dictionary<Transform, Transform>();
+        public RFX4_EffectEvent p_spellVFXHandler { get; set; }
         [SerializeField]
         float m_wheelPointerLerpRotationSpeed = 5f;
         [SerializeField]
@@ -388,6 +389,7 @@ namespace GameUI
                 return;
             }
 
+            p_spellVFXHandler.CastSpellEffect(s_targetEnchantable.transform.position);
             s_targetEnchantable.CastSpell(new Spell(m_spellSlotToSpellType[m_spellSlots[m_availableSlotIndices[m_targetSlotIdx]]]));            
         }
     }
