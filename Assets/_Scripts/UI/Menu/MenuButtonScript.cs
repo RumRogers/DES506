@@ -68,14 +68,14 @@ public class MenuButtonScript : MonoBehaviour
         //Just in case the others are left enabled in the editor, hard set only the splash screen active on start
         DisplayMenu(0);
 
-        if (PlayerPrefs.HasKey("LevelReached"))
+        /*if (PlayerPrefs.HasKey("LevelReached"))
         {
             playButtonText.text = "Continue"; //Probably don't hard code these
         }
         else
         {
             playButtonText.text = "Begin";
-        }
+        }*/
 
         //if (m_mouseCursor)
         //{

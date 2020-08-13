@@ -963,7 +963,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Continue
+  m_Text: Start
 --- !u!222 &496526375
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3383,11 +3383,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8218913796581698117, guid: b475df3622f5ccf41bc8fcc4a515272a,
-        type: 3}
-      propertyPath: m_Text
-      value: Continue
-      objectReference: {fileID: 0}
     - target: {fileID: 1805768826206781586, guid: b475df3622f5ccf41bc8fcc4a515272a,
         type: 3}
       propertyPath: m_quill
@@ -3412,6 +3407,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: Intro
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218913796581698117, guid: b475df3622f5ccf41bc8fcc4a515272a,
+        type: 3}
+      propertyPath: m_Text
+      value: New Game
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b475df3622f5ccf41bc8fcc4a515272a, type: 3}
