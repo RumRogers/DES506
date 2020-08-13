@@ -11,11 +11,11 @@ namespace GameUI.SpellBook
     public class Active_SpellBookState : State
     {
         public static KeyCode m_keyHideSpellBook = KeyCode.Escape;
-        
-        public static KeyCode m_keyUp = KeyCode.UpArrow;
-        public static KeyCode m_keyDown = KeyCode.DownArrow;
-        public static KeyCode m_keyLeft = KeyCode.LeftArrow;
-        public static KeyCode m_keyRight = KeyCode.RightArrow;
+
+        public static KeyCode m_keyUp = KeyCode.W;
+        public static KeyCode m_keyDown = KeyCode.S;
+        public static KeyCode m_keyLeft = KeyCode.A;
+        public static KeyCode m_keyRight = KeyCode.D;
 
         private SpellBook m_spellBook;
         private SpellType m_lastSelectedQuillSpell = SpellType.NONE;
