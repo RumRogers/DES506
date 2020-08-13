@@ -2063,7 +2063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_direction: {x: 0.75, y: 0.75}
-  m_speed: 0.15
+  m_speed: 0.05
   m_material: {fileID: 2100000, guid: bc5fed1e6548ae64a840530a8980b543, type: 2}
 --- !u!224 &1329916065 stripped
 RectTransform:
