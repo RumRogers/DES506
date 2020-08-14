@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -158,7 +158,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 324342819}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: db915385aea8c264d8072f55b2a70263, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 562a80293141829418a10592b21fc578, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 1101460126}
