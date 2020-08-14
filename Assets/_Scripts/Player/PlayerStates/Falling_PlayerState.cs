@@ -38,7 +38,7 @@ namespace Player
                 m_playerEntity.HasJumped = false;
 
                 //if the player is still holding a direction we can assume that they did intend to keep moving
-                if (m_playerEntity.MovementInput == Vector2.zero)
+                if (new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) == Vector2.zero)
                 {
                     m_playerEntity.Velocity = Vector3.zero;
                 }

@@ -35,6 +35,7 @@ namespace Player
             m_landingAnimationFinished = true;
             m_turnAnimationFinished = true;
             LevelManager.ShowEnchantableParticles(false);
+            //m_playerEntity.StartCoroutine(WaitForLandingAnimation());
         }
 
         public override void Manage()
