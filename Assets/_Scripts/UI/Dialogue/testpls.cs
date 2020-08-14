@@ -48,7 +48,7 @@ public class testpls : MonoBehaviour
 
     private void Update()
     {
-        if (canTalk && !p_isTalking)
+        if (canTalk && !p_isTalking && m_player.IsGrounded())
         {
             if (Input.GetKeyUp(KeyCode.E) && !m_dialogueUI.activeSelf)
             {
