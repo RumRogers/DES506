@@ -6252,8 +6252,8 @@ MonoBehaviour:
   - {fileID: 7529084370915809626}
   - {fileID: 7529084371182423784}
   - {fileID: 7529084370880684373}
-  m_selectedTextColor: {r: 0, g: 0, b: 0, a: 0}
-  m_unselectedTextColor: {r: 0.5176471, g: 0.5176471, b: 0.5176471, a: 0}
+  m_selectedTextColor: {r: 0, g: 0, b: 0, a: 1}
+  m_unselectedTextColor: {r: 0.5176471, g: 0.5176471, b: 0.5176471, a: 1}
 --- !u!1 &7529084372089722723
 GameObject:
   m_ObjectHideFlags: 0
