@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3527441442036735294}
   - component: {fileID: 4211267319580912011}
   m_Layer: 0
-  m_Name: Shrink_SFX
+  m_Name: Freeze_SFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollisionTag: 
-  Event: event:/SPELLS/SpellFX_Shrink
+  Event: event:/SPELLS/SpellFX_Freeze
   PlayEvent: 1
   StopEvent: 2
   AllowFadeout: 1

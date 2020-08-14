@@ -7,14 +7,10 @@ namespace GameAudio
 {
     [DisallowMultipleComponent]
     public class Enchantable_FMODAdapter : MonoBehaviour
-    {
-        [SerializeField]
+    {        
         private GameObject m_shrinkSpellSFX;
-        [SerializeField]
         private GameObject m_enlargeSpellSFX;
-        [SerializeField]
         private GameObject m_infernoSpellSFX;
-        [SerializeField]
         private GameObject m_coldSpellSFX;
 
         private Dictionary<SpellType, GameObject> m_spellTypesToSFX;
@@ -26,6 +22,10 @@ namespace GameAudio
 
         private void Start()
         {
+            m_enlargeSpellSFX = Resources.Load<GameObject>("Prefabs/AudioPrefabs/Enlarge_SFX");
+            m_shrinkSpellSFX = Resources.Load<GameObject>("Prefabs/AudioPrefabs/Shrink_SFX");
+            m_coldSpellSFX = Resources.Load<GameObject>("Prefabs/AudioPrefabs/Freeze_SFX");
+
             m_spellTypesToSFX = new Dictionary<SpellType, GameObject>()
             {
                 { SpellType.TRANSFORM_SIZE_SMALL, m_shrinkSpellSFX },
