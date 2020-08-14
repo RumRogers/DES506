@@ -53,6 +53,8 @@ public class CogManager : MonoBehaviour
         }
 
         m_finalX = m_door.transform.position.x - 40f;
+
+        m_openFunc = OpenDoor();
     }
 
     // Update is called once per frame
@@ -73,7 +75,7 @@ public class CogManager : MonoBehaviour
 
         if(m_complete)
         {
-            m_openFunc = OpenDoor();
+       
             StartCoroutine(m_openFunc);
         }
 

@@ -37,6 +37,7 @@ public class Cog : Enchantable
     private Quaternion m_globalRotation;
 
     private IEnumerator m_rotationReference;
+    private IEnumerator m_stutterRotationReference;
 
     //Public accessors 
     //Should be removed, unless frozen is explicitly needed
@@ -68,7 +69,7 @@ public class Cog : Enchantable
         }
 
         m_rotationReference = Rotate();
-
+        m_stutterRotationReference = StutterRotate();
         #region Check for starting rotation
         if (m_leftNeighbour != null)
         {
@@ -80,8 +81,8 @@ public class Cog : Enchantable
         }
         else if (m_leftNeighbour == null)
         {
-            StartCoroutine(StutterRotate());
-            m_isRotating = true;
+            StartCoroutine(m_stutterRotationReference);
+            m_isRotating = false;
         }
         #endregion
     }
@@ -105,19 +106,16 @@ public class Cog : Enchantable
                 m_isRotating = true;
             }
         }
+
         else if (m_leftNeighbour == null)
         {
-            if(!m_rightNeighbour.IsFrozen)
+            if(!m_rightNeighbour.IsFrozen && !m_isRotating)
             {
-                StopCoroutine(m_rotationReference);
+                //StopCoroutine(m_stutterRotationReference);
+                StopAllCoroutines();
                 StartCoroutine(m_rotationReference);
+                m_isRotating = true;
             }
-        }
-
-            if (m_isRotating && m_iStopIt) //Temp solution for testing
-        {
-            StopCoroutine(m_rotationReference);
-            m_isRotating = false;
         }
     }
 
@@ -201,6 +199,8 @@ public class Cog : Enchantable
         StopAllCoroutines();
         StartCoroutine(ScaleObject(m_smallScale));
 
+
+
         m_size = SizeState.SMALL;
     }
 
@@ -217,8 +217,11 @@ public class Cog : Enchantable
         StopAllCoroutines();
 
         StartCoroutine(ScaleObject(Vector3.one));
+      //  StartCoroutine(StutterRotate());
 
         m_size = SizeState.DEFAULT;
+
+        m_isRotating = false;
     }
     #endregion
 
