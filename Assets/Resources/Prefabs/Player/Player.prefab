@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01d15bf284ad57a4cadb87e654c84338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_isPowerfulWizard: 1
+  m_isPowerfulWizard: 0
   m_pushMovementCurve:
     serializedVersion: 2
     m_Curve:
@@ -77,7 +77,9 @@ MonoBehaviour:
   m_pushingSpeed: 2
   m_maxSpeed: 0.4
   m_walkingAcceleration: 1
-  m_walkingDeceleration: 20
+  m_walkingDeceleration: 60
+  m_walkingTurnTime: 0.4
+  m_turnVelocityDevisor: 4
   m_runningAnimationSpeedThreshold: 0.7
   m_aimingMaxSpeed: 0.1
   m_aimingAcceleration: 1
@@ -145,8 +147,8 @@ MonoBehaviour:
   m_aimingEraserAnim: {fileID: 7400000, guid: 0411986cf986a454bb2f7080c63607d9, type: 2}
   m_aimRunForwardAnim: {fileID: 7400000, guid: 4fa9eed2371884c4989086278b0d2a1e, type: 2}
   m_aimRunBackAnim: {fileID: 7400000, guid: 2b232852ebbbabd47a2c59e90946de1d, type: 2}
-  m_aimRunLeftAnim: {fileID: 7400000, guid: 656fb708932c48c4d969431d4744623d, type: 2}
-  m_aimRunRightAnim: {fileID: 7400000, guid: e31a2184a08e28e4cb332431901cb59e, type: 2}
+  m_aimRunLeftAnim: {fileID: 7400000, guid: af6c008aa144ead498c6a8352688204b, type: 2}
+  m_aimRunRightAnim: {fileID: 7400000, guid: 08218f55534c06a489d4355780bcc4c7, type: 2}
   m_aimEraserRunForwardAnim: {fileID: 7400000, guid: 0579604d87edbb747b258c975da76537,
     type: 2}
   m_aimEraserRunBackAnim: {fileID: 7400000, guid: 6a1a0592c249cc749bd40119306bfe94,
@@ -164,25 +166,25 @@ MonoBehaviour:
   m_turnLeftAnim: {fileID: 7400000, guid: c9a37c292e869ba4c92587eb8d33e326, type: 2}
   m_turnRightAnim: {fileID: 7400000, guid: c9a37c292e869ba4c92587eb8d33e326, type: 2}
   m_animation: {fileID: 116125339}
-  m_idleAnimSpeed: 2
-  m_walkingAnimSpeed: 2
-  m_runningAnimSpeed: 2
-  m_jumpStartAnimSpeed: 5
+  m_idleAnimSpeed: 1.75
+  m_walkingAnimSpeed: 1.75
+  m_runningAnimSpeed: 2.4
+  m_jumpStartAnimSpeed: 10
   m_jumpMidAnimSpeed: 5
-  m_jumpLandAnimSpeed: 8
+  m_jumpLandAnimSpeed: 6
   m_fallingAnimSpeed: 2
   m_aimingAnimSpeed: 2
   m_aimingEraserAnimSpeed: 1
-  m_aimRunAnimSpeed: 2
+  m_aimRunAnimSpeed: 1.6
   m_aimRunEraserAnimSpeed: 1
-  m_aimStrafeAnimSpeed: 1
+  m_aimStrafeAnimSpeed: 1.6
   m_castingAnimSpeed: 2
   m_freeFallingAnimSpeed: 2
   m_recoveringAnimSpeed: 2
   m_slidingStartAnimSpeed: 2
   m_slidingMidAnimSpeed: 2
   m_slidingEndAnimSpeed: 2
-  m_turnAnimSpeed: 4
+  m_turnAnimSpeed: 8
   m_quill: {fileID: 5006512735820065046}
   m_eraser: {fileID: 5006512735538784333}
   m_timeOnGroundBeforeRecovering: 1
