@@ -73,11 +73,12 @@ public class Cog : Enchantable
         #region Check for starting rotation
         if (m_leftNeighbour != null)
         {
-            if (m_leftNeighbour.IsRotating == true && !m_leftNeighbour.IsFrozen)
+            if (m_leftNeighbour.IsRotating == true && !m_leftNeighbour.IsFrozen && IsCorrectSize())
             {
                 StartCoroutine(m_rotationReference);
                 m_isRotating = true;
             }
+
         }
         else if (m_leftNeighbour == null)
         {
@@ -94,7 +95,7 @@ public class Cog : Enchantable
         if (m_leftNeighbour != null)
         {
             //Check if current cog is no longer being acted upon
-            if (!m_leftNeighbour.IsRotating || m_leftNeighbour.IsFrozen || !IsCorrect())
+            if (!m_leftNeighbour.IsRotating || m_leftNeighbour.IsFrozen || !IsCorrectSize() || !m_leftNeighbour.IsCorrectSize())
             {
                 StopCoroutine(m_rotationReference);
                 m_isRotating = false;
@@ -111,8 +112,8 @@ public class Cog : Enchantable
         {
             if(!m_rightNeighbour.IsFrozen && !m_isRotating)
             {
-                //StopCoroutine(m_stutterRotationReference);
-                StopAllCoroutines();
+                StopCoroutine(m_stutterRotationReference);
+               // StopAllCoroutines();
                 StartCoroutine(m_rotationReference);
                 m_isRotating = true;
             }
@@ -219,7 +220,6 @@ public class Cog : Enchantable
         StopAllCoroutines();
 
         StartCoroutine(ScaleObject(Vector3.one));
-      //  StartCoroutine(StutterRotate());
 
         m_size = SizeState.DEFAULT;
 
