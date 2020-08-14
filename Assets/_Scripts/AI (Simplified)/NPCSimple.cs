@@ -67,7 +67,7 @@ public class NPCSimple : MonoBehaviour
         //Entering dialogue mode
         if (Vector3.Distance(transform.position, m_player.transform.position) < m_viewRadius)
         {
-            if(Input.GetKeyDown(m_dialogueInput) && !m_talking)
+            if(Input.GetKeyDown(m_dialogueInput) && !m_talking && !m_testpls.p_isDialogueHUDActive)
             {
                 m_state = new NPCStateTalking(m_animator, m_talkingAnimation, m_letterBox);
                 m_talking = true;

@@ -20,6 +20,7 @@ TagManager:
   - UI_SpellWheel
   - SpellVFX
   - UI_ItemSelector
+  - UI_DialogueHUD
   layers:
   - Default
   - TransparentFX
