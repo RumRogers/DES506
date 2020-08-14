@@ -52,7 +52,6 @@ public class CounterWeight : Enchantable
         RaycastHit m_rayInfo;
         Physics.Raycast(transform.position, Vector3.down, out m_rayInfo);
 
-        
         //Point of collision is the point of reference for scaling
 
         while (m_counter < c_scaleTime)
@@ -61,13 +60,10 @@ public class CounterWeight : Enchantable
 
             Physics.Raycast(transform.position, Vector3.down, out m_rayInfo);
 
-            Vector3 m_pos = m_rayInfo.point;// + (m_renderer.bounds.size.y / 2);
+            Vector3 m_pos = m_rayInfo.point;
 
-            m_pos += new Vector3(0, (m_renderer.bounds.size.y/2.1f), 0);
+            m_pos += new Vector3(0, (m_renderer.bounds.size.y/2.6f), 0);
 
-            //1. Get the height of the counter height
-            //2. divide it by two
-            //3. This gives us the new distance from the see saw
             transform.SetPositionAndRotation(m_pos, transform.rotation);
 
             m_counter += Time.deltaTime;
@@ -81,8 +77,6 @@ public class CounterWeight : Enchantable
     {
         StopAllCoroutines();
         StartCoroutine(ScaleObject(m_largeScale));
-
-        
     }
 
     protected override void SpellSizeSmall(Spell spell)

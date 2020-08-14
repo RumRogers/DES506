@@ -21,6 +21,7 @@ TagManager:
   - SpellVFX
   - UI_ItemSelector
   - UI_DialogueHUD
+  - Seesaw
   layers:
   - Default
   - TransparentFX

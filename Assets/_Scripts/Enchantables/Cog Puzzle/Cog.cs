@@ -134,7 +134,9 @@ public class Cog : Enchantable
 
     IEnumerator Rotate()
     {
-        transform.rotation = m_globalRotation;
+      //  transform.rotation = m_globalRotation;
+
+        transform.SetPositionAndRotation(transform.position, m_globalRotation);
 
         while (true)
         {
