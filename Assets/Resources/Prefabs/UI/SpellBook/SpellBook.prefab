@@ -411,7 +411,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: e0b12c161ec59b4419d0e157f8a776ec, type: 3}
+    m_Font: {fileID: 12800000, guid: 307bfe4dd763de34f85fc707bfb9542d, type: 3}
     m_FontSize: 19
     m_FontStyle: 0
     m_BestFit: 0
@@ -1034,7 +1034,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Trustworthy Eraser
+  m_Text: Correction Pen
 --- !u!1 &5896222478863189180
 GameObject:
   m_ObjectHideFlags: 0
@@ -3760,7 +3760,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Trustworthy Eraser
+  m_Text: Correction Pen
 --- !u!1 &7529084371084140632
 GameObject:
   m_ObjectHideFlags: 0
