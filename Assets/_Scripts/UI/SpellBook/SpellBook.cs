@@ -38,6 +38,8 @@ namespace GameUI.SpellBook
         State m_previousPlayerState = null;
         State m_previousCameraState = null;
 
+        bool m_isActive = false;
+        public bool p_IsActive { get => m_isActive; }
         public KeyCode p_keyShowSpellBook { get => m_keyShowSpellBook; }
 
         SpellType m_currentlySelectedSpell = SpellType.NONE;
@@ -62,6 +64,7 @@ namespace GameUI.SpellBook
 
         public void Display()
         {
+            m_isActive = true;
             m_previousPlayerState = m_playerEntity.GetState();
             m_previousCameraState = m_playerMoveCamera.GetState();
             m_playerEntity.SetState(new Idle_PlayerState(m_playerEntity));
@@ -76,6 +79,7 @@ namespace GameUI.SpellBook
 
         public void Hide()
         {
+            m_isActive = false;
             m_mainContainer.gameObject.SetActive(false);
             FMODUnity.RuntimeManager.PlayOneShot("event:/UI/SpellbookClose");
             if (m_previousPlayerState != null)
