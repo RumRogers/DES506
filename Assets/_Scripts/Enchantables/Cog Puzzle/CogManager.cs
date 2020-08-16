@@ -61,7 +61,7 @@ public class CogManager : MonoBehaviour
     void Update()
     {
         //Get rotation of root cog
-        m_globRotation = m_cogs[0].GlobalRotation;
+        m_globRotation = m_cogs[0].transform.rotation;
         
         m_complete = true;  
 

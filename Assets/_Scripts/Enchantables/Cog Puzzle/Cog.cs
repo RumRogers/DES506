@@ -8,13 +8,16 @@ public class Cog : Enchantable
 
     [Header("Components")]
     [SerializeField]
-    private Cog m_leftNeighbour;
+    public Cog m_leftNeighbour;
 
     [SerializeField]
-    private Cog m_rightNeighbour;
+    public Cog m_rightNeighbour;
 
     [SerializeField]
     private SizeState m_size = SizeState.DEFAULT;
+
+    [SerializeField]
+    private bool m_masterCog;
 
     //Rotation controls
     private bool m_isRotating; 
@@ -43,7 +46,7 @@ public class Cog : Enchantable
     //Should be removed, unless frozen is explicitly needed
     public bool IsFrozen { get { return m_isFrozen; } }
     public bool IsRotating { get { return m_isRotating; } }
-
+    Quaternion tempRot;
     public Quaternion GlobalRotation { get { return m_globalRotation; } set { m_globalRotation = value; } }
 
     /// <summary>
@@ -95,29 +98,52 @@ public class Cog : Enchantable
         if (m_leftNeighbour != null)
         {
             //Check if current cog is no longer being acted upon
-            if (!m_leftNeighbour.IsRotating || m_leftNeighbour.IsFrozen || !IsCorrectSize() || !m_leftNeighbour.IsCorrectSize())
+            if (!m_leftNeighbour.IsRotating || m_leftNeighbour.IsFrozen || !IsCorrectSize() || !m_leftNeighbour.IsCorrectSize() )
             {
-                StopCoroutine(m_rotationReference);
-                m_isRotating = false;
+                if(m_isRotating)
+                {
+                    StopAllCoroutines();
+                    m_isRotating = false;
+
+                    if (m_size == SizeState.LARGE)
+                        StartCoroutine(ScaleObject(m_largeScale));
+                    else if (m_size == SizeState.SMALL)
+                        StartCoroutine(ScaleObject(m_smallScale));
+                }
+
             }
             //If the cog is stationary, check if a change has now allowed it to move
             else if (m_leftNeighbour.IsRotating && m_leftNeighbour.IsCorrect() && IsCorrect() && !m_isRotating)
             {
-                StartCoroutine(m_rotationReference);
+                StopAllCoroutines();
+                StartCoroutine(Rotate());
+
                 m_isRotating = true;
             }
         }
 
         else if (m_leftNeighbour == null)
         {
-            if(!m_rightNeighbour.IsFrozen && !m_isRotating)
+            if(!m_rightNeighbour.IsFrozen && !m_isRotating && IsCorrectSize())
             {
-                StopCoroutine(m_stutterRotationReference);
-               // StopAllCoroutines();
-                StartCoroutine(m_rotationReference);
+                StopAllCoroutines();
+                StartCoroutine(Rotate());
                 m_isRotating = true;
             }
         }
+
+    }
+
+    private void LateUpdate()
+    {
+
+        //if (m_isRotating && transform.rotation != m_globalRotation)
+        //{
+        //    StopCoroutine(m_rotationReference);
+        //    StartCoroutine(m_rotationReference);
+        //}
+
+        //tempRot = m_globalRotation;
     }
 
     IEnumerator ScaleObject(Vector3 scale)
@@ -135,23 +161,22 @@ public class Cog : Enchantable
 
     IEnumerator Rotate()
     {
-      //  transform.rotation = m_globalRotation;
 
-        transform.SetPositionAndRotation(transform.position, m_globalRotation);
+        if (m_masterCog)
+        {
+            m_rightNeighbour.transform.SetPositionAndRotation(m_rightNeighbour.transform.position, transform.rotation);
+            m_rightNeighbour.m_rightNeighbour.transform.SetPositionAndRotation(m_rightNeighbour.m_rightNeighbour.transform.position, transform.rotation);
+        }
+        else
+            transform.SetPositionAndRotation(transform.position, m_leftNeighbour.transform.rotation);
 
         while (true)
         {
-            if(m_isTicking)
-            {
-                //Tick version probably not needed
-            }
+
+            if (m_isClockwise)
+                transform.RotateAround(transform.position, transform.right, Time.deltaTime * m_cogSpeed);
             else
-            {
-                if (m_isClockwise)
-                    transform.RotateAround(transform.position, transform.right, Time.deltaTime * m_cogSpeed);
-                else
-                    transform.RotateAround(transform.position, transform.right, Time.deltaTime * -m_cogSpeed);
-            }
+                transform.RotateAround(transform.position, transform.right, Time.deltaTime * -m_cogSpeed);
 
             yield return new WaitForSeconds(Time.deltaTime);
         }
@@ -186,6 +211,8 @@ public class Cog : Enchantable
     protected override void SpellTemperatureCold(Spell spell)
     {
         m_isFrozen = true;
+        m_isRotating = false;
+        StopAllCoroutines();
     }
 
     protected override void SpellSizeBig(Spell spell)
@@ -224,6 +251,8 @@ public class Cog : Enchantable
         m_size = SizeState.DEFAULT;
 
         m_isRotating = false;
+
+
     }
     #endregion
 
