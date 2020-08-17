@@ -4,16 +4,16 @@
       "text": "Wait a minute, you’re not supposed to be here! I even made that sign big enough so no one can enter!"
     },
     {
-      "text": "You must be really good at jumping…"
+      "text": "You must be really good at jumping, mister!"
     },
     {
-      "text": "Oh well, this is as far as you can go, I guess"
+      "text": "Oh well, this is as far as you can go, I guess."
     },
     {
       "text": "See this rock? It broke our bridge not so long ago. It fell from the sky!"
     },
     {
-      "text": "“I also think… I saw something crash into Owl’s house… I don’t suppose you know anything about that?"
+      "text": "I also think… I saw something crash into Owl’s house… I don’t suppose you know anything about that?"
     },
     {
       "text": "Either way, if you want to go ahead, you’re going to have to find another way around!"

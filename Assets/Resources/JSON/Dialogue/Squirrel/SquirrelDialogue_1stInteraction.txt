@@ -10,7 +10,7 @@
       "text": "This book here, he asked me to look at it… it seems to have some magical properties. I’ve never seen anything like it!"
     },
     {
-      "text": "He said maybe you should try using your “correction pen” … something about “Returning to your world”"
+      "text": "He said maybe you should try using your “Correction Pen” … something about “Returning to your world”"
     },
     {
       "text": "…What does that even mean? Oh, that silly old coot with his magic mumbo jumbo!"

@@ -4,19 +4,19 @@
       "text": "OH… wait… you’re still alive? Huh… not bad."
     },
     {
-      "text": "Well, our only hope was that fox over there and you crashed into him. Now we have no hero to save the day."
+      "text": "Well, our only hope was that fox over there and you crashed into him. Now, we have no hero to save the day."
     },
     {
       "text": "Unless…"
     },
     {
-      "text": "Tell you what, pick up that scroll on the table. It should help you"
+      "text": "Tell you what, pick up that scroll on the table. It should help you!"
     },
     {
       "text": "Once you're out, go towards the bridge. It's a straight road, you can't miss it!"
     },
     {
-      "text": "Good luck! Heheh"
+      "text": "Good luck! Heheh."
     }
   ]
 }

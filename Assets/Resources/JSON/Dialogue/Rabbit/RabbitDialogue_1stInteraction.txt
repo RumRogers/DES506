@@ -1,10 +1,10 @@
 {
   "lines": [
     {
-      "text": "Oh, hi there! It’s a bit cold in these parts here"
+      "text": "Oh, hi there! It’s a bit cold in these parts here."
     },
     {
-      "text": "I need to get back home but this bridge… it isn’t working properly"
+      "text": "I need to get back home but this bridge… it isn’t working properly."
     },
     {
       "text": "Honestly, who makes a contraption this complicated?! If only we could undo it, you know, the way it used to be before…"
