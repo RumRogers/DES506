@@ -2,16 +2,13 @@
 	"tips":
 	[
 		{
-			"text": "Yes hello this is a short sentence"
+			"text": "If you see floating letters, that's your cue to aim at it. See what you can do!"
 		},
     {
-      "text": "Yes hello this is a short sentence. This is another short sentence."
+      "text": "If you're a bit lost, try speaking to any friendly villagers you encounter.  They might have something useful to say!"
     },
     {
-      "text": "Yes hello this is a short sentence. This is another short sentence. And here's a slightly longer one."
-    },
-    {
-      "text": "Yes hello this is a short sentence. This is another short sentence. And here's a slightly longer one. Combined, all these sentences are quite long, actually."
+      "text": "Keep trying! There might be more than one way to cross the moving platforms!"
     }
 	]
 }
