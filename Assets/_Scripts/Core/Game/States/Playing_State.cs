@@ -26,6 +26,8 @@ namespace GameCore.GameState
 
             controller = owner;
 
+            m_playerEntity = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerEntity>();
+
             controller.GetPauseMenu().SetActive(false);
             Debug.Log("Game is unpaused");
         }
@@ -55,7 +57,7 @@ namespace GameCore.GameState
 
         public override void Manage()
         {
-            if (Input.GetKeyUp(KeyCode.Escape))
+            if (Input.GetKeyUp(KeyCode.Escape) && m_playerEntity.GetState().GetType() != typeof(Player.Death_PlayerState))
             {
                 m_owner.SetState(new Paused_State(controller));
             }
